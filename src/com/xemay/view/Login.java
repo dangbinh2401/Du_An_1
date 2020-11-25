@@ -271,14 +271,15 @@ public class Login extends javax.swing.JFrame {
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
         StringBuilder bd = new StringBuilder();
-        checkError.checkRong(txtUserName, bd,"Username chưa nhập\n");
-        checkError.checkRongPass(txtPassword, bd,"Passwword chưa nhập");
+        checkError.checkRong(txtUserName, bd, "Username chưa nhập\n");
+        checkError.checkRongPass(txtPassword, bd, "Passwword chưa nhập");
         if (bd.length() > 0) {
-            JOptionPane.showMessageDialog(this,bd.toString());
+            JOptionPane.showMessageDialog(this, bd.toString());
             return;
         }
         try {
             new HomeJFrame().setVisible(true);
+            dispose();
         } catch (Exception e) {
         }
     }//GEN-LAST:event_btnLoginActionPerformed
