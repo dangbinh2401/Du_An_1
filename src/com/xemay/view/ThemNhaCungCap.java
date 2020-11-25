@@ -9,12 +9,12 @@ package com.xemay.view;
  *
  * @author Admin
  */
-public class NhaCungCap extends javax.swing.JDialog {
+public class ThemNhaCungCap extends javax.swing.JDialog {
 
     /**
-     * Creates new form nhaCungCap
+     * Creates new form ThemNhaCungCap
      */
-    public NhaCungCap(java.awt.Frame parent, boolean modal) {
+    public ThemNhaCungCap(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
     }
@@ -29,46 +29,45 @@ public class NhaCungCap extends javax.swing.JDialog {
     private void initComponents() {
 
         jLabel3 = new javax.swing.JLabel();
-        txtHoTenKH = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        txtHoTenKH1 = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        txtHoTenKH2 = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
-        txtHoTenKH3 = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         txtHoTenKH4 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        txtHoTenKH3 = new javax.swing.JTextField();
+        txtHoTenKH2 = new javax.swing.JTextField();
+        txtHoTenKH1 = new javax.swing.JTextField();
+        txtHoTenKH = new javax.swing.JTextField();
+        btnThemNcc = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Nhà cung cấp");
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel3.setText("Mã:");
 
-        txtHoTenKH.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel4.setText("Tên nhà cung cấp:");
-
-        txtHoTenKH1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel5.setText("Địa chỉ:");
 
-        txtHoTenKH2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel6.setText("Số điện thoại:");
-
-        txtHoTenKH3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel7.setText("Email:");
 
         txtHoTenKH4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
-        jButton1.setText("Thêm");
+        txtHoTenKH3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+
+        txtHoTenKH2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+
+        txtHoTenKH1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+
+        txtHoTenKH.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+
+        btnThemNcc.setText("Thêm");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -90,10 +89,10 @@ public class NhaCungCap extends javax.swing.JDialog {
                             .addComponent(txtHoTenKH3)
                             .addComponent(txtHoTenKH2)
                             .addComponent(txtHoTenKH)
-                            .addComponent(txtHoTenKH1, javax.swing.GroupLayout.DEFAULT_SIZE, 552, Short.MAX_VALUE)))
+                            .addComponent(txtHoTenKH1, javax.swing.GroupLayout.DEFAULT_SIZE, 322, Short.MAX_VALUE)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jButton1)))
+                        .addComponent(btnThemNcc)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -120,7 +119,7 @@ public class NhaCungCap extends javax.swing.JDialog {
                     .addComponent(txtHoTenKH4, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE)
                     .addComponent(jLabel7))
                 .addGap(31, 31, 31)
-                .addComponent(jButton1)
+                .addComponent(btnThemNcc)
                 .addContainerGap())
         );
 
@@ -144,21 +143,20 @@ public class NhaCungCap extends javax.swing.JDialog {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(NhaCungCap.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ThemNhaCungCap.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(NhaCungCap.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ThemNhaCungCap.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(NhaCungCap.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ThemNhaCungCap.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(NhaCungCap.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ThemNhaCungCap.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                NhaCungCap dialog = new NhaCungCap(new javax.swing.JFrame(), true);
+                ThemNhaCungCap dialog = new ThemNhaCungCap(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -171,16 +169,16 @@ public class NhaCungCap extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    public javax.swing.JButton btnThemNcc;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JTextField txtHoTenKH;
-    private javax.swing.JTextField txtHoTenKH1;
-    private javax.swing.JTextField txtHoTenKH2;
-    private javax.swing.JTextField txtHoTenKH3;
-    private javax.swing.JTextField txtHoTenKH4;
+    public javax.swing.JTextField txtHoTenKH;
+    public javax.swing.JTextField txtHoTenKH1;
+    public javax.swing.JTextField txtHoTenKH2;
+    public javax.swing.JTextField txtHoTenKH3;
+    public javax.swing.JTextField txtHoTenKH4;
     // End of variables declaration//GEN-END:variables
 }

@@ -5,6 +5,10 @@
  */
 package com.xemay.view;
 
+import com.xemay.dao.NhaCungCapDAO;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Admin
@@ -16,6 +20,17 @@ public class NhaCungCapPanel extends javax.swing.JPanel {
      */
     public NhaCungCapPanel() {
         initComponents();
+        fillTable();
+    }
+    NhaCungCapDAO dao = new NhaCungCapDAO();
+    
+    private void fillTable(){
+        DefaultTableModel model = (DefaultTableModel) tblQuanLyNcc.getModel();
+        model.setRowCount(0);
+        try {
+            
+        } catch (Exception e) {
+        }
     }
 
     /**
@@ -29,13 +44,12 @@ public class NhaCungCapPanel extends javax.swing.JPanel {
 
         NhaCungCap = new javax.swing.JPanel();
         jButton17 = new javax.swing.JButton();
-        jButton19 = new javax.swing.JButton();
         jScrollPane4 = new javax.swing.JScrollPane();
-        jTable4 = new javax.swing.JTable();
+        tblQuanLyNcc = new javax.swing.JTable();
         jButton20 = new javax.swing.JButton();
         jButton21 = new javax.swing.JButton();
-        jButton22 = new javax.swing.JButton();
-        jButton23 = new javax.swing.JButton();
+        btnCapNhatNcc = new javax.swing.JButton();
+        btnThem = new javax.swing.JButton();
         jTextField4 = new javax.swing.JTextField();
         jComboBox3 = new javax.swing.JComboBox<>();
         jLabel19 = new javax.swing.JLabel();
@@ -45,11 +59,8 @@ public class NhaCungCapPanel extends javax.swing.JPanel {
         jButton17.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jButton17.setText("Tìm kiếm");
 
-        jButton19.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jButton19.setText("Chi tiết hóa đơn");
-
-        jTable4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jTable4.setModel(new javax.swing.table.DefaultTableModel(
+        tblQuanLyNcc.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        tblQuanLyNcc.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null},
                 {null, null, null, null, null, null},
@@ -60,8 +71,8 @@ public class NhaCungCapPanel extends javax.swing.JPanel {
                 "STT", "Mã Nhà Cung Cấp", "Tên Nhà Cung Cấp", "Số ĐIện Thoại", "Địa Chỉ", "Email"
             }
         ));
-        jTable4.setRowHeight(30);
-        jScrollPane4.setViewportView(jTable4);
+        tblQuanLyNcc.setRowHeight(30);
+        jScrollPane4.setViewportView(tblQuanLyNcc);
 
         jButton20.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jButton20.setText("Xóa");
@@ -69,11 +80,21 @@ public class NhaCungCapPanel extends javax.swing.JPanel {
         jButton21.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jButton21.setText("Sắp xếp theo tên");
 
-        jButton22.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jButton22.setText("Chỉnh sửa");
+        btnCapNhatNcc.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        btnCapNhatNcc.setText("Chỉnh sửa");
+        btnCapNhatNcc.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCapNhatNccActionPerformed(evt);
+            }
+        });
 
-        jButton23.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jButton23.setText("Tạo mới");
+        btnThem.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        btnThem.setText("Tạo mới");
+        btnThem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnThemActionPerformed(evt);
+            }
+        });
 
         jTextField4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jTextField4.setMinimumSize(new java.awt.Dimension(6, 35));
@@ -89,7 +110,14 @@ public class NhaCungCapPanel extends javax.swing.JPanel {
         NhaCungCap.setLayout(NhaCungCapLayout);
         NhaCungCapLayout.setHorizontalGroup(
             NhaCungCapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1835, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, NhaCungCapLayout.createSequentialGroup()
+                .addContainerGap(934, Short.MAX_VALUE)
+                .addComponent(jButton21, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(132, 132, 132)
+                .addComponent(btnThem, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(171, 171, 171)
+                .addComponent(btnCapNhatNcc, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(221, 221, 221))
             .addGroup(NhaCungCapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(NhaCungCapLayout.createSequentialGroup()
                     .addGap(43, 43, 43)
@@ -105,21 +133,19 @@ public class NhaCungCapPanel extends javax.swing.JPanel {
                                 .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 374, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(47, 47, 47)
                                 .addComponent(jButton17, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jButton21, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(77, 77, 77)
-                                .addComponent(jButton23, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(80, 80, 80)
-                                .addComponent(jButton22, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(85, 85, 85)
-                                .addComponent(jButton19, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(68, 68, 68)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 903, Short.MAX_VALUE)
                                 .addComponent(jButton20, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGap(44, 44, 44)))
         );
         NhaCungCapLayout.setVerticalGroup(
             NhaCungCapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1045, Short.MAX_VALUE)
+            .addGroup(NhaCungCapLayout.createSequentialGroup()
+                .addGap(44, 44, 44)
+                .addGroup(NhaCungCapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnCapNhatNcc, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton21, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnThem, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(966, Short.MAX_VALUE))
             .addGroup(NhaCungCapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(NhaCungCapLayout.createSequentialGroup()
                     .addGap(10, 10, 10)
@@ -128,14 +154,9 @@ public class NhaCungCapPanel extends javax.swing.JPanel {
                     .addGroup(NhaCungCapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addGroup(NhaCungCapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jTextField4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton23, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton22, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton19, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jButton20, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addComponent(jComboBox3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, NhaCungCapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton17, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton21, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jButton17, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGap(18, 18, 18)
                     .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addContainerGap(785, Short.MAX_VALUE)))
@@ -163,19 +184,29 @@ public class NhaCungCapPanel extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
+        ThemNhaCungCap themNcc = new ThemNhaCungCap(null, true);
+        themNcc.show();
+    }//GEN-LAST:event_btnThemActionPerformed
+
+    private void btnCapNhatNccActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCapNhatNccActionPerformed
+        ThemNhaCungCap capNhatNcc = new ThemNhaCungCap(null, true);
+        capNhatNcc.btnThemNcc.setText("Cập nhật");
+        capNhatNcc.show();
+    }//GEN-LAST:event_btnCapNhatNccActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel NhaCungCap;
+    private javax.swing.JButton btnCapNhatNcc;
+    private javax.swing.JButton btnThem;
     private javax.swing.JButton jButton17;
-    private javax.swing.JButton jButton19;
     private javax.swing.JButton jButton20;
     private javax.swing.JButton jButton21;
-    private javax.swing.JButton jButton22;
-    private javax.swing.JButton jButton23;
     private javax.swing.JComboBox<String> jComboBox3;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JScrollPane jScrollPane4;
-    private javax.swing.JTable jTable4;
     private javax.swing.JTextField jTextField4;
+    private javax.swing.JTable tblQuanLyNcc;
     // End of variables declaration//GEN-END:variables
 }
