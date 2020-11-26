@@ -11,32 +11,33 @@ package com.xemay.model;
  */
 public class KhachHang {
 
+    private String MaTk;
     private String MaKh;
     private String HoTen;
     private String Sdt;
     private String Email;
-    private Boolean GioiTinh;
+    private String GioiTinh;
     private String DiaChi;
-    private String MaTK;
-    
-    public KhachHang(String MaKh, String HoTen, String Sdt, String Email, Boolean GioiTinh, String DiaChi) {
+
+    public KhachHang(String MaTk, String MaKh, String HoTen, String Sdt, String Email, String GioiTinh, String DiaChi) {
         this.MaKh = MaKh;
         this.HoTen = HoTen;
         this.Sdt = Sdt;
         this.Email = Email;
         this.GioiTinh = GioiTinh;
         this.DiaChi = DiaChi;
-    }
-
-    public String getMaTK() {
-        return MaTK;
-    }
-
-    public void setMaTK(String MaTK) {
-        this.MaTK = MaTK;
+        this.MaTk = MaTk;
     }
 
     public KhachHang() {
+    }
+
+    public String getMaTk() {
+        return MaTk;
+    }
+
+    public void setMaTk(String MaTk) {
+        this.MaTk = MaTk;
     }
 
     public String getMaKh() {
@@ -71,11 +72,11 @@ public class KhachHang {
         this.Email = Email;
     }
 
-    public Boolean getGioiTinh() {
+    public String getGioiTinh() {
         return GioiTinh;
     }
 
-    public void setGioiTinh(Boolean GioiTinh) {
+    public void setGioiTinh(String GioiTinh) {
         this.GioiTinh = GioiTinh;
     }
 
