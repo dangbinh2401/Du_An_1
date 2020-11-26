@@ -45,7 +45,11 @@ public class TaiKhoanDAO {
             return select(sql);
         
     }
-    
+        public List<TaiKhoan> findMaTK(String key){
+            String sql = "select TaiKhoan.MaTK,NhanVien.HoTen, TaiKhoan.MatKhau, NhanVien.SoDienThoai, TaiKhoan.VaiTro from TaiKhoan Inner join NhanVien on TaiKhoan.MaTK = NhanVien.MaTK Where TaiKhoan.MaTK like N'%"+key+"%' UNION All select TaiKhoan.MaTK,KhachHang.HoTen, TaiKhoan.MatKhau, KhachHang.SoDienThoai,TaiKhoan.VaiTro from TaiKhoan inner join KhachHang on TaiKhoan.MaTK = KhachHang.MaTK Where KhachHang.MaTK like N'%"+key+"%'";
+            return select(sql);
+        
+    }    
     private List<TaiKhoan> select(String sql, Object... args) {
         List<TaiKhoan> list = new ArrayList<>();
         try {

@@ -23,7 +23,7 @@ public class NhanVienDAO {
     }
     public void update(NhanVien model){
         String sql = "UPDATE NhanVien SET MaCH=?, HoTen=?, SoDienThoai=?, Email=?, GioiTinh=?, DiaChi=?, MaTK=? WHERE MaNV=?";
-        JdbcHelper.executeQuery(sql,model.getMaCH(),model.getHoTen(), model.getSdt(), model.getEmail(),model.getGioiTinh(),model.getDiaChi(),model.getMaTK(),model.getMaNV());
+        JdbcHelper.executeUpdate(sql,model.getMaCH(),model.getHoTen(), model.getSdt(), model.getEmail(),model.getGioiTinh(),model.getDiaChi(),model.getMaTK(),model.getMaNV());
     }
         public List<NhanVien> select() {
         String sql = "SELECT * FROM NhanVien";

@@ -5,6 +5,14 @@
  */
 package com.xemay.view;
 
+import com.xemay.dao.CuaHangDAO;
+import com.xemay.dao.NhanVienDAO;
+import com.xemay.dao.TaiKhoanDAO;
+import com.xemay.model.CuaHang;
+import com.xemay.model.NhanVien;
+import com.xemay.model.TaiKhoan;
+import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 
 /**
@@ -24,8 +32,17 @@ public class ThemNhanVien extends javax.swing.JDialog {
         }
         initComponents();
         setLocationRelativeTo(null);
+        fillMaCH();
     }
-
+    NhanVienDAO dao = new NhanVienDAO();
+    void fillMaCH(){
+        CuaHangDAO dao = new CuaHangDAO();
+        List <CuaHang> list = dao.select();
+        cboMaCuaHang.removeAllItems();
+        for (CuaHang cuaHang : list) {
+            cboMaCuaHang.addItem(cuaHang.getMaCh());
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -236,13 +253,56 @@ public class ThemNhanVien extends javax.swing.JDialog {
             this.chinhSuaNV();
         }
     }//GEN-LAST:event_btnThemNVActionPerformed
-    
+    TaiKhoan mdTk(){
+        TaiKhoan mdTk = new TaiKhoan();
+        mdTk.setMaTk(txtMaTaiKhoan.getText());
+        mdTk.setMatKhau("123");
+        mdTk.setVaiTro("NhanVien");
+        return mdTk;
+    }
     void themNV(){
-        
+        try {
+            if (checkMaTK()){
+                tk.insert(mdTk());
+                dao.insert(model());
+                JOptionPane.showMessageDialog(this, "thêm nhân viên thành công!");
+            }else{
+                JOptionPane.showMessageDialog(this, "Mã tài khoản đã có người sử dụng!");
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "mã nhân viên đã có trong danh sách!");
+        }
+    }
+    TaiKhoanDAO tk = new TaiKhoanDAO();
+    boolean checkMaTK(){
+        List <TaiKhoan> checkma = tk.findMaTK(txtMaTaiKhoan.getText());
+        boolean kt = true;
+        if (checkma.size()==1){
+            kt = false;
+        }
+        return kt;
+    }
+    NhanVien model(){
+        NhanVien model = new NhanVien();
+        model.setMaNV(txtMaNhanVien.getText());
+        model.setHoTen(txtHoTen.getText());
+        model.setMaCH(cboMaCuaHang.getSelectedItem().toString());
+        model.setSdt(txtSoDienThoai.getText());
+        model.setEmail(txtEmail.getText());
+        model.setGioiTinh(rdoNam.isSelected());
+        model.setDiaChi(txtDiaChi.getText());
+        model.setMaTK(txtMaTaiKhoan.getText());
+        return model;
     }
     
     void chinhSuaNV(){
-        
+        try {
+            dao.update(model());
+            JOptionPane.showMessageDialog(this, "Chỉnh sửa thành công !");
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Chỉnh sửa thất bại");
+            
+        }
     }
     /**
      * @param args the command line arguments
@@ -307,13 +367,13 @@ public class ThemNhanVien extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JRadioButton rdoNam;
-    private javax.swing.JRadioButton rdoNu;
+    public javax.swing.JRadioButton rdoNam;
+    public javax.swing.JRadioButton rdoNu;
     public javax.swing.JTextField txtDiaChi;
     public javax.swing.JTextField txtEmail;
     public javax.swing.JTextField txtHoTen;
     public javax.swing.JTextField txtMaNhanVien;
     public javax.swing.JTextField txtMaTaiKhoan;
-    private javax.swing.JTextField txtSoDienThoai;
+    public javax.swing.JTextField txtSoDienThoai;
     // End of variables declaration//GEN-END:variables
 }
