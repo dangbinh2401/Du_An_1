@@ -7,6 +7,8 @@ package com.xemay.view;
 
 import com.xemay.dao.KhachHangDao;
 import com.xemay.model.KhachHang;
+import java.util.ArrayList;
+import static java.util.Collections.list;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -23,6 +25,7 @@ public class KhachHangJPanel extends javax.swing.JPanel {
     public KhachHangJPanel() {
         initComponents();
         fillToTable();
+
     }
     KhachHangDao dao = new KhachHangDao();
 
@@ -120,6 +123,11 @@ public class KhachHangJPanel extends javax.swing.JPanel {
 
         jButton38.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jButton38.setText("Xóa");
+        jButton38.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton38ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout QuanLyKhachHangLayout = new javax.swing.GroupLayout(QuanLyKhachHang);
         QuanLyKhachHang.setLayout(QuanLyKhachHangLayout);
@@ -194,11 +202,27 @@ public class KhachHangJPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton36ActionPerformed
 
     private void jButton37ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton37ActionPerformed
-       ThemKhachHang capnhatKH = new ThemKhachHang(null, true);
+        ThemKhachHang capnhatKH = new ThemKhachHang(null, true);
         capnhatKH.btnThemKhachHang.setText("Cập nhật");
         capnhatKH.show();
         fillToTable();
     }//GEN-LAST:event_jButton37ActionPerformed
+
+    private void jButton38ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton38ActionPerformed
+        String tkk = JOptionPane.showInputDialog(this, "Nhập mã tài khoản: ", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+        int traloi = JOptionPane.showConfirmDialog(null, "Bạn có muốn khách hàng có mã:  " + tkk, "Yes/No", JOptionPane.YES_NO_CANCEL_OPTION);
+        if (traloi == 0) {
+            KhachHangDao kh = new KhachHangDao();
+            try {
+                kh.delete(tkk);
+                JOptionPane.showMessageDialog(this, "Xóa thành công");
+                fillToTable();
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(this, "Xóa thất bại");
+            }
+        }
+
+    }//GEN-LAST:event_jButton38ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

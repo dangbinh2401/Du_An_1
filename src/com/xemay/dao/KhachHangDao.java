@@ -11,23 +11,35 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author PC
  */
 public class KhachHangDao {
+
     public void insert(KhachHang model) {
         String sql = "INSERT INTO KhachHang (MaTK, MaKH, HoTen, SoDienThoai, GioiTinh, DiaChi, Email) VALUES (?, ?, ?, ?, ?, ?, ?)";
         JdbcHelper.executeUpdate(sql, model.getMaTk(), model.getMaKh(), model.getHoTen(), model.getSdt(), model.getGioiTinh(), model.getDiaChi(), model.getEmail());
     }
 
     public void update(KhachHang model) {
-          String sql = "UPDATE KhachHang  SET MaTK=?, HoTen=?, SoDienThoai=? GioiTinh=? DiaChi=? Email=? WHERE  MaKH=?";
+        String sql = "UPDATE KhachHang  SET MaTK=?, HoTen=?, SoDienThoai=? GioiTinh=? DiaChi=? Email=? WHERE  MaKH=?";
         JdbcHelper.executeUpdate(sql, model.getMaTk(), model.getHoTen(), model.getSdt(), model.getGioiTinh(), model.getDiaChi(), model.getEmail(), model.getMaKh());
     }
 
-    private List<KhachHang> select(String sql, Object... args) {
+    public void delete(String maTK) {
+        try {
+            String sql = "{ call Sp_KhachHang(?)}";
+            JdbcHelper.executeUpdate(sql, maTK);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public List<KhachHang> select(String sql, Object... args) {
         List<KhachHang> list = new ArrayList<>();
         try {
             ResultSet rs = null;
