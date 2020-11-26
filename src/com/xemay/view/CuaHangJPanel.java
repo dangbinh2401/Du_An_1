@@ -120,7 +120,7 @@ public class CuaHangJPanel extends javax.swing.JPanel {
         tblCuaHang = new javax.swing.JTable();
         jButton27 = new javax.swing.JButton();
         jButton26 = new javax.swing.JButton();
-        jButton25 = new javax.swing.JButton();
+        btnSapXep = new javax.swing.JButton();
         jButton24 = new javax.swing.JButton();
         jButton28 = new javax.swing.JButton();
 
@@ -156,6 +156,7 @@ public class CuaHangJPanel extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
+        tblCuaHang.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         tblCuaHang.setRowHeight(30);
         tblCuaHang.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -186,11 +187,11 @@ public class CuaHangJPanel extends javax.swing.JPanel {
             }
         });
 
-        jButton25.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jButton25.setText("Sắp xếp theo tên");
-        jButton25.addActionListener(new java.awt.event.ActionListener() {
+        btnSapXep.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        btnSapXep.setText("Sắp xếp theo tên");
+        btnSapXep.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton25ActionPerformed(evt);
+                btnSapXepActionPerformed(evt);
             }
         });
 
@@ -224,7 +225,7 @@ public class CuaHangJPanel extends javax.swing.JPanel {
                         .addGap(62, 62, 62)
                         .addComponent(jButton24, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(89, 89, 89)
-                        .addComponent(jButton25, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnSapXep, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(83, 83, 83)
                         .addComponent(jButton26, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(79, 79, 79)
@@ -246,7 +247,7 @@ public class CuaHangJPanel extends javax.swing.JPanel {
                     .addComponent(jButton26, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton27, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton28, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton25, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnSapXep, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton24, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cboTimKiem1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
@@ -306,9 +307,44 @@ public class CuaHangJPanel extends javax.swing.JPanel {
         timKiem();
     }//GEN-LAST:event_jButton24ActionPerformed
 
-    private void jButton25ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton25ActionPerformed
-
-    }//GEN-LAST:event_jButton25ActionPerformed
+    private void btnSapXepActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSapXepActionPerformed
+            Comparator<CuaHang> sortName = new Comparator<CuaHang>() {
+            @Override
+            public int compare(CuaHang s1, CuaHang s2) {
+                return s1.getTenCuaHang().compareTo(s2.getTenCuaHang());
+            }
+        };    
+        Comparator<CuaHang> sortMaCH = new Comparator<CuaHang>() {
+            @Override
+            public int compare(CuaHang s1, CuaHang s2) {
+                return s1.getMaCh().compareTo(s2.getMaCh());
+            }
+        };   
+        if(btnSapXep.getText().equals("Sắp xếp theo tên")){
+            Collections.sort(list,sortName);
+            btnSapXep.setText("Sắp xếp theo mã");
+        }else{
+            Collections.sort(list,sortMaCH);
+            btnSapXep.setText("Sắp xếp theo tên");
+        }
+        DefaultTableModel model = (DefaultTableModel) tblCuaHang.getModel(); 
+        model.setRowCount(0); 
+        try {
+            for (CuaHang ch : list) { 
+                Object[] row = { 
+                    ch.getMaCh(), 
+                    ch.getTenCuaHang(), 
+                    ch.getDiaChi(), 
+                    ch.getSdt(), 
+                    ch.getEmail()
+                }; 
+                model.addRow(row); 
+            } 
+        }  
+        catch (Exception e) { 
+            JOptionPane.showMessageDialog(this, "lỗi truy vẫn dữ liệu"+e);
+        }
+    }//GEN-LAST:event_btnSapXepActionPerformed
 
     private void jButton28ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton28ActionPerformed
         int i = tblCuaHang.getSelectedRow();
@@ -324,9 +360,9 @@ public class CuaHangJPanel extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel QuanLyCuaHang;
+    private javax.swing.JButton btnSapXep;
     private javax.swing.JComboBox<String> cboTimKiem1;
     private javax.swing.JButton jButton24;
-    private javax.swing.JButton jButton25;
     private javax.swing.JButton jButton26;
     private javax.swing.JButton jButton27;
     private javax.swing.JButton jButton28;

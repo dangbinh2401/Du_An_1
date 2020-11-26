@@ -17,7 +17,8 @@ public class KhachHang {
     private String Email;
     private Boolean GioiTinh;
     private String DiaChi;
-
+    private String MaTK;
+    
     public KhachHang(String MaKh, String HoTen, String Sdt, String Email, Boolean GioiTinh, String DiaChi) {
         this.MaKh = MaKh;
         this.HoTen = HoTen;
@@ -25,6 +26,14 @@ public class KhachHang {
         this.Email = Email;
         this.GioiTinh = GioiTinh;
         this.DiaChi = DiaChi;
+    }
+
+    public String getMaTK() {
+        return MaTK;
+    }
+
+    public void setMaTK(String MaTK) {
+        this.MaTK = MaTK;
     }
 
     public KhachHang() {
