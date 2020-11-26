@@ -36,11 +36,11 @@
                       </Group>
                       <EmptySpace min="-2" pref="75" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="txtHoTenKH4" alignment="0" max="32767" attributes="0"/>
-                          <Component id="txtHoTenKH3" alignment="0" max="32767" attributes="0"/>
-                          <Component id="txtHoTenKH2" alignment="0" max="32767" attributes="0"/>
-                          <Component id="txtHoTenKH" alignment="0" max="32767" attributes="0"/>
-                          <Component id="txtHoTenKH1" alignment="0" pref="322" max="32767" attributes="0"/>
+                          <Component id="txtEmailNcc" alignment="0" max="32767" attributes="0"/>
+                          <Component id="txtSoDienThoaiNcc" alignment="0" max="32767" attributes="0"/>
+                          <Component id="txtDiaChiNcc" alignment="0" max="32767" attributes="0"/>
+                          <Component id="txtMaNcc" alignment="0" max="32767" attributes="0"/>
+                          <Component id="txtTenNcc" alignment="0" pref="322" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                   <Group type="102" alignment="1" attributes="0">
@@ -57,27 +57,27 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="txtHoTenKH" alignment="3" pref="35" max="32767" attributes="0"/>
+                  <Component id="txtMaNcc" alignment="3" pref="35" max="32767" attributes="0"/>
                   <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="txtHoTenKH1" alignment="3" pref="35" max="32767" attributes="0"/>
+                  <Component id="txtTenNcc" alignment="3" pref="35" max="32767" attributes="0"/>
                   <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="txtHoTenKH2" alignment="3" pref="35" max="32767" attributes="0"/>
+                  <Component id="txtDiaChiNcc" alignment="3" pref="35" max="32767" attributes="0"/>
                   <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="txtHoTenKH3" alignment="3" pref="35" max="32767" attributes="0"/>
+                  <Component id="txtSoDienThoaiNcc" alignment="3" pref="35" max="32767" attributes="0"/>
                   <Component id="jLabel6" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="txtHoTenKH4" alignment="3" pref="35" max="32767" attributes="0"/>
+                  <Component id="txtEmailNcc" alignment="3" pref="35" max="32767" attributes="0"/>
                   <Component id="jLabel7" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
@@ -128,7 +128,7 @@
         <Property name="text" type="java.lang.String" value="Email:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="txtHoTenKH4">
+    <Component class="javax.swing.JTextField" name="txtEmailNcc">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Tahoma" size="14" style="0"/>
@@ -138,7 +138,7 @@
         <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
       </AuxValues>
     </Component>
-    <Component class="javax.swing.JTextField" name="txtHoTenKH3">
+    <Component class="javax.swing.JTextField" name="txtSoDienThoaiNcc">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Tahoma" size="14" style="0"/>
@@ -148,7 +148,7 @@
         <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
       </AuxValues>
     </Component>
-    <Component class="javax.swing.JTextField" name="txtHoTenKH2">
+    <Component class="javax.swing.JTextField" name="txtDiaChiNcc">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Tahoma" size="14" style="0"/>
@@ -158,7 +158,7 @@
         <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
       </AuxValues>
     </Component>
-    <Component class="javax.swing.JTextField" name="txtHoTenKH1">
+    <Component class="javax.swing.JTextField" name="txtTenNcc">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Tahoma" size="14" style="0"/>
@@ -168,7 +168,7 @@
         <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
       </AuxValues>
     </Component>
-    <Component class="javax.swing.JTextField" name="txtHoTenKH">
+    <Component class="javax.swing.JTextField" name="txtMaNcc">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Tahoma" size="14" style="0"/>
@@ -180,8 +180,11 @@
     </Component>
     <Component class="javax.swing.JButton" name="btnThemNcc">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Th&#xea;m"/>
+        <Property name="text" type="java.lang.String" value="Th&#xea;m m&#x1edb;i"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnThemNccActionPerformed"/>
+      </Events>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
       </AuxValues>
