@@ -52,6 +52,10 @@ public class CuaHangDAO {
         String sql = "SELECT * FROM CuaHang";
         return select(sql);
     }
+    public List<CuaHang> find(String key){
+        String sql = "select * from CuaHang where TenCuaHang like N'%"+key+"%'";
+        return select(sql);
+    }
 
     private CuaHang readFromResultSet(ResultSet rs) throws SQLException {
         CuaHang model = new CuaHang();
