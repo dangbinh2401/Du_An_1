@@ -49,9 +49,14 @@ public class NhanVienJPanel extends javax.swing.JPanel {
         themNV.btnThemNV.setText("Chỉnh sửa");
         int i = tblNhanVien.getSelectedRow();
         try {
-            themNV.txtMaNhanVien.setText(list.get(i).getMaTK());
+            themNV.txtMaNhanVien.setText(list.get(i).getMaNV());
             themNV.txtMaNhanVien.disable();
-            themNV.cboMaCuaHang.setSelectedIndex(i);
+            //themNV.cboMaCuaHang.addItem(list.get(i).getMaCH());
+            for (int j=1;j<themNV.cboMaCuaHang.getItemCount();j++){
+                if (themNV.cboMaCuaHang.getItemAt(j).equals(list.get(i).getMaCH())){
+                    themNV.cboMaCuaHang.setSelectedIndex(j);
+                }
+            }
             themNV.txtHoTen.setText(list.get(i).getHoTen());
             themNV.txtSoDienThoai.setText(list.get(i).getSdt());
             themNV.txtEmail.setText(list. get(i).getEmail());
@@ -63,10 +68,10 @@ public class NhanVienJPanel extends javax.swing.JPanel {
             themNV.txtDiaChi.setText(list.get(i).getDiaChi());
             themNV.txtMaTaiKhoan.setText(list.get(i).getMaTK());
             themNV.txtMaTaiKhoan.disable();
+            themNV.show();
         } catch (Exception e) {
+             JOptionPane.showMessageDialog(this, "vui lòng chọn nhân viên hàng cần sửa");
         }
-        
-        themNV.show();
         fillToTable();
     }
     void timKiem(){
