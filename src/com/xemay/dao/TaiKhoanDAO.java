@@ -34,6 +34,18 @@ public class TaiKhoanDAO {
         String sql = "select * from TaiKhoan where MaTK like N'%"+key+"%'";
         return select(sql);
     }
+    
+    public List<TaiKhoan> selectAll(){
+        String sql = "select TaiKhoan.MaTK,NhanVien.HoTen, TaiKhoan.MatKhau, NhanVien.SoDienThoai, TaiKhoan.VaiTro from TaiKhoan Inner join NhanVien on TaiKhoan.MaTK = NhanVien.MaTK UNION All select TaiKhoan.MaTK,KhachHang.HoTen, TaiKhoan.MatKhau, KhachHang.SoDienThoai,TaiKhoan.VaiTro from TaiKhoan inner join KhachHang on TaiKhoan.MaTK = KhachHang.MaTK";
+        return select(sql);
+        
+    }
+        public List<TaiKhoan> findkey(String key){
+            String sql = "select TaiKhoan.MaTK,NhanVien.HoTen, TaiKhoan.MatKhau, NhanVien.SoDienThoai, TaiKhoan.VaiTro from TaiKhoan Inner join NhanVien on TaiKhoan.MaTK = NhanVien.MaTK Where HoTen like N'%"+key+"%' UNION All select TaiKhoan.MaTK,KhachHang.HoTen, TaiKhoan.MatKhau, KhachHang.SoDienThoai,TaiKhoan.VaiTro from TaiKhoan inner join KhachHang on TaiKhoan.MaTK = KhachHang.MaTK Where HoTen like N'%"+key+"%'";
+            return select(sql);
+        
+    }
+    
     private List<TaiKhoan> select(String sql, Object... args) {
         List<TaiKhoan> list = new ArrayList<>();
         try {
@@ -48,6 +60,7 @@ public class TaiKhoanDAO {
                 rs.getStatement().getConnection().close();
             }
         } catch (SQLException ex) {
+            System.out.println(ex.toString());
             throw new RuntimeException(ex);
         }
         return list;
@@ -57,6 +70,7 @@ public class TaiKhoanDAO {
         model.setMaTk(rs.getString("MaTK"));
         model.setMatKhau(rs.getString("MatKhau"));
         model.setVaiTro(rs.getString("VaiTro"));
+        model.setHoTen(rs.getString("HoTen"));
         return model;
     }
 }

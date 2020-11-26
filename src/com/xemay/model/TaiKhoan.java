@@ -14,13 +14,21 @@ public class TaiKhoan {
     private String MaTk;
     private String MatKhau;
     private String VaiTro;
-
+    private String HoTen;
     public TaiKhoan(String MaTk, String MatKhau, String VaiTro) {
         this.MaTk = MaTk;
         this.MatKhau = MatKhau;
         this.VaiTro = VaiTro;
     }
 
+    public String getHoTen() {
+        return HoTen;
+    }
+
+    public void setHoTen(String HoTen) {
+        this.HoTen = HoTen;
+    }
+    
     public TaiKhoan() {
     }
 
