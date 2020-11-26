@@ -65,7 +65,7 @@ public class KhachHangJPanel extends javax.swing.JPanel {
         jButton34 = new javax.swing.JButton();
         jTextField7 = new javax.swing.JTextField();
         jLabel20 = new javax.swing.JLabel();
-        cboTimKiem3 = new javax.swing.JComboBox<String>();
+        cboTimKiem3 = new javax.swing.JComboBox<>();
         jButton37 = new javax.swing.JButton();
         jButton36 = new javax.swing.JButton();
         jScrollPane7 = new javax.swing.JScrollPane();
@@ -87,7 +87,7 @@ public class KhachHangJPanel extends javax.swing.JPanel {
         jLabel20.setText("QUẢN LÝ KHÁCH HÀNG");
 
         cboTimKiem3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        cboTimKiem3.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Tìm kiếm theo tên", "Tìm kiếm theo mã" }));
+        cboTimKiem3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tìm kiếm theo tên", "Tìm kiếm theo mã" }));
         cboTimKiem3.setMinimumSize(new java.awt.Dimension(138, 35));
 
         jButton37.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -169,8 +169,8 @@ public class KhachHangJPanel extends javax.swing.JPanel {
                     .addComponent(jButton34, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cboTimKiem3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(751, 751, 751))
+                .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 558, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(351, 351, 351))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);

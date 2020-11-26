@@ -37,6 +37,15 @@ public class NhanVienDAO {
         String sql = "select * from NhanVien where MaNV like N'%"+key+"%'";
         return select(sql);
     }
+    public void delete(String maTK) {
+        try {
+            String sql = "{ call Sp_NhanVien(?)}";
+            JdbcHelper.executeUpdate(sql, maTK);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
     private List<NhanVien> select(String sql, Object... args) {
         List<NhanVien> list = new ArrayList<>();
         try {

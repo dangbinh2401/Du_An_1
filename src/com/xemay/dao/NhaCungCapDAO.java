@@ -21,7 +21,16 @@ public class NhaCungCapDAO {
                 model.getSdt(),model.getEmail(),model.getMaNcc());
     }
     
-    private List<NhaCungCap> select(String sql, Object... args){
+    public void delete(String ma) {
+        String sql = "DELETE NhaCungCap WHERE MaNCC=?";
+        try {
+            JdbcHelper.executeUpdate(sql,ma);
+        } catch (Exception ex) {
+            System.out.println("Lỗi");
+        }
+    }
+    
+    protected List<NhaCungCap> selectBySql(String sql, Object... args) {
         List<NhaCungCap> list = new ArrayList<>();
         try {
             ResultSet rs = JdbcHelper.executeQuery(sql, args);
@@ -33,14 +42,31 @@ public class NhaCungCapDAO {
                 nhaCungCap.setSdt(rs.getString(4));
                 nhaCungCap.setEmail(rs.getString(5));
                 list.add(nhaCungCap);
+
             }
+            rs.getStatement().getConnection().close();
+            return list;
         } catch (Exception e) {
+            throw new RuntimeException(e);
         }
-        return list;
+    }   
+    
+    public List<NhaCungCap> selectAll() {
+        String sql = "SELECT * FROM NhaCungCap";
+        return this.selectBySql(sql);
     }
     
-    public List<NhaCungCap> select() {
-        String sql = "SELECT * FROM NhaCungCap";
-        return select(sql);
+    public List<NhaCungCap> selectByKeyWord(String keyWord){
+        String sql = "SELECT * FROM NhaCungCap WHERE TenNCC LIKE ?";
+        return this.selectBySql(sql,"%"+keyWord+"%");
+    }
+    
+    public NhaCungCap selectByIdTimKiem(String ma) {
+        String sql = "SELECT * FROM NhaCungCap WHERE MaNCC=?";
+        List<NhaCungCap> list = this.selectBySql(sql, ma);
+        if (list.isEmpty()) {
+            return null;
+        }
+        return list.get(0);
     }
 }

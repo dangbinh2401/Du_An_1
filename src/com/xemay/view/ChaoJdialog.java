@@ -46,15 +46,12 @@ public class ChaoJdialog extends javax.swing.JFrame {
 
                     if (value < 30) {
                         lblload.setText("Hệ thống quản lý cửa hàng xe máy");
-                    } else {
+                    } else if(value < 60){
                         lblload.setText("Mã nhân viên là tên đăng nhập");
-                    }
-                    if (value > 60) {
+                    }else if (value < 80) {
                         lblload.setText("Hệ thống dành cho Admin!");
-                    }
-                    if (value > 90) {
+                    }else {
                         lblload.setText("Sẵn sàng để bắt đầu! wellcom");
-
                     }
                 } else {
                     check += "Stop";
