@@ -5,6 +5,12 @@
  */
 package com.xemay.view;
 
+import com.xemay.dao.KhachHangDao;
+import com.xemay.model.KhachHang;
+import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Admin
@@ -16,6 +22,30 @@ public class KhachHangJPanel extends javax.swing.JPanel {
      */
     public KhachHangJPanel() {
         initComponents();
+        fillToTable();
+    }
+    KhachHangDao dao = new KhachHangDao();
+
+    void fillToTable() {
+        DefaultTableModel model = (DefaultTableModel) tblKhachHang.getModel();
+        model.setRowCount(0);
+        try {
+            List<KhachHang> list = dao.select();
+            for (KhachHang ch : list) {
+                Object[] row = {
+                    ch.getMaTk(),
+                    ch.getMaKh(),
+                    ch.getHoTen(),
+                    ch.getSdt(),
+                    ch.getDiaChi(),
+                    ch.getEmail(),
+                    ch.getGioiTinh()
+                };
+                model.addRow(row);
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "lỗi truy vẫn dữ liệu");
+        }
     }
 
     /**
@@ -32,11 +62,11 @@ public class KhachHangJPanel extends javax.swing.JPanel {
         jButton34 = new javax.swing.JButton();
         jTextField7 = new javax.swing.JTextField();
         jLabel20 = new javax.swing.JLabel();
-        cboTimKiem3 = new javax.swing.JComboBox<>();
+        cboTimKiem3 = new javax.swing.JComboBox<String>();
         jButton37 = new javax.swing.JButton();
         jButton36 = new javax.swing.JButton();
         jScrollPane7 = new javax.swing.JScrollPane();
-        jTable7 = new javax.swing.JTable();
+        tblKhachHang = new javax.swing.JTable();
         jButton38 = new javax.swing.JButton();
 
         QuanLyKhachHang.setBackground(new java.awt.Color(255, 255, 255));
@@ -54,29 +84,39 @@ public class KhachHangJPanel extends javax.swing.JPanel {
         jLabel20.setText("QUẢN LÝ KHÁCH HÀNG");
 
         cboTimKiem3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        cboTimKiem3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tìm kiếm theo tên", "Tìm kiếm theo mã" }));
+        cboTimKiem3.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Tìm kiếm theo tên", "Tìm kiếm theo mã" }));
         cboTimKiem3.setMinimumSize(new java.awt.Dimension(138, 35));
 
         jButton37.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jButton37.setText("Chỉnh sửa");
+        jButton37.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton37ActionPerformed(evt);
+            }
+        });
 
         jButton36.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jButton36.setText("Tạo mới");
+        jButton36.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton36ActionPerformed(evt);
+            }
+        });
 
-        jTable7.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jTable7.setModel(new javax.swing.table.DefaultTableModel(
+        tblKhachHang.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        tblKhachHang.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
             },
             new String [] {
-                "STT", "Mã Khách Hàng", "Tên Khách Hàng", "Số Điện Thoại", "Email", "Địa Chỉ"
+                "Mã tài khoản", "Mã Khách Hàng", "Tên Khách Hàng", "Số Điện Thoại", "Email", "Địa Chỉ", "Giới tính"
             }
         ));
-        jTable7.setRowHeight(30);
-        jScrollPane7.setViewportView(jTable7);
+        tblKhachHang.setRowHeight(30);
+        jScrollPane7.setViewportView(tblKhachHang);
 
         jButton38.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jButton38.setText("Xóa");
@@ -90,17 +130,17 @@ public class KhachHangJPanel extends javax.swing.JPanel {
                 .addGroup(QuanLyKhachHangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(QuanLyKhachHangLayout.createSequentialGroup()
                         .addComponent(cboTimKiem3, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 187, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, 374, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(62, 62, 62)
                         .addComponent(jButton34, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(102, 102, 102)
                         .addComponent(jButton35, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(83, 83, 83)
+                        .addGap(93, 93, 93)
                         .addComponent(jButton36, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(79, 79, 79)
+                        .addGap(84, 84, 84)
                         .addComponent(jButton37, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(109, 109, 109)
+                        .addGap(84, 84, 84)
                         .addComponent(jButton38, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jLabel20)
                     .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 1715, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -129,7 +169,7 @@ public class KhachHangJPanel extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1835, Short.MAX_VALUE)
+            .addGap(0, 1840, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
@@ -147,6 +187,19 @@ public class KhachHangJPanel extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButton36ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton36ActionPerformed
+        ThemKhachHang themKH = new ThemKhachHang(null, true);
+        themKH.show();
+        fillToTable();
+    }//GEN-LAST:event_jButton36ActionPerformed
+
+    private void jButton37ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton37ActionPerformed
+       ThemKhachHang capnhatKH = new ThemKhachHang(null, true);
+        capnhatKH.btnThemKhachHang.setText("Cập nhật");
+        capnhatKH.show();
+        fillToTable();
+    }//GEN-LAST:event_jButton37ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel QuanLyKhachHang;
@@ -158,7 +211,7 @@ public class KhachHangJPanel extends javax.swing.JPanel {
     private javax.swing.JButton jButton38;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JScrollPane jScrollPane7;
-    private javax.swing.JTable jTable7;
     private javax.swing.JTextField jTextField7;
+    private javax.swing.JTable tblKhachHang;
     // End of variables declaration//GEN-END:variables
 }
