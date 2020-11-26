@@ -10,23 +10,44 @@ package com.xemay.model;
  * @author PC
  */
 public class NhanVien {
-
+    private String MaCH;
     private String MaNV;
     private String HoTen;
     private String Sdt;
     private String Email;
     private Boolean GioiTinh;
     private String DiaChi;
+    private String MaTK;
 
-    public NhanVien(String MaNV, String HoTen, String Sdt, String Email, Boolean GioiTinh, String DiaChi) {
+    public NhanVien(String MaCH, String MaNV, String HoTen, String Sdt, String Email, Boolean GioiTinh, String DiaChi, String MaTK) {
+        this.MaCH = MaCH;
         this.MaNV = MaNV;
         this.HoTen = HoTen;
         this.Sdt = Sdt;
         this.Email = Email;
         this.GioiTinh = GioiTinh;
         this.DiaChi = DiaChi;
+        this.MaTK = MaTK;
     }
 
+    public String getMaCH() {
+        return MaCH;
+    }
+
+    public void setMaCH(String MaCH) {
+        this.MaCH = MaCH;
+    }
+
+    public String getMaTK() {
+        return MaTK;
+    }
+
+    public void setMaTK(String MaTK) {
+        this.MaTK = MaTK;
+    }
+
+    
+    
     public NhanVien() {
     }
 

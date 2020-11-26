@@ -11,11 +11,11 @@ package com.xemay.model;
  */
 public class TaiKhoan {
 
-    private int MaTk;
+    private String MaTk;
     private String MatKhau;
     private String VaiTro;
 
-    public TaiKhoan(int MaTk, String MatKhau, String VaiTro) {
+    public TaiKhoan(String MaTk, String MatKhau, String VaiTro) {
         this.MaTk = MaTk;
         this.MatKhau = MatKhau;
         this.VaiTro = VaiTro;
@@ -24,11 +24,11 @@ public class TaiKhoan {
     public TaiKhoan() {
     }
 
-    public int getMaTk() {
+    public String getMaTk() {
         return MaTk;
     }
 
-    public void setMaTk(int MaTk) {
+    public void setMaTk(String MaTk) {
         this.MaTk = MaTk;
     }
 
