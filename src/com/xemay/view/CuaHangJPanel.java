@@ -68,7 +68,8 @@ public class CuaHangJPanel extends javax.swing.JPanel {
             } 
         }  
         catch (Exception e) { 
-            JOptionPane.showMessageDialog(this, "lỗi truy vẫn dữ liệu");
+            JOptionPane.showMessageDialog(this,"lỗi truy vẫn dữ liệu");
+            
         }
     }
     void fillToTable(){
