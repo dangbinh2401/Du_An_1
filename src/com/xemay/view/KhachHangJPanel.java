@@ -8,9 +8,13 @@ package com.xemay.view;
 import com.xemay.dao.KhachHangDao;
 import com.xemay.model.KhachHang;
 import java.util.ArrayList;
+import java.util.Collections;
 import static java.util.Collections.list;
+import java.util.Comparator;
 import java.util.List;
 import javax.swing.JOptionPane;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -25,9 +29,49 @@ public class KhachHangJPanel extends javax.swing.JPanel {
     public KhachHangJPanel() {
         initComponents();
         fillToTable();
+   txtTimKiem.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent de) {
+                timKiem();
+            }
 
+            @Override
+            public void removeUpdate(DocumentEvent de) {
+                timKiem();
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent de) {
+                timKiem();
+            }
+        });
     }
     KhachHangDao dao = new KhachHangDao();
+    List<KhachHang> list; 
+     void timKiem(){
+        DefaultTableModel model = (DefaultTableModel) tblKhachHang.getModel(); 
+        model.setRowCount(0); 
+        try { 
+            list = dao.find(txtTimKiem.getText()); 
+            for (KhachHang ch : list) { 
+                Object[] row = { 
+                     ch.getMaTk(),
+                    ch.getMaKh(),
+                    ch.getHoTen(),
+                    ch.getSdt(),
+                    ch.getDiaChi(),
+                    ch.getEmail(),
+                    ch.getGioiTinh()
+                }; 
+                model.addRow(row); 
+            } 
+        }  
+        catch (Exception e) { 
+            JOptionPane.showMessageDialog(this,"lỗi truy vẫn dữ liệu");
+            
+        }
+    }
+    
 
     void fillToTable() {
         DefaultTableModel model = (DefaultTableModel) tblKhachHang.getModel();
@@ -61,11 +105,11 @@ public class KhachHangJPanel extends javax.swing.JPanel {
     private void initComponents() {
 
         QuanLyKhachHang = new javax.swing.JPanel();
-        jButton35 = new javax.swing.JButton();
+        btnSapXep = new javax.swing.JButton();
         jButton34 = new javax.swing.JButton();
-        jTextField7 = new javax.swing.JTextField();
+        txtTimKiem = new javax.swing.JTextField();
         jLabel20 = new javax.swing.JLabel();
-        cboTimKiem3 = new javax.swing.JComboBox<>();
+        cboTimKiem3 = new javax.swing.JComboBox<String>();
         jButton37 = new javax.swing.JButton();
         jButton36 = new javax.swing.JButton();
         jScrollPane7 = new javax.swing.JScrollPane();
@@ -74,20 +118,25 @@ public class KhachHangJPanel extends javax.swing.JPanel {
 
         QuanLyKhachHang.setBackground(new java.awt.Color(255, 255, 255));
 
-        jButton35.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jButton35.setText("Sắp xếp theo tên");
+        btnSapXep.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        btnSapXep.setText("Sắp xếp theo tên");
+        btnSapXep.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSapXepActionPerformed(evt);
+            }
+        });
 
         jButton34.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jButton34.setText("Tìm kiếm");
 
-        jTextField7.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jTextField7.setMinimumSize(new java.awt.Dimension(6, 35));
+        txtTimKiem.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txtTimKiem.setMinimumSize(new java.awt.Dimension(6, 35));
 
         jLabel20.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel20.setText("QUẢN LÝ KHÁCH HÀNG");
 
         cboTimKiem3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        cboTimKiem3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tìm kiếm theo tên", "Tìm kiếm theo mã" }));
+        cboTimKiem3.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Tìm kiếm theo tên", "Tìm kiếm theo mã" }));
         cboTimKiem3.setMinimumSize(new java.awt.Dimension(138, 35));
 
         jButton37.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -139,11 +188,11 @@ public class KhachHangJPanel extends javax.swing.JPanel {
                     .addGroup(QuanLyKhachHangLayout.createSequentialGroup()
                         .addComponent(cboTimKiem3, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, 374, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 374, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(62, 62, 62)
                         .addComponent(jButton34, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(102, 102, 102)
-                        .addComponent(jButton35, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnSapXep, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(93, 93, 93)
                         .addComponent(jButton36, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(84, 84, 84)
@@ -161,11 +210,11 @@ public class KhachHangJPanel extends javax.swing.JPanel {
                 .addComponent(jLabel20)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(QuanLyKhachHangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton36, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton37, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton38, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton35, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnSapXep, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton34, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cboTimKiem3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
@@ -224,18 +273,58 @@ public class KhachHangJPanel extends javax.swing.JPanel {
 
     }//GEN-LAST:event_jButton38ActionPerformed
 
+    private void btnSapXepActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSapXepActionPerformed
+        Comparator<KhachHang> sortName = new Comparator<KhachHang>() {
+            @Override
+            public int compare(KhachHang s1, KhachHang s2) {
+                return s1.getHoTen().compareTo(s2.getHoTen());
+            }
+        };
+        Comparator<KhachHang> sortMaCH = new Comparator<KhachHang>() {
+            @Override
+            public int compare(KhachHang s1, KhachHang s2) {
+                return s1.getMaKh().compareTo(s2.getMaKh());
+            }
+        };
+        if (btnSapXep.getText().equals("Sắp xếp theo tên")) {
+            Collections.sort(list, sortName);
+            btnSapXep.setText("Sắp xếp theo mã");
+        } else {
+            Collections.sort(list, sortMaCH);
+            btnSapXep.setText("Sắp xếp theo tên");
+        }
+        DefaultTableModel model = (DefaultTableModel) tblKhachHang.getModel();
+        model.setRowCount(0);
+        try {
+            for (KhachHang ch : list) {
+                Object[] row = {
+                    ch.getMaTk(),
+                    ch.getMaKh(),
+                    ch.getHoTen(),
+                    ch.getSdt(),
+                    ch.getDiaChi(),
+                    ch.getEmail(),
+                    ch.getGioiTinh()
+                };
+                model.addRow(row);
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "lỗi truy vẫn dữ liệu" + e);
+        }
+    }//GEN-LAST:event_btnSapXepActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel QuanLyKhachHang;
+    private javax.swing.JButton btnSapXep;
     private javax.swing.JComboBox<String> cboTimKiem3;
     private javax.swing.JButton jButton34;
-    private javax.swing.JButton jButton35;
     private javax.swing.JButton jButton36;
     private javax.swing.JButton jButton37;
     private javax.swing.JButton jButton38;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JScrollPane jScrollPane7;
-    private javax.swing.JTextField jTextField7;
     private javax.swing.JTable tblKhachHang;
+    private javax.swing.JTextField txtTimKiem;
     // End of variables declaration//GEN-END:variables
 }
