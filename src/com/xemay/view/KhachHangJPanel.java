@@ -29,7 +29,7 @@ public class KhachHangJPanel extends javax.swing.JPanel {
     public KhachHangJPanel() {
         initComponents();
         fillToTable();
-   txtTimKiem.getDocument().addDocumentListener(new DocumentListener() {
+        txtTimKiem.getDocument().addDocumentListener(new DocumentListener() {
             @Override
             public void insertUpdate(DocumentEvent de) {
                 timKiem();
@@ -47,37 +47,36 @@ public class KhachHangJPanel extends javax.swing.JPanel {
         });
     }
     KhachHangDao dao = new KhachHangDao();
-    List<KhachHang> list; 
-     void timKiem(){
-        DefaultTableModel model = (DefaultTableModel) tblKhachHang.getModel(); 
-        model.setRowCount(0); 
-        try { 
-            list = dao.find(txtTimKiem.getText()); 
-            for (KhachHang ch : list) { 
-                Object[] row = { 
-                     ch.getMaTk(),
+    List<KhachHang> list;
+
+    void timKiem() {
+        DefaultTableModel model = (DefaultTableModel) tblKhachHang.getModel();
+        model.setRowCount(0);
+        try {
+            list = dao.find(txtTimKiem.getText());
+            for (KhachHang ch : list) {
+                Object[] row = {
+                    ch.getMaTk(),
                     ch.getMaKh(),
                     ch.getHoTen(),
                     ch.getSdt(),
                     ch.getDiaChi(),
                     ch.getEmail(),
                     ch.getGioiTinh()
-                }; 
-                model.addRow(row); 
-            } 
-        }  
-        catch (Exception e) { 
-            JOptionPane.showMessageDialog(this,"lỗi truy vẫn dữ liệu");
-            
+                };
+                model.addRow(row);
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "lỗi truy vẫn dữ liệu");
+
         }
     }
-    
 
     void fillToTable() {
         DefaultTableModel model = (DefaultTableModel) tblKhachHang.getModel();
         model.setRowCount(0);
         try {
-            List<KhachHang> list = dao.select();
+            list = dao.select();
             for (KhachHang ch : list) {
                 Object[] row = {
                     ch.getMaTk(),
@@ -93,6 +92,31 @@ public class KhachHangJPanel extends javax.swing.JPanel {
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "lỗi truy vẫn dữ liệu");
         }
+    }
+
+    void fillChinhSua() {
+        ThemKhachHang capnhatKH = new ThemKhachHang(null, true);
+        capnhatKH.btnThemKhachHang.setText("Cập nhật");
+        int i = tblKhachHang.getSelectedRow();
+        try {
+            capnhatKH.txtMaTK.setText(list.get(i).getMaTk());
+            capnhatKH.txtMaKH.setText(list.get(i).getMaKh());
+            capnhatKH.txtTenKH.setText(list.get(i).getHoTen());
+            capnhatKH.txtSoDienThoai.setText(list.get(i).getSdt());
+            capnhatKH.txtEmail.setText(list.get(i).getEmail());
+            if (list.get(i).getGioiTinh().equals("Nam")) {
+                capnhatKH.rdoNam.setSelected(true);
+            }
+            if (list.get(i).getGioiTinh().equals("Nữ")) {
+                capnhatKH.rdoNu.setSelected(true);
+            }
+            capnhatKH.txtDiaChi.setText(list.get(i).getDiaChi());
+            capnhatKH.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "vui lòng chọn cửa hàng cần sửa");
+        }
+        fillToTable();
     }
 
     /**
@@ -168,6 +192,11 @@ public class KhachHangJPanel extends javax.swing.JPanel {
             }
         ));
         tblKhachHang.setRowHeight(30);
+        tblKhachHang.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                tblKhachHangMousePressed(evt);
+            }
+        });
         jScrollPane7.setViewportView(tblKhachHang);
 
         jButton38.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -251,14 +280,11 @@ public class KhachHangJPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton36ActionPerformed
 
     private void jButton37ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton37ActionPerformed
-        ThemKhachHang capnhatKH = new ThemKhachHang(null, true);
-        capnhatKH.btnThemKhachHang.setText("Cập nhật");
-        capnhatKH.show();
-        fillToTable();
+        fillChinhSua();
     }//GEN-LAST:event_jButton37ActionPerformed
 
     private void jButton38ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton38ActionPerformed
-        String tkk = JOptionPane.showInputDialog(this, "Nhập mã tài khoản: ", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+        String tkk = JOptionPane.showInputDialog(this, "Nhập mã khách hàng: ", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
         int traloi = JOptionPane.showConfirmDialog(null, "Bạn có muốn khách hàng có mã:  " + tkk, "Yes/No", JOptionPane.YES_NO_CANCEL_OPTION);
         if (traloi == 0) {
             KhachHangDao kh = new KhachHangDao();
@@ -313,6 +339,23 @@ public class KhachHangJPanel extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_btnSapXepActionPerformed
 
+    private void tblKhachHangMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblKhachHangMousePressed
+        if (evt.getX() == x & evt.getY() == y) {
+            kt = 1;
+        } else {
+            x = evt.getX();
+            y = evt.getY();
+        }
+        if (kt == 1) {
+            fillChinhSua();
+            kt = 0;
+            x = 0;
+            y = 0;
+        }
+    }//GEN-LAST:event_tblKhachHangMousePressed
+    int x = 0;
+    int y = 0;
+    int kt = 0;
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel QuanLyKhachHang;
