@@ -63,11 +63,10 @@ public class KhachHangDao {
         String sql = "SELECT * FROM KhachHang";
         return select(sql);
     }
-public List<KhachHang> find(String key){
+    public List<KhachHang> find(String key){
         String sql = "select * from KhachHang where HoTen like N'%"+key+"%'";
         return select(sql);
-    }
-    private KhachHang readFromResultSet(ResultSet rs) throws SQLException {
+    }private KhachHang readFromResultSet(ResultSet rs) throws SQLException {
         KhachHang model = new KhachHang();
         model.setMaTk(rs.getString("MaTK"));
         model.setMaKh(rs.getString("MaKH"));

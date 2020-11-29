@@ -5,7 +5,14 @@
  */
 package com.xemay.view;
 
+import com.xemay.dao.BaoHanhDAO;
+import com.xemay.dao.QLXeDAO;
+import com.xemay.dao.KhachHangDao;
 import javax.swing.UIManager;
+import com.xemay.model.KhachHang;
+import com.xemay.model.Xe;
+import com.xemay.model.BaoHang;
+import java.util.List;
 
 /**
  *
@@ -13,10 +20,11 @@ import javax.swing.UIManager;
  */
 public class BaoHanh extends javax.swing.JDialog {
 
+    KhachHangDao dao = new KhachHangDao();
     /**
      * Creates new form baoHanh
      */
-    public BaoHanh(java.awt.Frame parent, boolean modal) {
+    public BaoHanh(java.awt.Frame parent, boolean modal,BaoHang bh) {
         super(parent, modal);
         try {
             UIManager.setLookAndFeel("com.jtattoo.plaf.smart.SmartLookAndFeel");
@@ -24,6 +32,38 @@ public class BaoHanh extends javax.swing.JDialog {
         }
         initComponents();
         setLocationRelativeTo(null);
+        fillComboxKhachHang();
+        fillComboxXe();
+    }
+    BaoHanhDAO daoBh = new BaoHanhDAO();
+    public void fillComboxKhachHang(){
+        KhachHangDao dao = new KhachHangDao();
+        List <KhachHang> list = dao.select();
+        cboMaKhachHang.removeAllItems();
+        for (KhachHang khachHang : list) {
+            cboMaKhachHang.addItem(khachHang.getMaKh());
+        }
+    }
+    
+    public void fillComboxXe(){
+        QLXeDAO dao = new QLXeDAO();
+        List<Xe> list = dao.selectAll();
+        cboMaXe.removeAllItems();
+        for (Xe xe : list) {
+            cboMaXe.addItem(xe.getMaXe());
+        }
+    }
+    
+    public void timKiemTenKH(){
+        KhachHangDao dao = new KhachHangDao();
+        List<KhachHang> list = dao.find(txtHoTenKH.getText());
+        if (list != null) {
+            fillComboxKhachHang();
+        }
+    }
+    
+    public void SetModel(BaoHang baoHang){
+        
     }
 
     /**
@@ -45,7 +85,7 @@ public class BaoHanh extends javax.swing.JDialog {
         jLabel3 = new javax.swing.JLabel();
         cboMaKhachHang = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
-        cboMaKhachHang1 = new javax.swing.JComboBox<>();
+        cboMaXe = new javax.swing.JComboBox<>();
         jLabel11 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
@@ -72,6 +112,11 @@ public class BaoHanh extends javax.swing.JDialog {
         });
 
         jButton1.setText("Chọn");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jLabel19.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel19.setText("Ngày bảo hành:");
@@ -92,7 +137,7 @@ public class BaoHanh extends javax.swing.JDialog {
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel2.setText("Mã khách hàng:");
 
-        cboMaKhachHang1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        cboMaXe.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
         jLabel11.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel11.setText("Mã xe:");
@@ -163,7 +208,7 @@ public class BaoHanh extends javax.swing.JDialog {
                                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                         .addComponent(jTextField2, javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(cboMaKhachHang1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(cboMaXe, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addGroup(jPanel1Layout.createSequentialGroup()
                                             .addGap(0, 0, Short.MAX_VALUE)
                                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -188,7 +233,7 @@ public class BaoHanh extends javax.swing.JDialog {
                     .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(30, 30, 30)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtHoTenKH, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE)
+                    .addComponent(txtHoTenKH)
                     .addComponent(jLabel3)
                     .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(22, 22, 22)
@@ -209,7 +254,7 @@ public class BaoHanh extends javax.swing.JDialog {
                     .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(21, 21, 21)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cboMaKhachHang1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cboMaXe, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(30, 30, 30)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -251,6 +296,10 @@ public class BaoHanh extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton3ActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        this.timKiemTenKH();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -282,7 +331,7 @@ public class BaoHanh extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                BaoHanh dialog = new BaoHanh(new javax.swing.JFrame(), true);
+                BaoHanh dialog = new BaoHanh(new javax.swing.JFrame(), true,null);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -296,7 +345,7 @@ public class BaoHanh extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> cboMaKhachHang;
-    private javax.swing.JComboBox<String> cboMaKhachHang1;
+    private javax.swing.JComboBox<String> cboMaXe;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;

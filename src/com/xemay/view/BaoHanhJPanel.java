@@ -5,17 +5,53 @@
  */
 package com.xemay.view;
 
+import com.xemay.model.BaoHang;
+import com.xemay.dao.QLXeDAO;
+import com.xemay.dao.KhachHangDao;
+import com.xemay.dao.BaoHanhDAO;
+import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Admin
  */
 public class BaoHanhJPanel extends javax.swing.JPanel {
 
+    private List<BaoHang> dataBaoHanh;
     /**
      * Creates new form baoHanhJPanel
      */
     public BaoHanhJPanel() {
         initComponents();
+        fillTable();
+    }
+    BaoHanhDAO dao = new BaoHanhDAO();
+    KhachHangDao khDao = new KhachHangDao();
+    QLXeDAO xeDao = new QLXeDAO();
+    BaoHang baoHang = new BaoHang();
+    
+    void fillTable(){
+        DefaultTableModel model = (DefaultTableModel) tblBaoHanh.getModel();
+        model.setRowCount(0);
+        int i = 1;
+        try {
+            this.dataBaoHanh = dao.selectAll();
+            for (BaoHang bh : this.dataBaoHanh) {
+                Object[] row = {
+                    i++,
+                    bh.getMaBh(),
+                    bh.getMaKh(),
+                    bh.getMaXe(),
+                    bh.getNgayBaoHanh(),
+                    bh.getNoidungBh()
+                };
+                model.addRow(row);                 
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this,"lỗi truy vẫn dữ liệu");
+        }
     }
 
     /**
@@ -36,7 +72,7 @@ public class BaoHanhJPanel extends javax.swing.JPanel {
         jButton15 = new javax.swing.JButton();
         jButton16 = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jTable3 = new javax.swing.JTable();
+        tblBaoHanh = new javax.swing.JTable();
         jButton18 = new javax.swing.JButton();
 
         BaoHanh.setBackground(new java.awt.Color(255, 255, 255));
@@ -67,9 +103,14 @@ public class BaoHanhJPanel extends javax.swing.JPanel {
 
         jButton16.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jButton16.setText("Chỉnh sửa");
+        jButton16.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton16ActionPerformed(evt);
+            }
+        });
 
-        jTable3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jTable3.setModel(new javax.swing.table.DefaultTableModel(
+        tblBaoHanh.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        tblBaoHanh.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null},
                 {null, null, null, null, null, null},
@@ -80,8 +121,8 @@ public class BaoHanhJPanel extends javax.swing.JPanel {
                 "STT", "Mã Bảo Hành", "Tên Khách Hàng", "Tên Xe", "Ngày Bảo Hành", "Nội Dung"
             }
         ));
-        jTable3.setRowHeight(30);
-        jScrollPane3.setViewportView(jTable3);
+        tblBaoHanh.setRowHeight(30);
+        jScrollPane3.setViewportView(tblBaoHanh);
 
         jButton18.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jButton18.setText("Xóa");
@@ -147,9 +188,14 @@ public class BaoHanhJPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton15ActionPerformed
-        BaoHanh bh = new BaoHanh(null, true);
+        BaoHanh bh = new BaoHanh(null, true,null);
         bh.show();
     }//GEN-LAST:event_jButton15ActionPerformed
+
+    private void jButton16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton16ActionPerformed
+        BaoHanh bh = new BaoHanh(null, true,null);
+        bh.show();
+    }//GEN-LAST:event_jButton16ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -162,7 +208,7 @@ public class BaoHanhJPanel extends javax.swing.JPanel {
     private javax.swing.JButton jButton18;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTable jTable3;
     private javax.swing.JTextField jTextField3;
+    private javax.swing.JTable tblBaoHanh;
     // End of variables declaration//GEN-END:variables
 }

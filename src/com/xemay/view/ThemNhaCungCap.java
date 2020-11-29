@@ -7,6 +7,7 @@ package com.xemay.view;
 
 import com.xemay.dao.NhaCungCapDAO;
 import com.xemay.model.NhaCungCap;
+import com.xemay.utils.CheckLoi;
 import javax.swing.JOptionPane;
 
 /**
@@ -143,12 +144,28 @@ public class ThemNhaCungCap extends javax.swing.JDialog {
         if(btnThemNcc.getText().equals("Thêm mới")){
              this.themMoiNcc();
          }else{
-             this.capNhatNcc();
+            this.capNhatNcc();
          }
     }//GEN-LAST:event_btnThemNccActionPerformed
 
     public void themMoiNcc(){
+        StringBuilder bd = new StringBuilder();
+        CheckLoi.checkRong(txtMaNcc, bd,"Mã nhà cung cấp chưa nhập\n");
+        CheckLoi.checkRong(txtTenNcc, bd,"Tên nhà cung cấp chưa nhập\n");
+        CheckLoi.checkRong(txtDiaChiNcc, bd,"Địa chỉ nhà cung cấp\n");
+        CheckLoi.checkRong(txtSoDienThoaiNcc, bd,"Số điện thoại chưa nhập\n");
+        CheckLoi.checkRong(txtEmailNcc, bd,"Email chưa nhập\n");
+        if (bd.length() > 0) {
+            JOptionPane.showMessageDialog(this,bd.toString(),"Thông báo",
+                    JOptionPane.ERROR_MESSAGE);
+            return;
+        }
         NhaCungCapDAO dao = new NhaCungCapDAO();
+        if (dao.selectByKeyWord1(txtMaNcc.getText()) != null) {
+            JOptionPane.showMessageDialog(this,"Mã đã tồn tại","Thông báo",
+                    JOptionPane.ERROR_MESSAGE);
+            return;
+        }
         try {
             dao.insert(model());
             JOptionPane.showMessageDialog(this,"Thêm thành công");                
@@ -178,6 +195,17 @@ public class ThemNhaCungCap extends javax.swing.JDialog {
     }
     
     private void capNhatNcc(){
+        StringBuilder bd = new StringBuilder();
+        CheckLoi.checkRong(txtMaNcc, bd,"Mã nhà cung cấp chưa nhập\n");
+        CheckLoi.checkRong(txtTenNcc, bd,"Tên nhà cung cấp chưa nhập\n");
+        CheckLoi.checkRong(txtDiaChiNcc, bd,"Địa chỉ nhà cung cấp\n");
+        CheckLoi.checkRong(txtSoDienThoaiNcc, bd,"Số điện thoại chưa nhập\n");
+        CheckLoi.checkRong(txtEmailNcc, bd,"Email chưa nhập\n");
+        if (bd.length() > 0) {
+            JOptionPane.showMessageDialog(this,bd.toString(),"Thông báo",
+                    JOptionPane.ERROR_MESSAGE);
+            return;
+        }
         NhaCungCapDAO dao = new NhaCungCapDAO();
         try {
             if (JOptionPane.showConfirmDialog(this,"Bạn có chắc chắn muốn cập nhật không")== JOptionPane.YES_OPTION) {

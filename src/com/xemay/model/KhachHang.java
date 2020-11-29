@@ -88,4 +88,8 @@ public class KhachHang {
         this.DiaChi = DiaChi;
     }
 
+    @Override//hiển thị dữ liệu lên JcomBoBox
+    public String toString() {
+        return this.MaKh;
+    }
 }

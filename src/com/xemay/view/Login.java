@@ -5,7 +5,7 @@
  */
 package com.xemay.view;
 
-import com.xemay.utils.checkError;
+import com.xemay.utils.CheckLoi;
 import java.awt.Color;
 import javax.swing.JOptionPane;
 
@@ -271,8 +271,8 @@ public class Login extends javax.swing.JFrame {
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
         StringBuilder bd = new StringBuilder();
-        checkError.checkRong(txtUserName, bd, "Username chưa nhập\n");
-        checkError.checkRongPass(txtPassword, bd, "Passwword chưa nhập");
+        CheckLoi.checkRong(txtUserName, bd, "Username chưa nhập\n");
+        CheckLoi.checkRongPass(txtPassword, bd, "Passwword chưa nhập");
         if (bd.length() > 0) {
             JOptionPane.showMessageDialog(this, bd.toString());
             return;

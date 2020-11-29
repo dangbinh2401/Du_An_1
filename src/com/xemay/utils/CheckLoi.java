@@ -1,5 +1,4 @@
 package com.xemay.utils;
-
 import java.awt.Color;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -7,8 +6,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
-
-public class checkError {
+public class CheckLoi {
     public static boolean checkRong(JTextField txt,StringBuilder bd, String mess){
         boolean ok = true;
         if (txt.getText().equals("")) {

@@ -61,12 +61,8 @@ public class NhaCungCapDAO {
         return this.selectBySql(sql,"%"+keyWord+"%");
     }
     
-    public NhaCungCap selectByIdTimKiem(String ma) {
-        String sql = "SELECT * FROM NhaCungCap WHERE MaNCC=?";
-        List<NhaCungCap> list = this.selectBySql(sql, ma);
-        if (list.isEmpty()) {
-            return null;
-        }
-        return list.get(0);
-    }
+    public List<NhaCungCap> selectByKeyWord1(String keyWord){
+        String sql = "select * from NhaCungCap where MaNcc LIKE ?";
+        return this.selectBySql(sql,"%"+keyWord+"%");
+    } 
 }
