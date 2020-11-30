@@ -284,8 +284,8 @@ public class KhachHangJPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton37ActionPerformed
 
     private void jButton38ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton38ActionPerformed
-        String tkk = JOptionPane.showInputDialog(this, "Nhập mã khách hàng: ", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
-        int traloi = JOptionPane.showConfirmDialog(null, "Bạn có muốn khách hàng có mã:  " + tkk, "Yes/No", JOptionPane.YES_NO_CANCEL_OPTION);
+        String tkk = JOptionPane.showInputDialog(this, "Nhập mã tài khoản: ", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+        int traloi = JOptionPane.showConfirmDialog(null, "Bạn có muốn xóa khách hàng có mã:  " + tkk, "Yes/No", JOptionPane.YES_NO_CANCEL_OPTION);
         if (traloi == 0) {
             KhachHangDao kh = new KhachHangDao();
             try {

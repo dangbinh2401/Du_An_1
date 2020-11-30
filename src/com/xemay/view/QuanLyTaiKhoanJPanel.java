@@ -337,8 +337,18 @@ public class QuanLyTaiKhoanJPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton42ActionPerformed
 
     private void jButton43ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton43ActionPerformed
-        int i= tblTaiKhoan.getSelectedRow();
-        JOptionPane.showMessageDialog(this, list.get(i).getMaTk());
+        String tkk = JOptionPane.showInputDialog(this, "Nhập mã tài khoản: ", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+        int traloi = JOptionPane.showConfirmDialog(null, "Bạn có muốn xóa tài khoản có mã: " + tkk, "Yes/No", JOptionPane.YES_NO_CANCEL_OPTION);
+        if (traloi == 0) {
+           TaiKhoanDAO tk= new TaiKhoanDAO();
+            try {
+                tk.delete(tkk);
+                JOptionPane.showMessageDialog(this, "Xóa thành công");
+                fillToTable();
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(this, "Xóa thất bại");
+            }
+        }
         
         
     }//GEN-LAST:event_jButton43ActionPerformed

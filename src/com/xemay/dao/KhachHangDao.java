@@ -28,14 +28,13 @@ public class KhachHangDao {
         JdbcHelper.executeUpdate(sql, model.getMaTk(), model.getHoTen(), model.getSdt(), model.getGioiTinh(), model.getDiaChi(), model.getEmail(), model.getMaKh());
     }
 
-    public void delete(String makh) {
+    public void delete(String maTK) {
         try {
-            String sql = "UPDATE KhachHang  SET Kt= 0 where MaKH=? ";
-            JdbcHelper.executeUpdate(sql, makh);
+            String sql = "{ call Sp_UpdateKhachHang(?)}";
+            JdbcHelper.executeUpdate(sql, maTK);
         } catch (Exception e) {
             e.printStackTrace();
         }
-
     }
 
     public List<KhachHang> select(String sql, Object... args) {
@@ -59,14 +58,15 @@ public class KhachHangDao {
     }
 
     public List<KhachHang> select() {
-        String sql = "SELECT * FROM KhachHang where kt=1";
+        String sql = "SELECT * FROM KhachHang where Kt=1";
         return select(sql);
     }
-    public List<KhachHang> find(String key){
-        String sql = "select * from KhachHang where HoTen like N'%"+key+"%'";
+
+    public List<KhachHang> find(String key) {
+        String sql = "select * from KhachHang where HoTen like N'%" + key + "%'";
         return select(sql);
     }
-    
+
     public KhachHang selectByMa(String ma) {
         String sql = "select * from KhachHang where MaKH= ?";
         List<KhachHang> list = this.select(sql, ma);
@@ -75,7 +75,7 @@ public class KhachHangDao {
         }
         return list.get(0);
     }
-    
+
     private KhachHang readFromResultSet(ResultSet rs) throws SQLException {
         KhachHang model = new KhachHang();
         model.setMaTk(rs.getString("MaTK"));
