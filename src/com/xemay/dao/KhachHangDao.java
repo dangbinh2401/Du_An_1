@@ -12,6 +12,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
+import javax.swing.text.html.parser.DTDConstants;
 
 /**
  *
@@ -29,10 +30,10 @@ public class KhachHangDao {
         JdbcHelper.executeUpdate(sql, model.getMaTk(), model.getHoTen(), model.getSdt(), model.getGioiTinh(), model.getDiaChi(), model.getEmail(), model.getMaKh());
     }
 
-    public void delete(String maTK) {
+    public void delete(String makh) {
         try {
-            String sql = "{ call Sp_KhachHang(?)}";
-            JdbcHelper.executeUpdate(sql, maTK);
+            String sql = "UPDATE KhachHang  SET Kt= 0 where MaKH=? ";
+            JdbcHelper.executeUpdate(sql, makh);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -60,11 +61,13 @@ public class KhachHangDao {
     }
 
     public List<KhachHang> select() {
-        String sql = "SELECT * FROM KhachHang";
+        String sql = "SELECT * FROM KhachHang where kt=1";
         return select(sql);
     }
-
-    private KhachHang readFromResultSet(ResultSet rs) throws SQLException {
+    public List<KhachHang> find(String key){
+        String sql = "select * from KhachHang where HoTen like N'%"+key+"%'";
+        return select(sql);
+    }private KhachHang readFromResultSet(ResultSet rs) throws SQLException {
         KhachHang model = new KhachHang();
         model.setMaTk(rs.getString("MaTK"));
         model.setMaKh(rs.getString("MaKH"));

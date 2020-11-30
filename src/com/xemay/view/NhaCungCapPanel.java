@@ -28,30 +28,38 @@ public class NhaCungCapPanel extends javax.swing.JPanel {
     public NhaCungCapPanel() {
         initComponents();
         fillTable();
-        txtTimKiemNcc.getDocument().addDocumentListener(new DocumentListener() {
-            @Override
-            public void insertUpdate(DocumentEvent de) {
-                timKiem();
-            }
-
-            @Override
-            public void removeUpdate(DocumentEvent de) {
-                timKiem();
-            }
-
-            @Override
-            public void changedUpdate(DocumentEvent de) {
-                timKiem();
-            }
-        });
     }
     NhaCungCapDAO dao = new NhaCungCapDAO();
-    void timKiem(){
+    void timKiemTheoTen(){
         int i = 1;
         DefaultTableModel model = (DefaultTableModel) tblQuanLyNcc.getModel(); 
         model.setRowCount(0); 
         try { 
             dataNhaCungCaps = dao.selectByKeyWord(txtTimKiemNcc.getText()); 
+            for (NhaCungCap ncc : dataNhaCungCaps) { 
+                Object[] row = { 
+                    i++,
+                    ncc.getMaNcc(),
+                    ncc.getTenNcc(),
+                    ncc.getSdt(),
+                    ncc.getDiaChi(),
+                    ncc.getEmail()
+                }; 
+                model.addRow(row); 
+            } 
+        }  
+        catch (Exception e) { 
+            JOptionPane.showMessageDialog(this,"lỗi truy vẫn dữ liệu");
+            
+        }
+    }
+    
+    void timKiemTheoMa(){
+        int i = 1;
+        DefaultTableModel model = (DefaultTableModel) tblQuanLyNcc.getModel(); 
+        model.setRowCount(0); 
+        try { 
+            dataNhaCungCaps = dao.selectByKeyWord1(txtTimKiemNcc.getText()); 
             for (NhaCungCap ncc : dataNhaCungCaps) { 
                 Object[] row = { 
                     i++,
@@ -85,8 +93,7 @@ public class NhaCungCapPanel extends javax.swing.JPanel {
                     ncc.getDiaChi(),
                     ncc.getEmail()
                 };
-                model.addRow(row); 
-                
+                model.addRow(row);                 
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this,"lỗi truy vẫn dữ liệu");
@@ -238,8 +245,8 @@ public class NhaCungCapPanel extends javax.swing.JPanel {
                         .addComponent(cboTimKiemNcc, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButton17, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGap(18, 18, 18)
-                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(653, Short.MAX_VALUE)))
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 508, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(438, Short.MAX_VALUE)))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -279,6 +286,7 @@ public class NhaCungCapPanel extends javax.swing.JPanel {
             NhaCungCap nhaCungCap = dataNhaCungCaps.get(index);
             ThemNhaCungCap themNCCDialog = new ThemNhaCungCap(null, true, nhaCungCap);
             themNCCDialog.btnThemNcc.setText("Cập nhật");
+            themNCCDialog.txtMaNcc.setEditable(false);
             themNCCDialog.show();
             fillTable();
         }
@@ -353,7 +361,11 @@ public class NhaCungCapPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btnSapXepActionPerformed
 
     private void jButton17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton17ActionPerformed
-    
+        if (cboTimKiemNcc.getSelectedItem().equals("Tìm kiếm theo tên")) {
+            this.timKiemTheoTen();
+        }else{
+            this.timKiemTheoMa();
+        }
     }//GEN-LAST:event_jButton17ActionPerformed
 
 

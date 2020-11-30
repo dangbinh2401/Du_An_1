@@ -14,20 +14,46 @@ import java.util.Date;
  */
 public class BaoHang {
 
-    private String MaBh;
+    private String maBh;
+    private String maXe;
+    private String maNv;
     private Date NgayBaoHanh = DateHelper.now();
+    private String maKh;
     private String NoidungBh;
 
     public BaoHang() {
     }
 
-    public BaoHang(String MaBh, String NoidungBh) {
-        this.MaBh = MaBh;
+    public BaoHang(String maBh, String maXe, String maNv, String maKh, String NoidungBh) {
+        this.maBh = maBh;
+        this.maXe = maXe;
+        this.maNv = maNv;
+        this.maKh = maKh;
         this.NoidungBh = NoidungBh;
     }
 
     public String getMaBh() {
-        return MaBh;
+        return maBh;
+    }
+
+    public void setMaBh(String maBh) {
+        this.maBh = maBh;
+    }
+
+    public String getMaXe() {
+        return maXe;
+    }
+
+    public void setMaXe(String maXe) {
+        this.maXe = maXe;
+    }
+
+    public String getMaNv() {
+        return maNv;
+    }
+
+    public void setMaNv(String maNv) {
+        this.maNv = maNv;
     }
 
     public Date getNgayBaoHanh() {
@@ -38,6 +64,14 @@ public class BaoHang {
         this.NgayBaoHanh = NgayBaoHanh;
     }
 
+    public String getMaKh() {
+        return maKh;
+    }
+
+    public void setMaKh(String maKh) {
+        this.maKh = maKh;
+    }
+
     public String getNoidungBh() {
         return NoidungBh;
     }
@@ -45,5 +79,5 @@ public class BaoHang {
     public void setNoidungBh(String NoidungBh) {
         this.NoidungBh = NoidungBh;
     }
-
+    
 }
