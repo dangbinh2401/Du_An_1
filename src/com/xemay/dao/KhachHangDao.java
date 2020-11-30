@@ -52,7 +52,7 @@ public class KhachHangDao {
                 }
             } finally {
 
-                rs.getStatement().getConnection().close();
+                //rs.getStatement().getConnection().close();
             }
         } catch (SQLException ex) {
             throw new RuntimeException(ex);

@@ -8,21 +8,19 @@ import java.util.List;
 
 public class NhaCungCapDAO {
     public void insert(NhaCungCap model){
-        String sql = "INSERT INTO NhaCungCap (MaNCC, TenNCC, DiaChi, SoDienThoai"
-                + ", Email) VALUES (?,?,?,?,?)";
+        String sql = "INSERT INTO NhaCungCap (MaNCC, TenNCC, DiaChi, SoDienThoai, Email, Kt) VALUES (?,?,?,?,?,?)";
         JdbcHelper.executeUpdate(sql,model.getMaNcc(),model.getTenNcc(),
-                model.getDiaChi(),model.getSdt(),model.getEmail());
+                model.getDiaChi(),model.getSdt(),model.getEmail(),1);
     }
     
     public void update(NhaCungCap model){
-        String sql = "UPDATE NhaCungCap SET TenNCC =?, DiaChi =?, SoDienThoai =?"
-                + ", Email =? WHERE MaNCC =?";
+        String sql = "UPDATE NhaCungCap SET TenNCC = ?, DiaChi = ?, SoDienThoai = ?, Email = ? WHERE MaNCC = ?";
         JdbcHelper.executeUpdate(sql,model.getTenNcc(),model.getDiaChi(),
                 model.getSdt(),model.getEmail(),model.getMaNcc());
     }
     
     public void delete(String ma) {
-        String sql = "DELETE NhaCungCap WHERE MaNCC=?";
+        String sql = "update NhaCungCap set Kt = 0 where MaNCC =?";
         try {
             JdbcHelper.executeUpdate(sql,ma);
         } catch (Exception ex) {
@@ -49,10 +47,19 @@ public class NhaCungCapDAO {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-    }   
+    } 
+    
+     public NhaCungCap selectByIdTxt(String ma) {
+        String sql = "select * from NhaCungCap where MaNcc= ?";
+        List<NhaCungCap> list = this.selectBySql(sql, ma);
+        if (list.isEmpty()) {
+            return null;
+        }
+        return list.get(0);
+    }
     
     public List<NhaCungCap> selectAll() {
-        String sql = "SELECT * FROM NhaCungCap";
+        String sql = "select * from NhaCungCap where Kt = 1";
         return this.selectBySql(sql);
     }
     
@@ -61,7 +68,7 @@ public class NhaCungCapDAO {
         return this.selectBySql(sql,"%"+keyWord+"%");
     }
     
-    public List<NhaCungCap> selectByKeyWord1(String keyWord){
+    public List<NhaCungCap> selectByKyId(String keyWord){
         String sql = "select * from NhaCungCap where MaNcc LIKE ?";
         return this.selectBySql(sql,"%"+keyWord+"%");
     } 
