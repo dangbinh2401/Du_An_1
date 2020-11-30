@@ -26,6 +26,7 @@ public class BaoHanhJPanel extends javax.swing.JPanel {
     public BaoHanhJPanel() {
         initComponents();
         fillTable();
+        
     }
     BaoHanhDAO dao = new BaoHanhDAO();
     KhachHangDao khDao = new KhachHangDao();
@@ -39,10 +40,11 @@ public class BaoHanhJPanel extends javax.swing.JPanel {
         try {
             this.dataBaoHanh = dao.selectAll();
             for (BaoHang bh : this.dataBaoHanh) {
+                String ten = khDao.selectByMa(bh.getMaKh()).getHoTen();
                 Object[] row = {
                     i++,
                     bh.getMaBh(),
-                    bh.getMaKh(),
+                    ten,
                     bh.getMaXe(),
                     bh.getNgayBaoHanh(),
                     bh.getNoidungBh()
@@ -194,9 +196,18 @@ public class BaoHanhJPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton15ActionPerformed
 
     private void jButton16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton16ActionPerformed
-        BaoHanh bh = new BaoHanh(null, true,null);
-        bh.show();
-        fillTable();
+        int index = tblBaoHanh.getSelectedRow();
+        if (index == -1) {
+            JOptionPane.showMessageDialog(this,"Hãy chọn 1 dòng rồi ấn nút xóa","Thông báo",
+                    JOptionPane.ERROR_MESSAGE);
+        } else {
+            BaoHang bh = dataBaoHanh.get(index);
+            BaoHanh baoHanhJDialog = new BaoHanh(null, true, bh);
+            baoHanhJDialog.btnThem.setText("Cập nhật");
+            baoHanhJDialog.txtMaNhanVien.setEditable(false);
+            baoHanhJDialog.show();
+            fillTable();
+        }
     }//GEN-LAST:event_jButton16ActionPerformed
 
 

@@ -11,8 +11,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import javax.swing.JOptionPane;
-import javax.swing.text.html.parser.DTDConstants;
 
 /**
  *
@@ -67,7 +65,18 @@ public class KhachHangDao {
     public List<KhachHang> find(String key){
         String sql = "select * from KhachHang where HoTen like N'%"+key+"%'";
         return select(sql);
-    }private KhachHang readFromResultSet(ResultSet rs) throws SQLException {
+    }
+    
+    public KhachHang selectByMa(String ma) {
+        String sql = "select * from KhachHang where MaKH= ?";
+        List<KhachHang> list = this.select(sql, ma);
+        if (list.isEmpty()) {
+            return null;
+        }
+        return list.get(0);
+    }
+    
+    private KhachHang readFromResultSet(ResultSet rs) throws SQLException {
         KhachHang model = new KhachHang();
         model.setMaTk(rs.getString("MaTK"));
         model.setMaKh(rs.getString("MaKH"));
