@@ -12,7 +12,43 @@ package com.xemay.model;
 public class ChiTietHdx {
 
     private int SoLuong;
+    private String MaHDX;
+    private String MaXe;
+    private String TenXe;
+    private String GiaTienBan;
 
+    public String getMaHDX() {
+        return MaHDX;
+    }
+
+    public void setMaHDX(String MaHDX) {
+        this.MaHDX = MaHDX;
+    }
+
+    public String getMaXe() {
+        return MaXe;
+    }
+
+    public void setMaXe(String MaXe) {
+        this.MaXe = MaXe;
+    }
+
+    public String getTenXe() {
+        return TenXe;
+    }
+
+    public void setTenXe(String TenXe) {
+        this.TenXe = TenXe;
+    }
+
+    public String getGiaTienBan() {
+        return GiaTienBan;
+    }
+
+    public void setGiaTienBan(String GiaTienBan) {
+        this.GiaTienBan = GiaTienBan;
+    }
+    
     public ChiTietHdx(int SoLuong) {
         this.SoLuong = SoLuong;
     }

@@ -15,11 +15,61 @@ public class HoaDonXuat {
 
     private String MaHdx;
     private Date NgayXuat;
+    private  String MaNV;
+    private String MaKH;
+    private  String HoTenKH;
+    private String HoTenNhanVien;
+    private String SoDienThoai;
 
-    public HoaDonXuat(String MaHdx, Date NgayXuat) {
+    public String getSoDienThoai() {
+        return SoDienThoai;
+    }
+
+    public void setSoDienThoai(String SoDienThoai) {
+        this.SoDienThoai = SoDienThoai;
+    }
+    
+    public String getHoTenNhanVien() {
+        return HoTenNhanVien;
+    }
+
+    public void setHoTenNhanVien(String HoTenNhanVien) {
+        this.HoTenNhanVien = HoTenNhanVien;
+    }
+    
+    public String getMaNV() {
+        return MaNV;
+    }
+
+    public String getHoTenKH() {
+        return HoTenKH;
+    }
+
+    public void setHoTenKH(String HoTenKH) {
+        this.HoTenKH = HoTenKH;
+    }
+    
+    public HoaDonXuat(String MaHdx, Date NgayXuat, String MaNV, String MaKH) {
         this.MaHdx = MaHdx;
         this.NgayXuat = NgayXuat;
+        this.MaNV = MaNV;
+        this.MaKH = MaKH;
     }
+
+    
+    public void setMaNV(String MaNV) {
+        this.MaNV = MaNV;
+    }
+
+    public String getMaKH() {
+        return MaKH;
+    }
+
+    public void setMaKH(String MaKH) {
+        this.MaKH = MaKH;
+    }
+    
+    
 
     public HoaDonXuat() {
     }
