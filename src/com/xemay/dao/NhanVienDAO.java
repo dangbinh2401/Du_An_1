@@ -29,6 +29,14 @@ public class NhanVienDAO {
         String sql = "SELECT * FROM NhanVien";
         return select(sql);
     }
+    public List<NhanVien> selectMaCH(String MaCH) {
+        String sql = "SELECT * FROM NhanVien where MaCH='"+MaCH+"'";
+        return select(sql);
+    }
+    public List<NhanVien> selectMaNV(String MaNV) {
+        String sql = "SELECT * FROM NhanVien where MaNV='"+MaNV+"'";
+        return select(sql);
+    }
     public List<NhanVien> findName(String key){
         String sql = "select * from NhanVien where HoTen like N'%"+key+"%'";
         return select(sql);
