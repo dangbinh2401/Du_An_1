@@ -190,11 +190,13 @@ public class BaoHanhJPanel extends javax.swing.JPanel {
     private void jButton15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton15ActionPerformed
         BaoHanh bh = new BaoHanh(null, true,null);
         bh.show();
+        fillTable();
     }//GEN-LAST:event_jButton15ActionPerformed
 
     private void jButton16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton16ActionPerformed
         BaoHanh bh = new BaoHanh(null, true,null);
         bh.show();
+        fillTable();
     }//GEN-LAST:event_jButton16ActionPerformed
 
 

@@ -59,7 +59,7 @@ public class NhaCungCapPanel extends javax.swing.JPanel {
         DefaultTableModel model = (DefaultTableModel) tblQuanLyNcc.getModel(); 
         model.setRowCount(0); 
         try { 
-            dataNhaCungCaps = dao.selectByKeyWord1(txtTimKiemNcc.getText()); 
+            dataNhaCungCaps = dao.selectByKyId(txtTimKiemNcc.getText()); 
             for (NhaCungCap ncc : dataNhaCungCaps) { 
                 Object[] row = { 
                     i++,

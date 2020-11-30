@@ -161,7 +161,7 @@ public class ThemNhaCungCap extends javax.swing.JDialog {
             return;
         }
         NhaCungCapDAO dao = new NhaCungCapDAO();
-        if (dao.selectByKeyWord1(txtMaNcc.getText()) != null) {
+        if (dao.selectByIdTxt(txtMaNcc.getText()) != null) {
             JOptionPane.showMessageDialog(this,"Mã đã tồn tại","Thông báo",
                     JOptionPane.ERROR_MESSAGE);
             return;
