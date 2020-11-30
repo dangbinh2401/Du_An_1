@@ -262,7 +262,7 @@ public class ThemNhanVien extends javax.swing.JDialog {
     }
     void themNV(){
         try {
-            if (checkMaTK()){
+            if (checkMaTK()==true){
                 tk.insert(mdTk());
                 dao.insert(model());
                 JOptionPane.showMessageDialog(this, "thêm nhân viên thành công!");
@@ -270,7 +270,7 @@ public class ThemNhanVien extends javax.swing.JDialog {
                 JOptionPane.showMessageDialog(this, "Mã tài khoản đã có người sử dụng!");
             }
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "mã nhân viên đã có trong danh sách!");
+            JOptionPane.showMessageDialog(this, "mã nhân viên đã có trong danh sách!"+e.toString());
         }
     }
     TaiKhoanDAO tk = new TaiKhoanDAO();

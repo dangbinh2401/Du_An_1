@@ -220,6 +220,11 @@ public class NhanVienJPanel extends javax.swing.JPanel {
 
         jButton1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jButton1.setText("Xóa");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout QuanLyNhanVienLayout = new javax.swing.GroupLayout(QuanLyNhanVien);
         QuanLyNhanVien.setLayout(QuanLyNhanVienLayout);
@@ -228,8 +233,8 @@ public class NhanVienJPanel extends javax.swing.JPanel {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, QuanLyNhanVienLayout.createSequentialGroup()
                 .addContainerGap(1520, Short.MAX_VALUE)
                 .addComponent(jButton32, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(76, 76, 76)
-                .addComponent(jButton1)
+                .addGap(53, 53, 53)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(85, 85, 85))
             .addGroup(QuanLyNhanVienLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(QuanLyNhanVienLayout.createSequentialGroup()
@@ -365,6 +370,23 @@ public class NhanVienJPanel extends javax.swing.JPanel {
             y=0;
         }
     }//GEN-LAST:event_tblNhanVienMousePressed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+
+        int traloi = JOptionPane.showConfirmDialog(this, "bạn có chắc muốn xóa nhân viên này?");        
+        if (traloi == 0) {
+            NhanVienDAO kh = new NhanVienDAO();
+            try {
+                int i=tblNhanVien.getSelectedRow();
+                kh.delete(list.get(i).getMaNV());
+                JOptionPane.showMessageDialog(this, list.get(i).getMaNV());
+                JOptionPane.showMessageDialog(this, "Xóa thành công");
+                fillToTable();
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(this, "Xóa thất bại");
+            }
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
     int kt=0;
     int x=0;
     int y=0;
