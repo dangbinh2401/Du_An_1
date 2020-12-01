@@ -28,18 +28,19 @@ public class ChiTietHoaDonXuat extends javax.swing.JDialog {
     }
     List<ChiTietHdx> list;
     ChiTietHoaDonXuatDAO dao = new ChiTietHoaDonXuatDAO();
-    public void fillToTable(){
+
+    public void fillToTable() {
         DefaultTableModel model = (DefaultTableModel) tblChiTiet.getModel();
         model.setRowCount(0);
         try {
             list = dao.selectAll(txtMaHDX.getText());
-            int i=1;
+            int i = 1;
             for (ChiTietHdx ch : list) {
                 Object[] row = {
                     i,
                     ch.getMaXe(),
                     ch.getTenXe(),
-                    ch.getGiaTienBan().toString(),
+                    ch.getGiaTienBan(),
                     ch.getSoLuong(),
                     "chưa tính"
                 };
@@ -50,6 +51,7 @@ public class ChiTietHoaDonXuat extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(this, "lỗi truy vẫn dữ liệu");
         }
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -135,7 +137,16 @@ public class ChiTietHoaDonXuat extends javax.swing.JDialog {
             new String [] {
                 "STT", "Mã Xe", "Tên Xe", "Giá Bán", "Số Lượng", "Tổng Tiền"
             }
-        ));
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Float.class, java.lang.Object.class, java.lang.Object.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        tblChiTiet.setToolTipText("");
         tblChiTiet.setRowHeight(30);
         jScrollPane1.setViewportView(tblChiTiet);
 
@@ -230,7 +241,7 @@ public class ChiTietHoaDonXuat extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MouseClicked
-        ThemChiTietHoaDonXuat themct = new ThemChiTietHoaDonXuat(null,true);
+        ThemChiTietHoaDonXuat themct = new ThemChiTietHoaDonXuat(null, true);
         themct.txtMaHDX.setText(txtMaHDX.getText());
         themct.txtMaHDX.disable();
         themct.show();

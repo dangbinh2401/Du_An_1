@@ -57,7 +57,7 @@ public class ChiTietHoaDonXuatDAO {
         model.setMaHDX(rs.getString("MaHDX"));
         model.setMaXe(rs.getString("MaXe"));
         model.setTenXe(rs.getString("TenXe"));
-        model.setGiaTienBan(rs.getString("GiaTienBan"));
+        model.setGiaTienBan(rs.getFloat("GiaTienBan"));
         model.setSoLuong(rs.getInt("SoLuong"));
         return model;
     }

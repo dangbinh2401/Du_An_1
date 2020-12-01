@@ -15,7 +15,7 @@ public class ChiTietHdx {
     private String MaHDX;
     private String MaXe;
     private String TenXe;
-    private String GiaTienBan;
+    private float GiaTienBan;
 
     public String getMaHDX() {
         return MaHDX;
@@ -41,11 +41,11 @@ public class ChiTietHdx {
         this.TenXe = TenXe;
     }
 
-    public String getGiaTienBan() {
+    public float getGiaTienBan() {
         return GiaTienBan;
     }
 
-    public void setGiaTienBan(String GiaTienBan) {
+    public void setGiaTienBan(float GiaTienBan) {
         this.GiaTienBan = GiaTienBan;
     }
     
