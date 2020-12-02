@@ -7,6 +7,7 @@ package com.xemay.view;
 
 import com.xemay.dao.HoaDonXuatDAO;
 import com.xemay.dao.KhachHangDao;
+import com.xemay.helper.ShareHelper;
 import com.xemay.model.HoaDonXuat;
 import com.xemay.model.KhachHang;
 import java.awt.event.ActionEvent;
@@ -253,7 +254,24 @@ public class ThemHoaDonXuat extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
     KhachHangDao dataKH = new KhachHangDao();
     List<KhachHang> list;
-
+    Boolean check(){
+        Boolean check=true;
+        
+        if (txtMaHDX.getText().equals("")){
+            JOptionPane.showMessageDialog(this, "Mã hóa đơn xuất không được để trống!");
+            check = false;
+        }else
+        if(txtMaNV.getText().equals("")){
+            JOptionPane.showMessageDialog(this, "Mã nhân viên không được để trống!");
+            check = false;
+        }else
+        if(txtNgayXuat.getText().equals("")){
+            JOptionPane.showMessageDialog(this, "Ngày sinh không được để trống!");
+            check = false;
+        }
+        return check;
+    }
+    
     void fillToKH() {
         list = dataKH.findHoTen(txtHoTen.getText());
         cboMaKH.removeAllItems();
@@ -272,10 +290,12 @@ public class ThemHoaDonXuat extends javax.swing.JDialog {
     }//GEN-LAST:event_btnTimActionPerformed
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
-        if(btnThem.getText().equals("Thêm hóa đơn xuất")){
-            this.themHoaDonXuat();
-        }else{
-            this.ChinhSua();
+        if(check()==true){
+            if(btnThem.getText().equals("Thêm hóa đơn xuất")){
+                this.themHoaDonXuat();
+            }else{
+                this.ChinhSua();
+            }
         }
             
     }//GEN-LAST:event_btnThemActionPerformed
