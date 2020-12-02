@@ -50,21 +50,28 @@ public class KhachHangJPanel extends javax.swing.JPanel {
     List<KhachHang> list;
 
     void timKiem() {
+        list = dao.find(txtTimKiem.getText());
         DefaultTableModel model = (DefaultTableModel) tblKhachHang.getModel();
         model.setRowCount(0);
         try {
-            list = dao.find(txtTimKiem.getText());
+            int i = 1;
             for (KhachHang ch : list) {
+                String gt = "Nữ";
+                if (ch.getGioiTinh()) {
+                    gt = "Nam";
+                }
                 Object[] row = {
+                    i,
                     ch.getMaTk(),
                     ch.getMaKh(),
                     ch.getHoTen(),
                     ch.getSdt(),
-                    ch.getDiaChi(),
                     ch.getEmail(),
-                    ch.getGioiTinh()
+                    gt,
+                    ch.getDiaChi()
                 };
                 model.addRow(row);
+                i++;
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "lỗi truy vẫn dữ liệu");
@@ -77,17 +84,24 @@ public class KhachHangJPanel extends javax.swing.JPanel {
         model.setRowCount(0);
         try {
             list = dao.select();
+            int i = 1;
             for (KhachHang ch : list) {
+                String gt = "Nữ";
+                if (ch.getGioiTinh()) {
+                    gt = "Nam";
+                }
                 Object[] row = {
+                    i,
                     ch.getMaTk(),
                     ch.getMaKh(),
                     ch.getHoTen(),
                     ch.getSdt(),
-                    ch.getDiaChi(),
                     ch.getEmail(),
-                    ch.getGioiTinh()
+                    gt,
+                    ch.getDiaChi()
                 };
                 model.addRow(row);
+                i++;
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "lỗi truy vẫn dữ liệu");
@@ -104,10 +118,9 @@ public class KhachHangJPanel extends javax.swing.JPanel {
             capnhatKH.txtTenKH.setText(list.get(i).getHoTen());
             capnhatKH.txtSoDienThoai.setText(list.get(i).getSdt());
             capnhatKH.txtEmail.setText(list.get(i).getEmail());
-            if (list.get(i).getGioiTinh().equals("Nam")) {
+            if (list.get(i).getGioiTinh()) {
                 capnhatKH.rdoNam.setSelected(true);
-            }
-            if (list.get(i).getGioiTinh().equals("Nữ")) {
+            } else {
                 capnhatKH.rdoNu.setSelected(true);
             }
             capnhatKH.txtDiaChi.setText(list.get(i).getDiaChi());
@@ -182,13 +195,13 @@ public class KhachHangJPanel extends javax.swing.JPanel {
         tblKhachHang.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         tblKhachHang.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Mã tài khoản", "Mã Khách Hàng", "Tên Khách Hàng", "Số Điện Thoại", "Email", "Địa Chỉ", "Giới tính"
+                "Stt", "Mã tài khoản", "Mã Khách Hàng", "Tên Khách Hàng", "Số Điện Thoại", "Email", "Giới tính", "Địa Chỉ"
             }
         ));
         tblKhachHang.setRowHeight(30);
@@ -216,7 +229,7 @@ public class KhachHangJPanel extends javax.swing.JPanel {
                 .addGroup(QuanLyKhachHangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(QuanLyKhachHangLayout.createSequentialGroup()
                         .addComponent(cboTimKiem3, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 175, Short.MAX_VALUE)
                         .addComponent(txtTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 374, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(62, 62, 62)
                         .addComponent(jButton34, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -228,9 +241,12 @@ public class KhachHangJPanel extends javax.swing.JPanel {
                         .addComponent(jButton37, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(84, 84, 84)
                         .addComponent(jButton38, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLabel20)
-                    .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 1715, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel20))
                 .addGap(52, 52, 52))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, QuanLyKhachHangLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 1715, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(43, 43, 43))
         );
         QuanLyKhachHangLayout.setVerticalGroup(
             QuanLyKhachHangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -258,9 +274,9 @@ public class KhachHangJPanel extends javax.swing.JPanel {
             .addGap(0, 1840, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addGap(0, 13, Short.MAX_VALUE)
                     .addComponent(QuanLyKhachHang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
+                    .addGap(0, 14, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -281,6 +297,7 @@ public class KhachHangJPanel extends javax.swing.JPanel {
 
     private void jButton37ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton37ActionPerformed
         fillChinhSua();
+        fillToTable();
     }//GEN-LAST:event_jButton37ActionPerformed
 
     private void jButton38ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton38ActionPerformed
@@ -322,17 +339,24 @@ public class KhachHangJPanel extends javax.swing.JPanel {
         DefaultTableModel model = (DefaultTableModel) tblKhachHang.getModel();
         model.setRowCount(0);
         try {
+            int i = 1;
             for (KhachHang ch : list) {
+                String gt = "Nữ";
+                if (ch.getGioiTinh()) {
+                    gt = "Nam";
+                }
                 Object[] row = {
+                    i,
                     ch.getMaTk(),
                     ch.getMaKh(),
                     ch.getHoTen(),
                     ch.getSdt(),
-                    ch.getDiaChi(),
                     ch.getEmail(),
-                    ch.getGioiTinh()
+                    gt,
+                    ch.getDiaChi()
                 };
                 model.addRow(row);
+                i++;
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "lỗi truy vẫn dữ liệu" + e);

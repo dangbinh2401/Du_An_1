@@ -16,10 +16,10 @@ public class KhachHang {
     private String HoTen;
     private String Sdt;
     private String Email;
-    private String GioiTinh;
+    private boolean GioiTinh;
     private String DiaChi;
 
-    public KhachHang(String MaTk, String MaKh, String HoTen, String Sdt, String Email, String GioiTinh, String DiaChi) {
+    public KhachHang(String MaTk, String MaKh, String HoTen, String Sdt, String Email, boolean GioiTinh, String DiaChi) {
         this.MaKh = MaKh;
         this.HoTen = HoTen;
         this.Sdt = Sdt;
@@ -72,11 +72,11 @@ public class KhachHang {
         this.Email = Email;
     }
 
-    public String getGioiTinh() {
+    public boolean getGioiTinh() {
         return GioiTinh;
     }
 
-    public void setGioiTinh(String GioiTinh) {
+    public void setGioiTinh(boolean GioiTinh) {
         this.GioiTinh = GioiTinh;
     }
 

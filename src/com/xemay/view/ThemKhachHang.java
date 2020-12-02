@@ -103,6 +103,7 @@ public class ThemKhachHang extends javax.swing.JDialog {
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel6.setText("Mã khách hàng");
 
+        txtMaTK.setEditable(false);
         txtMaTK.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         txtMaTK.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -255,7 +256,7 @@ public class ThemKhachHang extends javax.swing.JDialog {
         model.setMaKh(txtMaKH.getText());
         model.setHoTen(txtTenKH.getText());
         model.setSdt(txtSoDienThoai.getText());
-        model.setGioiTinh(rdoNam.isSelected() ? "True" : "False");
+        model.setGioiTinh(rdoNam.isSelected());
         model.setDiaChi(txtDiaChi.getText());
         model.setEmail(txtEmail.getText());
         return model;
@@ -267,7 +268,7 @@ public class ThemKhachHang extends javax.swing.JDialog {
             kh.update(model());
             JOptionPane.showMessageDialog(this, "Cập nhật khách hàng thành công");
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "cập nhật thất bại");
+           JOptionPane.showMessageDialog(this, "Cập nhật khách hàng không thành công");
         }
     }
     /**
