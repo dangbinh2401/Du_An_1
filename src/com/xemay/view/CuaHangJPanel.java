@@ -361,7 +361,7 @@ public class CuaHangJPanel extends javax.swing.JPanel {
                 }
             }
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Cần chọn nhân viên để xóa");
+            JOptionPane.showMessageDialog(this, "Cần chọn cửa hàng để xóa");
         }
     }//GEN-LAST:event_jButton28ActionPerformed
 
