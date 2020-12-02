@@ -301,18 +301,35 @@ public class KhachHangJPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton37ActionPerformed
 
     private void jButton38ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton38ActionPerformed
-        String tkk = JOptionPane.showInputDialog(this, "Nhập mã tài khoản: ", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
-        int traloi = JOptionPane.showConfirmDialog(null, "Bạn có muốn xóa khách hàng có mã:  " + tkk, "Yes/No", JOptionPane.YES_NO_CANCEL_OPTION);
+//        String tkk = JOptionPane.showInputDialog(this, "Nhập mã tài khoản: ", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+//        int traloi = JOptionPane.showConfirmDialog(null, "Bạn có muốn xóa khách hàng có mã:  " + tkk, "Yes/No", JOptionPane.YES_NO_CANCEL_OPTION);
+//        if (traloi == 0) {
+//            KhachHangDao kh = new KhachHangDao();
+//            try {
+//                kh.delete(tkk);
+//                JOptionPane.showMessageDialog(this, "Xóa thành công");
+//                fillToTable();
+//            } catch (Exception e) {
+//                JOptionPane.showMessageDialog(this, "Xóa thất bại");
+//            }
+//        }
+        try {
+               int i=tblKhachHang.getSelectedRow();
+        int traloi = JOptionPane.showConfirmDialog(this, "bạn có chắc muốn xóa khách hàng có mã: " +list.get(i).getMaKh() );        
         if (traloi == 0) {
             KhachHangDao kh = new KhachHangDao();
             try {
-                kh.delete(tkk);
+                kh.delete(list.get(i).getMaTk());    
                 JOptionPane.showMessageDialog(this, "Xóa thành công");
                 fillToTable();
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(this, "Xóa thất bại");
             }
         }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Cần chọn khách hàng để xóa");
+        }
+       
 
     }//GEN-LAST:event_jButton38ActionPerformed
 

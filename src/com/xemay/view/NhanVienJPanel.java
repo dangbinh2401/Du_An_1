@@ -27,7 +27,7 @@ public class NhanVienJPanel extends javax.swing.JPanel {
     public NhanVienJPanel() {
         initComponents();
         fillToTable();
-                        txtTimKiem.getDocument().addDocumentListener(new DocumentListener() {
+        txtTimKiem.getDocument().addDocumentListener(new DocumentListener() {
             @Override
             public void insertUpdate(DocumentEvent de) {
                 timKiem();
@@ -44,7 +44,8 @@ public class NhanVienJPanel extends javax.swing.JPanel {
             }
         });
     }
-    void fillChinhSua(){
+
+    void fillChinhSua() {
         ThemNhanVien themNV = new ThemNhanVien(null, true);
         themNV.btnThemNV.setText("Chỉnh sửa");
         int i = tblNhanVien.getSelectedRow();
@@ -52,17 +53,17 @@ public class NhanVienJPanel extends javax.swing.JPanel {
             themNV.txtMaNhanVien.setText(list.get(i).getMaNV());
             themNV.txtMaNhanVien.disable();
             //themNV.cboMaCuaHang.addItem(list.get(i).getMaCH());
-            for (int j=1;j<themNV.cboMaCuaHang.getItemCount();j++){
-                if (themNV.cboMaCuaHang.getItemAt(j).equals(list.get(i).getMaCH())){
+            for (int j = 1; j < themNV.cboMaCuaHang.getItemCount(); j++) {
+                if (themNV.cboMaCuaHang.getItemAt(j).equals(list.get(i).getMaCH())) {
                     themNV.cboMaCuaHang.setSelectedIndex(j);
                 }
             }
             themNV.txtHoTen.setText(list.get(i).getHoTen());
             themNV.txtSoDienThoai.setText(list.get(i).getSdt());
-            themNV.txtEmail.setText(list. get(i).getEmail());
-            if (list.get(i).getGioiTinh()){
+            themNV.txtEmail.setText(list.get(i).getEmail());
+            if (list.get(i).getGioiTinh()) {
                 themNV.rdoNam.setSelected(true);
-            }else{
+            } else {
                 themNV.rdoNu.setSelected(true);
             }
             themNV.txtDiaChi.setText(list.get(i).getDiaChi());
@@ -70,24 +71,24 @@ public class NhanVienJPanel extends javax.swing.JPanel {
             themNV.txtMaTaiKhoan.disable();
             themNV.show();
         } catch (Exception e) {
-             JOptionPane.showMessageDialog(this, "vui lòng chọn nhân viên hàng cần sửa");
+            JOptionPane.showMessageDialog(this, "vui lòng chọn nhân viên hàng cần sửa");
         }
         fillToTable();
     }
-    void timKiem(){
-        if (cboTimKiem2.getSelectedItem().toString().equals("Tìm kiếm theo tên")){
-            list=dao.findName(txtTimKiem.getText());
-        }else{
-            list=dao.findMaNV(txtTimKiem.getText());
+
+    void timKiem() {
+        if (cboTimKiem2.getSelectedItem().toString().equals("Tìm kiếm theo tên")) {
+            list = dao.findName(txtTimKiem.getText());
+        } else {
+            list = dao.findMaNV(txtTimKiem.getText());
         }
         DefaultTableModel model = (DefaultTableModel) tblNhanVien.getModel();
         model.setRowCount(0);
         try {
-            int i=1;
+            int i = 1;
             for (NhanVien ch : list) {
                 Object[] row = {
-                    i
-                    ,ch.getMaNV(),
+                    i, ch.getMaNV(),
                     ch.getHoTen(),
                     ch.getSdt(),
                     ch.getEmail(),
@@ -103,20 +104,20 @@ public class NhanVienJPanel extends javax.swing.JPanel {
     }
     NhanVienDAO dao = new NhanVienDAO();
     List<NhanVien> list;
-    void fillToTable(){
+
+    void fillToTable() {
         DefaultTableModel model = (DefaultTableModel) tblNhanVien.getModel();
         model.setRowCount(0);
         try {
             list = dao.select();
-            int i=1;
+            int i = 1;
             for (NhanVien ch : list) {
-                String gt="Nữ";
-                if(ch.getGioiTinh()){
-                    gt="Nam";
+                String gt = "Nữ";
+                if (ch.getGioiTinh()) {
+                    gt = "Nam";
                 }
                 Object[] row = {
-                    i
-                    ,ch.getMaNV(),
+                    i, ch.getMaNV(),
                     ch.getHoTen(),
                     ch.getSdt(),
                     ch.getEmail(),
@@ -130,6 +131,7 @@ public class NhanVienJPanel extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, "lỗi truy vẫn dữ liệu");
         }
     }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -315,33 +317,32 @@ public class NhanVienJPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton29ActionPerformed
 
     private void btnSapXepActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSapXepActionPerformed
-                            Comparator<NhanVien> sortName = new Comparator<NhanVien>() {
+        Comparator<NhanVien> sortName = new Comparator<NhanVien>() {
             @Override
             public int compare(NhanVien s1, NhanVien s2) {
                 return s1.getHoTen().compareTo(s2.getHoTen());
             }
-        };    
+        };
         Comparator<NhanVien> sortMaNV = new Comparator<NhanVien>() {
             @Override
             public int compare(NhanVien s1, NhanVien s2) {
                 return s1.getMaNV().compareTo(s2.getMaNV());
             }
-        };   
-        if(btnSapXep.getText().equals("Sắp xếp theo tên")){
-            Collections.sort(list,sortName);
+        };
+        if (btnSapXep.getText().equals("Sắp xếp theo tên")) {
+            Collections.sort(list, sortName);
             btnSapXep.setText("Sắp xếp theo mã");
-        }else{
-            Collections.sort(list,sortMaNV);
+        } else {
+            Collections.sort(list, sortMaNV);
             btnSapXep.setText("Sắp xếp theo tên");
         }
         DefaultTableModel model = (DefaultTableModel) tblNhanVien.getModel();
         model.setRowCount(0);
         try {
-            int i=1;
+            int i = 1;
             for (NhanVien ch : list) {
                 Object[] row = {
-                    i
-                    ,ch.getMaNV(),
+                    i, ch.getMaNV(),
                     ch.getHoTen(),
                     ch.getSdt(),
                     ch.getEmail(),
@@ -357,40 +358,42 @@ public class NhanVienJPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btnSapXepActionPerformed
 
     private void tblNhanVienMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblNhanVienMousePressed
-        if (evt.getX()==x & evt.getY()==y){
-            kt=1;
-        }else{
-            x=evt.getX();
-            y=evt.getY();
+        if (evt.getX() == x & evt.getY() == y) {
+            kt = 1;
+        } else {
+            x = evt.getX();
+            y = evt.getY();
         }
-        if (kt==1){
+        if (kt == 1) {
             fillChinhSua();
-            kt=0;
-            x=0;
-            y=0;
+            kt = 0;
+            x = 0;
+            y = 0;
         }
     }//GEN-LAST:event_tblNhanVienMousePressed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-
-        int traloi = JOptionPane.showConfirmDialog(this, "bạn có chắc muốn xóa nhân viên này?");        
-        if (traloi == 0) {
-            NhanVienDAO kh = new NhanVienDAO();
-            try {
-                int i=tblNhanVien.getSelectedRow();
-                kh.delete(list.get(i).getMaNV());
-                JOptionPane.showMessageDialog(this, list.get(i).getMaNV());
-                JOptionPane.showMessageDialog(this, "Xóa thành công");
-                fillToTable();
-            } catch (Exception e) {
-                JOptionPane.showMessageDialog(this, "Xóa thất bại");
+        try {
+            int i = tblNhanVien.getSelectedRow();
+            int traloi = JOptionPane.showConfirmDialog(this, "bạn có chắc muốn xóa nhân viên có mã: " + list.get(i).getMaNV());
+            if (traloi == 0) {
+                NhanVienDAO kh = new NhanVienDAO();
+                try {
+                    kh.delete(list.get(i).getMaTK());
+                    JOptionPane.showMessageDialog(this, "Xóa thành công");
+                    fillToTable();
+                } catch (Exception e) {
+                    JOptionPane.showMessageDialog(this, "Xóa thất bại");
+                }
             }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Cần chọn nhân viên để xóa");
         }
     }//GEN-LAST:event_jButton1ActionPerformed
-    int kt=0;
-    int x=0;
-    int y=0;
-    
+    int kt = 0;
+    int x = 0;
+    int y = 0;
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel QuanLyNhanVien;
     private javax.swing.JButton btnSapXep;

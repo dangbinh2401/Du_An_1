@@ -26,7 +26,7 @@ public class NhanVienDAO {
         JdbcHelper.executeUpdate(sql,model.getMaCH(),model.getHoTen(), model.getSdt(), model.getEmail(),model.getGioiTinh(),model.getDiaChi(),model.getMaTK(),model.getMaNV());
     }
         public List<NhanVien> select() {
-        String sql = "SELECT * FROM NhanVien";
+        String sql = "SELECT * FROM NhanVien where Kt=1";
         return select(sql);
     }
     public List<NhanVien> selectMaCH(String MaCH) {
@@ -47,7 +47,7 @@ public class NhanVienDAO {
     }
     public void delete(String maTK) {
         try {
-            String sql = "{ call Sp_NhanVien(?)}";
+            String sql = "{ call Sp_UpdateNhanVien(?)}";
             JdbcHelper.executeUpdate(sql, maTK);
         } catch (Exception e) {
             e.printStackTrace();
