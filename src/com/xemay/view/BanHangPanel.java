@@ -124,9 +124,19 @@ public class BanHangPanel extends javax.swing.JPanel {
                 jButton3MouseClicked(evt);
             }
         });
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         jButton4.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jButton4.setText("Chỉnh sửa");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
         jButton5.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jButton5.setText("Chi tiết hóa đơn");
@@ -236,18 +246,50 @@ public class BanHangPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton3MouseClicked
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        ChiTietHoaDonXuat ct = new ChiTietHoaDonXuat(null, true);
         int i = tblHoaDonXuat.getSelectedRow();
+        if(i!=-1){
+            ChiTietHoaDonXuat ct = new ChiTietHoaDonXuat(null, true);
         ct.txtMaHDX.setText(list.get(i).getMaHdx());
+        ct.txtMaHDX.disable();
         ct.txtMaKH.setText(list.get(i).getMaKH());
+        ct.txtMaKH.disable();
         ct.txtMaNV.setText(list.get(i).getMaNV());
+        ct.txtMaNV.disable();
         ct.lblHoTenKH.setText(list.get(i).getHoTenKH());
         ct.lblSoDienThoai.setText(list.get(i).getSoDienThoai());
         ct.txtNgayXuat.setText(list.get(i).getNgayXuat().toString());
         ct.fillToTable();
         ct.show();
         fillToTable(list);
+        }else{
+            JOptionPane.showMessageDialog(this, "Vui lòng chọn hóa đơn cần xem");
+        }
     }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        int i = tblHoaDonXuat.getSelectedRow();
+        if(i!=-1){
+            ChiTietHoaDonXuat ct = new ChiTietHoaDonXuat(null, true);
+        ct.txtMaHDX.setText(list.get(i).getMaHdx());
+        ct.txtMaHDX.disable();
+        ct.txtMaKH.setText(list.get(i).getMaKH());
+        ct.txtMaKH.disable();
+        ct.txtMaNV.setText(list.get(i).getMaNV());
+        ct.txtMaNV.disable();
+        ct.lblHoTenKH.setText(list.get(i).getHoTenKH());
+        ct.lblSoDienThoai.setText(list.get(i).getSoDienThoai());
+        ct.txtNgayXuat.setText(list.get(i).getNgayXuat().toString());
+        ct.fillToTable();
+        ct.show();
+        fillToTable(list);
+        }else{
+            JOptionPane.showMessageDialog(this, "Vui lòng chọn hóa đơn cần xem");
+        }
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton3ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
