@@ -45,14 +45,56 @@ public class BaoHanhDAO {
         }
     }
     
+    public List<BaoHang> selectBySqlAll(String sql, Object... args){
+        List<BaoHang> list = new ArrayList<>();
+        try {
+            ResultSet rs = JdbcHelper.executeQuery(sql, args);
+            while (rs.next()) {                
+                BaoHang baoHang = new BaoHang();
+                baoHang.setMaBh(rs.getString("MaBH"));
+                baoHang.setMaKh(rs.getString("MaKH"));
+                baoHang.setMaXe(rs.getString("MaXe"));
+                baoHang.setMaNv(rs.getString("MaNV"));
+                baoHang.setTenKhachHang(rs.getString("HoTen"));
+                baoHang.setTenXe(rs.getString("TenXe"));
+                baoHang.setNgayBaoHanh(rs.getDate("NgayBH"));
+                baoHang.setNoidungBh(rs.getString("NoiDungBH"));
+                
+                list.add(baoHang);
+            }
+            rs.getStatement().getConnection().close();
+            return list;
+        } catch (Exception e) {
+            throw new RuntimeException();
+        }
+    }
+    
     public List<BaoHang> selectAll() {
-        String sql = "SELECT * FROM BaoHanh";
-        return this.selectBySql(sql);
+        String sql = "SELECT A.MaBH,B.HoTen,C.TenXe,A.NgayBH,A.NoiDungBH,B.MaKH,A.MaNV,C.MaXe FROM"
+                + " BaoHanh A inner join KhachHang B on A.MaKH = B.MaKH inner"
+                + " join Xe C on A.MaXe = C.MaXe";
+        return this.selectBySqlAll(sql);
     }
     
     public List<BaoHang> selectByKeyWord(String keyWord){
-        String sql = "SELECT * FROM NhaCungCap WHERE TenNCC LIKE ?";
-        return this.selectBySql(sql,"%"+keyWord+"%");
+        String sql = "SELECT A.MaBH,B.HoTen,C.TenXe,A.NgayBH,A.NoiDungBH,B.MaKH,C.MaXe"
+                + " FROM BaoHanh A inner join KhachHang B on A.MaKH = B.MaKH inner"
+                + " join Xe C on A.MaXe = C.MaXe where A.MaBH like ?";
+        return this.selectBySqlAll(sql,"%"+keyWord+"%");
+    }
+    
+    public List<BaoHang> selectByTenKh(String keyWord){
+        String sql = "SELECT A.MaBH,B.HoTen,C.TenXe,A.NgayBH,A.NoiDungBH,B.MaKH,"
+                + " C.MaXe FROM BaoHanh A inner join KhachHang B on A.MaKH = B.MaKH"
+                + " inner join Xe C on A.MaXe = C.MaXe where B.HoTen like ?";
+        return this.selectBySqlAll(sql,"%"+keyWord+"%");
+    }
+    
+    public List<BaoHang> selectByTenXe(String keyWord){
+        String sql = "SELECT A.MaBH,B.HoTen,C.TenXe,A.NgayBH,A.NoiDungBH,B.MaKH,C.MaXe"
+                + " FROM BaoHanh A inner join KhachHang B on A.MaKH = B.MaKH inner"
+                + " join Xe C on A.MaXe = C.MaXe where C.TenXe like ?";
+        return this.selectBySqlAll(sql,"%"+keyWord+"%");
     }
     
     public BaoHang selectByIdTimKiem(String ma) {

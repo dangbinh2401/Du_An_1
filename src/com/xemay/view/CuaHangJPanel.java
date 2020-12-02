@@ -136,7 +136,7 @@ public class CuaHangJPanel extends javax.swing.JPanel {
         txtTimKiem.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         txtTimKiem.setMinimumSize(new java.awt.Dimension(6, 35));
 
-        tblCuaHang.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        tblCuaHang.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         tblCuaHang.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
@@ -347,13 +347,21 @@ public class CuaHangJPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btnSapXepActionPerformed
 
     private void jButton28ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton28ActionPerformed
-        int i = tblCuaHang.getSelectedRow();
-        if(i>0){
-            if(JOptionPane.showConfirmDialog(this, "Bạn có chắc muốn xóa cửa hàng này?")==0){
-                JOptionPane.showMessageDialog(this, "đang làm chức năng xóa");
+             try {
+            int i = tblCuaHang.getSelectedRow();
+            int traloi = JOptionPane.showConfirmDialog(this, "bạn có chắc muốn xóa cửa hàng có mã: " + list.get(i).getMaCh());
+            if (traloi == 0) {
+                CuaHangDAO kh = new CuaHangDAO();
+                try {
+                    kh.delete(list.get(i).getMaCh());
+                    JOptionPane.showMessageDialog(this, "Xóa thành công");
+                    fillToTable();
+                } catch (Exception e) {
+                    JOptionPane.showMessageDialog(this, "Không thể xóa cửa hàng này vì còn nhân viên");
+                }
             }
-        }else{
-            JOptionPane.showMessageDialog(this, "Vui lòng chọn cửa hàng cần xóa");
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Cần chọn cửa hàng để xóa");
         }
     }//GEN-LAST:event_jButton28ActionPerformed
 

@@ -47,7 +47,10 @@ public class CuaHangDAO {
         }
         return list;
     }
-
+public void delete(String maCH) {
+        String sql = "Delete from CuaHang where MaCH=?";
+        JdbcHelper.executeUpdate(sql, maCH);
+    }
     public List<CuaHang> select() {
         String sql = "SELECT * FROM CuaHang";
         return select(sql);
