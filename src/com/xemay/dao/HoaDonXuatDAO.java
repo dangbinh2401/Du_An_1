@@ -15,13 +15,18 @@ import java.util.List;
 public class HoaDonXuatDAO {
 
     public void insert(HoaDonXuat model) {
-        String sql = "INSERT INTO HoaDonXuat (MaHDX, MaNV, NgayXuat, MaKH) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO HoaDonXuat (MaHDX, MaNV, NgayXuat, MaKH) VALUES (?, ?, ?, ?)";
         JdbcHelper.executeUpdate(sql, model.getMaHdx(), model.getMaNV(), model.getNgayXuat(), model.getMaKH());
     }
 
     public void update(HoaDonXuat model) {
         String sql = "UPDATE HoaDonXuat  SET MaNV=?, NgayXuat=?, MaKH=? WHERE  MaHDX=?";
         JdbcHelper.executeUpdate(sql, model.getMaNV(), model.getNgayXuat(), model.getMaKH(), model.getMaHdx());
+    }
+    
+    public void delete(String MaHDX){
+        String sql = "DELETE FROM HoaDonXuat WHERE MaHDX=?";
+        JdbcHelper.executeUpdate(sql, MaHDX);
     }
 
     public List<HoaDonXuat> selectAll() {

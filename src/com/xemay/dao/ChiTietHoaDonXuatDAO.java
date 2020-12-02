@@ -18,18 +18,21 @@ public class ChiTietHoaDonXuatDAO {
         String sql = "INSERT INTO ChiTietHDX (MaHDX, MaXe, SoLuong) VALUES (?, ?, ?)";
         JdbcHelper.executeUpdate(sql, model.getMaHDX(), model.getMaXe(), model.getSoLuong());
     }
-
+    public void delete(String MAHDX,String MaXe) {
+        String sql = "Delete from ChiTietHDX where MaHDX=? and MaXe=?";
+        JdbcHelper.executeUpdate(sql, MAHDX, MaXe);
+    }
     public void update(ChiTietHdx model) {
         String sql = "UPDATE ChiTietHDX  SET  SoLuong=? WHERE  MaHDX=? and MaXE=?";
         JdbcHelper.executeUpdate(sql, model.getSoLuong(), model.getMaHDX(),model.getMaXe());
     }
 
     public List<ChiTietHdx> selectAll(String MaHDX) {
-        String sql = "select MaHDX,a.MaXe,TenXe,b.GiaTienBan,b.SoLuong from ChiTietHDX a inner join Xe b on a.MaXe = b.MaXe  where MaHDX = '"+MaHDX+"'";
+        String sql = "select MaHDX,a.MaXe,TenXe,b.GiaTienBan,a.SoLuong from ChiTietHDX a inner join Xe b on a.MaXe = b.MaXe  where MaHDX = '"+MaHDX+"'";
         return select(sql);
     }
     public List<ChiTietHdx> findTenXe(String TenXe) {
-        String sql = "select MaHDX,a.MaXe,TenXe,b.GiaTienBan,b.SoLuong from ChiTietHDX a inner join Xe b on a.MaXe = b.MaXe  where TenXe like N'%"+TenXe+"%'";
+        String sql = "select MaHDX,a.MaXe,TenXe,b.GiaTienBan,a.SoLuong from ChiTietHDX a inner join Xe b on a.MaXe = b.MaXe  where TenXe like N'%"+TenXe+"%'";
         return select(sql);
     }
         private List<ChiTietHdx> select(String sql, Object... args) {

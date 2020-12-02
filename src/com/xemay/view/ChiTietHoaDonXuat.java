@@ -78,6 +78,7 @@ public class ChiTietHoaDonXuat extends javax.swing.JDialog {
         jScrollPane1 = new javax.swing.JScrollPane();
         tblChiTiet = new javax.swing.JTable();
         txtMaKH = new javax.swing.JTextField();
+        btnXoa = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -152,6 +153,13 @@ public class ChiTietHoaDonXuat extends javax.swing.JDialog {
 
         txtMaKH.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
+        btnXoa.setText("Xóa");
+        btnXoa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnXoaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -186,6 +194,8 @@ public class ChiTietHoaDonXuat extends javax.swing.JDialog {
                             .addComponent(jScrollPane1)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnXoa, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(38, 38, 38)
                         .addComponent(jButton2)
                         .addGap(45, 45, 45)
                         .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -219,10 +229,11 @@ public class ChiTietHoaDonXuat extends javax.swing.JDialog {
                         .addComponent(lblSoDienThoai, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(34, 34, 34)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 49, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnXoa, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(57, 57, 57))
         );
 
@@ -262,6 +273,24 @@ public class ChiTietHoaDonXuat extends javax.swing.JDialog {
         themctHDX.show();
         fillToTable();
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
+        int i = tblChiTiet.getSelectedRow();
+        if (i==-1){
+            JOptionPane.showMessageDialog(this, "vui lòng chọn sản phẩm cần xóa");
+        }else{
+            if(JOptionPane.showConfirmDialog(this, "bạn có chắc muốn xóa sản phẩm?")==0){
+                try {
+                    dao.delete(list.get(i).getMaHDX(), list.get(i).getMaXe());
+                    JOptionPane.showMessageDialog(this, "xóa thành công sản phẩm!");
+                    fillToTable();
+                } catch (Exception e) {
+                    JOptionPane.showMessageDialog(this, "xóa không thành công");
+            }
+            }
+        }
+        
+    }//GEN-LAST:event_btnXoaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -306,6 +335,7 @@ public class ChiTietHoaDonXuat extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnXoa;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;

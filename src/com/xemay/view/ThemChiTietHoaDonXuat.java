@@ -65,6 +65,7 @@ public class ThemChiTietHoaDonXuat extends javax.swing.JDialog {
         txtSoLuong = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Thêm chi tiết hóa đơn xuất");
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -242,6 +243,7 @@ public class ThemChiTietHoaDonXuat extends javax.swing.JDialog {
         model.setMaHDX(txtMaHDX.getText());
         model.setMaXe(cboMaXe.getSelectedItem().toString());
         model.setSoLuong(Integer.valueOf(txtSoLuong.getText()));
+        System.out.println(Integer.valueOf(txtSoLuong.getText()));
         return model;
     }
     
