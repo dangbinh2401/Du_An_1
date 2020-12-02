@@ -9,7 +9,7 @@ import java.util.List;
 public class NhaCungCapDAO {
 
     public void insert(NhaCungCap model) {
-        String sql = "INSERT INTO NhaCungCap (MaNCC, TenNCC, DiaChi, SoDienThoai, Email, Kt) VALUES (?,?,?,?,?,?)";
+        String sql = "INSERT INTO NhaCungCap (MaNCC, TenNCC, DiaChi, SoDienThoai, Email) VALUES (?,?,?,?,?)";
         JdbcHelper.executeUpdate(sql, model.getMaNcc(), model.getTenNcc(),
                 model.getDiaChi(), model.getSdt(), model.getEmail(), 1);
     }
@@ -20,13 +20,9 @@ public class NhaCungCapDAO {
                 model.getSdt(), model.getEmail(), model.getMaNcc());
     }
 
-    public void delete(String ma) {
-        String sql = "update NhaCungCap set Kt = 0 where MaNCC =?";
-        try {
-            JdbcHelper.executeUpdate(sql, ma);
-        } catch (Exception ex) {
-            System.out.println("Lỗi");
-        }
+    public void delete(String maNCC) {
+        String sql = "Delete from NhaCungCap where MaNCC=?";
+        JdbcHelper.executeUpdate(sql, maNCC);
     }
 
     protected List<NhaCungCap> selectBySql(String sql, Object... args) {
@@ -60,7 +56,7 @@ public class NhaCungCapDAO {
     }
 
     public List<NhaCungCap> selectAll() {
-        String sql = "select * from NhaCungCap where Kt = 1";
+        String sql = "select * from NhaCungCap";
         return this.selectBySql(sql);
     }
 

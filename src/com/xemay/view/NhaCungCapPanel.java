@@ -298,25 +298,21 @@ public class NhaCungCapPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_tblQuanLyNccMouseClicked
 
     private void btnXoaNccActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaNccActionPerformed
-        int index = tblQuanLyNcc.getSelectedRow();
-        if (index == -1) {
-            JOptionPane.showMessageDialog(this,"Hãy chọn 1 dòng rồi ấn nút xóa","Thông báo",
-                    JOptionPane.ERROR_MESSAGE);
-        } else {
-            NhaCungCapDAO dao = new NhaCungCapDAO();
-            NhaCungCap nhaCungCap = dataNhaCungCaps.get(index);
-            ThemNhaCungCap themNCCDialog = new ThemNhaCungCap(null, true, nhaCungCap);
-            String maNcc = themNCCDialog.txtMaNcc.getText();
-            try {
-                if (JOptionPane.showConfirmDialog(this,"Bạn có chắc chắn xóa không") == JOptionPane.YES_OPTION) {
-                    dao.delete(maNcc);
-                    JOptionPane.showMessageDialog(this,"Xóa thành công");
+       try {
+            int i = tblQuanLyNcc.getSelectedRow();
+            int traloi = JOptionPane.showConfirmDialog(this, "bạn có chắc muốn xóa nhà cung cấp có mã: " + dataNhaCungCaps.get(i).getMaNcc());
+            if (traloi == 0) {
+                NhaCungCapDAO kh = new NhaCungCapDAO();
+                try {
+                    kh.delete(dataNhaCungCaps.get(i).getMaNcc());
+                    JOptionPane.showMessageDialog(this, "Xóa thành công");
+                    fillTable();
+                } catch (Exception e) {
+                    JOptionPane.showMessageDialog(this, "Không thể xóa nhà cung cấp");
                 }
-            } catch (Exception e) {
-                JOptionPane.showMessageDialog(this,"Xóa thất bại","Thông báo",
-                    JOptionPane.ERROR_MESSAGE);
             }
-            fillTable();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Cần chọn nhà cung cấp để xóa");
         }
     }//GEN-LAST:event_btnXoaNccActionPerformed
 
