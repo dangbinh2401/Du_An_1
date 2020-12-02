@@ -6,7 +6,7 @@
 package com.xemay.view;
 
 import com.xemay.dao.BaoHanhDAO;
-import com.xemay.dao.QLXeDAO;
+import com.xemay.dao.XeDAO;
 import com.xemay.dao.KhachHangDao;
 import javax.swing.UIManager;
 import com.xemay.model.KhachHang;
@@ -57,7 +57,7 @@ public class BaoHanh extends javax.swing.JDialog {
     
 
     public void fillComboxXe() {
-        QLXeDAO dao = new QLXeDAO();
+        XeDAO dao = new XeDAO();
         List<Xe> list = dao.selectAll();
         cboMaXe.removeAllItems();
         for (Xe xe : list) {

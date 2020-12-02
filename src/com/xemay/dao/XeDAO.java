@@ -70,4 +70,44 @@ public class XeDAO {
         model.setHinh(rs.getString("Anh"));
         return model;
     }
+    public List<Xe> selectBySql(String sql, Object... args){
+        List<Xe> list = new ArrayList<>();
+        try {
+            ResultSet rs = JdbcHelper.executeQuery(sql, args);
+            while (rs.next()) {                
+                Xe xe = new Xe();
+                xe.setMaXe(rs.getString(1));
+                xe.setMaCH(rs.getString(2));
+                xe.setTenXe(rs.getString(3));
+                xe.setMaLX(rs.getString(4));
+                xe.setNamSx(rs.getInt(5));
+                xe.setDungTich(rs.getInt(6));
+                xe.setGiaTienBan(rs.getFloat(7));
+                xe.setSoLuong(rs.getInt(8));
+                xe.setThoiGianBh(rs.getInt(9));
+                xe.setSoKhung(rs.getString(10));
+                xe.setHinh(rs.getString(11));
+                list.add(xe);
+            }
+            rs.getStatement().getConnection().close();
+            return list;
+        } catch (Exception e) {
+            throw new RuntimeException();
+        }
+    }
+    
+    
+    public List<Xe> selectByKeyWord(String keyWord){
+        String sql = "SELECT * FROM NhaCungCap WHERE TenXe LIKE ?";
+        return this.selectBySql(sql,"%"+keyWord+"%");
+    }
+    
+    public Xe selectByIdTimKiem(String ma) {
+        String sql = "SELECT * FROM Xe WHERE MaXe = ?";
+        List<Xe> list = this.selectBySql(sql, ma);
+        if (list.isEmpty()) {
+            return null;
+        }
+        return list.get(0);
+    }
 }

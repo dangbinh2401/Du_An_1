@@ -7,7 +7,7 @@ package com.xemay.view;
 
 import com.xemay.model.BaoHang;
 import com.xemay.model.KhachHang;
-import com.xemay.dao.QLXeDAO;
+import com.xemay.dao.XeDAO;
 import com.xemay.dao.KhachHangDao;
 import com.xemay.dao.BaoHanhDAO;
 import java.text.SimpleDateFormat;
@@ -28,7 +28,7 @@ public class BaoHanhJPanel extends javax.swing.JPanel {
     SimpleDateFormat date_Format = new SimpleDateFormat("dd/MM/yyyy");
     BaoHanhDAO bhDao = new BaoHanhDAO();
     KhachHangDao khDao = new KhachHangDao();
-    QLXeDAO xeDao = new QLXeDAO();
+    XeDAO xeDao = new XeDAO();
     BaoHang baoHang = new BaoHang();
     /**
      * Creates new form baoHanhJPanel
