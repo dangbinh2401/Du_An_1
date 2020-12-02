@@ -24,7 +24,7 @@ public class KhachHangDao {
     }
 
     public void update(KhachHang model) {
-        String sql = "UPDATE KhachHang  SET MaTK=?, HoTen=?, SoDienThoai=? GioiTinh=? DiaChi=? Email=? WHERE  MaKH=?";
+        String sql = "UPDATE KhachHang  SET MaTK=?, HoTen=?, SoDienThoai=?, GioiTinh=?, DiaChi=?, Email=? WHERE  MaKH=?";
         JdbcHelper.executeUpdate(sql, model.getMaTk(), model.getHoTen(), model.getSdt(), model.getGioiTinh(), model.getDiaChi(), model.getEmail(), model.getMaKh());
     }
 
@@ -82,7 +82,7 @@ public class KhachHangDao {
         model.setMaKh(rs.getString("MaKH"));
         model.setHoTen(rs.getString("HoTen"));
         model.setSdt(rs.getString("SoDienThoai"));
-        model.setGioiTinh(rs.getBoolean("GioiTinh") ? "Nam" : "Nữ");
+        model.setGioiTinh(rs.getBoolean("GioiTinh"));
         model.setDiaChi(rs.getString("DiaChi"));
         model.setEmail(rs.getString("Email"));
         return model;
