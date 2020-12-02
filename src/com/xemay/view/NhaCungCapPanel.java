@@ -44,6 +44,7 @@ public class NhaCungCapPanel extends javax.swing.JPanel {
                     ncc.getEmail()
                 }; 
                 model.addRow(row); 
+                model.fireTableDataChanged();
             } 
         }  
         catch (Exception e) { 
@@ -68,6 +69,7 @@ public class NhaCungCapPanel extends javax.swing.JPanel {
                     ncc.getEmail()
                 }; 
                 model.addRow(row); 
+                model.fireTableDataChanged();
             } 
         }  
         catch (Exception e) { 
@@ -91,7 +93,8 @@ public class NhaCungCapPanel extends javax.swing.JPanel {
                     ncc.getDiaChi(),
                     ncc.getEmail()
                 };
-                model.addRow(row);                 
+                model.addRow(row); 
+                model.fireTableDataChanged();
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this,"lỗi truy vẫn dữ liệu");
@@ -230,7 +233,7 @@ public class NhaCungCapPanel extends javax.swing.JPanel {
                     .addComponent(btnCapNhatNcc, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnSapXep, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnThem, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(966, Short.MAX_VALUE))
+                .addContainerGap(969, Short.MAX_VALUE))
             .addGroup(NhaCungCapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(NhaCungCapLayout.createSequentialGroup()
                     .addGap(10, 10, 10)

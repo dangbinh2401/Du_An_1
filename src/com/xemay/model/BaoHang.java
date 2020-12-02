@@ -15,6 +15,8 @@ import java.util.Date;
 public class BaoHang {
 
     private String maBh;
+    private String tenKhachHang;
+    private String tenXe;
     private String maXe;
     private String maNv;
     private Date NgayBaoHanh = DateHelper.now();
@@ -24,8 +26,10 @@ public class BaoHang {
     public BaoHang() {
     }
 
-    public BaoHang(String maBh, String maXe, String maNv, String maKh, String NoidungBh) {
+    public BaoHang(String maBh, String tenKhachHang, String tenXe, String maXe, String maNv, String maKh, String NoidungBh) {
         this.maBh = maBh;
+        this.tenKhachHang = tenKhachHang;
+        this.tenXe = tenXe;
         this.maXe = maXe;
         this.maNv = maNv;
         this.maKh = maKh;
@@ -38,6 +42,22 @@ public class BaoHang {
 
     public void setMaBh(String maBh) {
         this.maBh = maBh;
+    }
+
+    public String getTenKhachHang() {
+        return tenKhachHang;
+    }
+
+    public void setTenKhachHang(String tenKhachHang) {
+        this.tenKhachHang = tenKhachHang;
+    }
+
+    public String getTenXe() {
+        return tenXe;
+    }
+
+    public void setTenXe(String tenXe) {
+        this.tenXe = tenXe;
     }
 
     public String getMaXe() {

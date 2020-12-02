@@ -136,7 +136,7 @@ public class CuaHangJPanel extends javax.swing.JPanel {
         txtTimKiem.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         txtTimKiem.setMinimumSize(new java.awt.Dimension(6, 35));
 
-        tblCuaHang.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        tblCuaHang.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         tblCuaHang.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
