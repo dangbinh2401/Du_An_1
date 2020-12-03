@@ -22,30 +22,22 @@ public class Xe {
     private int NamSx;
     private int ThoiGianBh;
     private String Hinh;
-
+     private String MaLx;
     public Xe() {
     }
 
-    public Xe(String MaXe, String maCH, String TenXe, String TenLx, int NamSx, int DungTich, float GiaTienBan, int SoLuong, int ThoiGianBh, String SoKhung, String Hinh) {
-        this.MaXe = MaXe;
+    public Xe(String maCH, String TenXe, String TenLx, String SoKhung, int DungTich, float GiaTienBan, int SoLuong, int NamSx, int ThoiGianBh, String Hinh, String MaLx) {
         this.maCH = maCH;
         this.TenXe = TenXe;
         this.TenLx = TenLx;
-        this.NamSx = NamSx;
+        this.SoKhung = SoKhung;
         this.DungTich = DungTich;
         this.GiaTienBan = GiaTienBan;
         this.SoLuong = SoLuong;
+        this.NamSx = NamSx;
         this.ThoiGianBh = ThoiGianBh;
-        this.SoKhung = SoKhung;
         this.Hinh = Hinh;
-    }
-
-    public String getMaXe() {
-        return MaXe;
-    }
-
-    public void setMaXe(String MaXe) {
-        this.MaXe = MaXe;
+        this.MaLx = MaLx;
     }
 
     public String getMaCH() {
@@ -54,6 +46,14 @@ public class Xe {
 
     public void setMaCH(String maCH) {
         this.maCH = maCH;
+    }
+
+    public String getMaXe() {
+        return MaXe;
+    }
+
+    public void setMaXe(String MaXe) {
+        this.MaXe = MaXe;
     }
 
     public String getTenXe() {
@@ -72,12 +72,12 @@ public class Xe {
         this.TenLx = TenLx;
     }
 
-    public int getNamSx() {
-        return NamSx;
+    public String getSoKhung() {
+        return SoKhung;
     }
 
-    public void setNamSx(int NamSx) {
-        this.NamSx = NamSx;
+    public void setSoKhung(String SoKhung) {
+        this.SoKhung = SoKhung;
     }
 
     public int getDungTich() {
@@ -104,6 +104,14 @@ public class Xe {
         this.SoLuong = SoLuong;
     }
 
+    public int getNamSx() {
+        return NamSx;
+    }
+
+    public void setNamSx(int NamSx) {
+        this.NamSx = NamSx;
+    }
+
     public int getThoiGianBh() {
         return ThoiGianBh;
     }
@@ -112,20 +120,20 @@ public class Xe {
         this.ThoiGianBh = ThoiGianBh;
     }
 
-    public String getSoKhung() {
-        return SoKhung;
-    }
-
-    public void setSoKhung(String SoKhung) {
-        this.SoKhung = SoKhung;
-    }
-
     public String getHinh() {
         return Hinh;
     }
 
     public void setHinh(String Hinh) {
         this.Hinh = Hinh;
+    }
+
+    public String getMaLx() {
+        return MaLx;
+    }
+
+    public void setMaLx(String MaLx) {
+        this.MaLx = MaLx;
     }
 
 }

@@ -5,10 +5,11 @@
  */
 package com.xemay.view;
 
-import com.xemay.dao.CuaHangDAO;
 import com.xemay.dao.KhachHangDao;
-import com.xemay.model.CuaHang;
+import com.xemay.dao.TaiKhoanDAO;
 import com.xemay.model.KhachHang;
+import com.xemay.model.TaiKhoan;
+import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 
@@ -30,6 +31,7 @@ public class ThemKhachHang extends javax.swing.JDialog {
         initComponents();
         setLocationRelativeTo(null);
     }
+        KhachHangDao dao = new KhachHangDao();
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -103,7 +105,6 @@ public class ThemKhachHang extends javax.swing.JDialog {
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel6.setText("Mã khách hàng");
 
-        txtMaTK.setEditable(false);
         txtMaTK.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         txtMaTK.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -230,7 +231,7 @@ public class ThemKhachHang extends javax.swing.JDialog {
 
     private void btnThemKhachHangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemKhachHangActionPerformed
         if (btnThemKhachHang.getText().equals("Thêm mới")) {
-            this.themmoiKH();
+            this.themKH();
         } else {
             this.capNhat();
         }
@@ -240,14 +241,34 @@ public class ThemKhachHang extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtMaTKActionPerformed
 
-    void themmoiKH() {
-        KhachHangDao kh = new KhachHangDao();
+     TaiKhoan mdTk(){
+        TaiKhoan mdTk = new TaiKhoan();
+        mdTk.setMaTk(txtMaTK.getText());
+        mdTk.setMatKhau("123");
+        mdTk.setVaiTro("Khách hàng");
+        return mdTk;
+    }
+     void themKH(){
         try {
-            kh.insert(model());
-            JOptionPane.showMessageDialog(this, "Thêm khách hàng thành công");
+            if (checkMaTK()==true){
+                tk.insert(mdTk());
+                dao.insert(model());
+                JOptionPane.showMessageDialog(this, "thêm khách hàng thành công!");
+            }else{
+                JOptionPane.showMessageDialog(this, "Mã tài khoản đã có người sử dụng!");
+            }
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Thêm thất bại");
+            JOptionPane.showMessageDialog(this, "Mã khách hàng đã có trong danh sách!"+e.toString());
         }
+    }
+    TaiKhoanDAO tk = new TaiKhoanDAO();
+    boolean checkMaTK(){
+        List <TaiKhoan> checkma = tk.findMaTK(txtMaTK.getText());
+        boolean kt = true;
+        if (checkma.size()==1){
+            kt = false;
+        }
+        return kt;
     }
 
     KhachHang model() {

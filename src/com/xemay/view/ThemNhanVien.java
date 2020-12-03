@@ -275,7 +275,7 @@ public class ThemNhanVien extends javax.swing.JDialog {
                 JOptionPane.showMessageDialog(this, "Mã tài khoản đã có người sử dụng!");
             }
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "mã nhân viên đã có trong danh sách!"+e.toString());
+            JOptionPane.showMessageDialog(this, "Mã nhân viên đã có trong danh sách!"+e.toString());
         }
     }
     TaiKhoanDAO tk = new TaiKhoanDAO();

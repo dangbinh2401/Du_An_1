@@ -52,12 +52,6 @@ public class NhanVienJPanel extends javax.swing.JPanel {
         try {
             themNV.txtMaNhanVien.setText(list.get(i).getMaNV());
             themNV.txtMaNhanVien.disable();
-            //themNV.cboMaCuaHang.addItem(list.get(i).getMaCH());
-            for (int j = 1; j < themNV.cboMaCuaHang.getItemCount(); j++) {
-                if (themNV.cboMaCuaHang.getItemAt(j).equals(list.get(i).getMaCH())) {
-                    themNV.cboMaCuaHang.setSelectedIndex(j);
-                }
-            }
             themNV.txtHoTen.setText(list.get(i).getHoTen());
             themNV.txtSoDienThoai.setText(list.get(i).getSdt());
             themNV.txtEmail.setText(list.get(i).getEmail());
