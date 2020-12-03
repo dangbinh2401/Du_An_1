@@ -77,7 +77,7 @@ public class XeDAO {
         model.setMaXe(rs.getString("MaXe"));
         model.setMaCH(rs.getString("MaCH"));
         model.setTenXe(rs.getString("TenXe"));
-        model.setTenLx(rs.getString("TenLx"));
+        model.setTenLx(rs.getString("TenLX"));
         model.setNamSx(rs.getInt("NamSX"));
         model.setDungTich(rs.getInt("DungTich"));
         model.setGiaTienBan(rs.getFloat("GiaTienBan"));

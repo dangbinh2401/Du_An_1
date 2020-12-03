@@ -5,6 +5,7 @@
  */
 package com.xemay.view;
 
+import com.xemay.helper.ShareHelper;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Desktop;
