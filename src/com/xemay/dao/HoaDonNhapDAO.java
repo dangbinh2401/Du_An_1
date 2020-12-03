@@ -18,23 +18,23 @@ public class HoaDonNhapDAO {
         JdbcHelper.executeUpdate(sql,  model.getMaNV(), model.getMaNCC(), model.getNgayNhap(), model.getMaHDN());
     }
     
-    public void delete(String MaHDX){
+    public void delete(String MaHDN){
         String sql = "DELETE FROM HoaDonNhap WHERE MaHDN=?";
-        JdbcHelper.executeUpdate(sql, MaHDX);
+        JdbcHelper.executeUpdate(sql, MaHDN);
     }
 
     public List<HoaDonNhap> selectAll() {
-        String sql = "select a.MaHDN , a.MaNV, a.MaNCC, a.NgayNhap , b.TenNCC, c.HoTen from HoaDonNhap a inner join NhaCungCap b on a.MaNCC = b.MaNCC inner join NhanVien c on a.MaNV = c.MaNV";
+        String sql = "select a.MaHDN , a.MaNV, a.MaNCC, a.NgayNhap , b.TenNCC, c.HoTen, b.SoDienThoai from HoaDonNhap a inner join NhaCungCap b on a.MaNCC = b.MaNCC inner join NhanVien c on a.MaNV = c.MaNV";
         return select(sql);
     }
     
     public List<HoaDonNhap> findTenNCC(String TenNCC){
-        String sql = "select a.MaHDN , a.MaNV, a.MaNCC, a.NgayNhap , b.TenNCC, c.HoTen from HoaDonNhap a inner join NhaCungCap b on a.MaNCC = b.MaNCC inner join NhanVien c on a.MaNV = c.MaNV where b.TenNCC like N'%?%'";
-        return select(sql,TenNCC);
+        String sql = "select a.MaHDN , a.MaNV, a.MaNCC, a.NgayNhap , b.TenNCC, c.HoTen,b.SoDienThoai from HoaDonNhap a inner join NhaCungCap b on a.MaNCC = b.MaNCC inner join NhanVien c on a.MaNV = c.MaNV where b.TenNCC like N'%"+TenNCC+"%'";
+        return select(sql);
     }
     public List<HoaDonNhap> findTenNV(String TenNV){
-        String sql = "select a.MaHDN , a.MaNV, a.MaNCC, a.NgayNhap , b.TenNCC, c.HoTen from HoaDonNhap a inner join NhaCungCap b on a.MaNCC = b.MaNCC inner join NhanVien c on a.MaNV = c.MaNV where c.HoTen like N'%?%'";
-        return select(sql,TenNV);
+        String sql = "select a.MaHDN , a.MaNV, a.MaNCC, a.NgayNhap , b.TenNCC, c.HoTen,b.SoDienThoai from HoaDonNhap a inner join NhaCungCap b on a.MaNCC = b.MaNCC inner join NhanVien c on a.MaNV = c.MaNV where c.HoTen like N'%"+TenNV+"%'";
+        return select(sql);
     }
     private List<HoaDonNhap> select(String sql, Object... args) {
         List<HoaDonNhap> list = new ArrayList<>();
@@ -64,6 +64,7 @@ public class HoaDonNhapDAO {
         model.setNgayNhap(rs.getDate("NgayNhap"));
         model.setTenNCC(rs.getString("TenNCC"));
         model.setTenNV(rs.getString("HoTen"));
+        model.setSDT(rs.getString("SoDienThoai"));
         return model;
     }
 }

@@ -9,17 +9,43 @@ package com.xemay.model;
  *
  * @author PC
  */
-public class ChiTietHdh {
+public class ChiTietHDN {
 
     private int SoLuong;
     private float GiaTienNhap;
+    private String MaHDN;
+    private String MaXe;
+    private String TenXe;
+    public String getTenXe() {
+        return TenXe;
+    }
 
-    public ChiTietHdh(int SoLuong, float GiaTienNhap) {
+    public void setTenXe(String TenXe) {
+        this.TenXe = TenXe;
+    }
+    
+    public String getMaHDN() {
+        return MaHDN;
+    }
+
+    public void setMaHDN(String MaHDN) {
+        this.MaHDN = MaHDN;
+    }
+
+    public String getMaXe() {
+        return MaXe;
+    }
+
+    public void setMaXe(String MaXe) {
+        this.MaXe = MaXe;
+    }
+    
+    public ChiTietHDN(int SoLuong, float GiaTienNhap) {
         this.SoLuong = SoLuong;
         this.GiaTienNhap = GiaTienNhap;
     }
 
-    public ChiTietHdh() {
+    public ChiTietHDN() {
     }
 
     public int getSoLuong() {

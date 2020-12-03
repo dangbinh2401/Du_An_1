@@ -31,7 +31,7 @@ public class ThemHoaDonXuat extends javax.swing.JDialog {
         cboMaKH.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 int i = cboMaKH.getSelectedIndex();
-                if (i > 0) {
+                if (i >=0 ) {
                     lblHoTen.setText(list.get(i).getHoTen());
                     lblSoDienThoai.setText(list.get(i).getSdt());
                     lblDiaChi.setText(list.get(i).getDiaChi());

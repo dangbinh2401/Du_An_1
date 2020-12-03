@@ -15,7 +15,16 @@ public class HoaDonNhap {
     private String MaNCC;
     private String TenNCC;
     private Date NgayNhap;
+    private String SDT;
 
+    public String getSDT() {
+        return SDT;
+    }
+
+    public void setSDT(String SDT) {
+        this.SDT = SDT;
+    }
+    
     public String getMaNV() {
         return MaNV;
     }
