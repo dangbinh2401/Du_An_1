@@ -88,7 +88,8 @@ public class NhanVienJPanel extends javax.swing.JPanel {
             int i = 1;
             for (NhanVien ch : list) {
                 Object[] row = {
-                    i, ch.getMaNV(),
+                    i, ch.getMaCH(),
+                    ch.getMaNV(),
                     ch.getHoTen(),
                     ch.getSdt(),
                     ch.getEmail(),
@@ -117,7 +118,8 @@ public class NhanVienJPanel extends javax.swing.JPanel {
                     gt = "Nam";
                 }
                 Object[] row = {
-                    i, ch.getMaNV(),
+                    i, ch.getMaCH(),
+                    ch.getMaNV(),
                     ch.getHoTen(),
                     ch.getSdt(),
                     ch.getEmail(),
@@ -138,7 +140,7 @@ public class NhanVienJPanel extends javax.swing.JPanel {
 
         QuanLyNhanVien = new javax.swing.JPanel();
         jLabel16 = new javax.swing.JLabel();
-        cboTimKiem2 = new javax.swing.JComboBox<>();
+        cboTimKiem2 = new javax.swing.JComboBox<String>();
         txtTimKiem = new javax.swing.JTextField();
         jButton29 = new javax.swing.JButton();
         btnSapXep = new javax.swing.JButton();
@@ -154,7 +156,7 @@ public class NhanVienJPanel extends javax.swing.JPanel {
         jLabel16.setText("QUẢN LÝ NHÂN VIÊN");
 
         cboTimKiem2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        cboTimKiem2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tìm kiếm theo tên", "Tìm kiếm theo mã" }));
+        cboTimKiem2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Tìm kiếm theo tên", "Tìm kiếm theo mã" }));
         cboTimKiem2.setMinimumSize(new java.awt.Dimension(138, 35));
 
         txtTimKiem.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -195,17 +197,17 @@ public class NhanVienJPanel extends javax.swing.JPanel {
         tblNhanVien.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         tblNhanVien.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "STT", "Mã Nhân Viên", "Tên Nhân Viên", "Số Điện Thoại", "Email", "Giới Tính", "Địa Chỉ"
+                "STT", "Mã cửa hàng", "Mã Nhân Viên", "Tên Nhân Viên", "Số Điện Thoại", "Email", "Giới Tính", "Địa Chỉ"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false
+                false, true, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -342,7 +344,8 @@ public class NhanVienJPanel extends javax.swing.JPanel {
             int i = 1;
             for (NhanVien ch : list) {
                 Object[] row = {
-                    i, ch.getMaNV(),
+                    i, ch.getMaCH(),
+                    ch.getMaNV(),
                     ch.getHoTen(),
                     ch.getSdt(),
                     ch.getEmail(),

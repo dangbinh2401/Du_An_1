@@ -77,7 +77,7 @@ public class BaoHanhDAO {
     }
     
     public List<BaoHang> selectByKeyWord(String keyWord){
-        String sql = "SELECT A.MaBH,B.HoTen,C.TenXe,A.NgayBH,A.NoiDungBH,B.MaKH,C.MaXe"
+        String sql = "SELECT A.MaBH,B.HoTen,C.TenXe, A.MaNV, A.NgayBH,A.NoiDungBH,B.MaKH,C.MaXe"
                 + " FROM BaoHanh A inner join KhachHang B on A.MaKH = B.MaKH inner"
                 + " join Xe C on A.MaXe = C.MaXe where A.MaBH like ?";
         return this.selectBySqlAll(sql,"%"+keyWord+"%");
