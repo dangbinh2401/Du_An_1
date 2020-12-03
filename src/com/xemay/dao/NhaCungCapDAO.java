@@ -11,7 +11,7 @@ public class NhaCungCapDAO {
     public void insert(NhaCungCap model) {
         String sql = "INSERT INTO NhaCungCap (MaNCC, TenNCC, DiaChi, SoDienThoai, Email) VALUES (?,?,?,?,?)";
         JdbcHelper.executeUpdate(sql, model.getMaNcc(), model.getTenNcc(),
-                model.getDiaChi(), model.getSdt(), model.getEmail(), 1);
+                model.getDiaChi(), model.getSdt(), model.getEmail());
     }
 
     public void update(NhaCungCap model) {
