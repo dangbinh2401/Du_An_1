@@ -70,7 +70,7 @@ public class BaoHanh extends javax.swing.JDialog {
 
     public void fillComboxXe() {
         XeDAO dao = new XeDAO();
-        List<Xe> list = dao.selectAll();
+        List<Xe> list = dao.selectTong();
         cboMaXe.removeAllItems();
         for (Xe xe : list) {
             cboMaXe.addItem(xe.getMaXe());
