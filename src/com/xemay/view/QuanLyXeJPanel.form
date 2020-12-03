@@ -40,13 +40,13 @@
                   <EmptySpace min="0" pref="64" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
-                          <Component id="cboTimKiem6" min="-2" pref="204" max="-2" attributes="0"/>
+                          <Component id="cboTimKiem2" min="-2" pref="204" max="-2" attributes="0"/>
                           <EmptySpace pref="230" max="32767" attributes="0"/>
-                          <Component id="jTextField10" min="-2" pref="374" max="-2" attributes="0"/>
+                          <Component id="txtTimKiem" min="-2" pref="374" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="62" max="-2" attributes="0"/>
                           <Component id="jButton49" min="-2" pref="113" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="102" max="-2" attributes="0"/>
-                          <Component id="jButton50" min="-2" pref="148" max="-2" attributes="0"/>
+                          <Component id="btnSapXep" min="-2" pref="148" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="83" max="-2" attributes="0"/>
                           <Component id="jButton51" min="-2" pref="97" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="79" max="-2" attributes="0"/>
@@ -68,13 +68,13 @@
                   <Component id="jLabel24" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jTextField10" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
+                      <Component id="txtTimKiem" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
                       <Component id="jButton51" alignment="3" min="-2" pref="38" max="-2" attributes="0"/>
                       <Component id="jButton52" alignment="3" min="-2" pref="38" max="-2" attributes="0"/>
                       <Component id="jButton53" alignment="3" min="-2" pref="38" max="-2" attributes="0"/>
-                      <Component id="jButton50" alignment="3" min="-2" pref="37" max="-2" attributes="0"/>
+                      <Component id="btnSapXep" alignment="3" min="-2" pref="37" max="-2" attributes="0"/>
                       <Component id="jButton49" alignment="3" min="-2" pref="39" max="-2" attributes="0"/>
-                      <Component id="cboTimKiem6" alignment="3" max="32767" attributes="0"/>
+                      <Component id="cboTimKiem2" alignment="3" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Component id="jScrollPane9" min="-2" pref="441" max="-2" attributes="0"/>
@@ -91,21 +91,24 @@
 
           <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
           <SubComponents>
-            <Component class="javax.swing.JTable" name="jTable9">
+            <Component class="javax.swing.JTable" name="tblXe">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Tahoma" size="14" style="0"/>
                 </Property>
                 <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                  <Table columnCount="8" rowCount="4">
+                  <Table columnCount="11" rowCount="4">
                     <Column editable="true" title="STT" type="java.lang.Object"/>
+                    <Column editable="true" title="M&#xe3; c&#x1eed;a h&#xe0;ng" type="java.lang.Object"/>
                     <Column editable="true" title="M&#xe3; Xe" type="java.lang.Object"/>
                     <Column editable="true" title="T&#xea;n Xe" type="java.lang.Object"/>
                     <Column editable="true" title="T&#xea;n Lo&#x1ea1;i Xe" type="java.lang.Object"/>
-                    <Column editable="true" title="N&#x103;m S&#x1ea3;n Xu&#x1ea5;t" type="java.lang.Object"/>
+                    <Column editable="true" title="S&#x1ed1; khung" type="java.lang.Object"/>
                     <Column editable="true" title="Dung T&#xed;ch" type="java.lang.Object"/>
                     <Column editable="true" title="S&#x1ed1; L&#x1b0;&#x1ee3;ng" type="java.lang.Object"/>
+                    <Column editable="true" title="N&#x103;m S&#x1ea3;n Xu&#x1ea5;t" type="java.lang.Object"/>
                     <Column editable="true" title="Th&#x1edd;i Gian B&#x1ea3;o H&#xe0;nh" type="java.lang.Object"/>
+                    <Column editable="true" title="Gi&#xe1; ti&#x1ec1;n b&#xe1;n" type="java.lang.Float"/>
                   </Table>
                 </Property>
                 <Property name="rowHeight" type="int" value="30"/>
@@ -124,7 +127,7 @@
             <Property name="text" type="java.lang.String" value="QU&#x1ea2;N L&#xdd; XE"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JComboBox" name="cboTimKiem6">
+        <Component class="javax.swing.JComboBox" name="cboTimKiem2">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Tahoma" size="14" style="1"/>
@@ -143,7 +146,7 @@
             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
           </AuxValues>
         </Component>
-        <Component class="javax.swing.JTextField" name="jTextField10">
+        <Component class="javax.swing.JTextField" name="txtTimKiem">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Tahoma" size="14" style="0"/>
@@ -161,13 +164,16 @@
             <Property name="text" type="java.lang.String" value="T&#xec;m ki&#x1ebf;m"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JButton" name="jButton50">
+        <Component class="javax.swing.JButton" name="btnSapXep">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Tahoma" size="14" style="1"/>
             </Property>
             <Property name="text" type="java.lang.String" value="S&#x1eaf;p x&#x1ebf;p theo t&#xea;n"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSapXepActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="jButton51">
           <Properties>

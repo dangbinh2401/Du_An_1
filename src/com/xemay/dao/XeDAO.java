@@ -17,24 +17,37 @@ import java.util.List;
  * @author ADMIN
  */
 public class XeDAO {
+
     public void insert(Xe model) {
         String sql = "INSERT INTO Xe (MaXe, MaCH, TenXe, MaLX, NamSX, DungTich, GiaTienBan,SoLuong,ThoiGianBH, Sokhung,Anh) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-        JdbcHelper.executeUpdate(sql, model.getMaXe(), model.getMaCH(), model.getTenXe(), model.getMaLX(), model.getNamSx(),model.getDungTich(),model.getGiaTienBan(),model.getSoLuong(),model.getThoiGianBh(),model.getSoKhung(),model.getHinh());
+        JdbcHelper.executeUpdate(sql, model.getMaXe(), model.getMaCH(), model.getTenXe(), model.getTenLx(), model.getNamSx(), model.getDungTich(), model.getGiaTienBan(), model.getSoLuong(), model.getThoiGianBh(), model.getSoKhung(), model.getHinh());
     }
 
     public void update(Xe model) {
         String sql = "UPDATE Xe  SET MaCH=?,TenXe=?, MaLX=?, NamSX=?, DungTich=?, GiaTienBan=?,SoLuong=?,ThoiGianBH=?, Sokhung=?,Anh=? WHERE  MaXe=?";
-        JdbcHelper.executeUpdate(sql, model.getMaCH(), model.getTenXe(), model.getMaLX(), model.getNamSx(),model.getDungTich(),model.getGiaTienBan(),model.getSoLuong(),model.getThoiGianBh(),model.getSoKhung(),model.getHinh(), model.getMaXe());
+        JdbcHelper.executeUpdate(sql, model.getMaCH(), model.getTenXe(), model.getTenLx(), model.getNamSx(), model.getDungTich(), model.getGiaTienBan(), model.getSoLuong(), model.getThoiGianBh(), model.getSoKhung(), model.getHinh(), model.getMaXe());
     }
 
     public List<Xe> selectAll() {
         String sql = "select * from Xe";
         return select(sql);
     }
-    public List<Xe> findTenXe(String TenXe) {
-        String sql = "select * from Xe where TenXe like N'%"+TenXe+"%'";
+
+    public List<Xe> selectTong() {
+        String sql = "SELECT A.MaCH, A.MaXe, A.TenXe, B.TenLX, A.SoKhung, A.DungTich, A.GiaTienBan , A.SoLuong, A.NamSX,  A.ThoiGianBH FROM Xe A, LoaiXe B where A.MaLX = B.MaLX ";
         return select(sql);
     }
+
+    public List<Xe> findTenXe(String TenXe) {
+        String sql = "SELECT A.MaCH, A.MaXe, A.TenXe, B.TenLX, A.SoKhung, A.DungTich, A.GiaTienBan , A.SoLuong, A.NamSX,  A.ThoiGianBH FROM Xe A, LoaiXe B where A.MaLX = B.MaLX and A.TenXe like N'%"+TenXe+"%'";
+        return select(sql);
+    }
+
+    public List<Xe> findMaNV(String MaXe){
+        String sql = "SELECT A.MaCH, A.MaXe, A.TenXe, B.TenLX, A.SoKhung, A.DungTich, A.GiaTienBan , A.SoLuong, A.NamSX,  A.ThoiGianBH FROM Xe A, LoaiXe B where A.MaLX = B.MaLX and A.MaXe like N'%"+MaXe+"%'";
+        return select(sql);
+    }
+
     private List<Xe> select(String sql, Object... args) {
         List<Xe> list = new ArrayList<>();
         try {
@@ -60,26 +73,27 @@ public class XeDAO {
         model.setMaXe(rs.getString("MaXe"));
         model.setMaCH(rs.getString("MaCH"));
         model.setTenXe(rs.getString("TenXe"));
-        model.setMaLX(rs.getString("MaLX"));
+        model.setTenLx(rs.getString("TenLx"));
         model.setNamSx(rs.getInt("NamSX"));
         model.setDungTich(rs.getInt("DungTich"));
         model.setGiaTienBan(rs.getFloat("GiaTienBan"));
         model.setSoLuong(rs.getInt("SoLuong"));
         model.setThoiGianBh(rs.getInt("ThoiGianBH"));
         model.setSoKhung(rs.getString("SoKhung"));
-        model.setHinh(rs.getString("Anh"));
+   
         return model;
     }
-    public List<Xe> selectBySql(String sql, Object... args){
+
+    public List<Xe> selectBySql(String sql, Object... args) {
         List<Xe> list = new ArrayList<>();
         try {
             ResultSet rs = JdbcHelper.executeQuery(sql, args);
-            while (rs.next()) {                
+            while (rs.next()) {
                 Xe xe = new Xe();
                 xe.setMaXe(rs.getString(1));
                 xe.setMaCH(rs.getString(2));
                 xe.setTenXe(rs.getString(3));
-                xe.setMaLX(rs.getString(4));
+                xe.setTenLx(rs.getString(4));
                 xe.setNamSx(rs.getInt(5));
                 xe.setDungTich(rs.getInt(6));
                 xe.setGiaTienBan(rs.getFloat(7));
@@ -95,13 +109,12 @@ public class XeDAO {
             throw new RuntimeException();
         }
     }
-    
-    
-    public List<Xe> selectByKeyWord(String keyWord){
+
+    public List<Xe> selectByKeyWord(String keyWord) {
         String sql = "SELECT * FROM NhaCungCap WHERE TenXe LIKE ?";
-        return this.selectBySql(sql,"%"+keyWord+"%");
+        return this.selectBySql(sql, "%" + keyWord + "%");
     }
-    
+
     public Xe selectByIdTimKiem(String ma) {
         String sql = "SELECT * FROM Xe WHERE MaXe = ?";
         List<Xe> list = this.selectBySql(sql, ma);

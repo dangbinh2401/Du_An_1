@@ -11,26 +11,26 @@ package com.xemay.model;
  */
 public class Xe {
 
-    private String MaXe;
     private String maCH;
+    private String MaXe;
     private String TenXe;
-    private String maLX;
-    private int NamSx;
+    private String TenLx;
+    private String SoKhung;
     private int DungTich;
     private float GiaTienBan;
     private int SoLuong;
+    private int NamSx;
     private int ThoiGianBh;
-    private String SoKhung;
     private String Hinh;
 
     public Xe() {
     }
 
-    public Xe(String MaXe, String maCH, String TenXe, String maLX, int NamSx, int DungTich, float GiaTienBan, int SoLuong, int ThoiGianBh, String SoKhung, String Hinh) {
+    public Xe(String MaXe, String maCH, String TenXe, String TenLx, int NamSx, int DungTich, float GiaTienBan, int SoLuong, int ThoiGianBh, String SoKhung, String Hinh) {
         this.MaXe = MaXe;
         this.maCH = maCH;
         this.TenXe = TenXe;
-        this.maLX = maLX;
+        this.TenLx = TenLx;
         this.NamSx = NamSx;
         this.DungTich = DungTich;
         this.GiaTienBan = GiaTienBan;
@@ -64,12 +64,12 @@ public class Xe {
         this.TenXe = TenXe;
     }
 
-    public String getMaLX() {
-        return maLX;
+    public String getTenLx() {
+        return TenLx;
     }
 
-    public void setMaLX(String maLX) {
-        this.maLX = maLX;
+    public void setTenLx(String TenLx) {
+        this.TenLx = TenLx;
     }
 
     public int getNamSx() {
@@ -127,5 +127,5 @@ public class Xe {
     public void setHinh(String Hinh) {
         this.Hinh = Hinh;
     }
-    
+
 }
