@@ -8,6 +8,7 @@ package com.xemay.view;
 import com.xemay.dao.CuaHangDAO;
 import com.xemay.dao.NhanVienDAO;
 import com.xemay.dao.TaiKhoanDAO;
+import com.xemay.helper.ShareHelper;
 import com.xemay.model.CuaHang;
 import com.xemay.model.NhanVien;
 import com.xemay.model.TaiKhoan;
@@ -33,6 +34,15 @@ public class ThemNhanVien extends javax.swing.JDialog {
         initComponents();
         setLocationRelativeTo(null);
         fillMaCH();
+                        List<NhanVien> data=dao.select();
+        String s;
+        if (data.size()-1<0){
+            s="0";
+        }else{
+            s=data.get(data.size()-1).getMaNV();
+        }
+        txtMaNhanVien.setText(ShareHelper.getMaXe("NV", s));
+        txtMaNhanVien.disable(); 
     }
     NhanVienDAO dao = new NhanVienDAO();
     void fillMaCH(){
@@ -94,7 +104,7 @@ public class ThemNhanVien extends javax.swing.JDialog {
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel4.setText("Số điện thoại");
 
-        txtMaNhanVien.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txtMaNhanVien.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel5.setText("Email");
