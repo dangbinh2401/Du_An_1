@@ -5,8 +5,12 @@
  */
 package com.xemay.view;
 
+import com.xemay.dao.TaiKhoanDAO;
+import com.xemay.helper.ShareHelper;
+import com.xemay.model.TaiKhoan;
 import com.xemay.utils.CheckLoi;
 import java.awt.Color;
+import java.util.List;
 import javax.swing.JOptionPane;
 
 /**
@@ -98,7 +102,7 @@ public class Login extends javax.swing.JFrame {
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
-        btnLogin.setBackground(new java.awt.Color(255, 102, 51));
+        btnLogin.setBackground(new java.awt.Color(118, 95, 220));
         btnLogin.setFont(new java.awt.Font("Times New Roman", 1, 20)); // NOI18N
         btnLogin.setForeground(new java.awt.Color(255, 255, 255));
         btnLogin.setText("Login");
@@ -155,7 +159,7 @@ public class Login extends javax.swing.JFrame {
             }
         });
 
-        btnCancel.setBackground(new java.awt.Color(255, 102, 51));
+        btnCancel.setBackground(new java.awt.Color(118, 95, 220));
         btnCancel.setFont(new java.awt.Font("Times New Roman", 1, 20)); // NOI18N
         btnCancel.setForeground(new java.awt.Color(255, 255, 255));
         btnCancel.setText("Cancel");
@@ -209,21 +213,24 @@ public class Login extends javax.swing.JFrame {
                 .addGap(39, 39, 39)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel3)
+                        .addContainerGap(196, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(btnLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(btnCancel))
+                                    .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtUserName, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addGroup(jPanel1Layout.createSequentialGroup()
-                                    .addComponent(btnLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(btnCancel))
-                                .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(txtUserName, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jLabel3))
-                        .addContainerGap())))
+                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -271,16 +278,26 @@ public class Login extends javax.swing.JFrame {
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
         StringBuilder bd = new StringBuilder();
-        CheckLoi.checkRong(txtUserName, bd, "Username chưa nhập\n");
+        CheckLoi.checkRong(txtUserName, bd, "Username chưa nhập");
         CheckLoi.checkRongPass(txtPassword, bd, "Passwword chưa nhập");
+        TaiKhoanDAO dao = new TaiKhoanDAO();
+        List <TaiKhoan> list = dao.selectLogin(txtUserName.getText());
+        if (list.size()==1){
+            if(list.get(0).getMatKhau().equals(txtPassword.getText())){
+                JOptionPane.showMessageDialog(this, "Đăng nhập thành công");
+                ShareHelper.TaiKhoan=list.get(0);
+                new HomeJFrame().setVisible(true);
+                dispose();
+            }else{
+                JOptionPane.showMessageDialog(this, "mật khẩu không chính xác");
+            }
+            
+        }else{
+            JOptionPane.showMessageDialog(this, "tài khoản không chính xác");
+        }
         if (bd.length() > 0) {
             JOptionPane.showMessageDialog(this, bd.toString());
             return;
-        }
-        try {
-            new HomeJFrame().setVisible(true);
-            dispose();
-        } catch (Exception e) {
         }
     }//GEN-LAST:event_btnLoginActionPerformed
 
@@ -311,11 +328,11 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCancelMouseEntered
 
     private void btnLoginMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLoginMouseExited
-        btnLogin.setBackground(new java.awt.Color(255, 102, 51));
+        btnLogin.setBackground(new java.awt.Color(118,95,220));
     }//GEN-LAST:event_btnLoginMouseExited
 
     private void btnCancelMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCancelMouseExited
-        btnCancel.setBackground(new java.awt.Color(255, 102, 51));        // TODO add your handling code here:
+        btnCancel.setBackground(new java.awt.Color(118,95,220));        // TODO add your handling code here:
     }//GEN-LAST:event_btnCancelMouseExited
 
     private void txtUserNameMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtUserNameMouseClicked

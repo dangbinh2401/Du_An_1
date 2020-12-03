@@ -7,7 +7,9 @@
 package com.xemay.view;
 
 import com.xemay.dao.CuaHangDAO;
+import com.xemay.helper.ShareHelper;
 import com.xemay.model.CuaHang;
+import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 
@@ -26,8 +28,17 @@ public class ThemCuaHang extends javax.swing.JDialog {
         }
         initComponents();
         setLocationRelativeTo(null);
+        String s;
+        if (list.size()-1<0){
+            s="0";
+        }else{
+            s=list.get(list.size()-1).getMaCh();
+        }
+        txtMaCuaHang.setText(ShareHelper.getMaXe("CH", s));
+        txtMaCuaHang.disable();
     }
-
+    CuaHangDAO CH= new CuaHangDAO();
+    List<CuaHang> list = CH.select();
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
@@ -81,7 +92,7 @@ public class ThemCuaHang extends javax.swing.JDialog {
 
         txtTenCuaHang.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
-        txtMaCuaHang.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txtMaCuaHang.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         txtMaCuaHang.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtMaCuaHangActionPerformed(evt);

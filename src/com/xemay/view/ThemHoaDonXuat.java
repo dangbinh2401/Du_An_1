@@ -40,6 +40,15 @@ public class ThemHoaDonXuat extends javax.swing.JDialog {
             }
         });
         txtNgayXuat.setText(java.time.LocalDate.now().toString());
+        List<HoaDonXuat> data=dao.selectAll();
+        String s;
+        if (data.size()-1<0){
+            s="0";
+        }else{
+            s=data.get(data.size()-1).getMaHdx();
+        }
+        txtMaHDX.setText(ShareHelper.getMaXe("HDX", s));
+        txtMaHDX.disable();
     }
 
     /**
@@ -120,7 +129,7 @@ public class ThemHoaDonXuat extends javax.swing.JDialog {
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel4.setText("Họ Tên KH");
 
-        txtMaHDX.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txtMaHDX.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         txtMaHDX.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtMaHDXActionPerformed(evt);

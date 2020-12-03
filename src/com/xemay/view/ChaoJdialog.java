@@ -40,8 +40,8 @@ public class ChaoJdialog extends javax.swing.JFrame {
                 int a = 0;
 
                 if (value < 100) {
-                    jProgressBar1.setValue(value + 1);
-                    a = value + 1;
+                    jProgressBar1.setValue(value + 2);
+                    a = value + 2;
                     lbln.setText(a + "%");
 
                     if (value < 30) {
@@ -95,18 +95,20 @@ public class ChaoJdialog extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
 
-        jPanel1.setBackground(new java.awt.Color(0, 51, 51));
+        jPanel1.setBackground(new java.awt.Color(115, 133, 219));
 
+        jProgressBar1.setBackground(new java.awt.Color(0, 153, 51));
+        jProgressBar1.setForeground(new java.awt.Color(0, 204, 102));
         jProgressBar1.setPreferredSize(new java.awt.Dimension(20, 20));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/xemay/icon/ElderlyConventionalCassowary-max-1mb.gif"))); // NOI18N
 
         lbln.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        lbln.setForeground(new java.awt.Color(255, 102, 0));
+        lbln.setForeground(new java.awt.Color(2, 2, 2));
         lbln.setText("0%");
 
         lblload.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        lblload.setForeground(new java.awt.Color(255, 102, 0));
+        lblload.setForeground(new java.awt.Color(2, 2, 2));
         lblload.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblload.setLabelFor(lblload);
         lblload.setText("Loading");

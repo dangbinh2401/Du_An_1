@@ -33,6 +33,10 @@ public class TaiKhoanDAO {
         String sql = "SELECT * FROM TaiKhoan";
         return select(sql);
     }
+    public List<TaiKhoan> selectLogin(String MaTK) {
+        String sql = "SELECT * FROM TaiKhoan where MaTK=?";
+        return select1(sql,MaTK);
+    }
 
     public List<TaiKhoan> find(String key) {
         String sql = "select * from TaiKhoan where MaTK like N'%" + key + "%'";
@@ -85,7 +89,33 @@ public class TaiKhoanDAO {
         }
         return list;
     }
-
+        private List<TaiKhoan> select1(String sql, Object... args) {
+        List<TaiKhoan> list = new ArrayList<>();
+        try {
+            ResultSet rs = null;
+            try {
+                rs = JdbcHelper.executeQuery(sql, args);
+                while (rs.next()) {
+                    TaiKhoan model = readFromResultSet1(rs);
+                    list.add(model);
+                }
+            } finally {
+                rs.getStatement().getConnection().close();
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.toString());
+            throw new RuntimeException(ex);
+        }
+        return list;
+    }
+    private TaiKhoan readFromResultSet1(ResultSet rs) throws SQLException {
+        TaiKhoan model = new TaiKhoan();
+        model.setMaTk(rs.getString("MaTK"));
+        model.setMatKhau(rs.getString("MatKhau"));
+        model.setVaiTro(rs.getString("VaiTro"));
+     
+        return model;
+    }
     private TaiKhoan readFromResultSet(ResultSet rs) throws SQLException {
         TaiKhoan model = new TaiKhoan();
         model.setMaTk(rs.getString("MaTK"));

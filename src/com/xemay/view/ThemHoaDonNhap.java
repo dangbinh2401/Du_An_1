@@ -3,6 +3,7 @@ package com.xemay.view;
 
 import com.xemay.dao.HoaDonNhapDAO;
 import com.xemay.dao.NhaCungCapDAO;
+import com.xemay.helper.ShareHelper;
 import com.xemay.model.HoaDonNhap;
 import com.xemay.model.NhaCungCap;
 import java.awt.event.ActionEvent;
@@ -28,6 +29,15 @@ public class ThemHoaDonNhap extends javax.swing.JDialog {
             }
         });
         fillToNCC();
+        List<HoaDonNhap> dataHDN=dao.selectAll();
+        String s;
+        if (dataHDN.size()-1<0){
+            s="0";
+        }else{
+            s=dataHDN.get(dataHDN.size()-1).getMaHDN();
+        }
+        txtMaHDN.setText(ShareHelper.getMaXe("HDN", s));
+        txtMaHDN.disable();
         txtNgayNhap.setText(java.time.LocalDate.now().toString());
     }
     HoaDonNhapDAO dao = new HoaDonNhapDAO();
@@ -74,7 +84,7 @@ public class ThemHoaDonNhap extends javax.swing.JDialog {
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
-        txtMaHDN.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txtMaHDN.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel1.setText("Mã hóa đơn nhập");
