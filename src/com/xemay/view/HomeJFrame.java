@@ -30,6 +30,7 @@ public class HomeJFrame extends javax.swing.JFrame {
         main.removeAll();
         this.setLocationRelativeTo(null);
 
+        
     }
 
     /**

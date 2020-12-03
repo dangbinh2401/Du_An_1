@@ -20,17 +20,21 @@ public class XeDAO {
 
     public void insert(Xe model) {
         String sql = "INSERT INTO Xe (MaXe, MaCH, TenXe, MaLX, NamSX, DungTich, GiaTienBan,SoLuong,ThoiGianBH, Sokhung,Anh) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-        JdbcHelper.executeUpdate(sql, model.getMaXe(), model.getMaCH(), model.getTenXe(), model.getTenLx(), model.getNamSx(), model.getDungTich(), model.getGiaTienBan(), model.getSoLuong(), model.getThoiGianBh(), model.getSoKhung(), model.getHinh());
+        JdbcHelper.executeUpdate(sql, model.getMaXe(), model.getMaCH(), model.getTenXe(), model.getMaLx(), model.getNamSx(), model.getDungTich(), model.getGiaTienBan(), model.getSoLuong(), model.getThoiGianBh(), model.getSoKhung(), model.getHinh());
     }
 
     public void update(Xe model) {
         String sql = "UPDATE Xe  SET MaCH=?,TenXe=?, MaLX=?, NamSX=?, DungTich=?, GiaTienBan=?,SoLuong=?,ThoiGianBH=?, Sokhung=?,Anh=? WHERE  MaXe=?";
-        JdbcHelper.executeUpdate(sql, model.getMaCH(), model.getTenXe(), model.getTenLx(), model.getNamSx(), model.getDungTich(), model.getGiaTienBan(), model.getSoLuong(), model.getThoiGianBh(), model.getSoKhung(), model.getHinh(), model.getMaXe());
+        JdbcHelper.executeUpdate(sql, model.getMaCH(), model.getTenXe(), model.getMaLx(), model.getNamSx(), model.getDungTich(), model.getGiaTienBan(), model.getSoLuong(), model.getThoiGianBh(), model.getSoKhung(), model.getHinh(), model.getMaXe());
     }
 
     public List<Xe> selectAll() {
         String sql = "select * from Xe";
         return select(sql);
+    }
+ public void delete(String maxe) {
+        String sql = "Delete from Xe where MaXe=?";
+        JdbcHelper.executeUpdate(sql, maxe);
     }
 
     public List<Xe> selectTong() {

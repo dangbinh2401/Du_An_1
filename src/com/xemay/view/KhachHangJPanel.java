@@ -50,7 +50,11 @@ public class KhachHangJPanel extends javax.swing.JPanel {
     List<KhachHang> list;
 
     void timKiem() {
-        list = dao.find(txtTimKiem.getText());
+        if (cboTimKiem3.getSelectedItem().toString().equals("Tìm kiếm theo tên")) {
+            list = dao.findHoTen(txtTimKiem.getText());
+        } else {
+            list = dao.find(txtTimKiem.getText());
+        }
         DefaultTableModel model = (DefaultTableModel) tblKhachHang.getModel();
         model.setRowCount(0);
         try {
@@ -114,6 +118,7 @@ public class KhachHangJPanel extends javax.swing.JPanel {
         int i = tblKhachHang.getSelectedRow();
         try {
             capnhatKH.txtMaTK.setText(list.get(i).getMaTk());
+            capnhatKH.txtMaKH.disable();
             capnhatKH.txtMaKH.setText(list.get(i).getMaKh());
             capnhatKH.txtTenKH.setText(list.get(i).getHoTen());
             capnhatKH.txtSoDienThoai.setText(list.get(i).getSdt());
@@ -201,7 +206,7 @@ public class KhachHangJPanel extends javax.swing.JPanel {
                 {null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Stt", "Mã tài khoản", "Mã Khách Hàng", "Tên Khách Hàng", "Số Điện Thoại", "Email", "Giới tính", "Địa Chỉ"
+                "STT", "Mã tài khoản", "Mã Khách Hàng", "Tên Khách Hàng", "Số Điện Thoại", "Email", "Giới tính", "Địa Chỉ"
             }
         ));
         tblKhachHang.setRowHeight(30);
@@ -290,14 +295,20 @@ public class KhachHangJPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton36ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton36ActionPerformed
-        ThemKhachHang themKH = new ThemKhachHang(null, true);
-        themKH.show();
-        fillToTable();
+        try {
+            ThemKhachHang themKH = new ThemKhachHang(null, true);
+            themKH.show();
+            fillToTable();
+        } catch (Exception e) {
+        }
     }//GEN-LAST:event_jButton36ActionPerformed
 
     private void jButton37ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton37ActionPerformed
-        fillChinhSua();
-        fillToTable();
+        try {
+            fillChinhSua();
+            fillToTable();
+        } catch (Exception e) {
+        }
     }//GEN-LAST:event_jButton37ActionPerformed
 
     private void jButton38ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton38ActionPerformed
@@ -314,22 +325,22 @@ public class KhachHangJPanel extends javax.swing.JPanel {
 //            }
 //        }
         try {
-               int i=tblKhachHang.getSelectedRow();
-        int traloi = JOptionPane.showConfirmDialog(this, "bạn có chắc muốn xóa khách hàng có mã: " +list.get(i).getMaKh() );        
-        if (traloi == 0) {
-            KhachHangDao kh = new KhachHangDao();
-            try {
-                kh.delete(list.get(i).getMaTk());    
-                JOptionPane.showMessageDialog(this, "Xóa thành công");
-                fillToTable();
-            } catch (Exception e) {
-                JOptionPane.showMessageDialog(this, "Xóa thất bại");
+            int i = tblKhachHang.getSelectedRow();
+            int traloi = JOptionPane.showConfirmDialog(this, "bạn có chắc muốn xóa khách hàng có mã: " + list.get(i).getMaKh());
+            if (traloi == 0) {
+                KhachHangDao kh = new KhachHangDao();
+                try {
+                    kh.delete(list.get(i).getMaTk());
+                    JOptionPane.showMessageDialog(this, "Xóa thành công");
+                    fillToTable();
+                } catch (Exception e) {
+                    JOptionPane.showMessageDialog(this, "Không thể xóa khách hàng này");
+                }
             }
-        }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Cần chọn khách hàng để xóa");
         }
-       
+
 
     }//GEN-LAST:event_jButton38ActionPerformed
 
@@ -337,13 +348,13 @@ public class KhachHangJPanel extends javax.swing.JPanel {
         Comparator<KhachHang> sortName = new Comparator<KhachHang>() {
             @Override
             public int compare(KhachHang s1, KhachHang s2) {
-                return s1.getHoTen().compareTo(s2.getHoTen());
+                return s1.getHoTen().toUpperCase().compareTo(s2.getHoTen().toUpperCase());
             }
         };
         Comparator<KhachHang> sortMaCH = new Comparator<KhachHang>() {
             @Override
             public int compare(KhachHang s1, KhachHang s2) {
-                return s1.getMaKh().compareTo(s2.getMaKh());
+                return s1.getMaKh().toUpperCase().compareTo(s2.getMaKh().toUpperCase());
             }
         };
         if (btnSapXep.getText().equals("Sắp xếp theo tên")) {

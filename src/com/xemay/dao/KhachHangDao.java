@@ -19,8 +19,8 @@ import java.util.List;
 public class KhachHangDao {
 
     public void insert(KhachHang model) {
-        String sql = "INSERT INTO KhachHang (MaTK, MaKH, HoTen, SoDienThoai, GioiTinh, DiaChi, Email) VALUES (?, ?, ?, ?, ?, ?, ?)";
-        JdbcHelper.executeUpdate(sql, model.getMaTk(), model.getMaKh(), model.getHoTen(), model.getSdt(), model.getGioiTinh(), model.getDiaChi(), model.getEmail());
+        String sql = "INSERT INTO KhachHang (MaTK, MaKH, HoTen, SoDienThoai, GioiTinh, DiaChi, Email, Kt) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+        JdbcHelper.executeUpdate(sql, model.getMaTk(), model.getMaKh(), model.getHoTen(), model.getSdt(), model.getGioiTinh(), model.getDiaChi(), model.getEmail(), 1);
     }
 
     public void update(KhachHang model) {
@@ -62,12 +62,12 @@ public class KhachHangDao {
         return select(sql);
     }
      public List<KhachHang> findHoTen(String HoTen) {
-        String sql = "SELECT * FROM KhachHang where HoTen like N'%"+HoTen+"%'";
+        String sql = "select * from KhachHang where HoTen like N'%"+HoTen+"%' and Kt=1";
         return select(sql);
     }
 
     public List<KhachHang> find(String key) {
-        String sql = "select * from KhachHang where HoTen like N'%" + key + "%'";
+        String sql = "select * from KhachHang where MaKH like N'%"+key+"%' and Kt=1";
         return select(sql);
     }
 
