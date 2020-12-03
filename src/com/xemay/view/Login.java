@@ -280,24 +280,26 @@ public class Login extends javax.swing.JFrame {
         StringBuilder bd = new StringBuilder();
         CheckLoi.checkRong(txtUserName, bd, "Username chưa nhập");
         CheckLoi.checkRongPass(txtPassword, bd, "Passwword chưa nhập");
-        TaiKhoanDAO dao = new TaiKhoanDAO();
-        List <TaiKhoan> list = dao.selectLogin(txtUserName.getText());
-        if (list.size()==1){
-            if(list.get(0).getMatKhau().equals(txtPassword.getText())){
-                JOptionPane.showMessageDialog(this, "Đăng nhập thành công");
-                ShareHelper.TaiKhoan=list.get(0);
-                new HomeJFrame().setVisible(true);
-                dispose();
-            }else{
-                JOptionPane.showMessageDialog(this, "mật khẩu không chính xác");
-            }
-            
-        }else{
-            JOptionPane.showMessageDialog(this, "tài khoản không chính xác");
-        }
+
         if (bd.length() > 0) {
             JOptionPane.showMessageDialog(this, bd.toString());
             return;
+        } else {
+            TaiKhoanDAO dao = new TaiKhoanDAO();
+            List<TaiKhoan> list = dao.selectLogin(txtUserName.getText());
+            if (list.size() == 1) {
+                if (list.get(0).getMatKhau().equals(txtPassword.getText())) {
+                    JOptionPane.showMessageDialog(this, "Đăng nhập thành công");
+                    ShareHelper.TaiKhoan = list.get(0);
+                    new HomeJFrame().setVisible(true);
+                    dispose();
+                } else {
+                    JOptionPane.showMessageDialog(this, "mật khẩu không chính xác");
+                }
+
+            } else {
+                JOptionPane.showMessageDialog(this, "tài khoản không chính xác");
+            }
         }
     }//GEN-LAST:event_btnLoginActionPerformed
 
