@@ -83,9 +83,6 @@ public class HomeJFrame extends javax.swing.JFrame {
         jLabel27 = new javax.swing.JLabel();
         cboTimKiem7 = new javax.swing.JComboBox<>();
         cboTimKiem8 = new javax.swing.JComboBox<>();
-        TinNhan = new javax.swing.JPanel();
-        jLabel22 = new javax.swing.JLabel();
-        jLabel25 = new javax.swing.JLabel();
         menuThongKe = new javax.swing.JPanel();
         jPanel14 = new javax.swing.JPanel();
         mnQLCH2 = new javax.swing.JPanel();
@@ -637,38 +634,6 @@ public class HomeJFrame extends javax.swing.JFrame {
         );
 
         main.add(BaoCaoThongKe, "card2");
-
-        TinNhan.setBackground(new java.awt.Color(255, 255, 255));
-
-        jLabel22.setText("jLabel22");
-
-        jLabel25.setText("jLabel25");
-
-        javax.swing.GroupLayout TinNhanLayout = new javax.swing.GroupLayout(TinNhan);
-        TinNhan.setLayout(TinNhanLayout);
-        TinNhanLayout.setHorizontalGroup(
-            TinNhanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(TinNhanLayout.createSequentialGroup()
-                .addGroup(TinNhanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(TinNhanLayout.createSequentialGroup()
-                        .addGap(808, 808, 808)
-                        .addComponent(jLabel22))
-                    .addGroup(TinNhanLayout.createSequentialGroup()
-                        .addGap(837, 837, 837)
-                        .addComponent(jLabel25)))
-                .addContainerGap(920, Short.MAX_VALUE))
-        );
-        TinNhanLayout.setVerticalGroup(
-            TinNhanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(TinNhanLayout.createSequentialGroup()
-                .addGap(251, 251, 251)
-                .addComponent(jLabel22)
-                .addGap(56, 56, 56)
-                .addComponent(jLabel25)
-                .addContainerGap(441, Short.MAX_VALUE))
-        );
-
-        main.add(TinNhan, "card2");
 
         menuThongKe.setBackground(new java.awt.Color(255, 255, 255));
         menuThongKe.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -1768,7 +1733,7 @@ public class HomeJFrame extends javax.swing.JFrame {
 
     private void btnTinNhanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTinNhanMouseClicked
         main.removeAll();
-        main.add(TinNhan);
+        main.add(new TinNhan());
         main.repaint();
         main.revalidate();
         pnQuanLy.setBackground(null);
@@ -2108,7 +2073,6 @@ public class HomeJFrame extends javax.swing.JFrame {
     private javax.swing.JPanel QuanLyNhanVien2;
     private javax.swing.JPanel QuanLyNhanVien3;
     private javax.swing.JPanel QuanLyNhanVien4;
-    private javax.swing.JPanel TinNhan;
     private javax.swing.JLabel btnBanHang;
     private javax.swing.JLabel btnBaoCaoThongKe;
     private javax.swing.JLabel btnBaoHanh;
@@ -2136,9 +2100,7 @@ public class HomeJFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
-    private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel28;
