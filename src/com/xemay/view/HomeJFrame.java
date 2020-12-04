@@ -31,7 +31,6 @@ public class HomeJFrame extends javax.swing.JFrame {
         main.removeAll();
         this.setLocationRelativeTo(null);
 
-        
     }
 
     /**
@@ -667,7 +666,7 @@ public class HomeJFrame extends javax.swing.JFrame {
 
         jLabel28.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel28.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel28.setText("Xe nhập vào bán ra");
+        jLabel28.setText("Xe nhập vào");
 
         javax.swing.GroupLayout mnQLCH2Layout = new javax.swing.GroupLayout(mnQLCH2);
         mnQLCH2.setLayout(mnQLCH2Layout);
@@ -676,7 +675,7 @@ public class HomeJFrame extends javax.swing.JFrame {
             .addGroup(mnQLCH2Layout.createSequentialGroup()
                 .addGap(16, 16, 16)
                 .addComponent(jLabel28, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(40, Short.MAX_VALUE))
         );
         mnQLCH2Layout.setVerticalGroup(
             mnQLCH2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -701,7 +700,7 @@ public class HomeJFrame extends javax.swing.JFrame {
 
         jLabel35.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel35.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel35.setText("Xe nhập vào bán ra của từng nhân viên");
+        jLabel35.setText("Xe bán chạy nhất");
 
         javax.swing.GroupLayout jPanel15Layout = new javax.swing.GroupLayout(jPanel15);
         jPanel15.setLayout(jPanel15Layout);
@@ -710,7 +709,7 @@ public class HomeJFrame extends javax.swing.JFrame {
             .addGroup(jPanel15Layout.createSequentialGroup()
                 .addGap(16, 16, 16)
                 .addComponent(jLabel35)
-                .addContainerGap(18, Short.MAX_VALUE))
+                .addContainerGap(73, Short.MAX_VALUE))
         );
         jPanel15Layout.setVerticalGroup(
             jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -736,7 +735,7 @@ public class HomeJFrame extends javax.swing.JFrame {
 
         jLabel36.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel36.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel36.setText("Xe bán chạy nhất");
+        jLabel36.setText("Xe bán ra");
 
         javax.swing.GroupLayout jPanel16Layout = new javax.swing.GroupLayout(jPanel16);
         jPanel16.setLayout(jPanel16Layout);
@@ -771,7 +770,6 @@ public class HomeJFrame extends javax.swing.JFrame {
 
         jLabel37.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel37.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel37.setText("Xe bán ra của từng cửa hàng");
 
         javax.swing.GroupLayout jPanel17Layout = new javax.swing.GroupLayout(jPanel17);
         jPanel17.setLayout(jPanel17Layout);
@@ -805,7 +803,6 @@ public class HomeJFrame extends javax.swing.JFrame {
 
         jLabel38.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel38.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel38.setText("Xe nhập vào của từng cửa hàng");
 
         javax.swing.GroupLayout jPanel18Layout = new javax.swing.GroupLayout(jPanel18);
         jPanel18.setLayout(jPanel18Layout);
@@ -831,11 +828,12 @@ public class HomeJFrame extends javax.swing.JFrame {
             .addGroup(jPanel14Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jPanel18, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel17, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 305, Short.MAX_VALUE)
+                    .addComponent(jPanel17, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addComponent(jPanel15, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel16, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 305, Short.MAX_VALUE)
-                    .addComponent(mnQLCH2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jPanel18, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(jPanel16, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 209, Short.MAX_VALUE)
+                        .addComponent(mnQLCH2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel14Layout.setVerticalGroup(
@@ -859,16 +857,16 @@ public class HomeJFrame extends javax.swing.JFrame {
         menuThongKeLayout.setHorizontalGroup(
             menuThongKeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, menuThongKeLayout.createSequentialGroup()
-                .addContainerGap(984, Short.MAX_VALUE)
+                .addContainerGap(812, Short.MAX_VALUE)
                 .addComponent(jPanel14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(492, 492, 492))
+                .addGap(592, 592, 592))
         );
         menuThongKeLayout.setVerticalGroup(
             menuThongKeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(menuThongKeLayout.createSequentialGroup()
                 .addGap(0, 0, 0)
                 .addComponent(jPanel14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(468, Short.MAX_VALUE))
+                .addContainerGap(475, Short.MAX_VALUE))
         );
 
         main.add(menuThongKe, "card2");
@@ -1903,7 +1901,11 @@ public class HomeJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_menuTroGiupMouseClicked
 
     private void mnQLCH2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mnQLCH2MouseClicked
-        // TODO add your handling code here:
+        main.removeAll();
+        main.add(new ThongKeXeNhapVaoJPanel());
+        main.repaint();
+        main.revalidate();
+        mnQLCH2.setBackground(new Color(34, 146, 129));
     }//GEN-LAST:event_mnQLCH2MouseClicked
 
     private void mnQLCH2MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mnQLCH2MouseEntered
@@ -1927,7 +1929,11 @@ public class HomeJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jPanel15MouseExited
 
     private void jPanel16MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel16MouseClicked
-        // TODO add your handling code here:
+        main.removeAll();
+        main.add(new ThongKeXeBanRaJpanel());
+        main.repaint();
+        main.revalidate();
+        jPanel16.setBackground(new Color(34, 146, 129));
     }//GEN-LAST:event_jPanel16MouseClicked
 
     private void jPanel16MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel16MouseEntered
@@ -1937,18 +1943,6 @@ public class HomeJFrame extends javax.swing.JFrame {
     private void jPanel16MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel16MouseExited
         jPanel16.setBackground(new Color(34, 146, 129));
     }//GEN-LAST:event_jPanel16MouseExited
-
-    private void jPanel18MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel18MouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jPanel18MouseClicked
-
-    private void jPanel18MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel18MouseEntered
-        jPanel18.setBackground(new Color(34, 150, 181));
-    }//GEN-LAST:event_jPanel18MouseEntered
-
-    private void jPanel18MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel18MouseExited
-        jPanel18.setBackground(new Color(34, 146, 129));
-    }//GEN-LAST:event_jPanel18MouseExited
 
     private void jPanel14MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel14MouseEntered
         check_hover = false;
@@ -2018,6 +2012,18 @@ public class HomeJFrame extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_jLabel6MouseClicked
+
+    private void jPanel18MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel18MouseExited
+        jPanel18.setBackground(new Color(34, 146, 129));
+    }//GEN-LAST:event_jPanel18MouseExited
+
+    private void jPanel18MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel18MouseEntered
+        jPanel18.setBackground(new Color(34, 150, 181));
+    }//GEN-LAST:event_jPanel18MouseEntered
+
+    private void jPanel18MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel18MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jPanel18MouseClicked
 
     private void jPanel17MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel17MouseExited
         jPanel17.setBackground(new Color(34, 146, 129));

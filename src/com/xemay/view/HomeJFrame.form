@@ -943,9 +943,9 @@
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="1" attributes="0">
-                      <EmptySpace pref="984" max="32767" attributes="0"/>
+                      <EmptySpace pref="812" max="32767" attributes="0"/>
                       <Component id="jPanel14" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="492" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="592" max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -954,7 +954,7 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
                       <Component id="jPanel14" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="468" max="32767" attributes="0"/>
+                      <EmptySpace pref="475" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -977,11 +977,13 @@
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                              <Component id="jPanel18" alignment="0" max="32767" attributes="0"/>
-                              <Component id="jPanel17" alignment="0" pref="305" max="32767" attributes="0"/>
+                              <Component id="jPanel17" alignment="0" pref="0" max="32767" attributes="0"/>
                               <Component id="jPanel15" alignment="0" max="32767" attributes="0"/>
-                              <Component id="jPanel16" alignment="0" pref="305" max="32767" attributes="0"/>
-                              <Component id="mnQLCH2" alignment="0" max="32767" attributes="0"/>
+                              <Component id="jPanel18" max="32767" attributes="0"/>
+                              <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
+                                  <Component id="jPanel16" alignment="0" pref="209" max="32767" attributes="0"/>
+                                  <Component id="mnQLCH2" alignment="0" max="32767" attributes="0"/>
+                              </Group>
                           </Group>
                           <EmptySpace max="32767" attributes="0"/>
                       </Group>
@@ -1024,7 +1026,7 @@
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
                               <Component id="jLabel28" min="-2" pref="153" max="-2" attributes="0"/>
-                              <EmptySpace max="32767" attributes="0"/>
+                              <EmptySpace pref="40" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -1047,7 +1049,7 @@
                         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                           <Color blue="ff" green="ff" red="ff" type="rgb"/>
                         </Property>
-                        <Property name="text" type="java.lang.String" value="Xe nh&#x1ead;p v&#xe0;o b&#xe1;n ra"/>
+                        <Property name="text" type="java.lang.String" value="Xe nh&#x1ead;p v&#xe0;o"/>
                       </Properties>
                     </Component>
                   </SubComponents>
@@ -1070,7 +1072,7 @@
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
                               <Component id="jLabel35" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace pref="18" max="32767" attributes="0"/>
+                              <EmptySpace pref="73" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -1093,7 +1095,7 @@
                         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                           <Color blue="ff" green="ff" red="ff" type="rgb"/>
                         </Property>
-                        <Property name="text" type="java.lang.String" value="Xe nh&#x1ead;p v&#xe0;o b&#xe1;n ra c&#x1ee7;a t&#x1eeb;ng nh&#xe2;n vi&#xea;n"/>
+                        <Property name="text" type="java.lang.String" value="Xe b&#xe1;n ch&#x1ea1;y nh&#x1ea5;t"/>
                       </Properties>
                     </Component>
                   </SubComponents>
@@ -1142,7 +1144,7 @@
                         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                           <Color blue="ff" green="ff" red="ff" type="rgb"/>
                         </Property>
-                        <Property name="text" type="java.lang.String" value="Xe b&#xe1;n ch&#x1ea1;y nh&#x1ea5;t"/>
+                        <Property name="text" type="java.lang.String" value="Xe b&#xe1;n ra"/>
                       </Properties>
                     </Component>
                   </SubComponents>
@@ -1191,7 +1193,6 @@
                         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                           <Color blue="ff" green="ff" red="ff" type="rgb"/>
                         </Property>
-                        <Property name="text" type="java.lang.String" value="Xe b&#xe1;n ra c&#x1ee7;a t&#x1eeb;ng c&#x1eed;a h&#xe0;ng"/>
                       </Properties>
                     </Component>
                   </SubComponents>
@@ -1237,7 +1238,6 @@
                         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                           <Color blue="ff" green="ff" red="ff" type="rgb"/>
                         </Property>
-                        <Property name="text" type="java.lang.String" value="Xe nh&#x1ead;p v&#xe0;o c&#x1ee7;a t&#x1eeb;ng c&#x1eed;a h&#xe0;ng"/>
                       </Properties>
                     </Component>
                   </SubComponents>
