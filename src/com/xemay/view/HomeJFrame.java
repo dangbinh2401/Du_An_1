@@ -64,25 +64,25 @@ public class HomeJFrame extends javax.swing.JFrame {
         xeNhapBan_TungNV = new javax.swing.JPanel();
         QuanLyNhanVien3 = new javax.swing.JPanel();
         jLabel31 = new javax.swing.JLabel();
-        cboTimKiem6 = new javax.swing.JComboBox<>();
+        cboTimKiem6 = new javax.swing.JComboBox<String>();
         jTextField11 = new javax.swing.JTextField();
         jButton35 = new javax.swing.JButton();
         jScrollPane12 = new javax.swing.JScrollPane();
         jTable12 = new javax.swing.JTable();
         jLabel32 = new javax.swing.JLabel();
-        cboTimKiem11 = new javax.swing.JComboBox<>();
-        cboTimKiem12 = new javax.swing.JComboBox<>();
+        cboTimKiem11 = new javax.swing.JComboBox<String>();
+        cboTimKiem12 = new javax.swing.JComboBox<String>();
         BaoCaoThongKe = new javax.swing.JPanel();
         QuanLyNhanVien1 = new javax.swing.JPanel();
         jLabel26 = new javax.swing.JLabel();
-        cboTimKiem5 = new javax.swing.JComboBox<>();
+        cboTimKiem5 = new javax.swing.JComboBox<String>();
         jTextField9 = new javax.swing.JTextField();
         jButton33 = new javax.swing.JButton();
         jScrollPane10 = new javax.swing.JScrollPane();
         jTable10 = new javax.swing.JTable();
         jLabel27 = new javax.swing.JLabel();
-        cboTimKiem7 = new javax.swing.JComboBox<>();
-        cboTimKiem8 = new javax.swing.JComboBox<>();
+        cboTimKiem7 = new javax.swing.JComboBox<String>();
+        cboTimKiem8 = new javax.swing.JComboBox<String>();
         menuThongKe = new javax.swing.JPanel();
         jPanel14 = new javax.swing.JPanel();
         mnQLCH2 = new javax.swing.JPanel();
@@ -103,8 +103,8 @@ public class HomeJFrame extends javax.swing.JFrame {
         jScrollPane13 = new javax.swing.JScrollPane();
         jTable13 = new javax.swing.JTable();
         jLabel39 = new javax.swing.JLabel();
-        cboTimKiem13 = new javax.swing.JComboBox<>();
-        cboTimKiem14 = new javax.swing.JComboBox<>();
+        cboTimKiem13 = new javax.swing.JComboBox<String>();
+        cboTimKiem14 = new javax.swing.JComboBox<String>();
         xeBanChayNhat = new javax.swing.JPanel();
         QuanLyNhanVien2 = new javax.swing.JPanel();
         jLabel29 = new javax.swing.JLabel();
@@ -113,8 +113,8 @@ public class HomeJFrame extends javax.swing.JFrame {
         jScrollPane11 = new javax.swing.JScrollPane();
         jTable11 = new javax.swing.JTable();
         jLabel30 = new javax.swing.JLabel();
-        cboTimKiem9 = new javax.swing.JComboBox<>();
-        cboTimKiem10 = new javax.swing.JComboBox<>();
+        cboTimKiem9 = new javax.swing.JComboBox<String>();
+        cboTimKiem10 = new javax.swing.JComboBox<String>();
         menuQuanLy = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         mnQLCH = new javax.swing.JPanel();
@@ -419,7 +419,7 @@ public class HomeJFrame extends javax.swing.JFrame {
         jLabel31.setText("BÁO CÁO THỐNG KÊ");
 
         cboTimKiem6.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        cboTimKiem6.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Xe nhập vào", "Xe bán ra" }));
+        cboTimKiem6.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Xe nhập vào", "Xe bán ra" }));
         cboTimKiem6.setMinimumSize(new java.awt.Dimension(138, 35));
 
         jTextField11.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -455,11 +455,11 @@ public class HomeJFrame extends javax.swing.JFrame {
         jLabel32.setText("Xe nhập vào bán ra của từng xe");
 
         cboTimKiem11.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        cboTimKiem11.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tháng", " " }));
+        cboTimKiem11.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Tháng", " " }));
         cboTimKiem11.setMinimumSize(new java.awt.Dimension(138, 35));
 
         cboTimKiem12.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        cboTimKiem12.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Năm" }));
+        cboTimKiem12.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Năm" }));
         cboTimKiem12.setMinimumSize(new java.awt.Dimension(138, 35));
 
         javax.swing.GroupLayout QuanLyNhanVien3Layout = new javax.swing.GroupLayout(QuanLyNhanVien3);
@@ -532,7 +532,7 @@ public class HomeJFrame extends javax.swing.JFrame {
         jLabel26.setText("BÁO CÁO THỐNG KÊ");
 
         cboTimKiem5.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        cboTimKiem5.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Xe nhập vào", "Xe bán ra" }));
+        cboTimKiem5.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Xe nhập vào", "Xe bán ra" }));
         cboTimKiem5.setMinimumSize(new java.awt.Dimension(138, 35));
 
         jTextField9.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -560,11 +560,11 @@ public class HomeJFrame extends javax.swing.JFrame {
         jLabel27.setText("Xe nhập vào bán ra của từng nhân viên");
 
         cboTimKiem7.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        cboTimKiem7.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tháng", " " }));
+        cboTimKiem7.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Tháng", " " }));
         cboTimKiem7.setMinimumSize(new java.awt.Dimension(138, 35));
 
         cboTimKiem8.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        cboTimKiem8.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Năm" }));
+        cboTimKiem8.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Năm" }));
         cboTimKiem8.setMinimumSize(new java.awt.Dimension(138, 35));
 
         javax.swing.GroupLayout QuanLyNhanVien1Layout = new javax.swing.GroupLayout(QuanLyNhanVien1);
@@ -751,7 +751,7 @@ public class HomeJFrame extends javax.swing.JFrame {
             jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel16Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel36, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)
+                .addComponent(jLabel36, javax.swing.GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -786,7 +786,7 @@ public class HomeJFrame extends javax.swing.JFrame {
             jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel17Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel37, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)
+                .addComponent(jLabel37, javax.swing.GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -903,11 +903,11 @@ public class HomeJFrame extends javax.swing.JFrame {
         jLabel39.setText("Xe bán chạy nhất");
 
         cboTimKiem13.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        cboTimKiem13.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tháng", " " }));
+        cboTimKiem13.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Tháng", " " }));
         cboTimKiem13.setMinimumSize(new java.awt.Dimension(138, 35));
 
         cboTimKiem14.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        cboTimKiem14.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Năm" }));
+        cboTimKiem14.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Năm" }));
         cboTimKiem14.setMinimumSize(new java.awt.Dimension(138, 35));
 
         javax.swing.GroupLayout QuanLyNhanVien4Layout = new javax.swing.GroupLayout(QuanLyNhanVien4);
@@ -1005,11 +1005,11 @@ public class HomeJFrame extends javax.swing.JFrame {
         jLabel30.setText("Xe bán ra của từng cửa hàng");
 
         cboTimKiem9.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        cboTimKiem9.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tháng", " " }));
+        cboTimKiem9.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Tháng", " " }));
         cboTimKiem9.setMinimumSize(new java.awt.Dimension(138, 35));
 
         cboTimKiem10.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        cboTimKiem10.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Năm" }));
+        cboTimKiem10.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Năm" }));
         cboTimKiem10.setMinimumSize(new java.awt.Dimension(138, 35));
 
         javax.swing.GroupLayout QuanLyNhanVien2Layout = new javax.swing.GroupLayout(QuanLyNhanVien2);
@@ -1187,7 +1187,7 @@ public class HomeJFrame extends javax.swing.JFrame {
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel8Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)
+                .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -1222,7 +1222,7 @@ public class HomeJFrame extends javax.swing.JFrame {
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel9Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel14, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)
+                .addComponent(jLabel14, javax.swing.GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -1628,7 +1628,7 @@ public class HomeJFrame extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(main, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+            .addComponent(main, javax.swing.GroupLayout.DEFAULT_SIZE, 0, Short.MAX_VALUE)
             .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
@@ -1938,18 +1938,6 @@ public class HomeJFrame extends javax.swing.JFrame {
         jPanel16.setBackground(new Color(34, 146, 129));
     }//GEN-LAST:event_jPanel16MouseExited
 
-    private void jPanel17MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel17MouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jPanel17MouseClicked
-
-    private void jPanel17MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel17MouseEntered
-        jPanel17.setBackground(new Color(34, 150, 181));
-    }//GEN-LAST:event_jPanel17MouseEntered
-
-    private void jPanel17MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel17MouseExited
-        jPanel17.setBackground(new Color(34, 146, 129));
-    }//GEN-LAST:event_jPanel17MouseExited
-
     private void jPanel18MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel18MouseClicked
         // TODO add your handling code here:
     }//GEN-LAST:event_jPanel18MouseClicked
@@ -2030,6 +2018,18 @@ public class HomeJFrame extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_jLabel6MouseClicked
+
+    private void jPanel17MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel17MouseExited
+        jPanel17.setBackground(new Color(34, 146, 129));
+    }//GEN-LAST:event_jPanel17MouseExited
+
+    private void jPanel17MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel17MouseEntered
+        jPanel17.setBackground(new Color(34, 150, 181));
+    }//GEN-LAST:event_jPanel17MouseEntered
+
+    private void jPanel17MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel17MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jPanel17MouseClicked
 
     /**
      * @param args the command line arguments

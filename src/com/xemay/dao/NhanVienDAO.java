@@ -38,11 +38,11 @@ public class NhanVienDAO {
         return select(sql);
     }
     public List<NhanVien> findName(String key){
-        String sql = "select * from NhanVien where HoTen like N'%"+key+"%'";
+        String sql = "select * from NhanVien where HoTen like N'%"+key+"%' and Kt=1";
         return select(sql);
     }
     public List<NhanVien> findMaNV(String key){
-        String sql = "select * from NhanVien where MaNV like N'%"+key+"%'";
+        String sql = "select * from NhanVien where MaNV like N'%"+key+"%' and Kt=1";
         return select(sql);
     }
     public void delete(String maTK) {
