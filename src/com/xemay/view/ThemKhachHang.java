@@ -9,6 +9,7 @@ import com.xemay.dao.KhachHangDao;
 import com.xemay.dao.TaiKhoanDAO;
 import com.xemay.model.KhachHang;
 import com.xemay.model.TaiKhoan;
+import com.xemay.utils.CheckLoi;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
@@ -31,7 +32,7 @@ public class ThemKhachHang extends javax.swing.JDialog {
         initComponents();
         setLocationRelativeTo(null);
     }
-        KhachHangDao dao = new KhachHangDao();
+    KhachHangDao dao = new KhachHangDao();
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -241,31 +242,53 @@ public class ThemKhachHang extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtMaTKActionPerformed
 
-     TaiKhoan mdTk(){
+    TaiKhoan mdTk() {
         TaiKhoan mdTk = new TaiKhoan();
         mdTk.setMaTk(txtMaTK.getText());
         mdTk.setMatKhau("123");
         mdTk.setVaiTro("Khách hàng");
         return mdTk;
     }
-     void themKH(){
-        try {
-            if (checkMaTK()==true){
-                tk.insert(mdTk());
-                dao.insert(model());
-                JOptionPane.showMessageDialog(this, "thêm khách hàng thành công!");
-            }else{
-                JOptionPane.showMessageDialog(this, "Mã tài khoản đã có người sử dụng!");
+
+    private boolean check() {
+        boolean ok = true;
+        StringBuilder bd = new StringBuilder();
+        CheckLoi.checkRong(txtMaKH, bd, "Mã khách hàng chưa nhập\n");
+        CheckLoi.checkRong(txtMaTK, bd, "Mã tài khoản chưa nhập\n");
+        CheckLoi.checkRong(txtTenKH, bd, "Tên khách hàng chưa nhập\n");
+        CheckLoi.checkRong(txtDiaChi, bd, "Địa chỉ chưa nhập\n");
+        CheckLoi.checkEmail(txtEmail, bd);
+        CheckLoi.checkSoDienThoai(txtSoDienThoai, bd);
+        if (bd.length() > 0) {
+            JOptionPane.showMessageDialog(this, bd.toString(), "Thông báo",
+                    JOptionPane.ERROR_MESSAGE);
+            ok = false;
+        }
+        return ok;
+    }
+
+    void themKH() {
+        if (check()) {
+            try {
+                if (checkMaTK() == true) {
+                    tk.insert(mdTk());
+                    dao.insert(model());
+                    JOptionPane.showMessageDialog(this, "thêm khách hàng thành công!");
+                } else {
+                    JOptionPane.showMessageDialog(this, "Mã tài khoản đã có người sử dụng!", "Thông báo",
+                    JOptionPane.ERROR_MESSAGE);
+                }
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(this, "Mã khách hàng đã có trong danh sách!" + e.toString());
             }
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Mã khách hàng đã có trong danh sách!"+e.toString());
         }
     }
     TaiKhoanDAO tk = new TaiKhoanDAO();
-    boolean checkMaTK(){
-        List <TaiKhoan> checkma = tk.findMaTK(txtMaTK.getText());
+
+    boolean checkMaTK() {
+        List<TaiKhoan> checkma = tk.findMaTK(txtMaTK.getText());
         boolean kt = true;
-        if (checkma.size()==1){
+        if (checkma.size() == 1) {
             kt = false;
         }
         return kt;
@@ -284,14 +307,18 @@ public class ThemKhachHang extends javax.swing.JDialog {
     }
 
     void capNhat() {
-        KhachHangDao kh = new KhachHangDao();
-        try {
-            kh.update(model());
-            JOptionPane.showMessageDialog(this, "Cập nhật khách hàng thành công");
-        } catch (Exception e) {
-           JOptionPane.showMessageDialog(this, "Cập nhật khách hàng không thành công");
+        if (check()) {
+            KhachHangDao kh = new KhachHangDao();
+            try {
+                kh.update(model());
+                JOptionPane.showMessageDialog(this, "Cập nhật khách hàng thành công");
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(this, "Cập nhật khách hàng không thành công", "Thông báo",
+                JOptionPane.ERROR_MESSAGE);
+            }
         }
     }
+
     /**
      * @param args the command line arguments
      */

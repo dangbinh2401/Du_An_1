@@ -292,9 +292,10 @@ public class ThemNhanVien extends javax.swing.JDialog {
                 if (checkMaTK() == true) {
                     tk.insert(mdTk());
                     dao.insert(model());
-                    JOptionPane.showMessageDialog(this, "thêm nhân viên thành công!");
+                    JOptionPane.showMessageDialog(this, "Thêm nhân viên thành công!");
                 } else {
-                    JOptionPane.showMessageDialog(this, "Mã tài khoản đã có người sử dụng!");
+                    JOptionPane.showMessageDialog(this,"Mã tài khoản đã có người sử dụng!","Thông báo",
+                    JOptionPane.ERROR_MESSAGE);
                 }
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(this, "Mã nhân viên đã có trong danh sách!" + e.toString());
@@ -331,7 +332,8 @@ public class ThemNhanVien extends javax.swing.JDialog {
                 dao.update(model());
                 JOptionPane.showMessageDialog(this, "Chỉnh sửa thành công !");
             } catch (Exception e) {
-                JOptionPane.showMessageDialog(this, "Chỉnh sửa thất bại");
+                JOptionPane.showMessageDialog(this,"Chỉnh sửa thất bại","Thông báo",
+                    JOptionPane.ERROR_MESSAGE);
             }
         }
     }
