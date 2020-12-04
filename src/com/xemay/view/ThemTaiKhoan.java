@@ -7,6 +7,7 @@ package com.xemay.view;
 
 import com.xemay.dao.TaiKhoanDAO;
 import com.xemay.model.TaiKhoan;
+import com.xemay.utils.CheckLoi;
 import javax.swing.JOptionPane;
 
 /**
@@ -127,37 +128,58 @@ public class ThemTaiKhoan extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
-        if (btnThem.getText().equals("Thêm")){
+        if (btnThem.getText().equals("Thêm")) {
             this.them();
-        }else{
+        } else {
             this.chinhSua();
         }
     }//GEN-LAST:event_btnThemActionPerformed
-  TaiKhoanDAO  tk = new TaiKhoanDAO();
-    void them(){
-        try {
-            tk.insert(model());
-            JOptionPane.showMessageDialog(this, "thêm tài khoản thành công !");
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "thêm tài khoản thất bại !");
+    TaiKhoanDAO tk = new TaiKhoanDAO();
+
+    private boolean check(){
+        boolean ok = true;
+        StringBuilder bd = new StringBuilder();
+        CheckLoi.checkRong(txtMaTK, bd,"Mã chưa nhập\n");
+        CheckLoi.checkRong(txtMatKhau, bd,"Mật khẩu chưa nhập\n");
+        CheckLoi.checkRong(txtVaiTro, bd,"Vai trò chưa nhập\n");
+        if (bd.length() > 0) {
+            JOptionPane.showMessageDialog(this,bd.toString(),"Thông báo",
+                    JOptionPane.ERROR_MESSAGE);
+            ok = false;
         }
+        return ok;
     }
     
-    void chinhSua(){
-        try {
-            tk.update(model());
-            JOptionPane.showMessageDialog(this, "cập nhật tài khoản thành công !");
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "cập nhật tài khoản thất bại !");
+    void them() {
+        if (check()) {
+            try {
+            tk.insert(model());
+            JOptionPane.showMessageDialog(this, "Thêm tài khoản thành công !");
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(this, "Thêm tài khoản thất bại !");
+            }
         }
     }
-    TaiKhoan model(){
+
+    void chinhSua() {
+        if (check()) {
+            try {
+            tk.update(model());
+            JOptionPane.showMessageDialog(this, "Cập nhật tài khoản thành công !");
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(this, "Cập nhật tài khoản thất bại !");
+            }
+        }
+    }
+
+    TaiKhoan model() {
         TaiKhoan model = new TaiKhoan();
         model.setMaTk(txtMaTK.getText());
         model.setMatKhau(txtMatKhau.getText());
         model.setVaiTro(txtVaiTro.getText());
         return model;
     }
+
     /**
      * @param args the command line arguments
      */

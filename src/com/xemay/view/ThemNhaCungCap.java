@@ -148,7 +148,8 @@ public class ThemNhaCungCap extends javax.swing.JDialog {
          }
     }//GEN-LAST:event_btnThemNccActionPerformed
 
-    public void themMoiNcc(){
+    private boolean check(){
+        boolean ok = true;
         StringBuilder bd = new StringBuilder();
         CheckLoi.checkRong(txtMaNcc, bd,"Mã nhà cung cấp chưa nhập\n");
         CheckLoi.checkRong(txtTenNcc, bd,"Tên nhà cung cấp chưa nhập\n");
@@ -158,21 +159,27 @@ public class ThemNhaCungCap extends javax.swing.JDialog {
         if (bd.length() > 0) {
             JOptionPane.showMessageDialog(this,bd.toString(),"Thông báo",
                     JOptionPane.ERROR_MESSAGE);
-            return;
+            ok = false;
         }
-        NhaCungCapDAO dao = new NhaCungCapDAO();
-        if (dao.selectByIdTxt(txtMaNcc.getText()) != null) {
-            JOptionPane.showMessageDialog(this,"Mã đã tồn tại","Thông báo",
-                    JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-        try {
-            dao.insert(model());
-            JOptionPane.showMessageDialog(this,"Thêm thành công");                
-            
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(this,"Thêm thất bại","Thông báo",
-                    JOptionPane.ERROR_MESSAGE);
+        return ok;
+    }
+    
+    public void themMoiNcc(){
+        if (check()) {
+            NhaCungCapDAO dao = new NhaCungCapDAO();
+            if (dao.selectByIdTxt(txtMaNcc.getText()) != null) {
+                JOptionPane.showMessageDialog(this,"Mã đã tồn tại","Thông báo",
+                        JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            try {
+                dao.insert(model());
+                JOptionPane.showMessageDialog(this,"Thêm thành công");                
+
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(this,"Thêm thất bại","Thông báo",
+                        JOptionPane.ERROR_MESSAGE);
+            }
         }
     }
     
@@ -195,26 +202,17 @@ public class ThemNhaCungCap extends javax.swing.JDialog {
     }
     
     private void capNhatNcc(){
-        StringBuilder bd = new StringBuilder();
-        CheckLoi.checkRong(txtMaNcc, bd,"Mã nhà cung cấp chưa nhập\n");
-        CheckLoi.checkRong(txtTenNcc, bd,"Tên nhà cung cấp chưa nhập\n");
-        CheckLoi.checkRong(txtDiaChiNcc, bd,"Địa chỉ nhà cung cấp\n");
-        CheckLoi.checkSoDienThoai(txtSoDienThoaiNcc, bd);
-        CheckLoi.checkEmail(txtEmailNcc, bd);
-        if (bd.length() > 0) {
-            JOptionPane.showMessageDialog(this,bd.toString(),"Thông báo",
-                    JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-        NhaCungCapDAO dao = new NhaCungCapDAO();
-        try {
-            if (JOptionPane.showConfirmDialog(this,"Bạn có chắc chắn muốn cập nhật không")== JOptionPane.YES_OPTION) {
-                dao.update(model());
-                JOptionPane.showMessageDialog(this,"Cập nhật thành công");
+        if (check()) {
+            NhaCungCapDAO dao = new NhaCungCapDAO();
+            try {
+                if (JOptionPane.showConfirmDialog(this,"Bạn có chắc chắn muốn cập nhật không")== JOptionPane.YES_OPTION) {
+                    dao.update(model());
+                    JOptionPane.showMessageDialog(this,"Cập nhật thành công");
+                }
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(this,"Thông báo","Cập nhật thành công",
+                        JOptionPane.ERROR_MESSAGE);
             }
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(this,"Thông báo","Cập nhật thành công",
-                    JOptionPane.ERROR_MESSAGE);
         }
     }
     /**

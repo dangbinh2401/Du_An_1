@@ -33,7 +33,7 @@ public class CheckLoi {
     
     public static boolean checkTien(JTextField txt, StringBuilder bd){
         boolean ok = true;
-        if (!checkRong(txt, bd,"Tiền chưa nhập")) {
+        if (!checkRong(txt, bd,"Tiền chưa nhập\n")) {
             return false;
         }
         try {
@@ -56,7 +56,7 @@ public class CheckLoi {
     public static boolean checkEmail(JTextField txt, StringBuilder bd) {
         boolean ok = true;
         //kiểm tra email đã nhập chưa
-        if (!checkRong(txt, bd, "Email chưa nhập")) {
+        if (!checkRong(txt, bd, "Email chưa nhập\n")) {
             return false;
         }
         //khai báo biến email
@@ -78,14 +78,14 @@ public class CheckLoi {
     
     public static boolean checkSoDienThoai(JTextField txt, StringBuilder bd) {
         boolean ok = true;
-        if (!checkRong(txt, bd, "Số điện thoại chưa nhập")) {
+        if (!checkRong(txt, bd, "Số điện thoại chưa nhập\n")) {
         return false;
         }
         String soDienThoai = txt.getText();
         Pattern pattern = Pattern.compile("^0\\d{9}$");//biểu thức chính quy theo khôn mẫu
         Matcher matcher = pattern.matcher(txt.getText());
         if (!matcher.find()) {
-            bd.append("Số điện thoại không đúng định dạng(vd: 0*********)\n");
+            bd.append("Số điện thoại không đúng định dạng.Số điện thoại phải 10 số(vd: 0*********)\n");
             txt.setBackground(Color.yellow);
             txt.requestFocus();
             ok = false;
@@ -98,7 +98,7 @@ public class CheckLoi {
     
     public static boolean checkNgaySinh(JTextField txt, StringBuilder bd){
         boolean ok = true;
-        if (!checkRong(txt, bd,"Ngày chưa nhập")) {
+        if (!checkRong(txt, bd,"Ngày chưa nhập\n")) {
             return false;
         }
         SimpleDateFormat date = new SimpleDateFormat();
