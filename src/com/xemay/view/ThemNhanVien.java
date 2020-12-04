@@ -28,32 +28,34 @@ public class ThemNhanVien extends javax.swing.JDialog {
      */
     public ThemNhanVien(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
-                try {
+        try {
             UIManager.setLookAndFeel("com.jtattoo.plaf.smart.SmartLookAndFeel");
         } catch (Exception ex) {
         }
         initComponents();
         setLocationRelativeTo(null);
         fillMaCH();
-                        List<NhanVien> data=dao.select();
+        List<NhanVien> data = dao.select();
         String s;
-        if (data.size()-1<0){
-            s="0";
-        }else{
-            s=data.get(data.size()-1).getMaNV();
+        if (data.size() - 1 < 0) {
+            s = "0";
+        } else {
+            s = data.get(data.size() - 1).getMaNV();
         }
         txtMaNhanVien.setText(ShareHelper.getMaXe("NV", s));
-        txtMaNhanVien.disable(); 
+        txtMaNhanVien.disable();
     }
     NhanVienDAO dao = new NhanVienDAO();
-    void fillMaCH(){
+
+    void fillMaCH() {
         CuaHangDAO dao = new CuaHangDAO();
-        List <CuaHang> list = dao.select();
+        List<CuaHang> list = dao.select();
         cboMaCuaHang.removeAllItems();
         for (CuaHang cuaHang : list) {
             cboMaCuaHang.addItem(cuaHang.getMaCh());
         }
     }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -254,44 +256,63 @@ public class ThemNhanVien extends javax.swing.JDialog {
     }//GEN-LAST:event_cboMaCuaHangActionPerformed
 
     private void btnThemNVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemNVActionPerformed
-        if(btnThemNV.getText().equals("Thêm nhân viên")){
+        if (btnThemNV.getText().equals("Thêm nhân viên")) {
             this.themNV();
-        }else{
+        } else {
             this.chinhSuaNV();
         }
     }//GEN-LAST:event_btnThemNVActionPerformed
-    TaiKhoan mdTk(){
+    TaiKhoan mdTk() {
         TaiKhoan mdTk = new TaiKhoan();
         mdTk.setMaTk(txtMaTaiKhoan.getText());
         mdTk.setMatKhau("123");
         mdTk.setVaiTro("NhanVien");
         return mdTk;
     }
-    void themNV(){
+
+    Boolean check() {
+        Boolean check = true;
         StringBuilder bd = new StringBuilder();
-        CheckLoi.checkRong(txtMaNhanVien,bd,"Mã nhân viên chưa nhập");
-        try {
-            if (checkMaTK()==true){
-                tk.insert(mdTk());
-                dao.insert(model());
-                JOptionPane.showMessageDialog(this, "thêm nhân viên thành công!");
-            }else{
-                JOptionPane.showMessageDialog(this, "Mã tài khoản đã có người sử dụng!");
+        CheckLoi.checkRong(txtMaNhanVien, bd, "Mã nhân viên chưa nhập\n");
+        CheckLoi.checkRong(txtHoTen, bd, "Họ tên nhân viên chưa nhập\n");
+        CheckLoi.checkRong(txtDiaChi, bd, "Địa chỉ nhân viên chưa nhập\n");
+        CheckLoi.checkSoDienThoai(txtSoDienThoai, bd);
+        CheckLoi.checkEmail(txtEmail, bd);
+        if (bd.length() > 0) {
+            JOptionPane.showMessageDialog(this, bd.toString(), "Thông báo",
+                    JOptionPane.ERROR_MESSAGE);
+            check = false;
+        }
+        return check;
+    }
+
+    void themNV() {
+        if (check()) {
+            try {
+                if (checkMaTK() == true) {
+                    tk.insert(mdTk());
+                    dao.insert(model());
+                    JOptionPane.showMessageDialog(this, "thêm nhân viên thành công!");
+                } else {
+                    JOptionPane.showMessageDialog(this, "Mã tài khoản đã có người sử dụng!");
+                }
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(this, "Mã nhân viên đã có trong danh sách!" + e.toString());
             }
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Mã nhân viên đã có trong danh sách!"+e.toString());
         }
     }
     TaiKhoanDAO tk = new TaiKhoanDAO();
-    boolean checkMaTK(){
-        List <TaiKhoan> checkma = tk.findMaTK(txtMaTaiKhoan.getText());
+
+    boolean checkMaTK() {
+        List<TaiKhoan> checkma = tk.findMaTK(txtMaTaiKhoan.getText());
         boolean kt = true;
-        if (checkma.size()==1){
+        if (checkma.size() == 1) {
             kt = false;
         }
         return kt;
     }
-    NhanVien model(){
+
+    NhanVien model() {
         NhanVien model = new NhanVien();
         model.setMaNV(txtMaNhanVien.getText());
         model.setHoTen(txtHoTen.getText());
@@ -303,16 +324,18 @@ public class ThemNhanVien extends javax.swing.JDialog {
         model.setMaTK(txtMaTaiKhoan.getText());
         return model;
     }
-    
-    void chinhSuaNV(){
-        try {
-            dao.update(model());
-            JOptionPane.showMessageDialog(this, "Chỉnh sửa thành công !");
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Chỉnh sửa thất bại");
-            
+
+    void chinhSuaNV() {
+        if (check()) {
+            try {
+                dao.update(model());
+                JOptionPane.showMessageDialog(this, "Chỉnh sửa thành công !");
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(this, "Chỉnh sửa thất bại");
+            }
         }
     }
+
     /**
      * @param args the command line arguments
      */

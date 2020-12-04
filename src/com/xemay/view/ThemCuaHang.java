@@ -9,6 +9,7 @@ package com.xemay.view;
 import com.xemay.dao.CuaHangDAO;
 import com.xemay.helper.ShareHelper;
 import com.xemay.model.CuaHang;
+import com.xemay.utils.CheckLoi;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
@@ -194,13 +195,30 @@ public class ThemCuaHang extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_btnThemCuaHangActionPerformed
     
+    private boolean check(){
+        boolean ok = true;
+        StringBuilder bd = new StringBuilder();
+        CheckLoi.checkRong(txtTenCuaHang, bd,"Tên cửa hàng chưa nhập\n");
+        CheckLoi.checkRong(txtDiaChi, bd,"Địa chỉ chưa nhập\n");
+        CheckLoi.checkSoDienThoai(txtSoDienThoai, bd);
+        CheckLoi.checkEmail(txtEmail, bd);
+        if (bd.length() > 0) {
+            JOptionPane.showMessageDialog(this,bd.toString(),"Thông báo",
+                    JOptionPane.ERROR_MESSAGE);
+            ok = false;
+        }
+        return ok;
+    }
+    
     void themMoiCH(){
-        CuaHangDAO ch = new CuaHangDAO();
-        try {
-            ch.insert(model());
-            JOptionPane.showMessageDialog(this, "Thêm cửa hàng thành công");
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Thêm thất bại");
+        if (check()) {
+            CuaHangDAO ch = new CuaHangDAO();
+            try {
+                ch.insert(model());
+                JOptionPane.showMessageDialog(this, "Thêm cửa hàng thành công");
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(this, "Thêm thất bại");
+            }
         }
     }
     CuaHang model(){
@@ -214,12 +232,14 @@ public class ThemCuaHang extends javax.swing.JDialog {
     }
     
     void capNhat(){
-        CuaHangDAO ch = new CuaHangDAO();
-        try {
-            ch.update(model());
-            JOptionPane.showMessageDialog(this, "cập nhật cửa hàng thành công");
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "cập nhật thất bại");
+        if (check()) {
+            CuaHangDAO ch = new CuaHangDAO();
+            try {
+                ch.update(model());
+                JOptionPane.showMessageDialog(this, "cập nhật cửa hàng thành công");
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(this, "cập nhật thất bại");
+            }
         }
     }
     /**
