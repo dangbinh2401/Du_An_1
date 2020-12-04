@@ -153,8 +153,8 @@ public class ThemNhaCungCap extends javax.swing.JDialog {
         CheckLoi.checkRong(txtMaNcc, bd,"Mã nhà cung cấp chưa nhập\n");
         CheckLoi.checkRong(txtTenNcc, bd,"Tên nhà cung cấp chưa nhập\n");
         CheckLoi.checkRong(txtDiaChiNcc, bd,"Địa chỉ nhà cung cấp\n");
-        CheckLoi.checkRong(txtSoDienThoaiNcc, bd,"Số điện thoại chưa nhập\n");
-        CheckLoi.checkRong(txtEmailNcc, bd,"Email chưa nhập\n");
+        CheckLoi.checkSoDienThoai(txtSoDienThoaiNcc, bd);
+        CheckLoi.checkEmail(txtEmailNcc, bd);
         if (bd.length() > 0) {
             JOptionPane.showMessageDialog(this,bd.toString(),"Thông báo",
                     JOptionPane.ERROR_MESSAGE);
@@ -199,8 +199,8 @@ public class ThemNhaCungCap extends javax.swing.JDialog {
         CheckLoi.checkRong(txtMaNcc, bd,"Mã nhà cung cấp chưa nhập\n");
         CheckLoi.checkRong(txtTenNcc, bd,"Tên nhà cung cấp chưa nhập\n");
         CheckLoi.checkRong(txtDiaChiNcc, bd,"Địa chỉ nhà cung cấp\n");
-        CheckLoi.checkRong(txtSoDienThoaiNcc, bd,"Số điện thoại chưa nhập\n");
-        CheckLoi.checkRong(txtEmailNcc, bd,"Email chưa nhập\n");
+        CheckLoi.checkSoDienThoai(txtSoDienThoaiNcc, bd);
+        CheckLoi.checkEmail(txtEmailNcc, bd);
         if (bd.length() > 0) {
             JOptionPane.showMessageDialog(this,bd.toString(),"Thông báo",
                     JOptionPane.ERROR_MESSAGE);

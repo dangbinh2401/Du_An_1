@@ -46,8 +46,8 @@ public class ShareHelper {
 //    }
     public static String getMa(String Ma,String X){
                String rs = Ma+X;
-       while (rs.length()!=10){
-           if (rs.length()<10){
+       while (rs.length()!=7){
+           if (rs.length()<7){
                X = "0"+X;
            }else{
                X = X.substring(1, X.length());

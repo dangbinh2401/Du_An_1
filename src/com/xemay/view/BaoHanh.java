@@ -122,6 +122,8 @@ public class BaoHanh extends javax.swing.JDialog {
     }
     
     public void themBaoHanh() {
+        StringBuilder bd = new StringBuilder();
+        
         if (bhDao.selectByIdTimKiem(txtMaBaoHanh.getText()) != null) {
             JOptionPane.showMessageDialog(this,"Mã đã tồn tại","Thông báo",
                     JOptionPane.ERROR_MESSAGE);
@@ -335,8 +337,8 @@ public class BaoHanh extends javax.swing.JDialog {
                     .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(30, 30, 30)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtHoTenKH, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE)
-                    .addComponent(jLabel3)
+                    .addComponent(txtHoTenKH, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(22, 22, 22)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
