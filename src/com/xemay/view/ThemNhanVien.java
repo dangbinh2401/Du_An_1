@@ -12,6 +12,7 @@ import com.xemay.helper.ShareHelper;
 import com.xemay.model.CuaHang;
 import com.xemay.model.NhanVien;
 import com.xemay.model.TaiKhoan;
+import com.xemay.utils.CheckLoi;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
@@ -139,6 +140,7 @@ public class ThemNhanVien extends javax.swing.JDialog {
         rdoNam.setBackground(new java.awt.Color(255, 255, 255));
         btgrGioiTinh.add(rdoNam);
         rdoNam.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        rdoNam.setSelected(true);
         rdoNam.setText("Nam");
 
         rdoNu.setBackground(new java.awt.Color(255, 255, 255));
@@ -266,6 +268,8 @@ public class ThemNhanVien extends javax.swing.JDialog {
         return mdTk;
     }
     void themNV(){
+        StringBuilder bd = new StringBuilder();
+        CheckLoi.checkRong(txtMaNhanVien,bd,"Mã nhân viên chưa nhập");
         try {
             if (checkMaTK()==true){
                 tk.insert(mdTk());
