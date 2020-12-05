@@ -9,6 +9,7 @@ import com.xemay.dao.ChiTietHoaDonNhapDAO;
 import com.xemay.dao.ChiTietHoaDonXuatDAO;
 import com.xemay.model.ChiTietHDN;
 import com.xemay.model.ChiTietHdx;
+import com.xemay.utils.CheckLoi;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -52,6 +53,18 @@ public class ChiTietHoaDonNhap extends javax.swing.JDialog {
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "lỗi truy vẫn dữ liệu");
         }
+    }
+    
+    private boolean check(){
+        boolean ok = true;
+        StringBuilder bd = new StringBuilder();
+        CheckLoi.checkNgayNhap(txtNgayNhap, bd);
+        if (bd.length()>0) {
+            JOptionPane.showMessageDialog(this,bd.toString(),"Thông báo",
+                    JOptionPane.ERROR_MESSAGE);
+            ok = false;
+        }
+        return ok;
     }
 
     /**
@@ -281,11 +294,13 @@ public class ChiTietHoaDonNhap extends javax.swing.JDialog {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void btnThemMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnThemMouseClicked
-        ThemChiTietHoaDonNhap them = new ThemChiTietHoaDonNhap(null,true);
-        them.txtMaHDN.setText(txtMaHDN.getText());
-        them.txtMaHDN.disable();
-        them.show();
-        fillToTable();
+        if (check()) {
+            ThemChiTietHoaDonNhap them = new ThemChiTietHoaDonNhap(null,true);
+            them.txtMaHDN.setText(txtMaHDN.getText());
+            them.txtMaHDN.disable();
+            them.show();
+            fillToTable();    
+        }
     }//GEN-LAST:event_btnThemMouseClicked
 
     private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed

@@ -154,4 +154,21 @@ public class CheckLoi {
         }
         return ok;
     }
+    
+    public static boolean checkNgayNhap(JTextField txt, StringBuilder bd){
+        boolean ok = true;
+        if (!checkRong(txt, bd,"Ngày chưa nhập\n")) {
+            return false;
+        }
+        SimpleDateFormat date = new SimpleDateFormat();
+        date.applyPattern("yyyy-MM-dd");
+        try {
+            Date dob = date.parse(txt.getText());
+            txt.setBackground(Color.white);
+        } catch (Exception e) {
+            bd.append("Ngày nhập không đúng định dạng (vd: 1999/01/01)\n");
+            txt.setBackground(Color.yellow);
+        }
+        return ok;
+    }
 }

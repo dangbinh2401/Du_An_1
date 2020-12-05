@@ -6,6 +6,7 @@ import com.xemay.dao.NhaCungCapDAO;
 import com.xemay.helper.ShareHelper;
 import com.xemay.model.HoaDonNhap;
 import com.xemay.model.NhaCungCap;
+import com.xemay.utils.CheckLoi;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.SimpleDateFormat;
@@ -236,43 +237,63 @@ public class ThemHoaDonNhap extends javax.swing.JDialog {
             this.capNhat();
         } 
     }//GEN-LAST:event_btnThemActionPerformed
-        HoaDonNhap model(){
-            HoaDonNhap model = new HoaDonNhap();
-            model.setMaHDN(txtMaHDN.getText());
-            model.setMaNV(txtMaNV.getText());
-            model.setMaNCC(cboMaNCC.getSelectedItem().toString());
-            SimpleDateFormat Ngay = new SimpleDateFormat("yyyy-MM-dd");
-            try {
-                 model.setNgayNhap(chuyenNgay(Ngay.parse(txtNgayNhap.getText())));
-            } catch (Exception e) {
-                JOptionPane.showConfirmDialog(this, "ngày không đúng định dạng");
-            }
-            return model;
+    HoaDonNhap model(){
+        HoaDonNhap model = new HoaDonNhap();
+        model.setMaHDN(txtMaHDN.getText());
+        model.setMaNV(txtMaNV.getText());
+        model.setMaNCC(cboMaNCC.getSelectedItem().toString());
+        SimpleDateFormat Ngay = new SimpleDateFormat("yyyy-MM-dd");
+        try {
+             model.setNgayNhap(chuyenNgay(Ngay.parse(txtNgayNhap.getText())));
+        } catch (Exception e) {
+            JOptionPane.showConfirmDialog(this, "ngày không đúng định dạng");
         }
-        private static java.sql.Date chuyenNgay(java.util.Date date){
-        java.sql.Date sqlDate=new java.sql.Date(date.getTime());
-        return sqlDate;
+        return model;
     }
+    private static java.sql.Date chuyenNgay(java.util.Date date){
+    java.sql.Date sqlDate=new java.sql.Date(date.getTime());
+    return sqlDate;
+    }
+    
+    private boolean check(){
+        boolean ok = true;
+        StringBuilder bd = new StringBuilder();
+        CheckLoi.checkRong(txtMaNV, bd,"Mã nhân viên chưa nhập\n");
+        CheckLoi.checkNgayNhap(txtNgayNhap, bd);
+        if (bd.length() >0) {
+            JOptionPane.showMessageDialog(this,bd.toString(),"Thông báo",
+                    JOptionPane.ERROR_MESSAGE);
+            ok=false;
+        }
+        return ok;
+    }
+    
     Boolean kt= false;
-        void them(){
+    void them(){
+        if (check()) {
             try {
                 dao.insert(model());
-                JOptionPane.showMessageDialog(this, "thêm hóa đơn thành công!");
+                JOptionPane.showMessageDialog(this, "Thêm hóa đơn thành công!");
                 kt=true;
             } catch (Exception e) {
-                JOptionPane.showMessageDialog(this, "thêm hóa đơn không thành công!");
-            }
+                JOptionPane.showMessageDialog(this,"Thêm hóa đơn không thành công!","Thông báo",
+                    JOptionPane.ERROR_MESSAGE);
+            }   
         }
-        
-        void capNhat(){
+    }
+
+    void capNhat(){
+        if (check()) {
             try {
                 dao.update(model());
-                JOptionPane.showMessageDialog(this, "cập nhật hóa đơn thành công!");
+                JOptionPane.showMessageDialog(this, "Cập nhật hóa đơn thành công!");
                 kt=true;
             } catch (Exception e) {
-                JOptionPane.showMessageDialog(this, "cập nhật hóa đơn không thành công!");
-            }
+                JOptionPane.showMessageDialog(this,"Cập nhật hóa đơn không thành công!","Thông báo",
+                    JOptionPane.ERROR_MESSAGE);
+            }   
         }
+    }
     /**
      * @param args the command line arguments
      */

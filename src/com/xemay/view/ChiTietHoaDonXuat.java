@@ -7,6 +7,7 @@ package com.xemay.view;
 
 import com.xemay.dao.ChiTietHoaDonXuatDAO;
 import com.xemay.model.ChiTietHdx;
+import com.xemay.utils.CheckLoi;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -52,6 +53,18 @@ public class ChiTietHoaDonXuat extends javax.swing.JDialog {
         }
     }
 
+    private boolean check(){
+        boolean ok = true;
+        StringBuilder bd = new StringBuilder();
+        CheckLoi.checkNgayNhap(txtNgayXuat, bd);
+        if (bd.length()>0) {
+            JOptionPane.showMessageDialog(this,bd.toString(),"Thông báo",
+                    JOptionPane.ERROR_MESSAGE);
+            ok = false;
+        }
+        return ok;
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -100,6 +113,11 @@ public class ChiTietHoaDonXuat extends javax.swing.JDialog {
         jButton3.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jButton3MouseClicked(evt);
+            }
+        });
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
             }
         });
 
@@ -252,11 +270,13 @@ public class ChiTietHoaDonXuat extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MouseClicked
-        ThemChiTietHoaDonXuat themct = new ThemChiTietHoaDonXuat(null, true);
-        themct.txtMaHDX.setText(txtMaHDX.getText());
-        themct.txtMaHDX.disable();
-        themct.show();
-        fillToTable();
+        if (check()) {
+            ThemChiTietHoaDonXuat themct = new ThemChiTietHoaDonXuat(null, true);
+            themct.txtMaHDX.setText(txtMaHDX.getText());
+            themct.txtMaHDX.disable();
+            themct.show();
+            fillToTable();
+        }
     }//GEN-LAST:event_jButton3MouseClicked
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -291,6 +311,10 @@ public class ChiTietHoaDonXuat extends javax.swing.JDialog {
         }
         
     }//GEN-LAST:event_btnXoaActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
      * @param args the command line arguments
