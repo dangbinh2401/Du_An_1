@@ -156,7 +156,8 @@ public class ThemTaiKhoan extends javax.swing.JDialog {
             tk.insert(model());
             JOptionPane.showMessageDialog(this, "Thêm tài khoản thành công !");
             } catch (Exception e) {
-                JOptionPane.showMessageDialog(this, "Thêm tài khoản thất bại !");
+                JOptionPane.showMessageDialog(this,"Thêm tài khoản thất bại !","Thông báo",
+                    JOptionPane.ERROR_MESSAGE);
             }
         }
     }
@@ -167,7 +168,8 @@ public class ThemTaiKhoan extends javax.swing.JDialog {
             tk.update(model());
             JOptionPane.showMessageDialog(this, "Cập nhật tài khoản thành công !");
             } catch (Exception e) {
-                JOptionPane.showMessageDialog(this, "Cập nhật tài khoản thất bại !");
+                JOptionPane.showMessageDialog(this,"Cập nhật tài khoản thất bại !","Thông báo",
+                    JOptionPane.ERROR_MESSAGE);
             }
         }
     }

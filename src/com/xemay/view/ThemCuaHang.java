@@ -217,7 +217,8 @@ public class ThemCuaHang extends javax.swing.JDialog {
                 ch.insert(model());
                 JOptionPane.showMessageDialog(this, "Thêm cửa hàng thành công");
             } catch (Exception e) {
-                JOptionPane.showMessageDialog(this, "Thêm thất bại");
+                JOptionPane.showMessageDialog(this,"Thêm thất bại","Thông báo",
+                    JOptionPane.ERROR_MESSAGE);
             }
         }
     }
@@ -238,7 +239,8 @@ public class ThemCuaHang extends javax.swing.JDialog {
                 ch.update(model());
                 JOptionPane.showMessageDialog(this, "cập nhật cửa hàng thành công");
             } catch (Exception e) {
-                JOptionPane.showMessageDialog(this, "cập nhật thất bại");
+                JOptionPane.showMessageDialog(this,"cập nhật thất bại","Thông báo",
+                    JOptionPane.ERROR_MESSAGE);
             }
         }
     }

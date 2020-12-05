@@ -12,6 +12,7 @@ import com.xemay.dao.XeDAO;
 import com.xemay.model.CuaHang;
 import com.xemay.model.LoaiXe;
 import com.xemay.model.Xe;
+import com.xemay.utils.CheckLoi;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
@@ -295,23 +296,46 @@ public class ThemMoiXe extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_btnThemActionPerformed
 
+    private boolean check(){
+        boolean ok = true;
+        StringBuilder bd = new StringBuilder();
+        CheckLoi.checkRong(txtMaXe, bd,"Mã xe chưa nhập\n");
+        CheckLoi.checkRong(txtTenXe, bd,"Tên xe chưa nhập\n");
+        CheckLoi.checkNam(txtNamSanXuat1, bd);
+        CheckLoi.checkSo(txtSoKhung, bd,"Số khung chưa nhập\n","Số khung");
+        CheckLoi.checkSo(txtDungTich, bd,"Dung tích chưa nhập\n","Dung tích");
+        CheckLoi.checkTien(txtGiaTien, bd);
+        CheckLoi.checkSo(txtSoLuong, bd,"Số lượng chưa nhập\n","Số lượng");
+        CheckLoi.checkSo(txtThoiGianBaoHanh, bd,"Thời gian bảo hành chưa nhập\n","Thời gian bảo hành");
+        if (bd.length() >0) {
+            JOptionPane.showMessageDialog(this,bd.toString(),"Thông báo",
+                    JOptionPane.ERROR_MESSAGE);
+            ok = false;
+        }
+        return ok;
+    }
+    
     void them() {
-        try {
+        if (check()) {
+            try {
             dao.insert(model());
             JOptionPane.showMessageDialog(this, "Thêm mới thành công ");
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Thêm mới thất bại");
-
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(this,"Thêm mới thất bại","Thông báo",
+                        JOptionPane.ERROR_MESSAGE);
+            }
         }
     }
 
     void capNhat() {
-        try {
+        if (check()) {
+            try {
             dao.update(model());
             JOptionPane.showMessageDialog(this, "Chỉnh sửa thành công !");
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Chỉnh sửa thất bại");
-
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(this,"Chỉnh sửa thất bại","Thông báo",
+                            JOptionPane.ERROR_MESSAGE);
+            }
         }
     }
 

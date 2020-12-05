@@ -53,6 +53,28 @@ public class CheckLoi {
         return ok;
     }
     
+    public static boolean checkSo(JTextField txt, StringBuilder bd,String mess,String ten){
+        boolean ok = true;
+        if (!checkRong(txt, bd,mess)) {
+            return false;
+        }
+        try {
+            float so = Integer.parseInt(txt.getText());
+            if (so < 0) {
+                bd.append(ten+" phải lớn hơn 0\n");
+                txt.setBackground(Color.yellow);
+                txt.requestFocus();
+                ok = false;
+            }
+        } catch (Exception e) {
+            bd.append(ten +" không được ký tự khác.Phải là số\n");
+            txt.setBackground(Color.yellow);
+            txt.requestFocus();
+            ok = false;
+        }
+        return ok;
+    }
+    
     public static boolean checkEmail(JTextField txt, StringBuilder bd) {
         boolean ok = true;
         //kiểm tra email đã nhập chưa
@@ -95,6 +117,26 @@ public class CheckLoi {
         }
         return ok;
     } 
+    
+    public static boolean checkNam(JTextField txt, StringBuilder bd){
+        boolean ok = true;
+        if (!checkRong(txt, bd, "Năm sản xuất chưa nhập\n")) {
+        return false;
+        }
+        String namSX = txt.getText();
+        Pattern pattern = Pattern.compile("^\\d{4}$");//biểu thức chính quy theo khôn mẫu
+        Matcher matcher = pattern.matcher(namSX);
+        if (!matcher.find()) {
+            bd.append("Năm sản xuất không đúng định dạng. Năm sản xuất có 4 số (vd: 1999)\n");
+            txt.setBackground(Color.yellow);
+            txt.requestFocus();
+            ok = false;
+        }
+        if (ok) {
+            txt.setBackground(Color.white);
+        }
+        return ok;
+    }
     
     public static boolean checkNgaySinh(JTextField txt, StringBuilder bd){
         boolean ok = true;
