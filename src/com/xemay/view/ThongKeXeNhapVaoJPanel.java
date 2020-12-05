@@ -37,6 +37,8 @@ public class ThongKeXeNhapVaoJPanel extends javax.swing.JPanel {
         cboTimKiem4 = new javax.swing.JComboBox<String>();
         cboTimKiem5 = new javax.swing.JComboBox<String>();
 
+        setBackground(new java.awt.Color(255, 255, 255));
+
         QuanLyCuaHang.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel11.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
