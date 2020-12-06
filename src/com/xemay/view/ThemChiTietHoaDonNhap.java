@@ -10,6 +10,7 @@ import com.xemay.dao.XeDAO;
 import com.xemay.model.ChiTietHDN;
 import com.xemay.model.HoaDonNhap;
 import com.xemay.model.Xe;
+import com.xemay.utils.CheckLoi;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.DecimalFormat;
@@ -252,20 +253,39 @@ public class ThemChiTietHoaDonNhap extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_btnThemActionPerformed
     
+    private boolean check(){
+        boolean ok = true;
+        StringBuilder bd = new StringBuilder();
+        CheckLoi.checkSo(txtSoLuong, bd,"Số lượng chưa nhập\n","Số lượng");
+        CheckLoi.checkSo(txtGiaTien, bd,"Giá tiền chưa nhập\n","Giá tền");
+        if (bd.length()>0) {
+            JOptionPane.showMessageDialog(this,bd.toString(),"Thông báo",
+                    JOptionPane.ERROR_MESSAGE);
+            ok=false;
+        }
+        return ok;
+    }
+    
     void them(){
-        try {
-            dao.insert(model());
-            JOptionPane.showMessageDialog(this, "thêm sản phẩm thành công!");
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "thêm sản phẩm thất bại!");
+        if (check()) {
+            try {
+                dao.insert(model());
+                JOptionPane.showMessageDialog(this, "Thêm sản phẩm thành công!");
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(this,"Thêm sản phẩm thất bại!","Thông báo",
+                        JOptionPane.ERROR_MESSAGE);
+            }   
         }
     }
     void chinhSua(){
-        try {
-            dao.update(model());
-            JOptionPane.showMessageDialog(this, "chỉnh sửa sản phẩm thành công!");
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "chỉnh sửa sản phẩm thất bại!"+e);
+        if (check()) {
+            try {
+                dao.update(model());
+                JOptionPane.showMessageDialog(this, "Chỉnh sửa sản phẩm thành công!");
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(this,"Chỉnh sửa sản phẩm thất bại!"+e,"Thông báo",
+                        JOptionPane.ERROR_MESSAGE);
+            }   
         }
     }
     ChiTietHDN model(){

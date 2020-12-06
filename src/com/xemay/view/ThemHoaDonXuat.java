@@ -10,6 +10,7 @@ import com.xemay.dao.KhachHangDao;
 import com.xemay.helper.ShareHelper;
 import com.xemay.model.HoaDonXuat;
 import com.xemay.model.KhachHang;
+import com.xemay.utils.CheckLoi;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.SimpleDateFormat;
@@ -264,21 +265,17 @@ public class ThemHoaDonXuat extends javax.swing.JDialog {
     KhachHangDao dataKH = new KhachHangDao();
     List<KhachHang> list;
     Boolean check(){
-        Boolean check=true;
-        
-        if (txtMaHDX.getText().equals("")){
-            JOptionPane.showMessageDialog(this, "Mã hóa đơn xuất không được để trống!");
-            check = false;
-        }else
-        if(txtMaNV.getText().equals("")){
-            JOptionPane.showMessageDialog(this, "Mã nhân viên không được để trống!");
-            check = false;
-        }else
-        if(txtNgayXuat.getText().equals("")){
-            JOptionPane.showMessageDialog(this, "Ngày sinh không được để trống!");
-            check = false;
+        boolean ok = true;
+        StringBuilder bd = new StringBuilder();
+        CheckLoi.checkRong(txtMaHDX, bd,"Mã hóa đơn xuất không được để trống!\n");
+        CheckLoi.checkRong(txtMaNV, bd,"Mã nhân viên không được để trống!\n");
+        CheckLoi.checkNgayNhap(txtNgayXuat, bd);
+        if (bd.length() >0) {
+            JOptionPane.showMessageDialog(this,bd.toString(),"Thông báo",
+                    JOptionPane.ERROR_MESSAGE);
+            ok = false;
         }
-        return check;
+        return ok;  
     }
     
     void fillToKH() {
@@ -310,12 +307,15 @@ public class ThemHoaDonXuat extends javax.swing.JDialog {
     }//GEN-LAST:event_btnThemActionPerformed
 
     void ChinhSua(){
-        try {
-            dao.update(model());
-            JOptionPane.showMessageDialog(this, "chỉnh sửa hóa đơn thành công");
-            kt=true;
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "chỉnh sửa hóa đơn thất bại ");
+        if (check()) {
+            try {
+                dao.update(model());
+                JOptionPane.showMessageDialog(this, "Chỉnh sửa hóa đơn thành công");
+                kt=true;
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(this,"Chỉnh sửa hóa đơn thất bại","Thông báo",
+                    JOptionPane.ERROR_MESSAGE);
+            }
         }
     }
     private void btnChiTietActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChiTietActionPerformed
@@ -347,10 +347,11 @@ public class ThemHoaDonXuat extends javax.swing.JDialog {
     void themHoaDonXuat(){
         try {
             dao.insert(model());
-            JOptionPane.showMessageDialog(this, "thêm hóa đơn thành công");
+            JOptionPane.showMessageDialog(this, "Thêm hóa đơn thành công");
             kt=true;
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "thêm hóa đơn thất bại "+e);
+            JOptionPane.showMessageDialog(this,"Thêm hóa đơn thất bại "+e,"Thông báo",
+                    JOptionPane.ERROR_MESSAGE);
         }
     }
     

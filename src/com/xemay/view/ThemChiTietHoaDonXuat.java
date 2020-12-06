@@ -10,6 +10,7 @@ import com.xemay.dao.ChiTietHoaDonXuatDAO;
 import com.xemay.dao.XeDAO;
 import com.xemay.model.ChiTietHdx;
 import com.xemay.model.Xe;
+import com.xemay.utils.CheckLoi;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
@@ -218,24 +219,41 @@ public class ThemChiTietHoaDonXuat extends javax.swing.JDialog {
              this.chinhSuaCTHD();
          }
     }//GEN-LAST:event_btnThemXeActionPerformed
+    
+    private boolean check(){
+        boolean ok = true;
+        StringBuilder bd = new StringBuilder();
+        CheckLoi.checkSo(txtSoLuong, bd,"Số lượng chưa nhập\n","Số lượng");
+        if (bd.length()>0) {
+            JOptionPane.showMessageDialog(this,bd.toString(),"Thông báo",
+                    JOptionPane.ERROR_MESSAGE);
+            ok=false;
+        }
+        return ok;
+    }
+    
     ChiTietHoaDonXuatDAO dao = new ChiTietHoaDonXuatDAO();
     void themCTHD(){
-        try {
-            dao.insert(model());
-            JOptionPane.showMessageDialog(this, "Thêm thành công");
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Thêm thất bại");
+        if (check()) {
+            try {
+                dao.insert(model());
+                JOptionPane.showMessageDialog(this, "Thêm thành công");
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(this,"Thêm thất bại","Thông báo",
+                        JOptionPane.ERROR_MESSAGE);
+            }
         }
- 
     }
     void chinhSuaCTHD(){
-        try {
-            dao.update(model());
-            JOptionPane.showMessageDialog(this, "Chỉnh sửa thành công");
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Chỉnh sửa thất bại");
+        if (check()) {
+            try {
+                dao.update(model());
+                JOptionPane.showMessageDialog(this, "Chỉnh sửa thành công");
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(this,"Chỉnh sửa thất bại","Thông báo",
+                        JOptionPane.ERROR_MESSAGE);
+            }   
         }
- 
     }
     
     ChiTietHdx model(){
