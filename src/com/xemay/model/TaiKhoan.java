@@ -15,10 +15,20 @@ public class TaiKhoan {
     private String MatKhau;
     private String VaiTro;
     private String HoTen;
+    private String Email;
+    
     public TaiKhoan(String MaTk, String MatKhau, String VaiTro) {
         this.MaTk = MaTk;
         this.MatKhau = MatKhau;
         this.VaiTro = VaiTro;
+    }
+
+    public String getEmail() {
+        return Email;
+    }
+
+    public void setEmail(String Email) {
+        this.Email = Email;
     }
 
     public String getHoTen() {

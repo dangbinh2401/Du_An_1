@@ -30,6 +30,7 @@ public class HomeJFrame extends javax.swing.JFrame {
         initComponents();
         main.removeAll();
         this.setLocationRelativeTo(null);
+        System.out.println(ShareHelper.TaiKhoan.getHoTen());
 
     }
 
@@ -1618,7 +1619,7 @@ public class HomeJFrame extends javax.swing.JFrame {
 
     private void btnTinNhanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTinNhanMouseClicked
         main.removeAll();
-        main.add(new TinNhan());
+        main.add(new TinNhanJpanel());
         main.repaint();
         main.revalidate();
         pnQuanLy.setBackground(null);
