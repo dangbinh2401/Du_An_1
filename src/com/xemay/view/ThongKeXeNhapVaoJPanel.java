@@ -319,12 +319,12 @@ public class ThongKeXeNhapVaoJPanel extends javax.swing.JPanel {
         Comparator<ThongKeXeNV> sortMaCH = new Comparator<ThongKeXeNV>() {
             @Override
             public int compare(ThongKeXeNV s1, ThongKeXeNV s2) {
-                return s1.getTenCH().toUpperCase().compareTo(s2.getTenCH().toUpperCase());
+                return String.valueOf(s2.getSoLuong()).compareTo(String.valueOf(s1.getSoLuong()));
             }
         };
         if (btnSapXep.getText().equals("Sắp xếp theo tên xe")) {
             Collections.sort(list, sortName);
-            btnSapXep.setText("Sắp xếp theo tên cửa hàng ");
+            btnSapXep.setText("Sắp xếp theo số lượng ");
         } else {
             Collections.sort(list, sortMaCH);
             btnSapXep.setText("Sắp xếp theo tên xe");
