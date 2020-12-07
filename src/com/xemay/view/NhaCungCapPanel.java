@@ -143,11 +143,22 @@ public class NhaCungCapPanel extends javax.swing.JPanel {
             new String [] {
                 "STT", "Mã Nhà Cung Cấp", "Tên Nhà Cung Cấp", "Số ĐIện Thoại", "Địa Chỉ", "Email"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         tblQuanLyNcc.setRowHeight(30);
         tblQuanLyNcc.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tblQuanLyNccMouseClicked(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                tblQuanLyNccMousePressed(evt);
             }
         });
         jScrollPane4.setViewportView(tblQuanLyNcc);
@@ -277,8 +288,7 @@ public class NhaCungCapPanel extends javax.swing.JPanel {
         themNcc.show();
         fillTable();
     }//GEN-LAST:event_btnThemActionPerformed
-
-    private void btnCapNhatNccActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCapNhatNccActionPerformed
+    void chinhSua(){
         int index = tblQuanLyNcc.getSelectedRow();
         if (index == -1) {
             JOptionPane.showMessageDialog(this,"Hãy chọn 1 dòng rồi ấn nút xóa","Thông báo",
@@ -291,6 +301,9 @@ public class NhaCungCapPanel extends javax.swing.JPanel {
             themNCCDialog.show();
             fillTable();
         }
+    }
+    private void btnCapNhatNccActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCapNhatNccActionPerformed
+        this.chinhSua();
     }//GEN-LAST:event_btnCapNhatNccActionPerformed
 
     private void tblQuanLyNccMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblQuanLyNccMouseClicked
@@ -364,6 +377,24 @@ public class NhaCungCapPanel extends javax.swing.JPanel {
             this.timKiemTheoMa();
         }
     }//GEN-LAST:event_jButton17ActionPerformed
+
+    private void tblQuanLyNccMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblQuanLyNccMousePressed
+        if (evt.getX() == x & evt.getY() == y) {
+            kt = 1;
+        } else {
+            x = evt.getX();
+            y = evt.getY();
+        }
+        if (kt == 1) {
+            this.chinhSua();
+            kt = 0;
+            x = 0;
+            y = 0;
+        }
+    }//GEN-LAST:event_tblQuanLyNccMousePressed
+    int kt = 0;
+    int x = 0;
+    int y = 0;
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

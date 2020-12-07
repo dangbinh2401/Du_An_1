@@ -43,7 +43,7 @@ public class TinNhanJpanel extends javax.swing.JPanel {
 //        for (TinNhan tinNhan : list) {
 //            tpnChat.setText(tpnChat.getText()+tinNhan.getMaNguoiGui()+" : "+tinNhan.getNoiDung()+ "\n");
 //        }
-        JOptionPane.showMessageDialog(this, USER);
+//        JOptionPane.showMessageDialog(this, USER);
         load();
         Thread t = new Thread(new Loader());
 		t.start();
@@ -99,7 +99,9 @@ public class TinNhanJpanel extends javax.swing.JPanel {
         cboUser.removeAllItems();
         System.out.println(dataTK.size());
         for (TaiKhoan taiKhoan : dataTK) {
-            cboUser.addItem(taiKhoan.getMaTk());
+            if(!taiKhoan.getMaTk().equals(USER)){
+                cboUser.addItem(taiKhoan.getMaTk());
+            }
         }
         if(dataTK.size()>0){
             txtTenNguoiGui.setText(dataTK.get(0).getHoTen());

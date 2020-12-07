@@ -140,6 +140,11 @@ public class NhapHangPanel extends javax.swing.JPanel {
             }
         });
         tblHoaDonNhap.setRowHeight(30);
+        tblHoaDonNhap.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                tblHoaDonNhapMousePressed(evt);
+            }
+        });
         jScrollPane2.setViewportView(tblHoaDonNhap);
 
         jButton9.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -255,8 +260,7 @@ public class NhapHangPanel extends javax.swing.JPanel {
         list = dao.selectAll();
         fillToTable(list);
     }//GEN-LAST:event_jButton12ActionPerformed
-
-    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
+    void xemCTHD(){
         int i=tblHoaDonNhap.getSelectedRow();
         if(i!=-1){
             ChiTietHoaDonNhap ct = new ChiTietHoaDonNhap(null, true);
@@ -276,6 +280,9 @@ public class NhapHangPanel extends javax.swing.JPanel {
         }else{
             JOptionPane.showMessageDialog(this, "Vui lòng chọn hóa đơn cần xem");
         }
+    }
+    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
+        this.xemCTHD();
     }//GEN-LAST:event_jButton8ActionPerformed
 
     private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
@@ -337,6 +344,26 @@ public class NhapHangPanel extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, "Vui lòng chọn hóa đơn cần xóa!");
         }
     }//GEN-LAST:event_jButton9ActionPerformed
+
+    private void tblHoaDonNhapMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblHoaDonNhapMousePressed
+        
+if (evt.getX() == x & evt.getY() == y) {
+            kt = 1;
+        } else {
+            x = evt.getX();
+            y = evt.getY();
+        }
+        if (kt == 1) {
+            this.xemCTHD();
+            kt = 0;
+            x = 0;
+            y = 0;
+        }
+
+    }//GEN-LAST:event_tblHoaDonNhapMousePressed
+int kt = 0;
+    int x = 0;
+    int y = 0;
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

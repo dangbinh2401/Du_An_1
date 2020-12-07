@@ -181,6 +181,11 @@ public class BanHangPanel extends javax.swing.JPanel {
             }
         });
         tblHoaDonXuat.setRowHeight(30);
+        tblHoaDonXuat.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                tblHoaDonXuatMousePressed(evt);
+            }
+        });
         jScrollPane1.setViewportView(tblHoaDonXuat);
 
         javax.swing.GroupLayout BanHangLayout = new javax.swing.GroupLayout(BanHang);
@@ -257,8 +262,7 @@ public class BanHangPanel extends javax.swing.JPanel {
         list = dao.selectAll();
         fillToTable(list);
     }//GEN-LAST:event_jButton3MouseClicked
-
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+    void XemCTHD(){
         int i = tblHoaDonXuat.getSelectedRow();
         if (i != -1) {
             ChiTietHoaDonXuat ct = new ChiTietHoaDonXuat(null, true);
@@ -278,6 +282,9 @@ public class BanHangPanel extends javax.swing.JPanel {
         } else {
             JOptionPane.showMessageDialog(this, "Vui lòng chọn hóa đơn cần xem");
         }
+    }
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        this.XemCTHD();
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
@@ -350,6 +357,24 @@ public class BanHangPanel extends javax.swing.JPanel {
         fillToTable(list);
     }//GEN-LAST:event_btnSapXepActionPerformed
 
+    private void tblHoaDonXuatMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblHoaDonXuatMousePressed
+        if (evt.getX() == x & evt.getY() == y) {
+            kt = 1;
+        } else {
+            x = evt.getX();
+            y = evt.getY();
+        }
+        if (kt == 1) {
+            XemCTHD();
+            kt = 0;
+            x = 0;
+            y = 0;
+        }
+    }//GEN-LAST:event_tblHoaDonXuatMousePressed
+
+ int kt = 0;
+    int x = 0;
+    int y = 0;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel BanHang;
     private javax.swing.JButton btnSapXep;
