@@ -27,7 +27,7 @@ public class NhanVienDAO {
     }
     public List<NhanVien> select() {
         String sql = "SELECT * FROM NhanVien where Kt=1";
-        return select(sql);
+        return selectt(sql);
     }
     public List<NhanVien> select(String MaCH) {
         String sql = "SELECT * FROM NhanVien a inner join CuaHang b on a.MaCH = b.MaCH where a.Kt=1 and b.MaCH = ?";
@@ -71,6 +71,24 @@ public class NhanVienDAO {
 
     }
     private List<NhanVien> select(String sql, Object... args) {
+        List<NhanVien> list = new ArrayList<>();
+        try {
+            ResultSet rs = null;
+            try {
+                rs = JdbcHelper.executeQuery(sql, args);
+                while (rs.next()) {
+                    NhanVien model = readFromResultSet(rs);
+                    list.add(model);
+                }
+            } finally {
+                rs.getStatement().getConnection().close();
+            }
+        } catch (SQLException ex) {
+            throw new RuntimeException(ex);
+        }
+        return list;
+    }
+        private List<NhanVien> selectt(String sql, Object... args) {
         List<NhanVien> list = new ArrayList<>();
         try {
             ResultSet rs = null;
