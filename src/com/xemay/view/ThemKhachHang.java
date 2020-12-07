@@ -63,7 +63,7 @@ public class ThemKhachHang extends javax.swing.JDialog {
         rdoNu = new javax.swing.JRadioButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Cửa hàng");
+        setTitle("Thêm khách hàng");
         setBackground(new java.awt.Color(255, 255, 255));
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
