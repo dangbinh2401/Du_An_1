@@ -5,9 +5,8 @@
  */
 package com.xemay.view;
 
-
-
 import com.xemay.dao.TaiKhoanDAO;
+import com.xemay.helper.ShareHelper;
 
 import com.xemay.model.TaiKhoan;
 import java.util.Collections;
@@ -23,14 +22,14 @@ import javax.swing.table.DefaultTableModel;
  * @author Admin
  */
 public class QuanLyTaiKhoanJPanel extends javax.swing.JPanel {
-
-    /**
-     * Creates new form quanLyTaiKhoanJPanel
-     */
+    public String VaiTro = ShareHelper.TaiKhoan.getVaiTro();
+    public String MaCH = ShareHelper.TaiKhoan.getMaCH();
+    public String MaNV = ShareHelper.TaiKhoan.getMaNV();
     public QuanLyTaiKhoanJPanel() {
         initComponents();
-        fillToTable();
-                txtTimKiem.getDocument().addDocumentListener(new DocumentListener() {
+        list=select();
+        fillToTable(list);
+        txtTimKiem.getDocument().addDocumentListener(new DocumentListener() {
             @Override
             public void insertUpdate(DocumentEvent de) {
                 timKiem();
@@ -47,53 +46,54 @@ public class QuanLyTaiKhoanJPanel extends javax.swing.JPanel {
             }
         });
     }
-        void timKiem(){
-         DefaultTableModel model = (DefaultTableModel) tblTaiKhoan.getModel(); 
-        model.setRowCount(0); 
-        try { 
-            list = dao.findkey(txtTimKiem.getText()); 
-            int i = 1;
-            for (TaiKhoan ch : list) { 
-                Object[] row = { 
-                    i
-                    ,ch.getMaTk(), 
-                    ch.getHoTen(), 
-                    ch.getMatKhau(), 
-                    ch.getVaiTro(), 
-                }; 
-                model.addRow(row); 
-                i++;
-            } 
-        }  
-        catch (Exception e) { 
-            JOptionPane.showMessageDialog(this, "lỗi truy vẫn dữ liệu"+e);
+
+    void timKiem() {
+        
+        try {
+            if(VaiTro.equals("GiamDoc")){
+                list = dao.findkey(txtTimKiem.getText());
+            }else{
+                list = dao.findkey(txtTimKiem.getText(),MaCH);
+            }
+            fillToTable(list);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "lỗi truy vẫn dữ liệu" + e);
         }
     }
-        TaiKhoanDAO dao = new TaiKhoanDAO(); 
+    TaiKhoanDAO dao = new TaiKhoanDAO();
     List<TaiKhoan> list;
-        void fillToTable(){
-        DefaultTableModel model = (DefaultTableModel) tblTaiKhoan.getModel(); 
-        model.setRowCount(0); 
-        try { 
-            list = dao.selectAll(); 
+
+    List<TaiKhoan> select() {
+        List<TaiKhoan> temp = null;
+        if (VaiTro.equals("GiamDoc")) {
+            temp = dao.selectAll();
+        }else{
+            temp = dao.selectAll(MaCH);
+        }
+        return temp;
+    }
+    void fillToTable(List<TaiKhoan> list) {
+        DefaultTableModel model = (DefaultTableModel) tblTaiKhoan.getModel();
+        model.setRowCount(0);
+        try {
+            //list = dao.selectAll(); 
             int i = 1;
-            for (TaiKhoan ch : list) { 
-                Object[] row = { 
-                    i
-                    ,ch.getMaTk(), 
-                    ch.getHoTen(), 
-                    ch.getMatKhau(), 
-                    ch.getVaiTro(), 
-                }; 
-                model.addRow(row); 
+            for (TaiKhoan ch : list) {
+                Object[] row = {
+                    i,
+                     ch.getMaTk(),
+                    ch.getHoTen(),
+                    ch.getMatKhau(),
+                    ch.getVaiTro(),};
+                model.addRow(row);
                 i++;
-            } 
-        }  
-        catch (Exception e) { 
-            JOptionPane.showMessageDialog(this, "lỗi truy vẫn dữ liệu"+e);
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "lỗi truy vẫn dữ liệu" + e);
         }
     }
-    void fillChinhSua(){
+
+    void fillChinhSua() {
         ThemTaiKhoan cs = new ThemTaiKhoan(null, true);
         cs.btnThem.setText("Chỉnh sửa");
         int i = tblTaiKhoan.getSelectedRow();
@@ -102,11 +102,13 @@ public class QuanLyTaiKhoanJPanel extends javax.swing.JPanel {
             cs.txtMatKhau.setText(list.get(i).getMatKhau());
             cs.txtVaiTro.setText(list.get(i).getVaiTro());
             cs.show();
-            fillToTable();
+            list=select();
+            fillToTable(list);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "vui lòng chọn tài khoản hàng cần sửa");
         }
     }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -271,64 +273,63 @@ public class QuanLyTaiKhoanJPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void tblTaiKhoanMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblTaiKhoanMousePressed
-         if (evt.getX()==x & evt.getY()==y){
-            kt=1;
-        }else{
-            x=evt.getX();
-            y=evt.getY();
+        if (evt.getX() == x & evt.getY() == y) {
+            kt = 1;
+        } else {
+            x = evt.getX();
+            y = evt.getY();
         }
-        if (kt==1){
+        if (kt == 1) {
             fillChinhSua();
-            kt=0;
-            x=0;
-            y=0;
+            kt = 0;
+            x = 0;
+            y = 0;
         }
     }//GEN-LAST:event_tblTaiKhoanMousePressed
 
     private void jButton41ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton41ActionPerformed
         ThemTaiKhoan them = new ThemTaiKhoan(null, true);
         them.show();
-        fillToTable();
+        list=select();
+        fillToTable(list);
     }//GEN-LAST:event_jButton41ActionPerformed
 
     private void btnSapXepActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSapXepActionPerformed
-                    Comparator<TaiKhoan> sortName = new Comparator<TaiKhoan>() {
+        Comparator<TaiKhoan> sortName = new Comparator<TaiKhoan>() {
             @Override
             public int compare(TaiKhoan s1, TaiKhoan s2) {
                 return s1.getHoTen().compareTo(s2.getHoTen());
             }
-        };    
+        };
         Comparator<TaiKhoan> sortMaTK = new Comparator<TaiKhoan>() {
             @Override
             public int compare(TaiKhoan s1, TaiKhoan s2) {
                 return s1.getMaTk().compareTo(s2.getMaTk());
             }
-        };   
-        if(btnSapXep.getText().equals("Sắp xếp theo tên")){
-            Collections.sort(list,sortName);
+        };
+        if (btnSapXep.getText().equals("Sắp xếp theo tên")) {
+            Collections.sort(list, sortName);
             btnSapXep.setText("Sắp xếp theo mã");
-        }else{
-            Collections.sort(list,sortMaTK);
+        } else {
+            Collections.sort(list, sortMaTK);
             btnSapXep.setText("Sắp xếp theo tên");
         }
-        DefaultTableModel model = (DefaultTableModel) tblTaiKhoan.getModel(); 
-        model.setRowCount(0); 
-        try { 
+        DefaultTableModel model = (DefaultTableModel) tblTaiKhoan.getModel();
+        model.setRowCount(0);
+        try {
             int i = 1;
-            for (TaiKhoan ch : list) { 
-                Object[] row = { 
-                    i
-                    ,ch.getMaTk(), 
-                    ch.getHoTen(), 
-                    ch.getMatKhau(), 
-                    ch.getVaiTro(), 
-                }; 
-                model.addRow(row); 
+            for (TaiKhoan ch : list) {
+                Object[] row = {
+                    i,
+                     ch.getMaTk(),
+                    ch.getHoTen(),
+                    ch.getMatKhau(),
+                    ch.getVaiTro(),};
+                model.addRow(row);
                 i++;
-            } 
-        }  
-        catch (Exception e) { 
-            JOptionPane.showMessageDialog(this, "lỗi truy vẫn dữ liệu"+e);
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "lỗi truy vẫn dữ liệu" + e);
         }
     }//GEN-LAST:event_btnSapXepActionPerformed
 
@@ -340,21 +341,22 @@ public class QuanLyTaiKhoanJPanel extends javax.swing.JPanel {
         String tkk = JOptionPane.showInputDialog(this, "Nhập mã tài khoản: ", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
         int traloi = JOptionPane.showConfirmDialog(null, "Bạn có muốn xóa tài khoản có mã: " + tkk, "Yes/No", JOptionPane.YES_NO_CANCEL_OPTION);
         if (traloi == 0) {
-           TaiKhoanDAO tk= new TaiKhoanDAO();
+            TaiKhoanDAO tk = new TaiKhoanDAO();
             try {
                 tk.delete(tkk);
                 JOptionPane.showMessageDialog(this, "Xóa thành công");
-                fillToTable();
+                list=select();
+        fillToTable(list);
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(this, "Xóa thất bại");
             }
         }
-        
-        
+
+
     }//GEN-LAST:event_jButton43ActionPerformed
-    int x=0;
-    int y=0;
-    int kt=0;
+    int x = 0;
+    int y = 0;
+    int kt = 0;
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel QuanLyTaiKhoan;

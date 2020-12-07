@@ -6,6 +6,7 @@
 package com.xemay.view;
 
 import com.xemay.dao.NhanVienDAO;
+import com.xemay.helper.ShareHelper;
 import com.xemay.model.NhanVien;
 import java.util.Collections;
 import java.util.Comparator;
@@ -21,12 +22,14 @@ import javax.swing.table.DefaultTableModel;
  */
 public class NhanVienJPanel extends javax.swing.JPanel {
 
-    /**
-     * Creates new form nhanVienJPanel
-     */
+    public String VaiTro = ShareHelper.TaiKhoan.getVaiTro();
+    public String MaCH = ShareHelper.TaiKhoan.getMaCH();
+    public String MaNV = ShareHelper.TaiKhoan.getMaNV();
+
     public NhanVienJPanel() {
         initComponents();
-        fillToTable();
+        list = select();
+        fillToTable(list);
         txtTimKiem.getDocument().addDocumentListener(new DocumentListener() {
             @Override
             public void insertUpdate(DocumentEvent de) {
@@ -43,6 +46,16 @@ public class NhanVienJPanel extends javax.swing.JPanel {
                 timKiem();
             }
         });
+    }
+
+    List<NhanVien> select() {
+        List<NhanVien> temp = null;
+        if (VaiTro.equals("GiamDoc")) {
+            temp = dao.select();
+        } else {
+            temp = dao.select(MaCH);
+        }
+        return temp;
     }
 
     void fillChinhSua() {
@@ -67,14 +80,24 @@ public class NhanVienJPanel extends javax.swing.JPanel {
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "vui lòng chọn nhân viên hàng cần sửa");
         }
-        fillToTable();
+        list = select();
+        fillToTable(list);
     }
 
     void timKiem() {
         if (cboTimKiem2.getSelectedItem().toString().equals("Tìm kiếm theo tên")) {
-            list = dao.findName(txtTimKiem.getText());
+            if(VaiTro.equals("GiamDoc")){
+                list = dao.findName(txtTimKiem.getText());
+            }else{
+                list = dao.findName(txtTimKiem.getText(),MaCH);
+            }
         } else {
-            list = dao.findMaNV(txtTimKiem.getText());
+            
+            if(VaiTro.equals("GiamDoc")){
+                list = dao.findMaNV(txtTimKiem.getText());
+            }else{
+                list = dao.findMaNV(txtTimKiem.getText(),MaCH);
+            }
         }
         DefaultTableModel model = (DefaultTableModel) tblNhanVien.getModel();
         model.setRowCount(0);
@@ -100,11 +123,11 @@ public class NhanVienJPanel extends javax.swing.JPanel {
     NhanVienDAO dao = new NhanVienDAO();
     List<NhanVien> list;
 
-    void fillToTable() {
+    void fillToTable(List<NhanVien> list) {
         DefaultTableModel model = (DefaultTableModel) tblNhanVien.getModel();
         model.setRowCount(0);
         try {
-            list = dao.select();
+            //list = dao.select();
             int i = 1;
             for (NhanVien ch : list) {
                 String gt = "Nữ";
@@ -300,12 +323,14 @@ public class NhanVienJPanel extends javax.swing.JPanel {
     private void jButton31ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton31ActionPerformed
         ThemNhanVien themNV = new ThemNhanVien(null, true);
         themNV.show();
-        fillToTable();
+        list = select();
+        fillToTable(list);
     }//GEN-LAST:event_jButton31ActionPerformed
 
     private void jButton32ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton32ActionPerformed
         fillChinhSua();
-        fillToTable();
+        list = select();
+        fillToTable(list);
     }//GEN-LAST:event_jButton32ActionPerformed
 
     private void jButton29ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton29ActionPerformed
@@ -378,7 +403,8 @@ public class NhanVienJPanel extends javax.swing.JPanel {
                 try {
                     kh.delete(list.get(i).getMaTK());
                     JOptionPane.showMessageDialog(this, "Xóa thành công");
-                    fillToTable();
+                    list = select();
+                    fillToTable(list);
                 } catch (Exception e) {
                     JOptionPane.showMessageDialog(this, "Xóa thất bại");
                 }

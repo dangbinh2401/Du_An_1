@@ -6,6 +6,7 @@
 package com.xemay.view;
 
 import com.xemay.dao.HoaDonNhapDAO;
+import com.xemay.helper.ShareHelper;
 import com.xemay.model.HoaDonNhap;
 import com.xemay.model.HoaDonXuat;
 import java.awt.event.ActionEvent;
@@ -27,9 +28,12 @@ public class NhapHangPanel extends javax.swing.JPanel {
     /**
      * Creates new form nhapHangPanel
      */
+        public String VaiTro = ShareHelper.TaiKhoan.getVaiTro();
+    public String MaCH = ShareHelper.TaiKhoan.getMaCH();
+    public String MaNV = ShareHelper.TaiKhoan.getMaNV();
     public NhapHangPanel() {
         initComponents();
-        list=dao.selectAll();
+        list=select();
         fillToTable(list);
         txtTimKiem.getDocument().addDocumentListener(new DocumentListener() {
             @Override
@@ -57,12 +61,39 @@ public class NhapHangPanel extends javax.swing.JPanel {
             }
         });
     }
+    List<HoaDonNhap> select(){
+        List<HoaDonNhap> temp=null;
+        if (VaiTro.equals("GiamDoc")) {
+            temp = dao.selectAll();
+        }
+        if (VaiTro.equals("NhanVien")) {
+            temp = dao.selectAll(MaCH,MaNV);
+        }
+        if (VaiTro.equals("QuanLy")) {
+            temp = dao.selectAll(MaCH);
+        }
+        return temp;
+    }
     void timKiem(){
         if (cboTimKiem.getSelectedItem().toString().equals("Tìm kiếm theo tên nhân viên")) {
-            list = dao.findTenNV(txtTimKiem.getText());
+            if(VaiTro.equals("GiamDoc")){
+                list = dao.findTenNV(txtTimKiem.getText());
+            }
+            if(VaiTro.equals("QuanLy")){
+                list = dao.findTenNV(txtTimKiem.getText(),MaCH);    
+            }
         }
         if (cboTimKiem.getSelectedItem().toString().equals("Tìm kiếm theo Tên nhà cung cấp")) {
-            list = dao.findTenNCC(txtTimKiem.getText());
+            if(VaiTro.equals("GiamDoc")){
+                list = dao.findTenNCC(txtTimKiem.getText());
+            }
+            if(VaiTro.equals("NhanVien")){
+                list = dao.findTenNCC(txtTimKiem.getText(),MaCH,MaNV);
+            }
+            if(VaiTro.equals("QuanLy")){
+                list = dao.findTenNCC(txtTimKiem.getText(),MaCH);    
+            }
+            
         }
         fillToTable(list);
     }
@@ -257,7 +288,7 @@ public class NhapHangPanel extends javax.swing.JPanel {
     private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
         ThemHoaDonNhap themHDN = new ThemHoaDonNhap(null, true);
         themHDN.show();
-        list = dao.selectAll();
+        list = select();
         fillToTable(list);
     }//GEN-LAST:event_jButton12ActionPerformed
     void xemCTHD(){
@@ -275,7 +306,7 @@ public class NhapHangPanel extends javax.swing.JPanel {
             ct.txtNgayNhap.setText(list.get(i).getNgayNhap().toString());
             ct.fillToTable();
             ct.show();
-            list = dao.selectAll();
+            list = select();
             fillToTable(list);
         }else{
             JOptionPane.showMessageDialog(this, "Vui lòng chọn hóa đơn cần xem");
@@ -298,7 +329,7 @@ public class NhapHangPanel extends javax.swing.JPanel {
             cs.txtTenNCC.setText(list.get(i).getTenNCC());
             cs.txtNgayNhap.setText(list.get(i).getNgayNhap().toString());          
             cs.show();
-            list = dao.selectAll();
+            list = select();
             fillToTable(list);
         
         }else{
@@ -337,7 +368,7 @@ public class NhapHangPanel extends javax.swing.JPanel {
             if (JOptionPane.showConfirmDialog(this, "bạn có chắc muốn xóa hóa đơn này?")==0){
                 dao.delete(list.get(i).getMaHDN());
             JOptionPane.showMessageDialog(this, "Xóa thành công!");
-            list=dao.selectAll();
+            list=select();
             fillToTable(list);
             }
         }else{

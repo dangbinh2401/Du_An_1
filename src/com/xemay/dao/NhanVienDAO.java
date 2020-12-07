@@ -25,9 +25,13 @@ public class NhanVienDAO {
         String sql = "UPDATE NhanVien SET MaCH=?, HoTen=?, SoDienThoai=?, Email=?, GioiTinh=?, DiaChi=?, MaTK=? WHERE MaNV=?";
         JdbcHelper.executeUpdate(sql,model.getMaCH(),model.getHoTen(), model.getSdt(), model.getEmail(),model.getGioiTinh(),model.getDiaChi(),model.getMaTK(),model.getMaNV());
     }
-        public List<NhanVien> select() {
+    public List<NhanVien> select() {
         String sql = "SELECT * FROM NhanVien where Kt=1";
         return select(sql);
+    }
+    public List<NhanVien> select(String MaCH) {
+        String sql = "SELECT * FROM NhanVien a inner join CuaHang b on a.MaCH = b.MaCH where a.Kt=1 and b.MaCH = ?";
+        return select(sql,MaCH);
     }
     public List<NhanVien> selectMaCH(String MaCH) {
         String sql = "SELECT * FROM NhanVien where MaCH='"+MaCH+"'";
@@ -37,13 +41,25 @@ public class NhanVienDAO {
         String sql = "SELECT * FROM NhanVien where MaNV='"+MaNV+"'";
         return select(sql);
     }
+    public List<NhanVien> selectMaNV(String MaNV, String MaCH) {
+        String sql = "SELECT * FROM NhanVien a inner join CuaHang b on a.MaCH = b.MaCH where a.MaNV=? and b.MaCH = ?";
+        return select(sql,MaNV,MaCH);
+    }
     public List<NhanVien> findName(String key){
         String sql = "select * from NhanVien where HoTen like N'%"+key+"%' and Kt=1";
         return select(sql);
     }
+    public List<NhanVien> findName(String key,String MaCH){
+        String sql = "SELECT * FROM NhanVien a inner join CuaHang b on a.MaCH = b.MaCH where a.HoTen like N'%"+key+"%' and a.Kt=1 and b.MaCH=?";
+        return select(sql,MaCH);
+    }
     public List<NhanVien> findMaNV(String key){
         String sql = "select * from NhanVien where MaNV like N'%"+key+"%' and Kt=1";
         return select(sql);
+    }
+    public List<NhanVien> findMaNV(String key,String MaCH){
+        String sql = "SELECT * FROM NhanVien a inner join CuaHang b on a.MaCH = b.MaCH where a.MaNV like N'%"+key+"%' and a.Kt=1 and b.MaCH=?";
+        return select(sql,MaCH);
     }
     public void delete(String maTK) {
         try {

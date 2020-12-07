@@ -16,11 +16,47 @@ public class TaiKhoan {
     private String VaiTro;
     private String HoTen;
     private String Email;
-    
+    private String TenCH;
+    private String DiaChiCH;
+    private String MaCH;
+    private String MaNV;
     public TaiKhoan(String MaTk, String MatKhau, String VaiTro) {
         this.MaTk = MaTk;
         this.MatKhau = MatKhau;
         this.VaiTro = VaiTro;
+    }
+
+    public String getMaCH() {
+        return MaCH;
+    }
+
+    public String getMaNV() {
+        return MaNV;
+    }
+
+    public void setMaNV(String MaNV) {
+        this.MaNV = MaNV;
+    }
+    
+
+    public void setMaCH(String MaCH) {
+        this.MaCH = MaCH;
+    }
+
+    public String getTenCH() {
+        return TenCH;
+    }
+
+    public void setTenCH(String TenCH) {
+        this.TenCH = TenCH;
+    }
+
+    public String getDiaChiCH() {
+        return DiaChiCH;
+    }
+
+    public void setDiaChiCH(String DiaChiCH) {
+        this.DiaChiCH = DiaChiCH;
     }
 
     public String getEmail() {

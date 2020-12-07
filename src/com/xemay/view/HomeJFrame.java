@@ -11,6 +11,7 @@ import java.awt.Color;
 import java.awt.Desktop;
 import java.io.File;
 import java.io.IOException;
+import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 
 /**
@@ -19,9 +20,10 @@ import javax.swing.UIManager;
  */
 public class HomeJFrame extends javax.swing.JFrame {
 
-    /**
-     * Creates new form homeJFrame
-     */
+    public String VaiTro = ShareHelper.TaiKhoan.getVaiTro();
+    public String MaCH = ShareHelper.TaiKhoan.getMaCH();
+    public String MaNV = ShareHelper.TaiKhoan.getMaNV();
+
     public HomeJFrame() {
         try {
             UIManager.setLookAndFeel("com.jtattoo.plaf.smart.SmartLookAndFeel");
@@ -30,8 +32,25 @@ public class HomeJFrame extends javax.swing.JFrame {
         initComponents();
         main.removeAll();
         this.setLocationRelativeTo(null);
-        System.out.println(ShareHelper.TaiKhoan.getHoTen());
-
+        try {
+            lblTenCuaHang.setText(ShareHelper.TaiKhoan.getTenCH());
+            lblDiaChi.setText(ShareHelper.TaiKhoan.getDiaChiCH());
+            lblTenDangNhap.setText(MaNV);
+            if (VaiTro.equals("NhanVien")) {
+                lblVaiTro.setText("Nhân viên");
+            }
+            if (VaiTro.equals("QuanLy")) {
+                lblVaiTro.setText("Quản lý");
+            }
+            if (VaiTro.equals("GiamDoc")) {
+                lblVaiTro.setText("Giám đốc");
+            }
+            if (VaiTro.equals("KhachHang")) {
+                lblVaiTro.setText("Khách hàng");
+            }
+        } catch (Exception e) {
+            System.out.println("Vui lòng đăng nhập!");
+        }
     }
 
     /**
@@ -64,25 +83,25 @@ public class HomeJFrame extends javax.swing.JFrame {
         xeNhapBan_TungNV = new javax.swing.JPanel();
         QuanLyNhanVien3 = new javax.swing.JPanel();
         jLabel31 = new javax.swing.JLabel();
-        cboTimKiem6 = new javax.swing.JComboBox<String>();
+        cboTimKiem6 = new javax.swing.JComboBox<>();
         jTextField11 = new javax.swing.JTextField();
         jButton35 = new javax.swing.JButton();
         jScrollPane12 = new javax.swing.JScrollPane();
         jTable12 = new javax.swing.JTable();
         jLabel32 = new javax.swing.JLabel();
-        cboTimKiem11 = new javax.swing.JComboBox<String>();
-        cboTimKiem12 = new javax.swing.JComboBox<String>();
+        cboTimKiem11 = new javax.swing.JComboBox<>();
+        cboTimKiem12 = new javax.swing.JComboBox<>();
         BaoCaoThongKe = new javax.swing.JPanel();
         QuanLyNhanVien1 = new javax.swing.JPanel();
         jLabel26 = new javax.swing.JLabel();
-        cboTimKiem5 = new javax.swing.JComboBox<String>();
+        cboTimKiem5 = new javax.swing.JComboBox<>();
         jTextField9 = new javax.swing.JTextField();
         jButton33 = new javax.swing.JButton();
         jScrollPane10 = new javax.swing.JScrollPane();
         jTable10 = new javax.swing.JTable();
         jLabel27 = new javax.swing.JLabel();
-        cboTimKiem7 = new javax.swing.JComboBox<String>();
-        cboTimKiem8 = new javax.swing.JComboBox<String>();
+        cboTimKiem7 = new javax.swing.JComboBox<>();
+        cboTimKiem8 = new javax.swing.JComboBox<>();
         menuThongKe = new javax.swing.JPanel();
         jPanel14 = new javax.swing.JPanel();
         mnQLCH2 = new javax.swing.JPanel();
@@ -103,8 +122,8 @@ public class HomeJFrame extends javax.swing.JFrame {
         jScrollPane11 = new javax.swing.JScrollPane();
         jTable11 = new javax.swing.JTable();
         jLabel30 = new javax.swing.JLabel();
-        cboTimKiem9 = new javax.swing.JComboBox<String>();
-        cboTimKiem10 = new javax.swing.JComboBox<String>();
+        cboTimKiem9 = new javax.swing.JComboBox<>();
+        cboTimKiem10 = new javax.swing.JComboBox<>();
         menuQuanLy = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         mnQLCH = new javax.swing.JPanel();
@@ -131,7 +150,7 @@ public class HomeJFrame extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         lblTenDangNhap = new javax.swing.JLabel();
-        lblChiNhanh = new javax.swing.JLabel();
+        lblDiaChi = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         lblVaiTro = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
@@ -409,7 +428,7 @@ public class HomeJFrame extends javax.swing.JFrame {
         jLabel31.setText("BÁO CÁO THỐNG KÊ");
 
         cboTimKiem6.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        cboTimKiem6.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Xe nhập vào", "Xe bán ra" }));
+        cboTimKiem6.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Xe nhập vào", "Xe bán ra" }));
         cboTimKiem6.setMinimumSize(new java.awt.Dimension(138, 35));
 
         jTextField11.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -445,11 +464,11 @@ public class HomeJFrame extends javax.swing.JFrame {
         jLabel32.setText("Xe nhập vào bán ra của từng xe");
 
         cboTimKiem11.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        cboTimKiem11.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Tháng", " " }));
+        cboTimKiem11.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tháng", " " }));
         cboTimKiem11.setMinimumSize(new java.awt.Dimension(138, 35));
 
         cboTimKiem12.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        cboTimKiem12.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Năm" }));
+        cboTimKiem12.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Năm" }));
         cboTimKiem12.setMinimumSize(new java.awt.Dimension(138, 35));
 
         javax.swing.GroupLayout QuanLyNhanVien3Layout = new javax.swing.GroupLayout(QuanLyNhanVien3);
@@ -522,7 +541,7 @@ public class HomeJFrame extends javax.swing.JFrame {
         jLabel26.setText("BÁO CÁO THỐNG KÊ");
 
         cboTimKiem5.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        cboTimKiem5.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Xe nhập vào", "Xe bán ra" }));
+        cboTimKiem5.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Xe nhập vào", "Xe bán ra" }));
         cboTimKiem5.setMinimumSize(new java.awt.Dimension(138, 35));
 
         jTextField9.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -550,11 +569,11 @@ public class HomeJFrame extends javax.swing.JFrame {
         jLabel27.setText("Xe nhập vào bán ra của từng nhân viên");
 
         cboTimKiem7.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        cboTimKiem7.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Tháng", " " }));
+        cboTimKiem7.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tháng", " " }));
         cboTimKiem7.setMinimumSize(new java.awt.Dimension(138, 35));
 
         cboTimKiem8.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        cboTimKiem8.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Năm" }));
+        cboTimKiem8.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Năm" }));
         cboTimKiem8.setMinimumSize(new java.awt.Dimension(138, 35));
 
         javax.swing.GroupLayout QuanLyNhanVien1Layout = new javax.swing.GroupLayout(QuanLyNhanVien1);
@@ -741,7 +760,7 @@ public class HomeJFrame extends javax.swing.JFrame {
             jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel16Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel36, javax.swing.GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE)
+                .addComponent(jLabel36, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -775,7 +794,7 @@ public class HomeJFrame extends javax.swing.JFrame {
             jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel17Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel37, javax.swing.GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE)
+                .addComponent(jLabel37, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -891,11 +910,11 @@ public class HomeJFrame extends javax.swing.JFrame {
         jLabel30.setText("Xe bán ra của từng cửa hàng");
 
         cboTimKiem9.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        cboTimKiem9.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Tháng", " " }));
+        cboTimKiem9.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tháng", " " }));
         cboTimKiem9.setMinimumSize(new java.awt.Dimension(138, 35));
 
         cboTimKiem10.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        cboTimKiem10.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Năm" }));
+        cboTimKiem10.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Năm" }));
         cboTimKiem10.setMinimumSize(new java.awt.Dimension(138, 35));
 
         javax.swing.GroupLayout QuanLyNhanVien2Layout = new javax.swing.GroupLayout(QuanLyNhanVien2);
@@ -1073,7 +1092,7 @@ public class HomeJFrame extends javax.swing.JFrame {
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel8Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE)
+                .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -1108,7 +1127,7 @@ public class HomeJFrame extends javax.swing.JFrame {
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel9Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel14, javax.swing.GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE)
+                .addComponent(jLabel14, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -1365,7 +1384,7 @@ public class HomeJFrame extends javax.swing.JFrame {
         lblTenCuaHang.setText("HBH Showroom");
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel3.setText("Chi nhánh: ");
+        jLabel3.setText("Địa chỉ:");
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel4.setText("username:");
@@ -1373,8 +1392,8 @@ public class HomeJFrame extends javax.swing.JFrame {
         lblTenDangNhap.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         lblTenDangNhap.setText("quanly001");
 
-        lblChiNhanh.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        lblChiNhanh.setText("86 nguyen sinh sac");
+        lblDiaChi.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        lblDiaChi.setText("86 nguyen sinh sac");
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel2.setText("Bạn đang đăng nhập với vai trò");
@@ -1460,7 +1479,7 @@ public class HomeJFrame extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(lblTenDangNhap, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(lblChiNhanh, javax.swing.GroupLayout.DEFAULT_SIZE, 186, Short.MAX_VALUE))
+                                    .addComponent(lblDiaChi, javax.swing.GroupLayout.DEFAULT_SIZE, 189, Short.MAX_VALUE))
                                 .addGap(601, 601, 601)))
                         .addGap(231, 231, 231)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1475,7 +1494,7 @@ public class HomeJFrame extends javax.swing.JFrame {
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(pnDangXuat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel6))))))
-                .addContainerGap(27, Short.MAX_VALUE))
+                .addContainerGap(30, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1491,7 +1510,7 @@ public class HomeJFrame extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblChiNhanh, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(lblDiaChi, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lblTenDangNhap, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -1514,7 +1533,7 @@ public class HomeJFrame extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(main, javax.swing.GroupLayout.DEFAULT_SIZE, 0, Short.MAX_VALUE)
+            .addComponent(main, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
             .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
@@ -1590,17 +1609,21 @@ public class HomeJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_btnBaoHanhMouseClicked
 
     private void btnBaoCaoThongKeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBaoCaoThongKeMouseClicked
-        main.removeAll();
-        main.add(menuThongKe);
-        main.repaint();
-        main.revalidate();
-        pnQuanLy.setBackground(null);
-        pnNhapHang.setBackground(null);
-        pnBanHang.setBackground(null);
-        pnBaoHanh.setBackground(null);
-        pnBaoCaoThongKe.setBackground(new java.awt.Color(255, 102, 102));
-        pnTroGiup.setBackground(null);
-        pnTinNhan.setBackground(null);
+        if(VaiTro.equals("NhanVien") || VaiTro.equals("KhachHang") ){
+            JOptionPane.showMessageDialog(this,"Bạn không được phép xem thống kê!");
+        }else{
+            main.removeAll();
+            main.add(menuThongKe);
+            main.repaint();
+            main.revalidate();
+            pnQuanLy.setBackground(null);
+            pnNhapHang.setBackground(null);
+            pnBanHang.setBackground(null);
+            pnBaoHanh.setBackground(null);
+            pnBaoCaoThongKe.setBackground(new java.awt.Color(255, 102, 102));
+            pnTroGiup.setBackground(null);
+            pnTinNhan.setBackground(null);
+        }
     }//GEN-LAST:event_btnBaoCaoThongKeMouseClicked
 
     private void btnTroGiupMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTroGiupMouseClicked
@@ -1695,19 +1718,27 @@ public class HomeJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jPanel12MouseExited
 
     private void mnQLCHMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mnQLCHMouseClicked
-        main.removeAll();
-        main.add(new CuaHangJPanel());
-        main.repaint();
-        main.revalidate();
-        mnQLCH.setBackground(new Color(34, 146, 129));
+        if(VaiTro.equals("GiamDoc")){
+            main.removeAll();
+            main.add(new CuaHangJPanel());
+            main.repaint();
+            main.revalidate();
+            mnQLCH.setBackground(new Color(34, 146, 129));
+        }else{
+            JOptionPane.showMessageDialog(this, "Bạn không được vào quản lý cửa hành");
+        }
     }//GEN-LAST:event_mnQLCHMouseClicked
 
     private void jPanel8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel8MouseClicked
-        main.removeAll();
-        main.add(new NhanVienJPanel());
-        main.repaint();
-        main.revalidate();
-        jPanel8.setBackground(new Color(34, 146, 129));
+        if(!VaiTro.equals("NhanVien")&&!VaiTro.equals("KhachHang")){
+            main.removeAll();
+            main.add(new NhanVienJPanel());
+            main.repaint();
+            main.revalidate();
+            jPanel8.setBackground(new Color(34, 146, 129));
+        }else{
+            JOptionPane.showMessageDialog(this, "Bạn không được vào quản lý nhân viên");
+        }
     }//GEN-LAST:event_jPanel8MouseClicked
 
     private void jPanel7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel7MouseClicked
@@ -1805,7 +1836,7 @@ public class HomeJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_mnQLCH2MouseExited
 
     private void jPanel15MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel15MouseClicked
-       main.removeAll();
+        main.removeAll();
         main.add(new ThongKeXeBanChayJPanel());
         main.repaint();
         main.revalidate();
@@ -2039,7 +2070,7 @@ public class HomeJFrame extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField10;
     private javax.swing.JTextField jTextField11;
     private javax.swing.JTextField jTextField9;
-    private javax.swing.JLabel lblChiNhanh;
+    private javax.swing.JLabel lblDiaChi;
     private javax.swing.JLabel lblTenCuaHang;
     private javax.swing.JLabel lblTenDangNhap;
     private javax.swing.JLabel lblVaiTro;

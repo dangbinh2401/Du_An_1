@@ -33,14 +33,37 @@ public class HoaDonXuatDAO {
         String sql = "select a.MaHDX, a.MaNV,c.HoTen as 'TenNV', a.NgayXuat,a.MaKH,b.HoTen as 'TenKH',b.SoDienThoai as 'SDT' from HoaDonXuat a inner join KhachHang b on a.MaKH=b.MaKH inner join NhanVien c on a.MaNV = c.MaNV";
         return select(sql);
     }
-    
+    public List<HoaDonXuat> selectQuanLy(String MaCH) {
+        String sql = "select a.MaHDX, a.MaNV,c.HoTen as 'TenNV', a.NgayXuat,a.MaKH,b.HoTen as 'TenKH',b.SoDienThoai as 'SDT',d.MaCH from HoaDonXuat a inner join KhachHang b on a.MaKH=b.MaKH inner join NhanVien c on a.MaNV = c.MaNV inner join CuaHang d on c.MaCH = d.MaCH where d.MaCH=?";
+        return select(sql,MaCH);
+    }
+    public List<HoaDonXuat> selectNV(String MaCH,String MaNV) {
+        String sql = "select a.MaHDX, a.MaNV,c.HoTen as 'TenNV', a.NgayXuat,a.MaKH,b.HoTen as 'TenKH',b.SoDienThoai as 'SDT',d.MaCH from HoaDonXuat a inner join KhachHang b on a.MaKH=b.MaKH inner join NhanVien c on a.MaNV = c.MaNV inner join CuaHang d on c.MaCH = d.MaCH where d.MaCH=? and c.MaNV=?";
+        return select(sql,MaCH,MaNV);
+    }
     public List<HoaDonXuat> findTenKH(String TenKH){
         String sql = "select a.MaHDX, a.MaNV,c.HoTen as 'TenNV', a.NgayXuat,a.MaKH,b.HoTen as 'TenKH',b.SoDienThoai as 'SDT' from HoaDonXuat a inner join KhachHang b on a.MaKH=b.MaKH inner join NhanVien c on a.MaNV = c.MaNV where b.HoTen like N'%"+TenKH+"%'";
         return select(sql);
     }
+    public List<HoaDonXuat> findTenKH(String TenKH,String MaCH){
+        String sql = "select a.MaHDX, a.MaNV,c.HoTen as 'TenNV', a.NgayXuat,a.MaKH,b.HoTen as 'TenKH',b.SoDienThoai as 'SDT' from HoaDonXuat a inner join KhachHang b on a.MaKH=b.MaKH inner join NhanVien c on a.MaNV = c.MaNV inner join CuaHang d on c.MaCH = d.MaCH where b.HoTen like N'%"+TenKH+"%' and d.MaCH=?";
+        return select(sql,MaCH);
+    }
+    public List<HoaDonXuat> findTenKH(String TenKH,String MaCH,String MaNV){
+        String sql = "select a.MaHDX, a.MaNV,c.HoTen as 'TenNV', a.NgayXuat,a.MaKH,b.HoTen as 'TenKH',b.SoDienThoai as 'SDT' from HoaDonXuat a inner join KhachHang b on a.MaKH=b.MaKH inner join NhanVien c on a.MaNV = c.MaNV inner join CuaHang d on c.MaCH = d.MaCH where b.HoTen like N'%"+TenKH+"%' and d.MaCH=? and c.MaNV=?";
+        return select(sql,MaCH,MaNV);
+    }
     public List<HoaDonXuat> findTenNV(String TenNV){
         String sql = "select a.MaHDX, a.MaNV,c.HoTen as 'TenNV', a.NgayXuat,a.MaKH,b.HoTen as 'TenKH',b.SoDienThoai as 'SDT' from HoaDonXuat a inner join KhachHang b on a.MaKH=b.MaKH inner join NhanVien c on a.MaNV = c.MaNV where c.HoTen like N'%"+TenNV+"%'";
         return select(sql);
+    }
+    public List<HoaDonXuat> findTenNV(String TenNV,String MaCH){
+        String sql = "select a.MaHDX, a.MaNV,c.HoTen as 'TenNV', a.NgayXuat,a.MaKH,b.HoTen as 'TenKH',b.SoDienThoai as 'SDT' from HoaDonXuat a inner join KhachHang b on a.MaKH=b.MaKH inner join NhanVien c on a.MaNV = c.MaNV inner join CuaHang d on c.MaCH = d.MaCH where c.HoTen like N'%"+TenNV+"%' and d.MaCH=?";
+        return select(sql,MaCH);
+    }
+    public List<HoaDonXuat> findTenNV(String TenNV,String MaCH,String MaNV){
+        String sql = "select a.MaHDX, a.MaNV,c.HoTen as 'TenNV', a.NgayXuat,a.MaKH,b.HoTen as 'TenKH',b.SoDienThoai as 'SDT' from HoaDonXuat a inner join KhachHang b on a.MaKH=b.MaKH inner join NhanVien c on a.MaNV = c.MaNV inner join CuaHang d on c.MaCH = d.MaCH where c.HoTen like N'%"+TenNV+"%' and d.MaCH=? and c.MaNV=?";
+        return select(sql,MaCH,MaNV);
     }
     private List<HoaDonXuat> select(String sql, Object... args) {
         List<HoaDonXuat> list = new ArrayList<>();

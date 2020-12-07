@@ -41,15 +41,26 @@ public class XeDAO {
         String sql = "SELECT A.MaCH, A.MaXe, A.TenXe, B.TenLX, A.SoKhung, A.DungTich, A.GiaTienBan , A.SoLuong, A.NamSX,  A.ThoiGianBH FROM Xe A, LoaiXe B where A.MaLX = B.MaLX ";
         return select(sql);
     }
-
+    public List<Xe> selectTong(String MaCH) {
+        String sql = "SELECT A.MaCH, A.MaXe, A.TenXe, B.TenLX, A.SoKhung, A.DungTich, A.GiaTienBan , A.SoLuong, A.NamSX,  A.ThoiGianBH FROM Xe A INNER JOIN CuaHang C on A.MaCH=C.MaCH, LoaiXe B where A.MaLX = B.MaLX and c.MaCH = ?";
+        return select(sql,MaCH);
+    }
     public List<Xe> findTenXe(String TenXe) {
         String sql = "SELECT A.MaCH, A.MaXe, A.TenXe, B.TenLX, A.SoKhung, A.DungTich, A.GiaTienBan , A.SoLuong, A.NamSX,  A.ThoiGianBH FROM Xe A, LoaiXe B where A.MaLX = B.MaLX and A.TenXe like N'%"+TenXe+"%'";
         return select(sql);
+    }
+    public List<Xe> findTenXe(String TenXe,String MaCH) {
+        String sql = "SELECT A.MaCH, A.MaXe, A.TenXe, B.TenLX, A.SoKhung, A.DungTich, A.GiaTienBan , A.SoLuong, A.NamSX,  A.ThoiGianBH FROM Xe A  INNER JOIN CuaHang C on A.MaCH=C.MaCH, LoaiXe B  where A.MaLX = B.MaLX and A.TenXe like N'%"+TenXe+"%' and C.MaCH =?";
+        return select(sql,MaCH);
     }
 
     public List<Xe> findMaNV(String MaXe){
         String sql = "SELECT A.MaCH, A.MaXe, A.TenXe, B.TenLX, A.SoKhung, A.DungTich, A.GiaTienBan , A.SoLuong, A.NamSX,  A.ThoiGianBH FROM Xe A, LoaiXe B where A.MaLX = B.MaLX and A.MaXe like N'%"+MaXe+"%'";
         return select(sql);
+    }
+     public List<Xe> findMaNV(String MaXe,String MaCH){
+        String sql = "SELECT A.MaCH, A.MaXe, A.TenXe, B.TenLX, A.SoKhung, A.DungTich, A.GiaTienBan , A.SoLuong, A.NamSX,  A.ThoiGianBH FROM Xe A  INNER JOIN CuaHang C on A.MaCH=C.MaCH, LoaiXe B  where A.MaLX = B.MaLX and A.MaXe like N'%"+MaXe+"%' and C.MaCH =?";
+        return select(sql,MaCH);
     }
 
     private List<Xe> select(String sql, Object... args) {

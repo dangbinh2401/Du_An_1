@@ -229,6 +229,58 @@ public class BaoHanhJPanel extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this,"lỗi truy vẫn dữ liệu");
         }
     }
+    void sapXep(){
+        Comparator<BaoHang> sortNameKH = new Comparator<BaoHang>() {
+            @Override
+            public int compare(BaoHang s1, BaoHang s2) {
+                return s1.getTenKhachHang().toUpperCase().compareTo(s2.getTenKhachHang().toUpperCase());
+            }
+        };
+        Comparator<BaoHang> sortTenXe = new Comparator<BaoHang>() {
+            @Override
+            public int compare(BaoHang s1, BaoHang s2) {
+                return s1.getTenXe().toUpperCase().compareTo(s2.getTenXe().toUpperCase());
+            }
+        };
+        Comparator<BaoHang> sortMaBH = new Comparator<BaoHang>() {
+            @Override
+            public int compare(BaoHang s1, BaoHang s2) {
+                return s1.getMaBh().toUpperCase().compareTo(s2.getMaBh().toUpperCase());
+            }
+        };
+        if (btnSapXep.getText().equals("Sắp xếp theo tên xe")){
+            Collections.sort(dataBaoHanh,sortTenXe );
+            btnSapXep.setText("Sắp xếp theo tên khách hàng");
+        }
+        if(btnSapXep.getText().equals("Sắp xếp theo tên khách hàng")){
+            Collections.sort(dataBaoHanh,sortNameKH );
+            btnSapXep.setText("Sắp xếp theo mã");
+        }
+        if(btnSapXep.getText().equals("Sắp xếp theo mã")){
+            Collections.sort(dataBaoHanh,sortMaBH );
+            btnSapXep.setText("Sắp xếp theo tên xe");
+        }
+        DefaultTableModel model = (DefaultTableModel) tblBaoHanh.getModel();
+        model.setRowCount(0);
+        int i = 1;
+        try {
+            //dataBaoHanh = bhDao.selectAll();
+            for (BaoHang bh : dataBaoHanh) {
+                Object[] row = {
+                    i++,
+                    bh.getMaBh(),
+                    bh.getTenKhachHang(),
+                    bh.getTenXe(),
+                    bh.getNgayBaoHanh(),
+                    bh.getNoidungBh()
+                };
+                model.addRow(row); 
+                model.fireTableDataChanged();
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this,"lỗi truy vẫn dữ liệu");
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -271,7 +323,7 @@ public class BaoHanhJPanel extends javax.swing.JPanel {
         });
 
         btnSapXep.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        btnSapXep.setText("Sắp xếp theo tên");
+        btnSapXep.setText("Sắp xếp theo tên xe");
         btnSapXep.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSapXepActionPerformed(evt);
@@ -341,11 +393,11 @@ public class BaoHanhJPanel extends javax.swing.JPanel {
                         .addComponent(cboTimKiemBaoHanh, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(47, 47, 47)
                         .addComponent(txtTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 374, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(49, 49, 49)
                         .addComponent(btnTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(102, 102, 102)
-                        .addComponent(btnSapXep, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(103, 103, 103)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnSapXep, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(75, 75, 75)
                         .addComponent(btnTaoMoi, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(104, 104, 104)
                         .addComponent(btnChinhSua, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -406,35 +458,7 @@ public class BaoHanhJPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btnXoaActionPerformed
 
     private void btnSapXepActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSapXepActionPerformed
-        int i =1;
-        Comparator<BaoHang> sortName = new Comparator<BaoHang>() {
-            @Override
-            public int compare(BaoHang s1, BaoHang s2) {
-                return s2.getMaBh().compareTo(s1.getMaBh());
-            }
-        }; 
-        Collections.sort(dataBaoHanh,sortName);
-           
-        DefaultTableModel model = (DefaultTableModel) tblBaoHanh.getModel(); 
-        model.setRowCount(0); 
-        try {
-            for (BaoHang bh : this.dataBaoHanh) {
-                String tenKh = khDao.selectByMa(bh.getMaKh()).getHoTen();
-                String tenXe = xeDao.selectByIdTimKiem(bh.getMaXe()).getTenXe();
-                Object[] row = {
-                    i++,
-                    bh.getMaBh(),
-                    tenKh,
-                    tenXe,
-                    bh.getNgayBaoHanh(),
-                    bh.getNoidungBh()
-                };
-                model.addRow(row);                 
-            } 
-        }  
-        catch (Exception e) { 
-            JOptionPane.showMessageDialog(this, "lỗi truy vẫn dữ liệu"+e);
-        }
+
     }//GEN-LAST:event_btnSapXepActionPerformed
 
     private void btnTimKiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTimKiemActionPerformed

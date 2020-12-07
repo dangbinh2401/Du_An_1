@@ -7,6 +7,7 @@ package com.xemay.view;
 
 import com.xemay.dao.LoaiXeDao;
 import com.xemay.dao.XeDAO;
+import com.xemay.helper.ShareHelper;
 import com.xemay.model.LoaiXe;
 import com.xemay.model.Xe;
 import java.text.DecimalFormat;
@@ -25,12 +26,13 @@ import javax.swing.table.DefaultTableModel;
  */
 public class QuanLyXeJPanel extends javax.swing.JPanel {
 
-    /**
-     * Creates new form quanLyXeJPanel
-     */
+        public String VaiTro = ShareHelper.TaiKhoan.getVaiTro();
+    public String MaCH = ShareHelper.TaiKhoan.getMaCH();
+    public String MaNV = ShareHelper.TaiKhoan.getMaNV();
     public QuanLyXeJPanel() {
         initComponents();
-        fillToTable();
+        list= select();
+        fillToTable(list);
         txtTimKiem.getDocument().addDocumentListener(new DocumentListener() {
             @Override
             public void insertUpdate(DocumentEvent de) {
@@ -207,12 +209,21 @@ public class QuanLyXeJPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 XeDAO dao = new XeDAO();
     List<Xe> list;
-
-    void fillToTable() {
+    
+    List<Xe> select(){
+        List<Xe> temp=null;
+        if (VaiTro.equals("GiamDoc")) {
+            temp = dao.selectTong();
+        }else{
+             temp = dao.selectTong(MaCH);
+        }
+        return temp;
+    }
+    void fillToTable(List<Xe> list) {
         DefaultTableModel model = (DefaultTableModel) tblXe.getModel();
         model.setRowCount(0);
         try {
-            list = dao.selectTong();
+            //list = dao.selectTong();
             int i = 1;
             for (Xe ch : list) {
                 Object[] row = {
@@ -257,50 +268,39 @@ XeDAO dao = new XeDAO();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "vui lòng chọn xe cần sửa");
         }
-        fillToTable();
+        list= select();
+        fillToTable(list);
     }
 
     void timKiem() {
         if (cboTimKiem2.getSelectedItem().toString().equals("Tìm kiếm theo tên")) {
             list = dao.findTenXe(txtTimKiem.getText());
-        } else {
-            list = dao.findMaNV(txtTimKiem.getText());
-        }
-        DefaultTableModel model = (DefaultTableModel) tblXe.getModel();
-        model.setRowCount(0);
-        try {
-            int i = 1;
-            for (Xe ch : list) {
-                Object[] row = {
-                    i,
-                    ch.getMaCH(),
-                    ch.getMaXe(),
-                    ch.getTenXe(),
-                    ch.getTenLx(),
-                    ch.getSoKhung(),
-                    ch.getDungTich(),
-                    ch.getSoLuong(),
-                    ch.getNamSx(),
-                    ch.getThoiGianBh(),
-                    ch.getGiaTienBan()
-                };
-                model.addRow(row);
-                i++;
+            if(VaiTro.equals("GiamDoc")){
+                list = dao.findTenXe(txtTimKiem.getText());
+            }else{
+                list = dao.findTenXe(txtTimKiem.getText(),MaCH);
             }
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "lỗi truy vẫn dữ liệu");
+        } else {
+            if(VaiTro.equals("GiamDoc")){
+                list = dao.findMaNV(txtTimKiem.getText());
+            }else{
+                list = dao.findMaNV(txtTimKiem.getText(),MaCH);
+            }
         }
+        fillToTable(list);
     }
 
     private void jButton51ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton51ActionPerformed
         ThemMoiXe themXe = new ThemMoiXe(null, true);
         themXe.show();
-        fillToTable();
+        list= select();
+        fillToTable(list);
     }//GEN-LAST:event_jButton51ActionPerformed
 
     private void jButton52ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton52ActionPerformed
         fillChinhSua();
-        fillToTable();
+        list= select();
+        fillToTable(list);
     }//GEN-LAST:event_jButton52ActionPerformed
 
     private void btnSapXepActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSapXepActionPerformed
@@ -377,7 +377,8 @@ XeDAO dao = new XeDAO();
                 try {
                     kh.delete(list.get(i).getMaXe());
                     JOptionPane.showMessageDialog(this, "Xóa thành công");
-                    fillToTable();
+                    list= select();
+                    fillToTable(list);
                 } catch (Exception e) {
                     JOptionPane.showMessageDialog(this, "Không thể xóa khi còn hóa đơn");
                 }

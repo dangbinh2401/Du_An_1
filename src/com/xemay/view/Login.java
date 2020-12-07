@@ -331,8 +331,9 @@ public class Login extends javax.swing.JFrame {
             List<TaiKhoan> list = dao.selectLogin(txtUserName.getText());
             if (list.size() == 1) {
                 if (list.get(0).getMatKhau().equals(txtPassword.getText())) {
-                    JOptionPane.showMessageDialog(this, "Đăng nhập thành công");
-                    
+                    if(!list.get(0).getVaiTro().equals("KhachHang")){
+                        list= dao.selectNV(txtUserName.getText());
+                    }
                     ShareHelper.TaiKhoan = list.get(0);
                     new HomeJFrame().setVisible(true);
                     dispose();
