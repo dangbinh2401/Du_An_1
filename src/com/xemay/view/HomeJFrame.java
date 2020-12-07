@@ -1837,7 +1837,7 @@ public class HomeJFrame extends javax.swing.JFrame {
 
     private void jPanel15MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel15MouseClicked
         main.removeAll();
-        main.add(new ThongKeXeBanChayJPanel());
+        main.add(new ThongKeDoanhThuJpanel());
         main.repaint();
         main.revalidate();
         jPanel15.setBackground(new Color(34, 146, 129));

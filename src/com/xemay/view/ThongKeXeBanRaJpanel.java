@@ -5,6 +5,18 @@
  */
 package com.xemay.view;
 
+import com.xemay.dao.CuaHangDAO;
+import com.xemay.dao.ThongKeXBRDAO;
+import com.xemay.model.CuaHang;
+import com.xemay.model.ThongKeXeNV;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author PC
@@ -14,8 +26,83 @@ public class ThongKeXeBanRaJpanel extends javax.swing.JPanel {
     /**
      * Creates new form ThongKeXeBanRa
      */
+    ThongKeXBRDAO dao = new ThongKeXBRDAO();
+    List<ThongKeXeNV> list;
+
     public ThongKeXeBanRaJpanel() {
         initComponents();
+        fillMaCH();
+        fillTable();
+    }
+
+    void fillMaCH() {
+        CuaHangDAO dao = new CuaHangDAO();
+        List<CuaHang> list = dao.select();
+        cboTimKiem4.removeAllItems();
+        cboTimKiem4.addItem("Tất cả các cửa hàng");
+        for (CuaHang cuaHang : list) {
+            cboTimKiem4.addItem(cuaHang.getTenCuaHang());
+        }
+        cboTimKiem5.addItem("Tất cả các tháng");
+        for (int i = 1; i <= 12; i++) {
+            cboTimKiem5.addItem(String.valueOf(i));
+        }
+    }
+
+    void fillTable() {
+        if (cboTimKiem4.getSelectedItem().equals("Tất cả các cửa hàng")) {
+            list = dao.getXeBanRa();
+            fill();
+        } else {
+            String TenCh = cboTimKiem4.getSelectedItem().toString();
+            list = dao.Select(TenCh);
+            fill();
+
+        }
+    }
+
+    void TimkiemTheoThang() {
+        if (cboTimKiem5.getSelectedItem().equals("Tất cả các tháng")) {
+            list = dao.getXeBanRa();
+            fill();
+        } else {
+            String TenCh = cboTimKiem5.getSelectedItem().toString();
+            list = dao.SelectThang(TenCh);
+            fill();
+
+        }
+    }
+
+    void fill() {
+        DefaultTableModel model = (DefaultTableModel) tblThongKeXe.getModel();
+        model.setRowCount(0);
+//            list = dao.Select("Chi nhánh 15");
+        try {
+//                list = dao.getXeNhapVao();
+            int i = 1;
+            for (ThongKeXeNV ch : list) {
+                Object[] row = {
+                    i,
+                    ch.getTenCH(),
+                    ch.getTenXe(),
+                    ch.getSoLuong(),
+                    ch.getGiaTien(),
+                    ch.getTongTien()
+                };
+                model.addRow(row);
+                i++;
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "lỗi truy vẫn dữ liệu");
+        }
+        float Tong = 0;
+        int row = tblThongKeXe.getRowCount();
+        for (int i = 0; i < row; i++) {
+            Tong = Tong + Float.valueOf(tblThongKeXe.getModel().getValueAt(i, 5).toString());
+        }
+        NumberFormat formatter = new DecimalFormat("#,###,###");
+        String formattedNumber = formatter.format(Tong);
+        lblTong.setText(formattedNumber);
     }
 
     /**
@@ -32,10 +119,11 @@ public class ThongKeXeBanRaJpanel extends javax.swing.JPanel {
         jScrollPane5 = new javax.swing.JScrollPane();
         tblThongKeXe = new javax.swing.JTable();
         btnSapXep = new javax.swing.JButton();
-        jButton24 = new javax.swing.JButton();
         btnSapXep1 = new javax.swing.JButton();
         cboTimKiem4 = new javax.swing.JComboBox<String>();
         cboTimKiem5 = new javax.swing.JComboBox<String>();
+        jLabel1 = new javax.swing.JLabel();
+        lblTong = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -53,12 +141,19 @@ public class ThongKeXeBanRaJpanel extends javax.swing.JPanel {
                 {null, null, null, null, null, null}
             },
             new String [] {
-                "STT", "Mã Cửa Hàng", "Mã xe", "Tên xe", "Số lượng", "Tổng tiền"
+                "STT", "Tên cửa hàng", "Tên xe", "Số lượng", "Giá tiền", "Tổng tiền"
             }
         ) {
+            Class[] types = new Class [] {
+                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Integer.class, java.lang.Float.class, java.lang.Float.class
+            };
             boolean[] canEdit = new boolean [] {
                 false, false, false, false, false, false
             };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
@@ -80,15 +175,12 @@ public class ThongKeXeBanRaJpanel extends javax.swing.JPanel {
         jScrollPane5.setViewportView(tblThongKeXe);
 
         btnSapXep.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        btnSapXep.setText("Sắp xếp theo tên");
+        btnSapXep.setText("Sắp xếp theo tên xe");
         btnSapXep.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSapXepActionPerformed(evt);
             }
         });
-
-        jButton24.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jButton24.setText("Tìm kiếm");
 
         btnSapXep1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         btnSapXep1.setText("In thống kê ");
@@ -99,41 +191,56 @@ public class ThongKeXeBanRaJpanel extends javax.swing.JPanel {
         });
 
         cboTimKiem4.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        cboTimKiem4.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Tất cả các cửa hàng" }));
         cboTimKiem4.setToolTipText("");
         cboTimKiem4.setMinimumSize(new java.awt.Dimension(138, 35));
+        cboTimKiem4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cboTimKiem4ActionPerformed(evt);
+            }
+        });
 
         cboTimKiem5.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        cboTimKiem5.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Thống kê theo năm", "Thống theo tháng" }));
         cboTimKiem5.setMinimumSize(new java.awt.Dimension(138, 35));
+        cboTimKiem5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cboTimKiem5ActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabel1.setText("Tổng");
+
+        lblTong.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
 
         javax.swing.GroupLayout QuanLyCuaHangLayout = new javax.swing.GroupLayout(QuanLyCuaHang);
         QuanLyCuaHang.setLayout(QuanLyCuaHangLayout);
         QuanLyCuaHangLayout.setHorizontalGroup(
             QuanLyCuaHangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(QuanLyCuaHangLayout.createSequentialGroup()
-                .addGap(57, 57, 57)
                 .addGroup(QuanLyCuaHangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 1715, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel11)
                     .addGroup(QuanLyCuaHangLayout.createSequentialGroup()
-                        .addComponent(cboTimKiem4, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(32, 32, 32)
-                        .addComponent(cboTimKiem5, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(33, 33, 33)
-                        .addComponent(btnSapXep, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(33, 33, 33)
-                        .addComponent(btnSapXep1, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(46, 46, 46))
-            .addGroup(QuanLyCuaHangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(QuanLyCuaHangLayout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(jButton24)
-                    .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(57, 57, 57)
+                        .addGroup(QuanLyCuaHangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 1715, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel11)
+                            .addGroup(QuanLyCuaHangLayout.createSequentialGroup()
+                                .addComponent(cboTimKiem4, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(32, 32, 32)
+                                .addComponent(cboTimKiem5, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(33, 33, 33)
+                                .addComponent(btnSapXep, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(80, 80, 80)
+                                .addComponent(btnSapXep1, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, QuanLyCuaHangLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblTong, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
         QuanLyCuaHangLayout.setVerticalGroup(
             QuanLyCuaHangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(QuanLyCuaHangLayout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, QuanLyCuaHangLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel11)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -144,12 +251,10 @@ public class ThongKeXeBanRaJpanel extends javax.swing.JPanel {
                     .addComponent(cboTimKiem5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 535, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(90, 90, 90))
-            .addGroup(QuanLyCuaHangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(QuanLyCuaHangLayout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(jButton24)
-                    .addGap(0, 0, Short.MAX_VALUE)))
+                .addGap(46, 46, 46)
+                .addGroup(QuanLyCuaHangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblTong, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -172,18 +277,7 @@ public class ThongKeXeBanRaJpanel extends javax.swing.JPanel {
     }//GEN-LAST:event_tblThongKeXeMouseClicked
 
     private void tblThongKeXeMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblThongKeXeMousePressed
-        //        if (evt.getX()==x & evt.getY()==y){
-            //            kt=1;
-            //        }else{
-            //            x=evt.getX();
-            //            y=evt.getY();
-            //        }
-        //        if (kt==1){
-            //            fillChinhSua();
-            //            kt=0;
-            //            x=0;
-            //            y=0;
-            //        }
+
     }//GEN-LAST:event_tblThongKeXeMousePressed
 
     private void tblThongKeXeMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblThongKeXeMouseReleased
@@ -191,47 +285,57 @@ public class ThongKeXeBanRaJpanel extends javax.swing.JPanel {
     }//GEN-LAST:event_tblThongKeXeMouseReleased
 
     private void btnSapXepActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSapXepActionPerformed
-        //        Comparator<CuaHang> sortName = new Comparator<CuaHang>() {
-            //            @Override
-            //            public int compare(CuaHang s1, CuaHang s2) {
-                //                return s1.getTenCuaHang().compareTo(s2.getTenCuaHang());
-                //            }
-            //        };
-        //        Comparator<CuaHang> sortMaCH = new Comparator<CuaHang>() {
-            //            @Override
-            //            public int compare(CuaHang s1, CuaHang s2) {
-                //                return s1.getMaCh().compareTo(s2.getMaCh());
-                //            }
-            //        };
-        //        if(btnSapXep.getText().equals("Sắp xếp theo tên")){
-            //            Collections.sort(list,sortName);
-            //            btnSapXep.setText("Sắp xếp theo mã");
-            //        }else{
-            //            Collections.sort(list,sortMaCH);
-            //            btnSapXep.setText("Sắp xếp theo tên");
-            //        }
-        //        DefaultTableModel model = (DefaultTableModel) tblCuaHang.getModel();
-        //        model.setRowCount(0);
-        //        try {
-            //            for (CuaHang ch : list) {
-                //                Object[] row = {
-                    //                    ch.getMaCh(),
-                    //                    ch.getTenCuaHang(),
-                    //                    ch.getDiaChi(),
-                    //                    ch.getSdt(),
-                    //                    ch.getEmail()
-                    //                };
-                //                model.addRow(row);
-                //            }
-            //        }
-        //        catch (Exception e) {
-            //            JOptionPane.showMessageDialog(this, "lỗi truy vẫn dữ liệu"+e);
-            //        }
+        Comparator<ThongKeXeNV> sortName = new Comparator<ThongKeXeNV>() {
+            @Override
+            public int compare(ThongKeXeNV s1, ThongKeXeNV s2) {
+                return s1.getTenXe().toUpperCase().compareTo(s2.getTenXe().toUpperCase());
+            }
+        };
+        Comparator<ThongKeXeNV> sortMaCH = new Comparator<ThongKeXeNV>() {
+            @Override
+            public int compare(ThongKeXeNV s1, ThongKeXeNV s2) {
+                return String.valueOf(s2.getSoLuong()).compareTo(String.valueOf(s1.getSoLuong()));
+            }
+        };
+        if (btnSapXep.getText().equals("Sắp xếp theo tên xe")) {
+            Collections.sort(list, sortName);
+            btnSapXep.setText("Sắp xếp theo số lượng ");
+        } else {
+            Collections.sort(list, sortMaCH);
+            btnSapXep.setText("Sắp xếp theo tên xe");
+        }
+        DefaultTableModel model = (DefaultTableModel) tblThongKeXe.getModel();
+        model.setRowCount(0);
+        try {
+            int i = 1;
+            for (ThongKeXeNV ch : list) {
+                Object[] row = {
+                    i,
+                    ch.getTenCH(),
+                    ch.getTenXe(),
+                    ch.getSoLuong(),
+                    ch.getGiaTien(),
+                    ch.getTongTien()
+                };
+                model.addRow(row);
+                i++;
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "lỗi truy vẫn dữ liệu" + e);
+        }
     }//GEN-LAST:event_btnSapXepActionPerformed
 
     private void btnSapXep1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSapXep1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnSapXep1ActionPerformed
+
+    private void cboTimKiem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboTimKiem4ActionPerformed
+        fillTable();
+    }//GEN-LAST:event_cboTimKiem4ActionPerformed
+
+    private void cboTimKiem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboTimKiem5ActionPerformed
+        TimkiemTheoThang();
+    }//GEN-LAST:event_cboTimKiem5ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -240,9 +344,10 @@ public class ThongKeXeBanRaJpanel extends javax.swing.JPanel {
     private javax.swing.JButton btnSapXep1;
     private javax.swing.JComboBox<String> cboTimKiem4;
     private javax.swing.JComboBox<String> cboTimKiem5;
-    private javax.swing.JButton jButton24;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JLabel lblTong;
     private javax.swing.JTable tblThongKeXe;
     // End of variables declaration//GEN-END:variables
 }
