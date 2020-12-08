@@ -7,9 +7,13 @@ package com.xemay.view;
 
 import com.xemay.dao.ChiTietHoaDonNhapDAO;
 import com.xemay.dao.ChiTietHoaDonXuatDAO;
+import com.xemay.helper.ShareHelper;
+import com.xemay.helper.printPDF;
 import com.xemay.model.ChiTietHDN;
 import com.xemay.model.ChiTietHdx;
 import com.xemay.utils.CheckLoi;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -31,7 +35,7 @@ public class ChiTietHoaDonNhap extends javax.swing.JDialog {
     }
         List<ChiTietHDN> list;
     ChiTietHoaDonNhapDAO dao = new ChiTietHoaDonNhapDAO();
-
+    float tong=0;
     public void fillToTable() {
         DefaultTableModel model = (DefaultTableModel) tblChiTiet.getModel();
         model.setRowCount(0);
@@ -45,11 +49,14 @@ public class ChiTietHoaDonNhap extends javax.swing.JDialog {
                     ch.getTenXe(),
                     ch.getGiaTienNhap(),
                     ch.getSoLuong(),
-                    "chưa tính"
+                    ch.getGiaTienNhap()*ch.getSoLuong()
                 };
+                tong=tong+ch.getGiaTienNhap()*ch.getSoLuong();
                 model.addRow(row);
                 i++;
             }
+            NumberFormat formatter = new DecimalFormat("#,###,###");
+            lblTongTien.setText(formatter.format(tong));
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "lỗi truy vẫn dữ liệu");
         }
@@ -95,6 +102,8 @@ public class ChiTietHoaDonNhap extends javax.swing.JDialog {
         txtNgayNhap = new javax.swing.JTextField();
         btnXoa = new javax.swing.JButton();
         btnInHoaDon = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
+        lblTongTien = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Chi tiết hóa đơn");
@@ -182,6 +191,13 @@ public class ChiTietHoaDonNhap extends javax.swing.JDialog {
 
         btnInHoaDon.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btnInHoaDon.setText("In hóa đơn");
+        btnInHoaDon.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnInHoaDonActionPerformed(evt);
+            }
+        });
+
+        jLabel3.setText("Tổng tiền: ");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -213,9 +229,9 @@ public class ChiTietHoaDonNhap extends javax.swing.JDialog {
                                     .addComponent(txtMaNV)
                                     .addComponent(lblSoDienThoai, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
                                     .addComponent(txtNgayNhap)))
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 687, Short.MAX_VALUE)))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 688, Short.MAX_VALUE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap(239, Short.MAX_VALUE)
+                        .addContainerGap(240, Short.MAX_VALUE)
                         .addComponent(btnInHoaDon, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(47, 47, 47)
                         .addComponent(btnXoa, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -224,6 +240,12 @@ public class ChiTietHoaDonNhap extends javax.swing.JDialog {
                         .addGap(45, 45, 45)
                         .addComponent(btnThem, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(80, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jLabel3)
+                .addGap(32, 32, 32)
+                .addComponent(lblTongTien, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(89, 89, 89))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -253,13 +275,17 @@ public class ChiTietHoaDonNhap extends javax.swing.JDialog {
                         .addComponent(lblSoDienThoai, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(34, 34, 34)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(29, 29, 29)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 29, Short.MAX_VALUE)
+                    .addComponent(lblTongTien, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnThem, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnXoa, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnInHoaDon, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(34, Short.MAX_VALUE))
+                .addContainerGap(45, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -321,6 +347,16 @@ public class ChiTietHoaDonNhap extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnThemActionPerformed
 
+    private void btnInHoaDonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInHoaDonActionPerformed
+        printPDF print = new printPDF();
+        try {
+             print.printHDN(txtMaHDN.getText(), ShareHelper.TaiKhoan.getTenCH(), ShareHelper.TaiKhoan.getDiaChiCH(), "0961143378", lblTenNCC.getText(), lblSoDienThoai.getText(), txtNgayNhap.getText(), list, lblTongTien.getText());
+             JOptionPane.showMessageDialog(this, "In thành công hóa đơn!");
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "In thành không công hóa đơn!");
+        }
+    }//GEN-LAST:event_btnInHoaDonActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -370,6 +406,7 @@ public class ChiTietHoaDonNhap extends javax.swing.JDialog {
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
@@ -378,6 +415,7 @@ public class ChiTietHoaDonNhap extends javax.swing.JDialog {
     private javax.swing.JScrollPane jScrollPane1;
     public javax.swing.JLabel lblSoDienThoai;
     public javax.swing.JLabel lblTenNCC;
+    private javax.swing.JLabel lblTongTien;
     private javax.swing.JTable tblChiTiet;
     public javax.swing.JTextField txtMaHDN;
     public javax.swing.JTextField txtMaNCC;
