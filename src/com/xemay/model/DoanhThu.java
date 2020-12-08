@@ -10,15 +10,26 @@ package com.xemay.model;
  * @author PC
  */
 public class DoanhThu {
+
+    private String TenCH;
     private float TongNhap;
     private float DoanhThu;
 
     public DoanhThu() {
     }
 
-    public DoanhThu(float TongNhap, float DoanhThu) {
+    public DoanhThu(String TenCH, float TongNhap, float DoanhThu) {
+        this.TenCH = TenCH;
         this.TongNhap = TongNhap;
         this.DoanhThu = DoanhThu;
+    }
+
+    public String getTenCH() {
+        return TenCH;
+    }
+
+    public void setTenCH(String TenCH) {
+        this.TenCH = TenCH;
     }
 
     public float getTongNhap() {
@@ -36,5 +47,5 @@ public class DoanhThu {
     public void setDoanhThu(float DoanhThu) {
         this.DoanhThu = DoanhThu;
     }
-    
+
 }
