@@ -286,6 +286,7 @@ public class ChiTietHoaDonNhap extends javax.swing.JDialog {
             cs.cboMaXe.setSelectedItem(list.get(i).getMaXe());
             cs.txtSoLuong.setText(String.valueOf(list.get(i).getSoLuong()));
             cs.txtGiaTien.setText(String.valueOf(list.get(i).getGiaTienNhap()));
+            cs.SoLuongGoc=list.get(i).getSoLuong();
             cs.show();
             fillToTable();
         } else {

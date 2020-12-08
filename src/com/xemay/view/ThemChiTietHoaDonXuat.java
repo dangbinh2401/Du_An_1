@@ -23,6 +23,7 @@ import javax.swing.JOptionPane;
 public class ThemChiTietHoaDonXuat extends javax.swing.JDialog {
 
     /** Creates new form ThemChiTietHoaDonXuat */
+    public int SoLuongGoc;
     public ThemChiTietHoaDonXuat(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
@@ -236,8 +237,15 @@ public class ThemChiTietHoaDonXuat extends javax.swing.JDialog {
     void themCTHD(){
         if (check()) {
             try {
-                dao.insert(model());
-                JOptionPane.showMessageDialog(this, "Thêm thành công");
+                int i = Integer.valueOf(txtSoLuong.getText());
+                if(listXe.get(cboMaXe.getSelectedIndex()).getSoLuong()-i>=0){
+                    dao.insert(model());
+                    XeDAO xe = new XeDAO();
+                    xe.update(listXe.get(cboMaXe.getSelectedIndex()).getSoLuong()-i, cboMaXe.getSelectedItem().toString());
+                    JOptionPane.showMessageDialog(this, "Thêm thành công");
+                }else{
+                    JOptionPane.showMessageDialog(this, "Số lượng xe bán ra không được lớn hơn số lượng xe trong kho!");
+                }
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(this,"Thêm thất bại","Thông báo",
                         JOptionPane.ERROR_MESSAGE);
@@ -247,8 +255,14 @@ public class ThemChiTietHoaDonXuat extends javax.swing.JDialog {
     void chinhSuaCTHD(){
         if (check()) {
             try {
-                dao.update(model());
-                JOptionPane.showMessageDialog(this, "Chỉnh sửa thành công");
+                if(listXe.get(cboMaXe.getSelectedIndex()).getSoLuong()-(SoLuongGoc-Integer.valueOf(txtSoLuong.getText()))<0){
+                    JOptionPane.showMessageDialog(this, "Số lượng nhiều hơn số lượng xe trong kho!"); 
+                }else{
+                    XeDAO xe = new XeDAO();
+                    xe.update(listXe.get(cboMaXe.getSelectedIndex()).getSoLuong()-(SoLuongGoc-Integer.valueOf(txtSoLuong.getText())), cboMaXe.getSelectedItem().toString());
+                    dao.update(model());
+                    JOptionPane.showMessageDialog(this, "Chỉnh sửa thành công");
+                }
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(this,"Chỉnh sửa thất bại","Thông báo",
                         JOptionPane.ERROR_MESSAGE);

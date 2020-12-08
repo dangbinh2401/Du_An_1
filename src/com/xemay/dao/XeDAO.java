@@ -27,6 +27,10 @@ public class XeDAO {
         String sql = "UPDATE Xe  SET MaCH=?,TenXe=?, MaLX=?, NamSX=?, DungTich=?, GiaTienBan=?,SoLuong=?,ThoiGianBH=?, Sokhung=?,Anh=? WHERE  MaXe=?";
         JdbcHelper.executeUpdate(sql, model.getMaCH(), model.getTenXe(), model.getMaLx(), model.getNamSx(), model.getDungTich(), model.getGiaTienBan(), model.getSoLuong(), model.getThoiGianBh(), model.getSoKhung(), model.getHinh(), model.getMaXe());
     }
+     public void update(int SoLuong,String MaXe) {
+        String sql = "UPDATE Xe  SET SoLuong=? WHERE  MaXe=?";
+        JdbcHelper.executeUpdate(sql,SoLuong, MaXe );
+    }
 
     public List<Xe> selectAll() {
         String sql = "select * from Xe";

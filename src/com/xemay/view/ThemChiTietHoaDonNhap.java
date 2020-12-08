@@ -27,6 +27,7 @@ public class ThemChiTietHoaDonNhap extends javax.swing.JDialog {
     /**
      * Creates new form ThemChiTietHoaDonNhap
      */
+    public int SoLuongGoc = 0;
     public ThemChiTietHoaDonNhap(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
@@ -270,9 +271,13 @@ public class ThemChiTietHoaDonNhap extends javax.swing.JDialog {
         if (check()) {
             try {
                 dao.insert(model());
+                XeDAO xe = new XeDAO();
+                int i = Integer.valueOf(txtSoLuong.getText());
+                xe.update(list.get(cboMaXe.getSelectedIndex()).getSoLuong()+i, cboMaXe.getSelectedItem().toString());   
                 JOptionPane.showMessageDialog(this, "Thêm sản phẩm thành công!");
             } catch (Exception e) {
-                JOptionPane.showMessageDialog(this,"Thêm sản phẩm thất bại!","Thông báo",
+                 //System.out.println(list.get(cboMaXe.getSelectedIndex()).getSoLuong()+Integer.getInteger(txtSoLuong.getText()));
+                JOptionPane.showMessageDialog(this,"Thêm sản phẩm thất bại!"+e,"Thông báo",
                         JOptionPane.ERROR_MESSAGE);
             }   
         }
@@ -280,8 +285,14 @@ public class ThemChiTietHoaDonNhap extends javax.swing.JDialog {
     void chinhSua(){
         if (check()) {
             try {
-                dao.update(model());
-                JOptionPane.showMessageDialog(this, "Chỉnh sửa sản phẩm thành công!");
+                if(list.get(cboMaXe.getSelectedIndex()).getSoLuong()-(SoLuongGoc-Integer.valueOf(txtSoLuong.getText()))<0){
+                    JOptionPane.showMessageDialog(this, "Số lượng nhiều hơn số lượng xe trong kho!"); 
+                }else{
+                    XeDAO xe = new XeDAO();
+                    xe.update(list.get(cboMaXe.getSelectedIndex()).getSoLuong()-(SoLuongGoc-Integer.valueOf(txtSoLuong.getText())), cboMaXe.getSelectedItem().toString());
+                    dao.update(model());
+                    JOptionPane.showMessageDialog(this, "Chỉnh sửa sản phẩm thành công!");
+                }
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(this,"Chỉnh sửa sản phẩm thất bại!"+e,"Thông báo",
                         JOptionPane.ERROR_MESSAGE);
