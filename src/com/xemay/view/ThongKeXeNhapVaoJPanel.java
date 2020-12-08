@@ -119,7 +119,6 @@ public class ThongKeXeNhapVaoJPanel extends javax.swing.JPanel {
         jScrollPane5 = new javax.swing.JScrollPane();
         tblThongKeXe = new javax.swing.JTable();
         btnSapXep = new javax.swing.JButton();
-        jButton24 = new javax.swing.JButton();
         btnSapXep1 = new javax.swing.JButton();
         cboTimKiem4 = new javax.swing.JComboBox<String>();
         cboTimKiem5 = new javax.swing.JComboBox<String>();
@@ -183,9 +182,6 @@ public class ThongKeXeNhapVaoJPanel extends javax.swing.JPanel {
             }
         });
 
-        jButton24.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jButton24.setText("Tìm kiếm");
-
         btnSapXep1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         btnSapXep1.setText("In thống kê ");
         btnSapXep1.addActionListener(new java.awt.event.ActionListener() {
@@ -241,11 +237,6 @@ public class ThongKeXeNhapVaoJPanel extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(lblTong, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
-            .addGroup(QuanLyCuaHangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(QuanLyCuaHangLayout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(jButton24)
-                    .addGap(0, 0, Short.MAX_VALUE)))
         );
         QuanLyCuaHangLayout.setVerticalGroup(
             QuanLyCuaHangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -264,11 +255,6 @@ public class ThongKeXeNhapVaoJPanel extends javax.swing.JPanel {
                 .addGroup(QuanLyCuaHangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblTong, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)))
-            .addGroup(QuanLyCuaHangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(QuanLyCuaHangLayout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(jButton24)
-                    .addGap(0, 0, Short.MAX_VALUE)))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -369,7 +355,6 @@ public class ThongKeXeNhapVaoJPanel extends javax.swing.JPanel {
     private javax.swing.JButton btnSapXep1;
     private javax.swing.JComboBox<String> cboTimKiem4;
     private javax.swing.JComboBox<String> cboTimKiem5;
-    private javax.swing.JButton jButton24;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JScrollPane jScrollPane5;

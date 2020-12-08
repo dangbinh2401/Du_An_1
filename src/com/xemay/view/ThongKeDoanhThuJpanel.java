@@ -5,7 +5,9 @@
  */
 package com.xemay.view;
 
+import com.xemay.dao.CuaHangDAO;
 import com.xemay.dao.DoanhThuDAO;
+import com.xemay.model.CuaHang;
 import com.xemay.model.DoanhThu;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
@@ -24,13 +26,39 @@ public class ThongKeDoanhThuJpanel extends javax.swing.JPanel {
      */
     public ThongKeDoanhThuJpanel() {
         initComponents();
-        fill();
+        fillMaCH();
+        fillTable();
     }
     DoanhThuDAO dao = new DoanhThuDAO();
     List<DoanhThu> list;
 
+    void fillMaCH() {
+        CuaHangDAO dao = new CuaHangDAO();
+        List<CuaHang> list = dao.select();
+        cboTimKiem14.removeAllItems();
+        cboTimKiem14.addItem("Tất cả các cửa hàng");
+        for (CuaHang cuaHang : list) {
+            cboTimKiem14.addItem(cuaHang.getTenCuaHang());
+        }
+        cboTimKiem13.addItem("Tất cả các tháng");
+        for (int i = 1; i <= 12; i++) {
+            cboTimKiem13.addItem(String.valueOf(i));
+        }
+    }
+
+    void fillTable() {
+        if (cboTimKiem14.getSelectedItem().equals("Tất cả các cửa hàng")) {
+            list = dao.getDoanhThuNV();
+            fill();
+        } else {
+            String TenCh = cboTimKiem14.getSelectedItem().toString();
+            list = dao.Select(TenCh);
+            fill();
+
+        }
+    }
+
     void fill() {
-        list = dao.getDoanhThuNV();
         DefaultTableModel model = (DefaultTableModel) tblDoanhThu.getModel();
         model.setRowCount(0);
         try {
@@ -38,8 +66,10 @@ public class ThongKeDoanhThuJpanel extends javax.swing.JPanel {
             for (DoanhThu ch : list) {
                 Object[] row = {
                     i,
+                    ch.getTenCH(),
                     ch.getTongNhap(),
-                    ch.getDoanhThu()
+                    ch.getDoanhThu(),
+                    Float.valueOf(ch.getDoanhThu()) - Float.valueOf(ch.getTongNhap())
                 };
                 model.addRow(row);
                 i++;
@@ -47,13 +77,13 @@ public class ThongKeDoanhThuJpanel extends javax.swing.JPanel {
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "lỗi truy vẫn dữ liệu");
         }
-        float LoiNhuan = 0;
-        int row = tblDoanhThu.getRowCount();
-        for (int i = 0; i < row; i++) {
-            LoiNhuan = LoiNhuan + (Float.valueOf(tblDoanhThu.getModel().getValueAt(i, 2).toString()) - Float.valueOf(tblDoanhThu.getModel().getValueAt(i, 1).toString()));
-        }
-        NumberFormat formatter = new DecimalFormat("#,###,###");
-        String formattedNumber = formatter.format(LoiNhuan);
+//        float LoiNhuan = 0;
+//        int row = tblDoanhThu.getRowCount();
+//        for (int i = 0; i < row; i++) {
+//            LoiNhuan = LoiNhuan + (Float.valueOf(tblDoanhThu.getModel().getValueAt(i, 2).toString()) - Float.valueOf(tblDoanhThu.getModel().getValueAt(i, 1).toString()));
+//        }
+//        NumberFormat formatter = new DecimalFormat("#,###,###");
+//        String formattedNumber = formatter.format(LoiNhuan);
 //        tblDoanhThu.setModel();
     }
 
@@ -88,33 +118,43 @@ public class ThongKeDoanhThuJpanel extends javax.swing.JPanel {
         tblDoanhThu.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         tblDoanhThu.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "STT", "Tổng tiền nhập", "Doanh Thu", "Lợi Nhuận"
+                "STT", "Tên cửa hàng", "Tổng tiền nhập", "Doanh Thu", "Lợi Nhuận"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Object.class, java.lang.Float.class, java.lang.Float.class, java.lang.Float.class
+                java.lang.Object.class, java.lang.Object.class, java.lang.Float.class, java.lang.Float.class, java.lang.Float.class
+            };
+            boolean[] canEdit = new boolean [] {
+                true, false, true, true, true
             };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
             }
         });
         tblDoanhThu.setRowHeight(30);
         jScrollPane13.setViewportView(tblDoanhThu);
 
         cboTimKiem13.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        cboTimKiem13.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Tháng", " " }));
         cboTimKiem13.setMinimumSize(new java.awt.Dimension(138, 35));
 
         cboTimKiem14.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        cboTimKiem14.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Cửa hàng" }));
         cboTimKiem14.setMinimumSize(new java.awt.Dimension(138, 35));
+        cboTimKiem14.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cboTimKiem14ActionPerformed(evt);
+            }
+        });
 
         jButton37.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jButton37.setText("In thống kê");
@@ -178,6 +218,10 @@ public class ThongKeDoanhThuJpanel extends javax.swing.JPanel {
                 .addComponent(QuanLyNhanVien4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void cboTimKiem14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboTimKiem14ActionPerformed
+        fillTable();        // TODO add your handling code here:
+    }//GEN-LAST:event_cboTimKiem14ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

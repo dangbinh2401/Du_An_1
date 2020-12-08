@@ -17,16 +17,17 @@ import java.util.List;
  * @author PC
  */
 public class DoanhThuDAO {
-
+    
     public List<DoanhThu> getDoanhThuNV() {
-        String sql = "Select Sum(SoLuong* GiaTienNhap) as 'TongNhap',(Select Sum(SoLuong* GiaTien) FROM ChiTietHDX) as 'TongTien'  FROM ChiTietHDN";
-        return (List<DoanhThu>) select(sql);
+        String sql = "Select Sum(SoLuong* GiaTienNhap) as 'TongTien',(Select Sum(SoLuong* GiaTien) FROM ChiTietHDX) as 'DoanhThu'  FROM ChiTietHDN";
+        return (List<DoanhThu>) selectt(sql);
+    }
+    
+    public List<DoanhThu> Select(String maCH) {
+        String sql = "{call Sp_ThongKeDoanhThuCuaHang(?)}";
+        return select(sql, maCH);
     }
 
-//    public List<DoanhThu> getDoanhThuBR() {
-//        String sql = "Select Sum(SoLuong* GiaTien) as 'TongTien' FROM ChiTietHDX";
-//        return (List<DoanhThu>) select(sql);
-//    }
     public List<DoanhThu> select(String sql, Object... args) {
         List<DoanhThu> list = new ArrayList<>();
         try {
@@ -46,11 +47,38 @@ public class DoanhThuDAO {
         }
         return list;
     }
+    
+    public List<DoanhThu> selectt(String sql, Object... args) {
+        List<DoanhThu> list = new ArrayList<>();
+        try {
+            ResultSet rs = null;
+            try {
+                rs = JdbcHelper.executeQuery(sql, args);
+                while (rs.next()) {
+                    DoanhThu model = readFromResultSet1(rs);
+                    list.add(model);
+                }
+            } finally {
 
+                //rs.getStatement().getConnection().close();
+            }
+        } catch (SQLException ex) {
+            throw new RuntimeException(ex);
+        }
+        return list;
+    }
+    
     private DoanhThu readFromResultSet(ResultSet rs) throws SQLException {
         DoanhThu model = new DoanhThu();
-        model.setTongNhap(rs.getFloat("TongNhap"));
-        model.setDoanhThu(rs.getFloat("TongTien"));
+        model.setTenCH(rs.getString("TenCuaHang"));
+        model.setTongNhap(rs.getFloat("TongTien"));
+        model.setDoanhThu(rs.getFloat("DoanhThu"));
+        return model;
+    }
+      private DoanhThu readFromResultSet1(ResultSet rs) throws SQLException {
+        DoanhThu model = new DoanhThu();
+        model.setTongNhap(rs.getFloat("TongTien"));
+        model.setDoanhThu(rs.getFloat("DoanhThu"));
         return model;
     }
 }
