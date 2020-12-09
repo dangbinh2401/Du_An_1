@@ -29,19 +29,26 @@ public class TaiKhoanDAO {
         JdbcHelper.executeUpdate(sql, model.getMatKhau(), model.getVaiTro(), model.getMaTk());
     }
 
+    public void up(TaiKhoan model) {
+        String sql = "UPDATE TaiKhoan SET MatKhau=? WHERE MaTK=?";
+        JdbcHelper.executeUpdate(sql, model.getMatKhau(), model.getMaTk());
+    }
+
     public List<TaiKhoan> select() {
         String sql = "SELECT * FROM TaiKhoan";
         return select(sql);
     }
+
     public List<TaiKhoan> selectLogin(String MaTK) {
-        String sql = "select TaiKhoan.MaTK,NhanVien.HoTen, TaiKhoan.MatKhau, NhanVien.SoDienThoai, TaiKhoan.VaiTro, NhanVien.Email from TaiKhoan Inner join NhanVien on TaiKhoan.MaTK = NhanVien.MaTK Where TaiKhoan.Kt=1 and TaiKhoan.MaTK = '"+MaTK+"' UNION All select TaiKhoan.MaTK,KhachHang.HoTen, TaiKhoan.MatKhau, KhachHang.SoDienThoai,TaiKhoan.VaiTro, KhachHang.Email from TaiKhoan inner join KhachHang on TaiKhoan.MaTK = KhachHang.MaTK Where TaiKhoan.Kt=1 and TaiKhoan.MaTK = '"+MaTK+"'";
+        String sql = "select TaiKhoan.MaTK,NhanVien.HoTen, TaiKhoan.MatKhau, NhanVien.SoDienThoai, TaiKhoan.VaiTro, NhanVien.Email from TaiKhoan Inner join NhanVien on TaiKhoan.MaTK = NhanVien.MaTK Where TaiKhoan.Kt=1 and TaiKhoan.MaTK = '" + MaTK + "' UNION All select TaiKhoan.MaTK,KhachHang.HoTen, TaiKhoan.MatKhau, KhachHang.SoDienThoai,TaiKhoan.VaiTro, KhachHang.Email from TaiKhoan inner join KhachHang on TaiKhoan.MaTK = KhachHang.MaTK Where TaiKhoan.Kt=1 and TaiKhoan.MaTK = '" + MaTK + "'";
         return select(sql);
     }
-    
-public List<TaiKhoan> selectNV(String MaTK) {
+
+    public List<TaiKhoan> selectNV(String MaTK) {
         String sql = "select a.MaTK,b.HoTen, a.MatKhau, b.SoDienThoai, a.VaiTro, b.Email,b.MaNV, c.TenCuaHang, c.DiaChi, c.MaCH from TaiKhoan a Inner join NhanVien b on a.MaTK = b.MaTK inner join CuaHang c on b.MaCH = c.MaCH Where a.Kt=1 and a.MaTk = ?";
-        return select1(sql,MaTK);
+        return select1(sql, MaTK);
     }
+
     public List<TaiKhoan> find(String key) {
         String sql = "select * from TaiKhoan where MaTK like N'%" + key + "%'";
         return select(sql);
@@ -51,36 +58,39 @@ public List<TaiKhoan> selectNV(String MaTK) {
         String sql = "select TaiKhoan.MaTK,NhanVien.HoTen, TaiKhoan.MatKhau, NhanVien.SoDienThoai, TaiKhoan.VaiTro, NhanVien.Email from TaiKhoan Inner join NhanVien on TaiKhoan.MaTK = NhanVien.MaTK Where TaiKhoan.Kt=1 UNION All select TaiKhoan.MaTK,KhachHang.HoTen, TaiKhoan.MatKhau, KhachHang.SoDienThoai,TaiKhoan.VaiTro, KhachHang.Email from TaiKhoan inner join KhachHang on TaiKhoan.MaTK = KhachHang.MaTK Where TaiKhoan.Kt=1";
         return select(sql);
     }
+
     public List<TaiKhoan> selectAll(String MaCH) {
         String sql = "select a.MaTK,b.HoTen, a.MatKhau, b.SoDienThoai, a.VaiTro, b.Email from TaiKhoan a Inner join NhanVien b on a.MaTK = b.MaTK inner join CuaHang c on c.MaCH = b.MaCH Where a.Kt=1 and c.MaCH=? and a.VaiTro!='GiamDoc' UNION All select a.MaTK,b.HoTen, a.MatKhau, b.SoDienThoai,a.VaiTro, b.Email from TaiKhoan a inner join KhachHang b on a.MaTK = b.MaTK Where a.Kt=1";
-        return select(sql,MaCH);
+        return select(sql, MaCH);
     }
 
     public List<TaiKhoan> findkey(String key) {
         String sql = "select TaiKhoan.MaTK,NhanVien.HoTen, TaiKhoan.MatKhau, NhanVien.SoDienThoai, TaiKhoan.VaiTro, NhanVien.Email from TaiKhoan Inner join NhanVien on TaiKhoan.MaTK = NhanVien.MaTK Where HoTen like N'%" + key + "%' UNION All select TaiKhoan.MaTK,KhachHang.HoTen, TaiKhoan.MatKhau, KhachHang.SoDienThoai,TaiKhoan.VaiTro, KhachHang.Email from TaiKhoan inner join KhachHang on TaiKhoan.MaTK = KhachHang.MaTK Where HoTen like N'%" + key + "%'";
         return select(sql);
     }
-    public List<TaiKhoan> findkey(String key,String MaCH) {
-        String sql = "select a.MaTK,b.HoTen, a.MatKhau, b.SoDienThoai, a.VaiTro, b.Email from TaiKhoan a Inner join NhanVien b on a.MaTK = b.MaTK inner join CuaHang c on c.MaCH=b.MaCH Where b.HoTen like N'%"+key+"%' and c.MaCH = ? UNION All select a.MaTK,b.HoTen, a.MatKhau, b.SoDienThoai,a.VaiTro, b.Email from TaiKhoan a inner join KhachHang b on a.MaTK = b.MaTK Where HoTen like N'%"+key+"%'";
-        return select(sql,MaCH);
+
+    public List<TaiKhoan> findkey(String key, String MaCH) {
+        String sql = "select a.MaTK,b.HoTen, a.MatKhau, b.SoDienThoai, a.VaiTro, b.Email from TaiKhoan a Inner join NhanVien b on a.MaTK = b.MaTK inner join CuaHang c on c.MaCH=b.MaCH Where b.HoTen like N'%" + key + "%' and c.MaCH = ? UNION All select a.MaTK,b.HoTen, a.MatKhau, b.SoDienThoai,a.VaiTro, b.Email from TaiKhoan a inner join KhachHang b on a.MaTK = b.MaTK Where HoTen like N'%" + key + "%'";
+        return select(sql, MaCH);
     }
 
     public List<TaiKhoan> findMaTK(String key) {
         String sql = "select TaiKhoan.MaTK,NhanVien.HoTen, TaiKhoan.MatKhau, NhanVien.SoDienThoai, TaiKhoan.VaiTro, NhanVien.Email from TaiKhoan Inner join NhanVien on TaiKhoan.MaTK = NhanVien.MaTK Where TaiKhoan.MaTK = N'" + key + "' UNION All select TaiKhoan.MaTK,KhachHang.HoTen, TaiKhoan.MatKhau, KhachHang.SoDienThoai,TaiKhoan.VaiTro, KhachHang.Email from TaiKhoan inner join KhachHang on TaiKhoan.MaTK = KhachHang.MaTK Where KhachHang.MaTK = N'" + key + "'";
         return select(sql);
     }
-    public List<TaiKhoan> findMaTK(String key,String MaCH) {
-        String sql = "select TaiKhoan.MaTK,NhanVien.HoTen, TaiKhoan.MatKhau, NhanVien.SoDienThoai, TaiKhoan.VaiTro, NhanVien.Email from TaiKhoan Inner join NhanVien on TaiKhoan.MaTK = NhanVien.MaTK Where NhanVien.MaCH=? and TaiKhoan.MaTK = N'" + key + "' UNION All select TaiKhoan.MaTK,KhachHang.HoTen, TaiKhoan.MatKhau, KhachHang.SoDienThoai,TaiKhoan.VaiTro, KhachHang.Email from TaiKhoan inner join KhachHang on TaiKhoan.MaTK = KhachHang.MaTK Where KhachHang.MaTK = N'" + key + "'";
-        return select(sql,MaCH);
-    }
-    
-    //select TaiKhoan.MaTK,NhanVien.HoTen, TaiKhoan.MatKhau, NhanVien.SoDienThoai, TaiKhoan.VaiTro, NhanVien.Email from TaiKhoan Inner join NhanVien on TaiKhoan.MaTK = NhanVien.MaTK Where TaiKhoan.Kt=1 and NhanVien.Email='camly@gmail.com' UNION All select TaiKhoan.MaTK,KhachHang.HoTen, TaiKhoan.MatKhau, KhachHang.SoDienThoai,TaiKhoan.VaiTro, KhachHang.Email from TaiKhoan inner join KhachHang on TaiKhoan.MaTK = KhachHang.MaTK Where TaiKhoan.Kt=1 and KhachHang.Email='camly@gmail.com'
 
-        public List<TaiKhoan> findEmail(String Email) {
-        String sql = "select TaiKhoan.MaTK,NhanVien.HoTen, TaiKhoan.MatKhau, NhanVien.SoDienThoai, TaiKhoan.VaiTro, NhanVien.Email from TaiKhoan Inner join NhanVien on TaiKhoan.MaTK = NhanVien.MaTK Where TaiKhoan.Kt=1 and NhanVien.Email='"+Email+"' UNION All select TaiKhoan.MaTK,KhachHang.HoTen, TaiKhoan.MatKhau, KhachHang.SoDienThoai,TaiKhoan.VaiTro, KhachHang.Email from TaiKhoan inner join KhachHang on TaiKhoan.MaTK = KhachHang.MaTK Where TaiKhoan.Kt=1 and KhachHang.Email='"+Email+"'";
+    public List<TaiKhoan> findMaTK(String key, String MaCH) {
+        String sql = "select TaiKhoan.MaTK,NhanVien.HoTen, TaiKhoan.MatKhau, NhanVien.SoDienThoai, TaiKhoan.VaiTro, NhanVien.Email from TaiKhoan Inner join NhanVien on TaiKhoan.MaTK = NhanVien.MaTK Where NhanVien.MaCH=? and TaiKhoan.MaTK = N'" + key + "' UNION All select TaiKhoan.MaTK,KhachHang.HoTen, TaiKhoan.MatKhau, KhachHang.SoDienThoai,TaiKhoan.VaiTro, KhachHang.Email from TaiKhoan inner join KhachHang on TaiKhoan.MaTK = KhachHang.MaTK Where KhachHang.MaTK = N'" + key + "'";
+        return select(sql, MaCH);
+    }
+
+    //select TaiKhoan.MaTK,NhanVien.HoTen, TaiKhoan.MatKhau, NhanVien.SoDienThoai, TaiKhoan.VaiTro, NhanVien.Email from TaiKhoan Inner join NhanVien on TaiKhoan.MaTK = NhanVien.MaTK Where TaiKhoan.Kt=1 and NhanVien.Email='camly@gmail.com' UNION All select TaiKhoan.MaTK,KhachHang.HoTen, TaiKhoan.MatKhau, KhachHang.SoDienThoai,TaiKhoan.VaiTro, KhachHang.Email from TaiKhoan inner join KhachHang on TaiKhoan.MaTK = KhachHang.MaTK Where TaiKhoan.Kt=1 and KhachHang.Email='camly@gmail.com'
+    public List<TaiKhoan> findEmail(String Email) {
+        String sql = "select TaiKhoan.MaTK,NhanVien.HoTen, TaiKhoan.MatKhau, NhanVien.SoDienThoai, TaiKhoan.VaiTro, NhanVien.Email from TaiKhoan Inner join NhanVien on TaiKhoan.MaTK = NhanVien.MaTK Where TaiKhoan.Kt=1 and NhanVien.Email='" + Email + "' UNION All select TaiKhoan.MaTK,KhachHang.HoTen, TaiKhoan.MatKhau, KhachHang.SoDienThoai,TaiKhoan.VaiTro, KhachHang.Email from TaiKhoan inner join KhachHang on TaiKhoan.MaTK = KhachHang.MaTK Where TaiKhoan.Kt=1 and KhachHang.Email='" + Email + "'";
         return select(sql);
 
     }
+
     public void delete(String maTK) {
         try {
             String sql = " UPDATE TaiKhoan  SET Kt= 0 where MaTK=?";
@@ -109,7 +119,8 @@ public List<TaiKhoan> selectNV(String MaTK) {
         }
         return list;
     }
-        private List<TaiKhoan> select1(String sql, Object... args) {
+
+    private List<TaiKhoan> select1(String sql, Object... args) {
         List<TaiKhoan> list = new ArrayList<>();
         try {
             ResultSet rs = null;
@@ -128,7 +139,8 @@ public List<TaiKhoan> selectNV(String MaTK) {
         }
         return list;
     }
-     private TaiKhoan readFromResultSetTKK(ResultSet rs) throws SQLException {
+
+    private TaiKhoan readFromResultSetTKK(ResultSet rs) throws SQLException {
         TaiKhoan model = new TaiKhoan();
         model.setMaTk(rs.getString("MaTK"));
         model.setMatKhau(rs.getString("MatKhau"));
@@ -140,8 +152,8 @@ public List<TaiKhoan> selectNV(String MaTK) {
         model.setMaCH(rs.getString("MaCH"));
         model.setMaNV(rs.getString("MaNV"));
         return model;
-    }    
-        
+    }
+
     private List<TaiKhoan> selectNV(String sql, Object... args) {
         List<TaiKhoan> list = new ArrayList<>();
         try {
@@ -161,6 +173,7 @@ public List<TaiKhoan> selectNV(String MaTK) {
         }
         return list;
     }
+
     private TaiKhoan readFromResultSetNV(ResultSet rs) throws SQLException {
         TaiKhoan model = new TaiKhoan();
         model.setMaTk(rs.getString("MaTK"));
@@ -173,14 +186,16 @@ public List<TaiKhoan> selectNV(String MaTK) {
         model.setMaCH(rs.getString("MaCH"));
         return model;
     }
+
     private TaiKhoan readFromResultSet1(ResultSet rs) throws SQLException {
         TaiKhoan model = new TaiKhoan();
         model.setMaTk(rs.getString("MaTK"));
         model.setMatKhau(rs.getString("MatKhau"));
         model.setVaiTro(rs.getString("VaiTro"));
-     
+
         return model;
     }
+
     private TaiKhoan readFromResultSet(ResultSet rs) throws SQLException {
         TaiKhoan model = new TaiKhoan();
         model.setMaTk(rs.getString("MaTK"));

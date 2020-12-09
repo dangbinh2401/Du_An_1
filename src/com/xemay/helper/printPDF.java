@@ -41,7 +41,7 @@ public class printPDF {
                          Font catFontt = new Font();
                         catFont.getFamilyname();
                         //Vnariali.ttf
-                        Font f = new Font(BaseFont.createFont("C:\\Users\\ADMIN\\OneDrive\\Desktop\\times.ttf", BaseFont.IDENTITY_H, BaseFont.EMBEDDED));
+                        Font f = new Font(BaseFont.createFont("src/com/xemay/help/times.ttf", BaseFont.IDENTITY_H, BaseFont.EMBEDDED));
                            // f.setColor(Color.BLUE);
                             f.setSize(22);
                             f.setStyle(Font.NORMAL);

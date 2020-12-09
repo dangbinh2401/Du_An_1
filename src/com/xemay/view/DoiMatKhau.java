@@ -5,6 +5,11 @@
  */
 package com.xemay.view;
 
+import com.xemay.dao.TaiKhoanDAO;
+import com.xemay.helper.ShareHelper;
+import com.xemay.model.TaiKhoan;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author PC
@@ -17,7 +22,40 @@ public class DoiMatKhau extends javax.swing.JDialog {
     public DoiMatKhau(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        txtHoTen.setText(ShareHelper.TaiKhoan.getHoTen());
         this.setLocationRelativeTo(null);
+    }
+    TaiKhoanDAO dao = new TaiKhoanDAO();
+
+    void update() {
+        TaiKhoan model = getModel();
+        if (txtMKHT.getText().equals(ShareHelper.TaiKhoan.getMatKhau())) {
+            String confirm = new String(txtXNMK.getText());
+            if (!confirm.equals(model.getMatKhau())) {
+                JOptionPane.showMessageDialog(this, "Xác nhận mật khẩu không đúng!");
+            } else {
+                try {
+                    dao.up(model);
+                    JOptionPane.showMessageDialog(this, "Cập nhật thành công!");
+                    DoiMatKhau.this.dispose();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Mật khẩu hiện tại không đúng!");
+        }
+
+    }
+//    }
+
+    TaiKhoan getModel() {
+        TaiKhoan model = new TaiKhoan();
+        model.setMaTk(ShareHelper.TaiKhoan.getMaTk());
+//        model.setHoTen(txtHoTen.getText());
+        model.setMatKhau(txtMKM.getText());
+
+        return model;
     }
 
     /**
@@ -33,13 +71,13 @@ public class DoiMatKhau extends javax.swing.JDialog {
         jLabel29 = new javax.swing.JLabel();
         jPanel13 = new javax.swing.JPanel();
         jLabel30 = new javax.swing.JLabel();
-        jTextField12 = new javax.swing.JTextField();
+        txtHoTen = new javax.swing.JTextField();
         jLabel31 = new javax.swing.JLabel();
-        jPasswordField1 = new javax.swing.JPasswordField();
+        txtMKM = new javax.swing.JPasswordField();
         jLabel32 = new javax.swing.JLabel();
-        jPasswordField2 = new javax.swing.JPasswordField();
+        txtMKHT = new javax.swing.JPasswordField();
         jLabel33 = new javax.swing.JLabel();
-        jPasswordField3 = new javax.swing.JPasswordField();
+        txtXNMK = new javax.swing.JPasswordField();
         jButton54 = new javax.swing.JButton();
         jButton55 = new javax.swing.JButton();
 
@@ -57,28 +95,32 @@ public class DoiMatKhau extends javax.swing.JDialog {
         jLabel30.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel30.setText("Tên Đăng Nhập");
 
-        jTextField12.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        txtHoTen.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
 
         jLabel31.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel31.setText("Mật Khẩu Hiện Tại");
 
-        jPasswordField1.setText("jPasswordField1");
-
         jLabel32.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel32.setText("Mật Khẩu Mới");
-
-        jPasswordField2.setText("jPasswordField1");
 
         jLabel33.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel33.setText("Xác Nhận Mật Khẩu");
 
-        jPasswordField3.setText("jPasswordField1");
-
         jButton54.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jButton54.setText("Hủy");
+        jButton54.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton54ActionPerformed(evt);
+            }
+        });
 
         jButton55.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jButton55.setText("Đổi Mật Khẩu");
+        jButton55.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton55ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel13Layout = new javax.swing.GroupLayout(jPanel13);
         jPanel13.setLayout(jPanel13Layout);
@@ -92,14 +134,14 @@ public class DoiMatKhau extends javax.swing.JDialog {
                         .addComponent(jButton55)
                         .addGap(32, 32, 32)
                         .addComponent(jButton54, javax.swing.GroupLayout.DEFAULT_SIZE, 92, Short.MAX_VALUE))
-                    .addComponent(jPasswordField3)
-                    .addComponent(jPasswordField1)
-                    .addComponent(jPasswordField2)
+                    .addComponent(txtXNMK)
+                    .addComponent(txtMKM)
+                    .addComponent(txtMKHT)
                     .addComponent(jLabel30)
                     .addComponent(jLabel31)
                     .addComponent(jLabel32)
                     .addComponent(jLabel33)
-                    .addComponent(jTextField12))
+                    .addComponent(txtHoTen))
                 .addContainerGap(60, Short.MAX_VALUE))
         );
         jPanel13Layout.setVerticalGroup(
@@ -108,19 +150,19 @@ public class DoiMatKhau extends javax.swing.JDialog {
                 .addGap(23, 23, 23)
                 .addComponent(jLabel30)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField12, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtHoTen, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(30, 30, 30)
                 .addComponent(jLabel31)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPasswordField2, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtMKHT, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(30, 30, 30)
                 .addComponent(jLabel32)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtMKM, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(30, 30, 30)
                 .addComponent(jLabel33)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPasswordField3, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtXNMK, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(33, 33, 33)
                 .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton54, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -167,6 +209,14 @@ public class DoiMatKhau extends javax.swing.JDialog {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton55ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton55ActionPerformed
+        this.update();      // TODO add your handling code here:
+    }//GEN-LAST:event_jButton55ActionPerformed
+
+    private void jButton54ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton54ActionPerformed
+        DoiMatKhau.this.dispose(); // TODO add your handling code here:
+    }//GEN-LAST:event_jButton54ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -220,9 +270,9 @@ public class DoiMatKhau extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel32;
     private javax.swing.JLabel jLabel33;
     private javax.swing.JPanel jPanel13;
-    private javax.swing.JPasswordField jPasswordField1;
-    private javax.swing.JPasswordField jPasswordField2;
-    private javax.swing.JPasswordField jPasswordField3;
-    private javax.swing.JTextField jTextField12;
+    private javax.swing.JTextField txtHoTen;
+    private javax.swing.JPasswordField txtMKHT;
+    private javax.swing.JPasswordField txtMKM;
+    private javax.swing.JPasswordField txtXNMK;
     // End of variables declaration//GEN-END:variables
 }
