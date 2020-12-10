@@ -20,6 +20,7 @@ public class TaiKhoan {
     private String DiaChiCH;
     private String MaCH;
     private String MaNV;
+    private String MaKH;
     public TaiKhoan(String MaTk, String MatKhau, String VaiTro) {
         this.MaTk = MaTk;
         this.MatKhau = MatKhau;
@@ -28,6 +29,14 @@ public class TaiKhoan {
 
     public String getMaCH() {
         return MaCH;
+    }
+
+    public String getMaKH() {
+        return MaKH;
+    }
+
+    public void setMaKH(String MaKH) {
+        this.MaKH = MaKH;
     }
 
     public String getMaNV() {

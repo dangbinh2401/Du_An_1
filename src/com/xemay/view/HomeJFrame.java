@@ -35,7 +35,11 @@ public class HomeJFrame extends javax.swing.JFrame {
         try {
             lblTenCuaHang.setText(ShareHelper.TaiKhoan.getTenCH());
             lblDiaChi.setText(ShareHelper.TaiKhoan.getDiaChiCH());
-            lblTenDangNhap.setText(MaNV);
+            if(MaNV==null){
+                lblTenDangNhap.setText(ShareHelper.TaiKhoan.getMaKH());
+            }else{
+                lblTenDangNhap.setText(MaNV);
+            }
             if (VaiTro.equals("NhanVien")) {
                 lblVaiTro.setText("Nhân viên");
             }
@@ -1476,17 +1480,21 @@ public class HomeJFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnQuanLyMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnQuanLyMouseClicked
-        main.removeAll();
-        main.add(menuQuanLy);
-        main.repaint();
-        main.revalidate();
-        pnQuanLy.setBackground(new java.awt.Color(255, 102, 102));
-        pnNhapHang.setBackground(null);
-        pnBanHang.setBackground(null);
-        pnBaoHanh.setBackground(null);
-        pnBaoCaoThongKe.setBackground(null);
-        pnTroGiup.setBackground(null);
-        pnTinNhan.setBackground(null);
+        if(MaNV!=null){
+            main.removeAll();
+            main.add(menuQuanLy);
+            main.repaint();
+            main.revalidate();
+            pnQuanLy.setBackground(new java.awt.Color(255, 102, 102));
+            pnNhapHang.setBackground(null);
+            pnBanHang.setBackground(null);
+            pnBaoHanh.setBackground(null);
+            pnBaoCaoThongKe.setBackground(null);
+            pnTroGiup.setBackground(null);
+            pnTinNhan.setBackground(null);
+        }else{
+            JOptionPane.showMessageDialog(this, "Bạn không được xem quản lý!");
+        }
     }//GEN-LAST:event_btnQuanLyMouseClicked
 
     private void btnBanHangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBanHangMouseClicked
@@ -1504,7 +1512,8 @@ public class HomeJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_btnBanHangMouseClicked
 
     private void btnNhapHangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnNhapHangMouseClicked
-        main.removeAll();
+        if(MaNV!=null){
+            main.removeAll();
         main.add(new NhapHangPanel());
         main.repaint();
         main.revalidate();
@@ -1515,6 +1524,9 @@ public class HomeJFrame extends javax.swing.JFrame {
         pnBaoCaoThongKe.setBackground(null);
         pnTroGiup.setBackground(null);
         pnTinNhan.setBackground(null);
+        }else{
+            JOptionPane.showMessageDialog(this, "Bạn không được xem nhập hàng!");
+        }
     }//GEN-LAST:event_btnNhapHangMouseClicked
 
     private void btnBaoHanhMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBaoHanhMouseClicked

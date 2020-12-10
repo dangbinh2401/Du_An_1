@@ -1,13 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package com.xemay.view;
 
 import com.xemay.dao.TaiKhoanDAO;
 import com.xemay.helper.ShareHelper;
-
 import com.xemay.model.TaiKhoan;
 import java.util.Collections;
 import java.util.Comparator;
@@ -17,17 +12,15 @@ import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.table.DefaultTableModel;
 
-/**
- *
- * @author Admin
- */
 public class QuanLyTaiKhoanJPanel extends javax.swing.JPanel {
+
     public String VaiTro = ShareHelper.TaiKhoan.getVaiTro();
     public String MaCH = ShareHelper.TaiKhoan.getMaCH();
     public String MaNV = ShareHelper.TaiKhoan.getMaNV();
+
     public QuanLyTaiKhoanJPanel() {
         initComponents();
-        list=select();
+        list = select();
         fillToTable(list);
         txtTimKiem.getDocument().addDocumentListener(new DocumentListener() {
             @Override
@@ -48,12 +41,12 @@ public class QuanLyTaiKhoanJPanel extends javax.swing.JPanel {
     }
 
     void timKiem() {
-        
+
         try {
-            if(VaiTro.equals("GiamDoc")){
+            if (VaiTro.equals("GiamDoc")) {
                 list = dao.findkey(txtTimKiem.getText());
-            }else{
-                list = dao.findkey(txtTimKiem.getText(),MaCH);
+            } else {
+                list = dao.findkey(txtTimKiem.getText(), MaCH);
             }
             fillToTable(list);
         } catch (Exception e) {
@@ -67,11 +60,14 @@ public class QuanLyTaiKhoanJPanel extends javax.swing.JPanel {
         List<TaiKhoan> temp = null;
         if (VaiTro.equals("GiamDoc")) {
             temp = dao.selectAll();
-        }else{
+        } else if (VaiTro.equals("QuanLy")) {
             temp = dao.selectAll(MaCH);
+        } else {
+            temp = dao.selectTKKH();
         }
         return temp;
     }
+
     void fillToTable(List<TaiKhoan> list) {
         DefaultTableModel model = (DefaultTableModel) tblTaiKhoan.getModel();
         model.setRowCount(0);
@@ -81,7 +77,7 @@ public class QuanLyTaiKhoanJPanel extends javax.swing.JPanel {
             for (TaiKhoan ch : list) {
                 Object[] row = {
                     i,
-                     ch.getMaTk(),
+                    ch.getMaTk(),
                     ch.getHoTen(),
                     ch.getMatKhau(),
                     ch.getVaiTro(),};
@@ -102,7 +98,7 @@ public class QuanLyTaiKhoanJPanel extends javax.swing.JPanel {
             cs.txtMatKhau.setText(list.get(i).getMatKhau());
             cs.txtVaiTro.setText(list.get(i).getVaiTro());
             cs.show();
-            list=select();
+            list = select();
             fillToTable(list);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "vui lòng chọn tài khoản hàng cần sửa");
@@ -290,7 +286,7 @@ public class QuanLyTaiKhoanJPanel extends javax.swing.JPanel {
     private void jButton41ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton41ActionPerformed
         ThemTaiKhoan them = new ThemTaiKhoan(null, true);
         them.show();
-        list=select();
+        list = select();
         fillToTable(list);
     }//GEN-LAST:event_jButton41ActionPerformed
 
@@ -321,7 +317,7 @@ public class QuanLyTaiKhoanJPanel extends javax.swing.JPanel {
             for (TaiKhoan ch : list) {
                 Object[] row = {
                     i,
-                     ch.getMaTk(),
+                    ch.getMaTk(),
                     ch.getHoTen(),
                     ch.getMatKhau(),
                     ch.getVaiTro(),};
@@ -345,8 +341,8 @@ public class QuanLyTaiKhoanJPanel extends javax.swing.JPanel {
             try {
                 tk.delete(tkk);
                 JOptionPane.showMessageDialog(this, "Xóa thành công");
-                list=select();
-        fillToTable(list);
+                list = select();
+                fillToTable(list);
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(this, "Xóa thất bại");
             }

@@ -8,7 +8,6 @@ package com.xemay.view;
 import com.xemay.dao.HoaDonNhapDAO;
 import com.xemay.helper.ShareHelper;
 import com.xemay.model.HoaDonNhap;
-import com.xemay.model.HoaDonXuat;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Collections;
@@ -28,12 +27,13 @@ public class NhapHangPanel extends javax.swing.JPanel {
     /**
      * Creates new form nhapHangPanel
      */
-        public String VaiTro = ShareHelper.TaiKhoan.getVaiTro();
+    public String VaiTro = ShareHelper.TaiKhoan.getVaiTro();
     public String MaCH = ShareHelper.TaiKhoan.getMaCH();
     public String MaNV = ShareHelper.TaiKhoan.getMaNV();
+
     public NhapHangPanel() {
         initComponents();
-        list=select();
+        list = select();
         fillToTable(list);
         txtTimKiem.getDocument().addDocumentListener(new DocumentListener() {
             @Override
@@ -54,51 +54,54 @@ public class NhapHangPanel extends javax.swing.JPanel {
         cboTimKiem.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 int i = cboTimKiem.getSelectedIndex();
-                if (i >=0 ) {
+                if (i >= 0) {
                     timKiem();
                 }
 
             }
         });
     }
-    List<HoaDonNhap> select(){
-        List<HoaDonNhap> temp=null;
+
+    List<HoaDonNhap> select() {
+        List<HoaDonNhap> temp = null;
         if (VaiTro.equals("GiamDoc")) {
             temp = dao.selectAll();
         }
         if (VaiTro.equals("NhanVien")) {
-            temp = dao.selectAll(MaCH,MaNV);
+            temp = dao.selectAll(MaCH, MaNV);
         }
         if (VaiTro.equals("QuanLy")) {
             temp = dao.selectAll(MaCH);
         }
         return temp;
     }
-    void timKiem(){
+
+    void timKiem() {
         if (cboTimKiem.getSelectedItem().toString().equals("Tìm kiếm theo tên nhân viên")) {
-            if(VaiTro.equals("GiamDoc")){
+            if (VaiTro.equals("GiamDoc")) {
                 list = dao.findTenNV(txtTimKiem.getText());
             }
-            if(VaiTro.equals("QuanLy")){
-                list = dao.findTenNV(txtTimKiem.getText(),MaCH);    
+            if (VaiTro.equals("QuanLy")) {
+                list = dao.findTenNV(txtTimKiem.getText(), MaCH);
             }
         }
         if (cboTimKiem.getSelectedItem().toString().equals("Tìm kiếm theo Tên nhà cung cấp")) {
-            if(VaiTro.equals("GiamDoc")){
+            if (VaiTro.equals("GiamDoc")) {
                 list = dao.findTenNCC(txtTimKiem.getText());
             }
-            if(VaiTro.equals("NhanVien")){
-                list = dao.findTenNCC(txtTimKiem.getText(),MaCH,MaNV);
+            if (VaiTro.equals("NhanVien")) {
+                list = dao.findTenNCC(txtTimKiem.getText(), MaCH, MaNV);
             }
-            if(VaiTro.equals("QuanLy")){
-                list = dao.findTenNCC(txtTimKiem.getText(),MaCH);    
+            if (VaiTro.equals("QuanLy")) {
+                list = dao.findTenNCC(txtTimKiem.getText(), MaCH);
             }
-            
+
         }
         fillToTable(list);
     }
     List<HoaDonNhap> list;
     HoaDonNhapDAO dao = new HoaDonNhapDAO();
+
     void fillToTable(List<HoaDonNhap> list) {
         DefaultTableModel model = (DefaultTableModel) tblHoaDonNhap.getModel();
         model.setRowCount(0);
@@ -120,6 +123,7 @@ public class NhapHangPanel extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, "lỗi truy vẫn dữ liệu" + e);
         }
     }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -291,9 +295,9 @@ public class NhapHangPanel extends javax.swing.JPanel {
         list = select();
         fillToTable(list);
     }//GEN-LAST:event_jButton12ActionPerformed
-    void xemCTHD(){
-        int i=tblHoaDonNhap.getSelectedRow();
-        if(i!=-1){
+    void xemCTHD() {
+        int i = tblHoaDonNhap.getSelectedRow();
+        if (i != -1) {
             ChiTietHoaDonNhap ct = new ChiTietHoaDonNhap(null, true);
             ct.txtMaHDN.setText(list.get(i).getMaHDN());
             ct.txtMaHDN.disable();
@@ -308,7 +312,7 @@ public class NhapHangPanel extends javax.swing.JPanel {
             ct.show();
             list = select();
             fillToTable(list);
-        }else{
+        } else {
             JOptionPane.showMessageDialog(this, "Vui lòng chọn hóa đơn cần xem");
         }
     }
@@ -317,8 +321,8 @@ public class NhapHangPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton8ActionPerformed
 
     private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
-        int i=tblHoaDonNhap.getSelectedRow();
-        if(i!=-1){
+        int i = tblHoaDonNhap.getSelectedRow();
+        if (i != -1) {
             ThemHoaDonNhap cs = new ThemHoaDonNhap(null, true);
             cs.btnThem.setText("Chỉnh sửa");
             cs.txtMaHDN.setText(list.get(i).getMaHDN());
@@ -327,12 +331,12 @@ public class NhapHangPanel extends javax.swing.JPanel {
             cs.txtMaNV.disable();
             cs.cboMaNCC.setSelectedItem(list.get(i).getMaNCC());
             cs.txtTenNCC.setText(list.get(i).getTenNCC());
-            cs.txtNgayNhap.setText(list.get(i).getNgayNhap().toString());          
+            cs.txtNgayNhap.setText(list.get(i).getNgayNhap().toString());
             cs.show();
             list = select();
             fillToTable(list);
-        
-        }else{
+
+        } else {
             JOptionPane.showMessageDialog(this, "Vui lòng chọn hóa đơn cần xem");
         }
     }//GEN-LAST:event_jButton11ActionPerformed
@@ -341,7 +345,7 @@ public class NhapHangPanel extends javax.swing.JPanel {
         Comparator<HoaDonNhap> sortNameNV = new Comparator<HoaDonNhap>() {
             @Override
             public int compare(HoaDonNhap s1, HoaDonNhap s2) {
-                
+
                 return s1.getTenNV().toUpperCase().compareTo(s2.getTenNV().toUpperCase());
             }
         };
@@ -354,8 +358,7 @@ public class NhapHangPanel extends javax.swing.JPanel {
         if (btnSapXep.getText().equals("Sắp xếp tên nhân viên")) {
             Collections.sort(list, sortNameNV);
             btnSapXep.setText("Sắp xếp tên NCC");
-        }else
-        if (btnSapXep.getText().equals("Sắp xếp tên NCC")) {
+        } else if (btnSapXep.getText().equals("Sắp xếp tên NCC")) {
             Collections.sort(list, sortNCC);
             btnSapXep.setText("Sắp xếp tên nhân viên");
         }
@@ -363,22 +366,26 @@ public class NhapHangPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btnSapXepActionPerformed
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
-        int i = tblHoaDonNhap.getSelectedRow();
-        if (i!=-1){
-            if (JOptionPane.showConfirmDialog(this, "bạn có chắc muốn xóa hóa đơn này?")==0){
-                dao.delete(list.get(i).getMaHDN());
-            JOptionPane.showMessageDialog(this, "Xóa thành công!");
-            list=select();
-            fillToTable(list);
+        if (!ShareHelper.TaiKhoan.getVaiTro().equals("NhanVien")) {
+            int i = tblHoaDonNhap.getSelectedRow();
+            if (i != -1) {
+                if (JOptionPane.showConfirmDialog(this, "bạn có chắc muốn xóa hóa đơn này?") == 0) {
+                    dao.delete(list.get(i).getMaHDN());
+                    JOptionPane.showMessageDialog(this, "Xóa thành công!");
+                    list = select();
+                    fillToTable(list);
+                }
+            } else {
+                JOptionPane.showMessageDialog(this, "Vui lòng chọn hóa đơn cần xóa!");
             }
-        }else{
-            JOptionPane.showMessageDialog(this, "Vui lòng chọn hóa đơn cần xóa!");
+        } else {
+            JOptionPane.showMessageDialog(this, "Bạn không được xóa");
         }
     }//GEN-LAST:event_jButton9ActionPerformed
 
     private void tblHoaDonNhapMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblHoaDonNhapMousePressed
-        
-if (evt.getX() == x & evt.getY() == y) {
+
+        if (evt.getX() == x & evt.getY() == y) {
             kt = 1;
         } else {
             x = evt.getX();
@@ -392,7 +399,7 @@ if (evt.getX() == x & evt.getY() == y) {
         }
 
     }//GEN-LAST:event_tblHoaDonNhapMousePressed
-int kt = 0;
+    int kt = 0;
     int x = 0;
     int y = 0;
 

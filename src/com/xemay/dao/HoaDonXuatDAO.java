@@ -49,6 +49,10 @@ public class HoaDonXuatDAO {
         String sql = "select a.MaHDX, a.MaNV,c.HoTen as 'TenNV', a.NgayXuat,a.MaKH,b.HoTen as 'TenKH',b.SoDienThoai as 'SDT' from HoaDonXuat a inner join KhachHang b on a.MaKH=b.MaKH inner join NhanVien c on a.MaNV = c.MaNV inner join CuaHang d on c.MaCH = d.MaCH where b.HoTen like N'%"+TenKH+"%' and d.MaCH=?";
         return select(sql,MaCH);
     }
+    public List<HoaDonXuat> selectMaKH(String MaKH){
+        String sql = "select a.MaHDX, a.MaNV,c.HoTen as 'TenNV', a.NgayXuat,a.MaKH,b.HoTen as 'TenKH',b.SoDienThoai as 'SDT' from HoaDonXuat a inner join KhachHang b on a.MaKH=b.MaKH inner join NhanVien c on a.MaNV = c.MaNV inner join CuaHang d on c.MaCH = d.MaCH where b.MaKH =?";
+        return select(sql,MaKH);
+    }
     public List<HoaDonXuat> findTenKH(String TenKH,String MaCH,String MaNV){
         String sql = "select a.MaHDX, a.MaNV,c.HoTen as 'TenNV', a.NgayXuat,a.MaKH,b.HoTen as 'TenKH',b.SoDienThoai as 'SDT' from HoaDonXuat a inner join KhachHang b on a.MaKH=b.MaKH inner join NhanVien c on a.MaNV = c.MaNV inner join CuaHang d on c.MaCH = d.MaCH where b.HoTen like N'%"+TenKH+"%' and d.MaCH=? and c.MaNV=?";
         return select(sql,MaCH,MaNV);

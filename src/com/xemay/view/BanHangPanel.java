@@ -28,6 +28,7 @@ public class BanHangPanel extends javax.swing.JPanel {
     public String VaiTro = ShareHelper.TaiKhoan.getVaiTro();
     public String MaCH = ShareHelper.TaiKhoan.getMaCH();
     public String MaNV = ShareHelper.TaiKhoan.getMaNV();
+
     public BanHangPanel() {
         initComponents();
         list = select();
@@ -48,43 +49,48 @@ public class BanHangPanel extends javax.swing.JPanel {
                 timKiem();
             }
         });
-        
+
     }
 
     void timKiem() {
         if (cboTimKiem.getSelectedItem().toString().equals("Tìm kiếm theo tên khách hàng")) {
-            
-            if(VaiTro.equals("GiamDoc")){
+
+            if (VaiTro.equals("GiamDoc")) {
                 list = dao.findTenKH(txtTimKiem.getText());
             }
-            if(VaiTro.equals("NhanVien")){
-                list = dao.findTenKH(txtTimKiem.getText(),MaCH,MaNV);
+            if (VaiTro.equals("NhanVien")) {
+                list = dao.findTenKH(txtTimKiem.getText(), MaCH, MaNV);
             }
-            if(VaiTro.equals("QuanLy")){
-                list = dao.findTenKH(txtTimKiem.getText(),MaCH);    
+            if (VaiTro.equals("QuanLy")) {
+                list = dao.findTenKH(txtTimKiem.getText(), MaCH);
             }
+
         }
         if (cboTimKiem.getSelectedItem().toString().equals("Tìm kiếm theo tên nhân viên")) {
             list = dao.findTenNV(txtTimKiem.getText());
         }
         fillToTable(list);
     }
-    
-    List<HoaDonXuat> select(){
-        List<HoaDonXuat> temp=null;
+
+    List<HoaDonXuat> select() {
+        List<HoaDonXuat> temp = null;
         if (VaiTro.equals("GiamDoc")) {
             temp = dao.selectAll();
         }
         if (VaiTro.equals("NhanVien")) {
-            temp = dao.selectNV(MaCH,MaNV);
+            temp = dao.selectNV(MaCH, MaNV);
         }
         if (VaiTro.equals("QuanLy")) {
             temp = dao.selectQuanLy(MaCH);
+        }
+        if (VaiTro.equals("KhachHang")) {
+            temp = dao.selectMaKH(ShareHelper.TaiKhoan.getMaKH());
         }
         return temp;
     }
     HoaDonXuatDAO dao = new HoaDonXuatDAO();
     List<HoaDonXuat> list;
+
     void fillToTable(List<HoaDonXuat> list) {
         DefaultTableModel model = (DefaultTableModel) tblHoaDonXuat.getModel();
         model.setRowCount(0);
@@ -284,12 +290,14 @@ public class BanHangPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MouseClicked
-        ThemHoaDonXuat laphoadon = new ThemHoaDonXuat(null, true);
-        laphoadon.show();
-        list = select();
-        fillToTable(list);
+        if (!VaiTro.equals("KhachHang")) {
+            ThemHoaDonXuat laphoadon = new ThemHoaDonXuat(null, true);
+            laphoadon.show();
+            list = select();
+            fillToTable(list);
+        }
     }//GEN-LAST:event_jButton3MouseClicked
-    void XemCTHD(){
+    void XemCTHD() {
         int i = tblHoaDonXuat.getSelectedRow();
         if (i != -1) {
             ChiTietHoaDonXuat ct = new ChiTietHoaDonXuat(null, true);
@@ -315,17 +323,19 @@ public class BanHangPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-                ThemHoaDonXuat cs = new ThemHoaDonXuat(null, true);
-                int i=tblHoaDonXuat.getSelectedRow();
-                cs.txtMaHDX.setText(list.get(i).getMaHdx());
-                cs.txtMaHDX.disable();
-                cs.txtMaNV.setText(list.get(i).getMaNV());
-                cs.txtMaNV.disable();
-                cs.cboMaKH.setSelectedItem(list.get(i).getMaKH());
-                cs.btnThem.setText("Chỉnh sửa");
-                cs.show();
-                list = select();
-                fillToTable(list);
+        if (!VaiTro.equals("KhachHang")) {
+            ThemHoaDonXuat cs = new ThemHoaDonXuat(null, true);
+            int i = tblHoaDonXuat.getSelectedRow();
+            cs.txtMaHDX.setText(list.get(i).getMaHdx());
+            cs.txtMaHDX.disable();
+            cs.txtMaNV.setText(list.get(i).getMaNV());
+            cs.txtMaNV.disable();
+            cs.cboMaKH.setSelectedItem(list.get(i).getMaKH());
+            cs.btnThem.setText("Chỉnh sửa");
+            cs.show();
+            list = select();
+            fillToTable(list);
+        }
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
@@ -333,20 +343,24 @@ public class BanHangPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        int i = tblHoaDonXuat.getSelectedRow();
-        if (i == -1) {
-            JOptionPane.showMessageDialog(this, "Vui lòng chọn hóa đơn cần xóa");
-        } else {
-            if (JOptionPane.showConfirmDialog(this, "bạn có chắc muốn xóa hóa đơn này?") == 0) {
-                try {
-                    dao.delete(list.get(i).getMaHdx());
-                    JOptionPane.showMessageDialog(this, "Xóa thành công!");
-                    list = select();
-                    fillToTable(list);
-                } catch (Exception e) {
-                    JOptionPane.showMessageDialog(this, "không được xóa hóa đơn đã có chi tiết hóa đơn!");
+        if (!VaiTro.equals("KhachHang") && !VaiTro.equals("NhanVien")) {
+            int i = tblHoaDonXuat.getSelectedRow();
+            if (i == -1) {
+                JOptionPane.showMessageDialog(this, "Vui lòng chọn hóa đơn cần xóa");
+            } else {
+                if (JOptionPane.showConfirmDialog(this, "bạn có chắc muốn xóa hóa đơn này?") == 0) {
+                    try {
+                        dao.delete(list.get(i).getMaHdx());
+                        JOptionPane.showMessageDialog(this, "Xóa thành công!");
+                        list = select();
+                        fillToTable(list);
+                    } catch (Exception e) {
+                        JOptionPane.showMessageDialog(this, "không được xóa hóa đơn đã có chi tiết hóa đơn!");
+                    }
                 }
             }
+        } else {
+            JOptionPane.showMessageDialog(this, "bạn không được xóa");
         }
     }//GEN-LAST:event_jButton6ActionPerformed
 
@@ -399,7 +413,7 @@ public class BanHangPanel extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_tblHoaDonXuatMousePressed
 
- int kt = 0;
+    int kt = 0;
     int x = 0;
     int y = 0;
     // Variables declaration - do not modify//GEN-BEGIN:variables

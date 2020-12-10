@@ -140,7 +140,7 @@ public class BaoHanh extends javax.swing.JDialog {
     }
 
     public void suaBaoHanh() {
-        try {
+            try {
             if (JOptionPane.showConfirmDialog(this,"Bạn có chắc chắn muốn cập nhật không")== JOptionPane.YES_OPTION) {
                 bhDao.update(getModel());
                 JOptionPane.showMessageDialog(this,"Cập nhật thành công");

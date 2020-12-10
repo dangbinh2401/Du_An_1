@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package com.xemay.view;
 
 import com.xemay.dao.ChiTietHoaDonXuatDAO;
@@ -16,10 +12,7 @@ import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
-/**
- *
- * @author ADMIN
- */
+
 public class ChiTietHoaDonXuat extends javax.swing.JDialog {
 
     /**
@@ -40,7 +33,7 @@ public class ChiTietHoaDonXuat extends javax.swing.JDialog {
         try {
             list = dao.selectAll(txtMaHDX.getText());
             int i = 1;
-            float tong=0;
+            float tong = 0;
             for (ChiTietHdx ch : list) {
                 Object[] row = {
                     i,
@@ -48,10 +41,10 @@ public class ChiTietHoaDonXuat extends javax.swing.JDialog {
                     ch.getTenXe(),
                     ch.getGiaTienBan(),
                     ch.getSoLuong(),
-                    ch.getGiaTienBan()*ch.getSoLuong()
+                    ch.getGiaTienBan() * ch.getSoLuong()
                 };
                 model.addRow(row);
-                tong= tong+ch.getGiaTienBan()*ch.getSoLuong();
+                tong = tong + ch.getGiaTienBan() * ch.getSoLuong();
                 i++;
             }
             NumberFormat formatter = new DecimalFormat("#,###,###");
@@ -61,18 +54,18 @@ public class ChiTietHoaDonXuat extends javax.swing.JDialog {
         }
     }
 
-    private boolean check(){
+    private boolean check() {
         boolean ok = true;
         StringBuilder bd = new StringBuilder();
         CheckLoi.checkNgayNhap(txtNgayXuat, bd);
-        if (bd.length()>0) {
-            JOptionPane.showMessageDialog(this,bd.toString(),"Thông báo",
+        if (bd.length() > 0) {
+            JOptionPane.showMessageDialog(this, bd.toString(), "Thông báo",
                     JOptionPane.ERROR_MESSAGE);
             ok = false;
         }
         return ok;
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -309,46 +302,57 @@ public class ChiTietHoaDonXuat extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MouseClicked
-        if (check()) {
-            ThemChiTietHoaDonXuat themct = new ThemChiTietHoaDonXuat(null, true);
-            themct.txtMaHDX.setText(txtMaHDX.getText());
-            themct.txtMaHDX.disable();
-            themct.show();
-            fillToTable();
+        if (!ShareHelper.TaiKhoan.getVaiTro().equals("KhachHang")) {
+            if (check()) {
+                ThemChiTietHoaDonXuat themct = new ThemChiTietHoaDonXuat(null, true);
+                themct.txtMaHDX.setText(txtMaHDX.getText());
+                themct.txtMaHDX.disable();
+                themct.show();
+                fillToTable();
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "bạn không được thêm");
         }
     }//GEN-LAST:event_jButton3MouseClicked
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        int i = tblChiTiet.getSelectedRow();
-        ThemChiTietHoaDonXuat themctHDX = new ThemChiTietHoaDonXuat(null, true);
-        themctHDX.txtMaHDX.setText(list.get(i).getMaHDX());
-        themctHDX.txtMaHDX.disable();
-        themctHDX.txtTenXe.setText(list.get(i).getTenXe());
-        themctHDX.lblTenXe.setText(list.get(i).getTenXe());
-        themctHDX.cboMaXe.removeAllItems();
-        themctHDX.cboMaXe.addItem(list.get(i).getMaXe());
-        themctHDX.txtSoLuong.setText(String.valueOf(list.get(i).getSoLuong()));
-        themctHDX.btnThemXe.setText("Chỉnh sửa");
-        themctHDX.show();
-        fillToTable();
+        if (!ShareHelper.TaiKhoan.getVaiTro().equals("KhachHang")) {
+            int i = tblChiTiet.getSelectedRow();
+            ThemChiTietHoaDonXuat themctHDX = new ThemChiTietHoaDonXuat(null, true);
+            themctHDX.txtMaHDX.setText(list.get(i).getMaHDX());
+            themctHDX.txtMaHDX.disable();
+            themctHDX.txtTenXe.setText(list.get(i).getTenXe());
+            themctHDX.lblTenXe.setText(list.get(i).getTenXe());
+            themctHDX.cboMaXe.removeAllItems();
+            themctHDX.cboMaXe.addItem(list.get(i).getMaXe());
+            themctHDX.txtSoLuong.setText(String.valueOf(list.get(i).getSoLuong()));
+            themctHDX.btnThemXe.setText("Chỉnh sửa");
+            themctHDX.show();
+            fillToTable();
+        } else {
+            JOptionPane.showMessageDialog(this, "bạn không được chỉnh sửa");
+        }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
-        int i = tblChiTiet.getSelectedRow();
-        if (i==-1){
-            JOptionPane.showMessageDialog(this, "vui lòng chọn sản phẩm cần xóa");
-        }else{
-            if(JOptionPane.showConfirmDialog(this, "bạn có chắc muốn xóa sản phẩm?")==0){
-                try {
-                    dao.delete(list.get(i).getMaHDX(), list.get(i).getMaXe());
-                    JOptionPane.showMessageDialog(this, "xóa thành công sản phẩm!");
-                    fillToTable();
-                } catch (Exception e) {
-                    JOptionPane.showMessageDialog(this, "xóa không thành công");
+        if (!ShareHelper.TaiKhoan.getVaiTro().equals("KhachHang")) {
+            int i = tblChiTiet.getSelectedRow();
+            if (i == -1) {
+                JOptionPane.showMessageDialog(this, "vui lòng chọn sản phẩm cần xóa");
+            } else {
+                if (JOptionPane.showConfirmDialog(this, "bạn có chắc muốn xóa sản phẩm?") == 0) {
+                    try {
+                        dao.delete(list.get(i).getMaHDX(), list.get(i).getMaXe());
+                        JOptionPane.showMessageDialog(this, "xóa thành công sản phẩm!");
+                        fillToTable();
+                    } catch (Exception e) {
+                        JOptionPane.showMessageDialog(this, "xóa không thành công");
+                    }
+                }
             }
-            }
+        } else {
+            JOptionPane.showMessageDialog(this, "bạn không được chỉnh sửa");
         }
-        
     }//GEN-LAST:event_btnXoaActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
@@ -358,7 +362,7 @@ public class ChiTietHoaDonXuat extends javax.swing.JDialog {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         printPDF print = new printPDF();
         try {
-            print.print(txtMaHDX.getText(), ShareHelper.TaiKhoan.getTenCH(), ShareHelper.TaiKhoan.getDiaChiCH(), sdt, lblHoTenKH.getText(), lblSoDienThoai.getText(), txtNgayXuat.getText(), list,lblTongTien.getText());
+            print.print(txtMaHDX.getText(), ShareHelper.TaiKhoan.getTenCH(), ShareHelper.TaiKhoan.getDiaChiCH(), sdt, lblHoTenKH.getText(), lblSoDienThoai.getText(), txtNgayXuat.getText(), list, lblTongTien.getText());
             JOptionPane.showMessageDialog(this, "In thành công!");
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "lỗi " + e);

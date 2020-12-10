@@ -10,6 +10,7 @@ import com.xemay.model.KhachHang;
 import com.xemay.dao.XeDAO;
 import com.xemay.dao.KhachHangDao;
 import com.xemay.dao.BaoHanhDAO;
+import com.xemay.helper.ShareHelper;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.SimpleDateFormat;
@@ -34,14 +35,14 @@ public class BaoHanhJPanel extends javax.swing.JPanel {
     KhachHangDao khDao = new KhachHangDao();
     XeDAO xeDao = new XeDAO();
     BaoHang baoHang = new BaoHang();
-    
+
     /**
      * Creates new form baoHanhJPanel
      */
     public BaoHanhJPanel() {
         initComponents();
-        fillTable();
-                txtTimKiem.getDocument().addDocumentListener(new DocumentListener() {
+        fillTable(select());
+        txtTimKiem.getDocument().addDocumentListener(new DocumentListener() {
             @Override
             public void insertUpdate(DocumentEvent de) {
                 timKiem();
@@ -57,56 +58,70 @@ public class BaoHanhJPanel extends javax.swing.JPanel {
                 timKiem();
             }
         });
-                cboTimKiemBaoHanh.addActionListener(new ActionListener() {
+        cboTimKiemBaoHanh.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 int i = cboTimKiemBaoHanh.getSelectedIndex();
-                if (i >=0 ) {
+                if (i >= 0) {
                     timKiem();
                 }
 
             }
         });
     }
-    void timKiem(){
-        String tk=cboTimKiemBaoHanh.getSelectedItem().toString();
-        //Tìm kiếm theo tên khách hàng, Tìm kiếm theo mã bảo hành, Tìm kiếm theo tên xe
-        if (tk.equals("Tìm kiếm theo tên khách hàng")){
-            dataBaoHanh = bhDao.selectByTenKh(txtTimKiem.getText());
-        }
-        if (tk.equals("Tìm kiếm theo mã bảo hành")){
-            dataBaoHanh = bhDao.selectByKeyWord(txtTimKiem.getText());
-        }
-        if (tk.equals("Tìm kiếm theo tên xe")){
-            dataBaoHanh = bhDao.selectByTenXe(txtTimKiem.getText());
-        }
-                DefaultTableModel model = (DefaultTableModel) tblBaoHanh.getModel();
-        model.setRowCount(0);
-        int i = 1;
-        try {
-            //dataBaoHanh = bhDao.selectAll();
-            for (BaoHang bh : dataBaoHanh) {
-                Object[] row = {
-                    i++,
-                    bh.getMaBh(),
-                    bh.getTenKhachHang(),
-                    bh.getTenXe(),
-                    bh.getNgayBaoHanh(),
-                    bh.getNoidungBh()
-                };
-                model.addRow(row); 
-                model.fireTableDataChanged();
+
+    void timKiem() {
+        if (ShareHelper.TaiKhoan.getMaKH() != null) {
+            String tk = cboTimKiemBaoHanh.getSelectedItem().toString();
+            //Tìm kiếm theo tên khách hàng, Tìm kiếm theo mã bảo hành, Tìm kiếm theo tên xe
+            if (tk.equals("Tìm kiếm theo tên khách hàng")) {
+                dataBaoHanh = bhDao.selectByTenKh(txtTimKiem.getText());
             }
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(this,"lỗi truy vẫn dữ liệu");
+            if (tk.equals("Tìm kiếm theo mã bảo hành")) {
+                dataBaoHanh = bhDao.selectByKeyWord(txtTimKiem.getText());
+            }
+            if (tk.equals("Tìm kiếm theo tên xe")) {
+                dataBaoHanh = bhDao.selectByTenXe(txtTimKiem.getText());
+            }
+            DefaultTableModel model = (DefaultTableModel) tblBaoHanh.getModel();
+            model.setRowCount(0);
+            int i = 1;
+            try {
+                //dataBaoHanh = bhDao.selectAll();
+                for (BaoHang bh : dataBaoHanh) {
+                    Object[] row = {
+                        i++,
+                        bh.getMaBh(),
+                        bh.getTenKhachHang(),
+                        bh.getTenXe(),
+                        bh.getNgayBaoHanh(),
+                        bh.getNoidungBh()
+                    };
+                    model.addRow(row);
+                    model.fireTableDataChanged();
+                }
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(this, "lỗi truy vẫn dữ liệu");
+            }
         }
     }
-    void fillTable(){
+
+    List<BaoHang> select() {
+        List<BaoHang> temp = null;
+        if (!ShareHelper.TaiKhoan.getVaiTro().equals("KhachHang")) {
+            temp = bhDao.selectAll();
+        } else {
+            temp = bhDao.selectBHKH(ShareHelper.TaiKhoan.getMaKH());
+        }
+        return temp;
+    }
+
+    void fillTable(List<BaoHang> list) {
         DefaultTableModel model = (DefaultTableModel) tblBaoHanh.getModel();
         model.setRowCount(0);
         int i = 1;
         try {
-            dataBaoHanh = bhDao.selectAll();
-            for (BaoHang bh : dataBaoHanh) {
+            // dataBaoHanh = bhDao.selectAll();
+            for (BaoHang bh : list) {
                 Object[] row = {
                     i++,
                     bh.getMaBh(),
@@ -115,20 +130,20 @@ public class BaoHanhJPanel extends javax.swing.JPanel {
                     bh.getNgayBaoHanh(),
                     bh.getNoidungBh()
                 };
-                model.addRow(row); 
+                model.addRow(row);
                 model.fireTableDataChanged();
             }
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(this,"lỗi truy vẫn dữ liệu");
+            JOptionPane.showMessageDialog(this, "lỗi truy vẫn dữ liệu");
         }
     }
-    
-    void update(){
+
+    void update() {
         BaoHanh bh = new BaoHanh(null, true);
         bh.btnThem.setText("Cập nhật");
         int index = tblBaoHanh.getSelectedRow();
         if (index == -1) {
-            JOptionPane.showMessageDialog(this,"Chọn 1 hàng trước khi cập nhật","Thông báo",
+            JOptionPane.showMessageDialog(this, "Chọn 1 hàng trước khi cập nhật", "Thông báo",
                     JOptionPane.ERROR_MESSAGE);
             return;
         }
@@ -142,36 +157,36 @@ public class BaoHanhJPanel extends javax.swing.JPanel {
             bh.txtNoiDungBaoHanh.setText(dataBaoHanh.get(index).getNoidungBh());
             bh.show();
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(this,"Lỗi "+e);
+            JOptionPane.showMessageDialog(this, "Lỗi " + e);
         }
-        fillTable();
+        fillTable(select());
     }
 
-    void delete(){
+    void delete() {
         int index = tblBaoHanh.getSelectedRow();
         if (index >= 0) {
             BaoHang baoHang = dataBaoHanh.get(index);
             try {
-                if (JOptionPane.showConfirmDialog(this,"Bạn có chắc chắn xóa không") == JOptionPane.YES_OPTION) {
+                if (JOptionPane.showConfirmDialog(this, "Bạn có chắc chắn xóa không") == JOptionPane.YES_OPTION) {
                     bhDao.delete(baoHang.getMaBh());
-                    JOptionPane.showMessageDialog(this,"Xóa thành công");
-                    fillTable();
+                    JOptionPane.showMessageDialog(this, "Xóa thành công");
+                    fillTable(select());
                 }
             } catch (Exception e) {
-                JOptionPane.showMessageDialog(this,"Xóa thất bại","Thông báo",
-                    JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Xóa thất bại", "Thông báo",
+                        JOptionPane.ERROR_MESSAGE);
             }
         }
     }
-    
-    private void timKiemTheoMaBH(){
+
+    private void timKiemTheoMaBH() {
         int i = 1;
         DefaultTableModel model = (DefaultTableModel) tblBaoHanh.getModel();
         model.setRowCount(0);
         try {
             dataBaoHanh = bhDao.selectByKeyWord(txtTimKiem.getText());
             for (BaoHang baoHang1 : dataBaoHanh) {
-                Object[] row ={
+                Object[] row = {
                     i++,
                     baoHang1.getMaBh(),
                     baoHang1.getTenKhachHang(),
@@ -182,18 +197,18 @@ public class BaoHanhJPanel extends javax.swing.JPanel {
                 model.addRow(row);
             }
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(this,"lỗi truy vẫn dữ liệu");
+            JOptionPane.showMessageDialog(this, "lỗi truy vẫn dữ liệu");
         }
     }
-    
-    private void timKiemTheoTenKH(){
+
+    private void timKiemTheoTenKH() {
         int i = 1;
         DefaultTableModel model = (DefaultTableModel) tblBaoHanh.getModel();
         model.setRowCount(0);
         try {
             dataBaoHanh = bhDao.selectByTenKh(txtTimKiem.getText());
             for (BaoHang baoHang1 : dataBaoHanh) {
-                Object[] row ={
+                Object[] row = {
                     i++,
                     baoHang1.getMaBh(),
                     baoHang1.getTenKhachHang(),
@@ -204,18 +219,18 @@ public class BaoHanhJPanel extends javax.swing.JPanel {
                 model.addRow(row);
             }
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(this,"lỗi truy vẫn dữ liệu");
+            JOptionPane.showMessageDialog(this, "lỗi truy vẫn dữ liệu");
         }
     }
-    
-    private void timKiemTheoTenXe(){
+
+    private void timKiemTheoTenXe() {
         int i = 1;
         DefaultTableModel model = (DefaultTableModel) tblBaoHanh.getModel();
         model.setRowCount(0);
         try {
             dataBaoHanh = bhDao.selectByTenXe(txtTimKiem.getText());
             for (BaoHang baoHang1 : dataBaoHanh) {
-                Object[] row ={
+                Object[] row = {
                     i++,
                     baoHang1.getMaBh(),
                     baoHang1.getTenKhachHang(),
@@ -226,10 +241,11 @@ public class BaoHanhJPanel extends javax.swing.JPanel {
                 model.addRow(row);
             }
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(this,"lỗi truy vẫn dữ liệu");
+            JOptionPane.showMessageDialog(this, "lỗi truy vẫn dữ liệu");
         }
     }
-    void sapXep(){
+
+    void sapXep() {
         Comparator<BaoHang> sortNameKH = new Comparator<BaoHang>() {
             @Override
             public int compare(BaoHang s1, BaoHang s2) {
@@ -248,16 +264,16 @@ public class BaoHanhJPanel extends javax.swing.JPanel {
                 return s1.getMaBh().toUpperCase().compareTo(s2.getMaBh().toUpperCase());
             }
         };
-        if (btnSapXep.getText().equals("Sắp xếp theo tên xe")){
-            Collections.sort(dataBaoHanh,sortTenXe );
+        if (btnSapXep.getText().equals("Sắp xếp theo tên xe")) {
+            Collections.sort(dataBaoHanh, sortTenXe);
             btnSapXep.setText("Sắp xếp theo tên khách hàng");
         }
-        if(btnSapXep.getText().equals("Sắp xếp theo tên khách hàng")){
-            Collections.sort(dataBaoHanh,sortNameKH );
+        if (btnSapXep.getText().equals("Sắp xếp theo tên khách hàng")) {
+            Collections.sort(dataBaoHanh, sortNameKH);
             btnSapXep.setText("Sắp xếp theo mã");
         }
-        if(btnSapXep.getText().equals("Sắp xếp theo mã")){
-            Collections.sort(dataBaoHanh,sortMaBH );
+        if (btnSapXep.getText().equals("Sắp xếp theo mã")) {
+            Collections.sort(dataBaoHanh, sortMaBH);
             btnSapXep.setText("Sắp xếp theo tên xe");
         }
         DefaultTableModel model = (DefaultTableModel) tblBaoHanh.getModel();
@@ -274,13 +290,14 @@ public class BaoHanhJPanel extends javax.swing.JPanel {
                     bh.getNgayBaoHanh(),
                     bh.getNoidungBh()
                 };
-                model.addRow(row); 
+                model.addRow(row);
                 model.fireTableDataChanged();
             }
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(this,"lỗi truy vẫn dữ liệu");
+            JOptionPane.showMessageDialog(this, "lỗi truy vẫn dữ liệu");
         }
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -443,18 +460,34 @@ public class BaoHanhJPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnTaoMoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTaoMoiActionPerformed
-        BaoHanh bh = new BaoHanh(null, true);
-        bh.txtNgayBaoHanh.setEditable(false);
-        bh.show();
-        fillTable();
+//        BaoHanh bh = new BaoHanh(null, true);
+//        bh.txtNgayBaoHanh.setEditable(false);
+//        bh.show();
+        fillTable(select());
+        if (!ShareHelper.TaiKhoan.getVaiTro().equals("KhachHang")) {
+            BaoHanh bh = new BaoHanh(null, true);
+            bh.txtNgayBaoHanh.setEditable(false);
+            bh.show();
+            fillTable(select());
+        } else {
+            JOptionPane.showMessageDialog(this, "bạn không được thêm!");
+        }
     }//GEN-LAST:event_btnTaoMoiActionPerformed
 
     private void btnChinhSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChinhSuaActionPerformed
-        this.update();
+        if (!ShareHelper.TaiKhoan.getVaiTro().equals("KhachHang")) {
+            this.update();
+        } else {
+            JOptionPane.showMessageDialog(this, "bạn không được chỉnh sửa!");
+        }
     }//GEN-LAST:event_btnChinhSuaActionPerformed
 
     private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
-        this.delete();
+        if (!ShareHelper.TaiKhoan.getVaiTro().equals("KhachHang")) {
+            this.delete();
+        } else {
+            JOptionPane.showMessageDialog(this, "bạn không được xóa!");
+        }
     }//GEN-LAST:event_btnXoaActionPerformed
 
     private void btnSapXepActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSapXepActionPerformed
@@ -462,30 +495,34 @@ public class BaoHanhJPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btnSapXepActionPerformed
 
     private void btnTimKiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTimKiemActionPerformed
-        if (cboTimKiemBaoHanh.getSelectedItem().equals("Tìm kiếm theo tên khách hàng")) {
-            this.timKiemTheoTenKH(); 
-        }else if (cboTimKiemBaoHanh.getSelectedItem().equals("Tìm kiếm theo mã bảo hành")) {
-            this.timKiemTheoMaBH();
-        }else{
-            this.timKiemTheoTenXe();
+        if (!ShareHelper.TaiKhoan.getVaiTro().equals("KhachHang")) {
+            if (cboTimKiemBaoHanh.getSelectedItem().equals("Tìm kiếm theo tên khách hàng")) {
+                this.timKiemTheoTenKH();
+            } else if (cboTimKiemBaoHanh.getSelectedItem().equals("Tìm kiếm theo mã bảo hành")) {
+                this.timKiemTheoMaBH();
+            } else {
+                this.timKiemTheoTenXe();
+            }
         }
     }//GEN-LAST:event_btnTimKiemActionPerformed
 
     private void tblBaoHanhMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblBaoHanhMousePressed
-        if (evt.getX() == x & evt.getY() == y) {
-            kt = 1;
-        } else {
-            x = evt.getX();
-            y = evt.getY();
-        }
-        if (kt == 1) {
-            this.update();
-            kt = 0;
-            x = 0;
-            y = 0;
+        if (!ShareHelper.TaiKhoan.getVaiTro().equals("KhachHang")) {
+            if (evt.getX() == x & evt.getY() == y) {
+                kt = 1;
+            } else {
+                x = evt.getX();
+                y = evt.getY();
+            }
+            if (kt == 1) {
+                this.update();
+                kt = 0;
+                x = 0;
+                y = 0;
+            }
         }
     }//GEN-LAST:event_tblBaoHanhMousePressed
- int kt = 0;
+    int kt = 0;
     int x = 0;
     int y = 0;
 

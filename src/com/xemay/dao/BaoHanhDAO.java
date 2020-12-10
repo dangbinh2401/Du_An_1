@@ -75,6 +75,10 @@ public class BaoHanhDAO {
                 + " join Xe C on A.MaXe = C.MaXe";
         return this.selectBySqlAll(sql);
     }
+    public List<BaoHang> selectBHKH(String MaKH) {
+        String sql = "SELECT A.MaBH,B.HoTen,C.TenXe,A.NgayBH,A.NoiDungBH,B.MaKH,A.MaNV,C.MaXe FROM BaoHanh A inner join KhachHang B on A.MaKH = B.MaKH inner join Xe C on A.MaXe = C.MaXe where b.MaKH=?";
+        return this.selectBySqlAll(sql,MaKH);
+    }
     
     public List<BaoHang> selectByKeyWord(String keyWord){
         String sql = "SELECT A.MaBH,B.HoTen,C.TenXe,A.NgayBH,A.NoiDungBH,A.MaNV,B.MaKH,C.MaXe"
