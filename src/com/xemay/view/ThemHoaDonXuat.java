@@ -32,7 +32,7 @@ public class ThemHoaDonXuat extends javax.swing.JDialog {
         cboMaKH.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 int i = cboMaKH.getSelectedIndex();
-                if (i >=0 ) {
+                if (i >= 0) {
                     lblHoTen.setText(list.get(i).getHoTen());
                     lblSoDienThoai.setText(list.get(i).getSdt());
                     lblDiaChi.setText(list.get(i).getDiaChi());
@@ -41,15 +41,18 @@ public class ThemHoaDonXuat extends javax.swing.JDialog {
             }
         });
         txtNgayXuat.setText(java.time.LocalDate.now().toString());
-        List<HoaDonXuat> data=dao.selectAll();
+        List<HoaDonXuat> data = dao.selectAll();
         String s;
-        if (data.size()-1<0){
-            s="0";
-        }else{
-            s=data.get(data.size()-1).getMaHdx();
+        if (data.size() - 1 < 0) {
+            s = "0";
+        } else {
+            s = data.get(data.size() - 1).getMaHdx();
         }
         txtMaHDX.setText(ShareHelper.getMaXe("HDX", s));
         txtMaHDX.disable();
+        txtMaNV.setText(ShareHelper.TaiKhoan.getMaNV());
+        txtMaNV.disable();
+
     }
 
     /**
@@ -264,20 +267,21 @@ public class ThemHoaDonXuat extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
     KhachHangDao dataKH = new KhachHangDao();
     List<KhachHang> list;
-    Boolean check(){
+
+    Boolean check() {
         boolean ok = true;
         StringBuilder bd = new StringBuilder();
-        CheckLoi.checkRong(txtMaHDX, bd,"Mã hóa đơn xuất không được để trống!\n");
-        CheckLoi.checkRong(txtMaNV, bd,"Mã nhân viên không được để trống!\n");
+        CheckLoi.checkRong(txtMaHDX, bd, "Mã hóa đơn xuất không được để trống!\n");
+        CheckLoi.checkRong(txtMaNV, bd, "Mã nhân viên không được để trống!\n");
         CheckLoi.checkNgayNhap(txtNgayXuat, bd);
-        if (bd.length() >0) {
-            JOptionPane.showMessageDialog(this,bd.toString(),"Thông báo",
+        if (bd.length() > 0) {
+            JOptionPane.showMessageDialog(this, bd.toString(), "Thông báo",
                     JOptionPane.ERROR_MESSAGE);
             ok = false;
         }
-        return ok;  
+        return ok;
     }
-    
+
     void fillToKH() {
         list = dataKH.findHoTen(txtHoTen.getText());
         cboMaKH.removeAllItems();
@@ -296,30 +300,30 @@ public class ThemHoaDonXuat extends javax.swing.JDialog {
     }//GEN-LAST:event_btnTimActionPerformed
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
-        if(check()==true){
-            if(btnThem.getText().equals("Thêm hóa đơn xuất")){
+        if (check() == true) {
+            if (btnThem.getText().equals("Thêm hóa đơn xuất")) {
                 this.themHoaDonXuat();
-            }else{
+            } else {
                 this.ChinhSua();
             }
         }
-            
+
     }//GEN-LAST:event_btnThemActionPerformed
 
-    void ChinhSua(){
+    void ChinhSua() {
         if (check()) {
             try {
                 dao.update(model());
                 JOptionPane.showMessageDialog(this, "Chỉnh sửa hóa đơn thành công");
-                kt=true;
+                kt = true;
             } catch (Exception e) {
-                JOptionPane.showMessageDialog(this,"Chỉnh sửa hóa đơn thất bại","Thông báo",
-                    JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Chỉnh sửa hóa đơn thất bại", "Thông báo",
+                        JOptionPane.ERROR_MESSAGE);
             }
         }
     }
     private void btnChiTietActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChiTietActionPerformed
-        if (kt==true){
+        if (kt == true) {
             ChiTietHoaDonXuat ct = new ChiTietHoaDonXuat(null, true);
             ct.txtMaHDX.setText(txtMaHDX.getText());
             ct.txtMaHDX.disable();
@@ -343,19 +347,20 @@ public class ThemHoaDonXuat extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtMaHDXActionPerformed
     HoaDonXuatDAO dao = new HoaDonXuatDAO();
-    Boolean kt=false;
-    void themHoaDonXuat(){
+    Boolean kt = false;
+
+    void themHoaDonXuat() {
         try {
             dao.insert(model());
             JOptionPane.showMessageDialog(this, "Thêm hóa đơn thành công");
-            kt=true;
+            kt = true;
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(this,"Thêm hóa đơn thất bại "+e,"Thông báo",
+            JOptionPane.showMessageDialog(this, "Thêm hóa đơn thất bại " + e, "Thông báo",
                     JOptionPane.ERROR_MESSAGE);
         }
     }
-    
-    HoaDonXuat model(){
+
+    HoaDonXuat model() {
         HoaDonXuat model = new HoaDonXuat();
         model.setMaHdx(txtMaHDX.getText());
         model.setMaNV(txtMaNV.getText());
@@ -368,10 +373,12 @@ public class ThemHoaDonXuat extends javax.swing.JDialog {
         model.setMaKH(cboMaKH.getSelectedItem().toString());
         return model;
     }
-    private static java.sql.Date chuyenNgay(java.util.Date date){
-        java.sql.Date sqlDate=new java.sql.Date(date.getTime());
+
+    private static java.sql.Date chuyenNgay(java.util.Date date) {
+        java.sql.Date sqlDate = new java.sql.Date(date.getTime());
         return sqlDate;
     }
+
     /**
      * @param args the command line arguments
      */

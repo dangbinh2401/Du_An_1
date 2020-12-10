@@ -64,7 +64,7 @@ public class QuanLyXeJPanel extends javax.swing.JPanel {
         jScrollPane9 = new javax.swing.JScrollPane();
         tblXe = new javax.swing.JTable();
         jLabel24 = new javax.swing.JLabel();
-        cboTimKiem2 = new javax.swing.JComboBox<String>();
+        cboTimKiem2 = new javax.swing.JComboBox<>();
         txtTimKiem = new javax.swing.JTextField();
         jButton49 = new javax.swing.JButton();
         btnSapXep = new javax.swing.JButton();
@@ -106,7 +106,7 @@ public class QuanLyXeJPanel extends javax.swing.JPanel {
         jLabel24.setText("QUẢN LÝ XE");
 
         cboTimKiem2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        cboTimKiem2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Tìm kiếm theo tên", "Tìm kiếm theo mã" }));
+        cboTimKiem2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tìm kiếm theo tên", "Tìm kiếm theo mã" }));
         cboTimKiem2.setMinimumSize(new java.awt.Dimension(138, 35));
 
         txtTimKiem.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -129,7 +129,7 @@ public class QuanLyXeJPanel extends javax.swing.JPanel {
         });
 
         jButton51.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jButton51.setText("Tạo mới");
+        jButton51.setText("Thêm xe");
         jButton51.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton51ActionPerformed(evt);

@@ -40,6 +40,8 @@ public class ThemHoaDonNhap extends javax.swing.JDialog {
         txtMaHDN.setText(ShareHelper.getMaXe("HDN", s));
         txtMaHDN.disable();
         txtNgayNhap.setText(java.time.LocalDate.now().toString());
+        txtMaNV.setText(ShareHelper.TaiKhoan.getMaNV());
+        txtMaNV.disable();
     }
     HoaDonNhapDAO dao = new HoaDonNhapDAO();
     List<NhaCungCap> list;

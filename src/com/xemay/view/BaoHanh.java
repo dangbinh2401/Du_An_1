@@ -63,8 +63,8 @@ public class BaoHanh extends javax.swing.JDialog {
         }
         txtMaBaoHanh.setText(ShareHelper.getMaXe("BH", s));
         txtMaBaoHanh.disable();
-        
-        
+        txtMaNhanVien.setText(ShareHelper.TaiKhoan.getMaNV());
+        txtMaNhanVien.disable();
     }
     
 
