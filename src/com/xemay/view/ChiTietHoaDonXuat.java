@@ -6,6 +6,9 @@ import com.xemay.helper.ShareHelper;
 import com.xemay.helper.printPDF;
 import com.xemay.model.ChiTietHdx;
 import com.xemay.utils.CheckLoi;
+import java.awt.Desktop;
+import java.io.File;
+import java.io.IOException;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.List;
@@ -364,6 +367,10 @@ public class ChiTietHoaDonXuat extends javax.swing.JDialog {
         try {
             print.print(txtMaHDX.getText(), ShareHelper.TaiKhoan.getTenCH(), ShareHelper.TaiKhoan.getDiaChiCH(), sdt, lblHoTenKH.getText(), lblSoDienThoai.getText(), txtNgayXuat.getText(), list, lblTongTien.getText());
             JOptionPane.showMessageDialog(this, "In thành công!");
+            try {
+                Desktop.getDesktop().browse(new File("src/com/xemay/help/"+txtMaHDX.getText()+".pdf").toURI());
+            } catch (IOException ex) {
+            }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "lỗi " + e);
         }

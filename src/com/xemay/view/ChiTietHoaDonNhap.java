@@ -12,6 +12,9 @@ import com.xemay.helper.printPDF;
 import com.xemay.model.ChiTietHDN;
 import com.xemay.model.ChiTietHdx;
 import com.xemay.utils.CheckLoi;
+import java.awt.Desktop;
+import java.io.File;
+import java.io.IOException;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.List;
@@ -352,6 +355,10 @@ public class ChiTietHoaDonNhap extends javax.swing.JDialog {
         try {
              print.printHDN(txtMaHDN.getText(), ShareHelper.TaiKhoan.getTenCH(), ShareHelper.TaiKhoan.getDiaChiCH(), "0961143378", lblTenNCC.getText(), lblSoDienThoai.getText(), txtNgayNhap.getText(), list, lblTongTien.getText());
              JOptionPane.showMessageDialog(this, "In thành công hóa đơn!");
+             try {
+                Desktop.getDesktop().browse(new File("src/com/xemay/help/"+txtMaHDN.getText()+".pdf").toURI());
+            } catch (IOException ex) {
+            }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "In thành không công hóa đơn!");
         }

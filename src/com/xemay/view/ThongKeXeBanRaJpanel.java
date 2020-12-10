@@ -7,8 +7,13 @@ package com.xemay.view;
 
 import com.xemay.dao.CuaHangDAO;
 import com.xemay.dao.ThongKeXBRDAO;
+import com.xemay.helper.ShareHelper;
+import com.xemay.helper.printPDF;
 import com.xemay.model.CuaHang;
 import com.xemay.model.ThongKeXeNV;
+import java.awt.Desktop;
+import java.io.File;
+import java.io.IOException;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.Collections;
@@ -39,13 +44,22 @@ public class ThongKeXeBanRaJpanel extends javax.swing.JPanel {
         CuaHangDAO dao = new CuaHangDAO();
         List<CuaHang> list = dao.select();
         cboTimKiem4.removeAllItems();
-        cboTimKiem4.addItem("Tất cả các cửa hàng");
+                if(ShareHelper.TaiKhoan.getVaiTro().equals("GiamDoc")){
+            cboTimKiem4.addItem("Tất cả các cửa hàng");
         for (CuaHang cuaHang : list) {
             cboTimKiem4.addItem(cuaHang.getTenCuaHang());
         }
-        cboTimKiem5.addItem("Tất cả các tháng");
+                cboTimKiem5.addItem("Tất cả các tháng");
         for (int i = 1; i <= 12; i++) {
             cboTimKiem5.addItem(String.valueOf(i));
+        }
+        }else{
+            for (CuaHang cuaHang : list) {
+                if(ShareHelper.TaiKhoan.getMaCH().equals(cuaHang.getMaCh())){
+                    cboTimKiem4.addItem(cuaHang.getTenCuaHang());
+                }
+            }
+            cboTimKiem5.addItem("Tất cả các tháng");
         }
     }
 
@@ -326,7 +340,17 @@ public class ThongKeXeBanRaJpanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btnSapXepActionPerformed
 
     private void btnSapXep1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSapXep1ActionPerformed
-        // TODO add your handling code here:
+        printPDF print = new printPDF();
+        try {
+            print.printThongKe(list, lblTong.getText(),"BÁN RA");
+            JOptionPane.showMessageDialog(this, "In thành công");
+            try {
+                Desktop.getDesktop().browse(new File("src/com/xemay/help/ThongKeBanRa.pdf").toURI());
+            } catch (IOException ex) {
+            }
+        } catch (Exception e) {
+
+        }
     }//GEN-LAST:event_btnSapXep1ActionPerformed
 
     private void cboTimKiem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboTimKiem4ActionPerformed

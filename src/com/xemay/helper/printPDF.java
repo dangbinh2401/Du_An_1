@@ -17,6 +17,7 @@ import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 import com.xemay.model.ChiTietHDN;
 import com.xemay.model.ChiTietHdx;
+import com.xemay.model.ThongKeXeNV;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -127,7 +128,6 @@ public class printPDF {
     }
     public void printHDN(String MaHD,String TenCuaHang,String DiaChi, String SDT,String TenKH,String sdtKH,String NgayLap,List<ChiTietHDN> list,String tong) throws IOException, DocumentException{
          com.itextpdf.text.Document document = new com.itextpdf.text.Document(PageSize.A4, 50, 50, 50, 50);
-
 		try {
                         Font catFont = new Font(Font.FontFamily.TIMES_ROMAN, 22,Font.BOLD);
                          Font catFontt = new Font();
@@ -211,6 +211,84 @@ public class printPDF {
 		} catch (FileNotFoundException | DocumentException e) {
 			e.printStackTrace();
 		}
+    }
+    
+    public void printThongKe(List<ThongKeXeNV> list,String Tong,String Ten) throws IOException, DocumentException{
+         com.itextpdf.text.Document document = new com.itextpdf.text.Document(PageSize.A4, 50, 50, 50, 50);
+		try {
+                        Font catFont = new Font(Font.FontFamily.TIMES_ROMAN, 22,Font.BOLD);
+                        Font catFontt = new Font();
+                        catFont.getFamilyname();
+                        Font f = new Font(BaseFont.createFont("src/com/xemay/help/times.ttf", BaseFont.IDENTITY_H, BaseFont.EMBEDDED));
+                        String s;
+                        if (Ten.equals("NHẬP VÀO")){
+                            s="NhapVao";
+                        }else{
+                            s="BanRa";
+                        }
+                        PdfWriter.getInstance(document, new FileOutputStream("src/com/xemay/help/ThongKe"+s+".pdf"));
+                            f.setSize(22);
+                            f.setStyle(Font.NORMAL);
+
+			document.open();
+                        f.setSize(24);
+                        Paragraph tenHD = new Paragraph("THỐNG KÊ XE "+Ten,f);
+                        tenHD.setAlignment(Element.ALIGN_CENTER);
+
+                        f.setSize(22);
+                        String TenCongTy="ĐẠI LÝ XE MÁY HBH";
+
+                        f.setSize(14);
+			Paragraph tenCT = new Paragraph(TenCongTy,f);
+                        tenCT.setAlignment(Element.ALIGN_CENTER);
+
+                        document.add(tenHD);
+                        f.setSize(14);
+                        document.add(tenCT);
+                        
+                        PdfPTable t = new PdfPTable(6);
+                        t.setSpacingBefore(25);
+                        t.setSpacingAfter(25);
+                        t.setHorizontalAlignment(Element.ALIGN_CENTER);
+                        PdfPCell c1 = new PdfPCell(new Phrase("STT",f));
+                        t.addCell(c1);
+                        PdfPCell c2 = new PdfPCell(new Phrase("Tên cửa hàng",f));
+                        t.addCell(c2);
+                        PdfPCell c3 = new PdfPCell(new Phrase("Tên xe",f));
+                        t.addCell(c3);
+                        PdfPCell c4 = new PdfPCell(new Phrase("Số lượng",f));
+                        t.addCell(c4);
+                        PdfPCell c5 = new PdfPCell(new Phrase("Giá tiền",f));
+                        t.addCell(c5);
+                        PdfPCell c6 = new PdfPCell(new Phrase("Thành tiền",f));
+                        t.addCell(c6);
+                        int i=1;
+                        NumberFormat formatter = new DecimalFormat("#,###,###");
+                        for (ThongKeXeNV hdx : list) {
+                            t.addCell(String.valueOf(i));
+                            t.addCell(hdx.getTenCH());
+                            t.addCell(hdx.getTenXe());
+                            t.addCell(String.valueOf(hdx.getSoLuong()));
+                            t.addCell(formatter.format(hdx.getGiaTien()));
+                            t.addCell(formatter.format(hdx.getGiaTien()*hdx.getSoLuong()));
+                            i++;
+                        }
+                        document.add(t);
+                        Paragraph tt = new Paragraph("                                                                                   Tổng tiền: "+Tong,f);
+                        addEmptyLine(tt, 2);
+                        document.add(tt);
+			document.close();
+			System.out.println("Write file succes!");
+		} catch (FileNotFoundException | DocumentException e) {
+			e.printStackTrace();
+		}
+    }
+
+    public static void main(String[] args) {
+        try {
+           // printThongKe();
+        } catch (Exception e) {
+        }
     }
      private static void addEmptyLine(Paragraph paragraph, int number) {
         for (int i = 0; i < number; i++) {
