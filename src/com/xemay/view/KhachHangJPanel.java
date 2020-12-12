@@ -151,7 +151,7 @@ public class KhachHangJPanel extends javax.swing.JPanel {
         jButton34 = new javax.swing.JButton();
         txtTimKiem = new javax.swing.JTextField();
         jLabel20 = new javax.swing.JLabel();
-        cboTimKiem3 = new javax.swing.JComboBox<String>();
+        cboTimKiem3 = new javax.swing.JComboBox<>();
         jButton37 = new javax.swing.JButton();
         jButton36 = new javax.swing.JButton();
         jScrollPane7 = new javax.swing.JScrollPane();
@@ -178,7 +178,7 @@ public class KhachHangJPanel extends javax.swing.JPanel {
         jLabel20.setText("QUẢN LÝ KHÁCH HÀNG");
 
         cboTimKiem3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        cboTimKiem3.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Tìm kiếm theo tên", "Tìm kiếm theo mã" }));
+        cboTimKiem3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tìm kiếm theo tên", "Tìm kiếm theo mã" }));
         cboTimKiem3.setMinimumSize(new java.awt.Dimension(138, 35));
 
         jButton37.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -276,21 +276,15 @@ public class KhachHangJPanel extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1840, Short.MAX_VALUE)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 13, Short.MAX_VALUE)
-                    .addComponent(QuanLyKhachHang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 14, Short.MAX_VALUE)))
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(QuanLyKhachHang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 27, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1013, Short.MAX_VALUE)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(QuanLyKhachHang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(QuanLyKhachHang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 11, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -300,6 +294,7 @@ public class KhachHangJPanel extends javax.swing.JPanel {
             themKH.show();
             fillToTable();
         } catch (Exception e) {
+            System.out.println(e);
         }
     }//GEN-LAST:event_jButton36ActionPerformed
 

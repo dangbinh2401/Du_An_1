@@ -174,10 +174,7 @@ public class TaiKhoanDAO {
         model.setVaiTro(rs.getString("VaiTro"));
         model.setHoTen(rs.getString("HoTen"));
         model.setEmail(rs.getString("Email"));
-       // model.setTenCH(rs.getString("TenCuaHang"));
         model.setDiaChiCH(rs.getString("DiaChi"));
-       // model.setMaCH(rs.getString("MaCH"));
-       // model.setMaNV(rs.getString("MaNV"));
         model.setMaKH(rs.getString("MaKH"));
         return model;
     }

@@ -5,15 +5,8 @@
  */
 package com.xemay.helper;
 
-import com.xemay.dao.HoaDonNhapDAO;
-import com.xemay.dao.XeDAO;
-import com.xemay.model.HoaDonNhap;
 import com.xemay.model.TaiKhoan;
-import com.xemay.model.Xe;
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
-import java.util.ListIterator;
+
 
 /**
  *

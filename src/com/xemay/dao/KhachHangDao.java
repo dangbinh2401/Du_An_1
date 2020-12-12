@@ -61,6 +61,10 @@ public class KhachHangDao {
         String sql = "SELECT * FROM KhachHang where Kt=1";
         return select(sql);
     }
+    public List<KhachHang> selectt() {
+        String sql = "SELECT * FROM KhachHang";
+        return select(sql);
+    }
      public List<KhachHang> findHoTen(String HoTen) {
         String sql = "select * from KhachHang where HoTen like N'%"+HoTen+"%' and Kt=1";
         return select(sql);

@@ -7,6 +7,7 @@ package com.xemay.view;
 
 import com.xemay.dao.KhachHangDao;
 import com.xemay.dao.TaiKhoanDAO;
+import com.xemay.helper.ShareHelper;
 import com.xemay.model.KhachHang;
 import com.xemay.model.TaiKhoan;
 import com.xemay.utils.CheckLoi;
@@ -31,7 +32,26 @@ public class ThemKhachHang extends javax.swing.JDialog {
         }
         initComponents();
         setLocationRelativeTo(null);
-    }
+        TaiKhoanDAO tk = new TaiKhoanDAO();
+        List<TaiKhoan> data = tk.selectAll();
+        List<KhachHang> kh= dao.selectt();
+         String s;
+        if (data.size() - 1 < 0) {
+            s = "0";
+        } else {
+            s = data.get(data.size() - 1).getMaTk();
+        }
+         String ss;
+        if (kh.size() - 1 < 0) {
+            ss = "0";
+        } else {
+            ss = kh.get(kh.size() - 1).getMaKh();
+        }
+        txtMaTK.setText(ShareHelper.getMaXe("TK",s ));
+        txtMaTK.disable();
+        txtMaKH.setText(ShareHelper.getMaXe("KH",ss ));
+        txtMaKH.disable();
+    }  
     KhachHangDao dao = new KhachHangDao();
 
     /**
@@ -246,7 +266,7 @@ public class ThemKhachHang extends javax.swing.JDialog {
         TaiKhoan mdTk = new TaiKhoan();
         mdTk.setMaTk(txtMaTK.getText());
         mdTk.setMatKhau("123");
-        mdTk.setVaiTro("Khách hàng");
+        mdTk.setVaiTro("KhachHang");
         return mdTk;
     }
 
