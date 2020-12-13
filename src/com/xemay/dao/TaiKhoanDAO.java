@@ -20,7 +20,7 @@ public class TaiKhoanDAO {
 
     public void insert(TaiKhoan model) {
         //String MaCh, String TenCuaHang, String DiaChi, String Sdt, String Email
-        String sql = "INSERT INTO TaiKhoan (MaTK, MatKhau, VaiTro) VALUES (?, ?, ?)";
+        String sql = "INSERT INTO TaiKhoan (MaTK, MatKhau, VaiTro,kt) VALUES (?, ?, ?, 1)";
         JdbcHelper.executeUpdate(sql, model.getMaTk(), model.getMatKhau(), model.getVaiTro());
     }
 
@@ -59,7 +59,7 @@ public class TaiKhoanDAO {
     }
 
     public List<TaiKhoan> selectAll() {
-        String sql = "select TaiKhoan.MaTK,NhanVien.HoTen, TaiKhoan.MatKhau, NhanVien.SoDienThoai, TaiKhoan.VaiTro, NhanVien.Email from TaiKhoan Inner join NhanVien on TaiKhoan.MaTK = NhanVien.MaTK Where TaiKhoan.Kt=1 UNION All select TaiKhoan.MaTK,KhachHang.HoTen, TaiKhoan.MatKhau, KhachHang.SoDienThoai,TaiKhoan.VaiTro, KhachHang.Email from TaiKhoan inner join KhachHang on TaiKhoan.MaTK = KhachHang.MaTK Where TaiKhoan.Kt=1";
+        String sql = "select TaiKhoan.MaTK,NhanVien.HoTen, TaiKhoan.MatKhau, NhanVien.SoDienThoai, TaiKhoan.VaiTro, NhanVien.Email from TaiKhoan Inner join NhanVien on TaiKhoan.MaTK = NhanVien.MaTK Where TaiKhoan.Kt=1 UNION All select TaiKhoan.MaTK,KhachHang.HoTen, TaiKhoan.MatKhau, KhachHang.SoDienThoai,TaiKhoan.VaiTro, KhachHang.Email from TaiKhoan inner join KhachHang on TaiKhoan.MaTK = KhachHang.MaTK Where TaiKhoan.Kt=1 order by MaTK";
         return select(sql);
     }
 
@@ -174,7 +174,10 @@ public class TaiKhoanDAO {
         model.setVaiTro(rs.getString("VaiTro"));
         model.setHoTen(rs.getString("HoTen"));
         model.setEmail(rs.getString("Email"));
+       // model.setTenCH(rs.getString("TenCuaHang"));
         model.setDiaChiCH(rs.getString("DiaChi"));
+       // model.setMaCH(rs.getString("MaCH"));
+       // model.setMaNV(rs.getString("MaNV"));
         model.setMaKH(rs.getString("MaKH"));
         return model;
     }

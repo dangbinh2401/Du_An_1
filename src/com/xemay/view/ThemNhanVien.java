@@ -42,7 +42,15 @@ public class ThemNhanVien extends javax.swing.JDialog {
         } else {
             s = data.get(data.size() - 1).getMaNV();
         }
+                List<TaiKhoan> tkk = tk.selectAll();
+         String ss;
+        if (tkk.size() - 1 < 0) {
+            ss = "0";
+        } else {
+            ss = tkk.get(tkk.size() - 1).getMaTk();
+        }
         txtMaNhanVien.setText(ShareHelper.getMaXe("NV", s));
+        txtMaTaiKhoan.setText(ShareHelper.getMaXe("TK", ss));
         txtMaNhanVien.disable();
     }
     NhanVienDAO dao = new NhanVienDAO();

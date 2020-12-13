@@ -18,7 +18,7 @@ import java.util.List;
  */
 public class NhanVienDAO {
     public void insert(NhanVien model) {
-        String sql = "INSERT INTO NhanVien (MaNV,MaCH, HoTen, SoDienThoai, Email, GioiTinh, DiaChi, MaTK) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO NhanVien (MaNV,MaCH, HoTen, SoDienThoai, Email, GioiTinh, DiaChi, MaTK, kt) VALUES (?, ?, ?, ?, ?, ?, ?, ?,1)";
         JdbcHelper.executeUpdate(sql,model.getMaNV() ,model.getMaCH(), model.getHoTen(), model.getSdt(), model.getEmail(),model.getGioiTinh(),model.getDiaChi(),model.getMaTK());
     }
     public void update(NhanVien model){
