@@ -98,7 +98,7 @@ public class ChaoJdialog extends javax.swing.JFrame {
         setTitle("QUẢN LÝ CỬA HÀNG");
         setResizable(false);
 
-        jPanel1.setBackground(new java.awt.Color(115, 133, 219));
+        jPanel1.setBackground(new java.awt.Color(0, 153, 102));
 
         jProgressBar1.setBackground(new java.awt.Color(0, 153, 51));
         jProgressBar1.setForeground(new java.awt.Color(0, 204, 102));
