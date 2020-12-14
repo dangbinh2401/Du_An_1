@@ -41,6 +41,7 @@ public class BaoHanhJPanel extends javax.swing.JPanel {
      */
     public BaoHanhJPanel() {
         initComponents();
+        dataBaoHanh=select();
         fillTable(select());
         txtTimKiem.getDocument().addDocumentListener(new DocumentListener() {
             @Override
@@ -159,6 +160,7 @@ public class BaoHanhJPanel extends javax.swing.JPanel {
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Lỗi " + e);
         }
+        dataBaoHanh=select();
         fillTable(select());
     }
 
@@ -171,6 +173,7 @@ public class BaoHanhJPanel extends javax.swing.JPanel {
                     try {
                         bhDao.delete(baoHang.getMaBh());
                         JOptionPane.showMessageDialog(this, "Xóa thành công");
+                        dataBaoHanh=select();
                         fillTable(select());
                     } catch (Exception e) {
                         JOptionPane.showMessageDialog(this, "Xóa thất bại");
@@ -469,11 +472,13 @@ public class BaoHanhJPanel extends javax.swing.JPanel {
 //        BaoHanh bh = new BaoHanh(null, true);
 //        bh.txtNgayBaoHanh.setEditable(false);
 //        bh.show();
+        dataBaoHanh=select();
         fillTable(select());
         if (!ShareHelper.TaiKhoan.getVaiTro().equals("KhachHang")) {
             BaoHanh bh = new BaoHanh(null, true);
             bh.txtNgayBaoHanh.setEditable(false);
             bh.show();
+            dataBaoHanh=select();
             fillTable(select());
         } else {
             JOptionPane.showMessageDialog(this, "bạn không được thêm!");
