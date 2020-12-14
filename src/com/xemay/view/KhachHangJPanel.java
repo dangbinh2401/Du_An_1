@@ -321,7 +321,7 @@ public class KhachHangJPanel extends javax.swing.JPanel {
 //            }
 //        }
 
-        if(ShareHelper.TaiKhoan.getVaiTro().equals("NhanVien")){
+        if(!ShareHelper.TaiKhoan.getVaiTro().equals("NhanVien")){
             try {
             int i = tblKhachHang.getSelectedRow();
             int traloi = JOptionPane.showConfirmDialog(this, "bạn có chắc muốn xóa khách hàng có mã: " + list.get(i).getMaKh());
