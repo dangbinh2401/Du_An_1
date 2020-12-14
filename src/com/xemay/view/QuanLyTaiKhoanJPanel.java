@@ -118,7 +118,7 @@ public class QuanLyTaiKhoanJPanel extends javax.swing.JPanel {
         jButton42 = new javax.swing.JButton();
         jScrollPane8 = new javax.swing.JScrollPane();
         tblTaiKhoan = new javax.swing.JTable();
-        jButton43 = new javax.swing.JButton();
+        btnXoa = new javax.swing.JButton();
 
         QuanLyTaiKhoan.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -179,11 +179,11 @@ public class QuanLyTaiKhoanJPanel extends javax.swing.JPanel {
         });
         jScrollPane8.setViewportView(tblTaiKhoan);
 
-        jButton43.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jButton43.setText("Xóa");
-        jButton43.addActionListener(new java.awt.event.ActionListener() {
+        btnXoa.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        btnXoa.setText("Xóa");
+        btnXoa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton43ActionPerformed(evt);
+                btnXoaActionPerformed(evt);
             }
         });
 
@@ -208,7 +208,7 @@ public class QuanLyTaiKhoanJPanel extends javax.swing.JPanel {
                             .addGap(62, 62, 62)
                             .addComponent(jButton39, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGap(723, 723, 723)
-                            .addComponent(jButton43, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(btnXoa, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(QuanLyTaiKhoanLayout.createSequentialGroup()
                             .addComponent(jLabel21)
                             .addGap(0, 0, Short.MAX_VALUE))
@@ -230,7 +230,7 @@ public class QuanLyTaiKhoanJPanel extends javax.swing.JPanel {
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                     .addGroup(QuanLyTaiKhoanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(txtTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jButton43, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnXoa, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jButton39, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(cboTimKiem4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGap(18, 18, 18)
@@ -318,23 +318,30 @@ public class QuanLyTaiKhoanJPanel extends javax.swing.JPanel {
         fillChinhSua();
     }//GEN-LAST:event_jButton42ActionPerformed
 
-    private void jButton43ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton43ActionPerformed
-        String tkk = JOptionPane.showInputDialog(this, "Nhập mã tài khoản: ", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
-        int traloi = JOptionPane.showConfirmDialog(null, "Bạn có muốn xóa tài khoản có mã: " + tkk, "Yes/No", JOptionPane.YES_NO_CANCEL_OPTION);
-        if (traloi == 0) {
-            TaiKhoanDAO tk = new TaiKhoanDAO();
-            try {
-                tk.delete(tkk);
-                JOptionPane.showMessageDialog(this, "Xóa thành công");
-                list = select();
-                fillToTable(list);
-            } catch (Exception e) {
-                JOptionPane.showMessageDialog(this, "Xóa thất bại");
+    private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
+        if (ShareHelper.TaiKhoan.getVaiTro().equals("NhanVien")) {
+            JOptionPane.showMessageDialog(this, "Bạn không được xóa");
+        } else {
+            int i = tblTaiKhoan.getSelectedRow();
+            if (i!=-1) {
+                int traloi = JOptionPane.showConfirmDialog(null, "Bạn có muốn xóa tài khoản có mã: " + list.get(i).getMaTk(), "Yes/No", JOptionPane.YES_NO_CANCEL_OPTION);
+                if (traloi == 0) {
+                    TaiKhoanDAO tk = new TaiKhoanDAO();
+                    try {
+                        tk.delete(list.get(i).getMaTk());
+                        JOptionPane.showMessageDialog(this, "Xóa thành công");
+                        list = select();
+                        fillToTable(list);
+                    } catch (Exception e) {
+                        JOptionPane.showMessageDialog(this, "Xóa thất bại");
+                    }
+                }
             }
+            
         }
 
 
-    }//GEN-LAST:event_jButton43ActionPerformed
+    }//GEN-LAST:event_btnXoaActionPerformed
     int x = 0;
     int y = 0;
     int kt = 0;
@@ -342,10 +349,10 @@ public class QuanLyTaiKhoanJPanel extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel QuanLyTaiKhoan;
     private javax.swing.JButton btnSapXep;
+    private javax.swing.JButton btnXoa;
     private javax.swing.JComboBox<String> cboTimKiem4;
     private javax.swing.JButton jButton39;
     private javax.swing.JButton jButton42;
-    private javax.swing.JButton jButton43;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JScrollPane jScrollPane8;
     private javax.swing.JTable tblTaiKhoan;

@@ -6,6 +6,7 @@
 package com.xemay.view;
 
 import com.xemay.dao.KhachHangDao;
+import com.xemay.helper.ShareHelper;
 import com.xemay.model.KhachHang;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -319,7 +320,9 @@ public class KhachHangJPanel extends javax.swing.JPanel {
 //                JOptionPane.showMessageDialog(this, "Xóa thất bại");
 //            }
 //        }
-        try {
+
+        if(ShareHelper.TaiKhoan.getVaiTro().equals("NhanVien")){
+            try {
             int i = tblKhachHang.getSelectedRow();
             int traloi = JOptionPane.showConfirmDialog(this, "bạn có chắc muốn xóa khách hàng có mã: " + list.get(i).getMaKh());
             if (traloi == 0) {
@@ -334,6 +337,9 @@ public class KhachHangJPanel extends javax.swing.JPanel {
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Cần chọn khách hàng để xóa");
+        }
+        }else{
+            JOptionPane.showMessageDialog(this, "bạn không được phép xóa!");
         }
 
 

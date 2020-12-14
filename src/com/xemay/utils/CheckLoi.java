@@ -107,7 +107,7 @@ public class CheckLoi {
         Pattern pattern = Pattern.compile("^0\\d{9}$");//biểu thức chính quy theo khôn mẫu
         Matcher matcher = pattern.matcher(txt.getText());
         if (!matcher.find()) {
-            bd.append("Số điện thoại không đúng định dạng.Số điện thoại phải 10 số(vd: 0*********)\n");
+            bd.append("Số điện thoại không đúng định dạng.Số điện thoại phải 10 số(vd: 0978785678)\n");
             txt.setBackground(Color.yellow);
             txt.requestFocus();
             ok = false;
@@ -144,12 +144,12 @@ public class CheckLoi {
             return false;
         }
         SimpleDateFormat date = new SimpleDateFormat();
-        date.applyPattern("dd/MM/yyyy");
+        date.applyPattern("yyyy-MM-dd");
         try {
             Date dob = date.parse(txt.getText());
             txt.setBackground(Color.white);
         } catch (Exception e) {
-            bd.append("Ngày nhập không đúng định dạng (vd: 01/01/****)\n");
+            bd.append("Ngày nhập không đúng định dạng (vd: 1999-01-01)\n");
             txt.setBackground(Color.yellow);
         }
         return ok;
@@ -166,7 +166,7 @@ public class CheckLoi {
             Date dob = date.parse(txt.getText());
             txt.setBackground(Color.white);
         } catch (Exception e) {
-            bd.append("Ngày nhập không đúng định dạng (vd: 1999/01/01)\n");
+            bd.append("Ngày nhập không đúng định dạng (vd: 1999-01-01)\n");
             txt.setBackground(Color.yellow);
         }
         return ok;

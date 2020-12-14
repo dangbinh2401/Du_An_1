@@ -369,7 +369,9 @@ XeDAO dao = new XeDAO();
     }//GEN-LAST:event_jButton49ActionPerformed
 
     private void jButton53ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton53ActionPerformed
-        try {
+        
+        if(!ShareHelper.TaiKhoan.getVaiTro().equals("NhanVien")){
+            try {
             int i = tblXe.getSelectedRow();
             int traloi = JOptionPane.showConfirmDialog(this, "bạn có chắc muốn xóa xe có mã: " + list.get(i).getMaXe());
             if (traloi == 0) {
@@ -385,6 +387,9 @@ XeDAO dao = new XeDAO();
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Cần chọn xe để xóa");
+        }
+        }else{
+            JOptionPane.showMessageDialog(this, "Bạn không được xóa");
         }
 
     }//GEN-LAST:event_jButton53ActionPerformed

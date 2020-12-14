@@ -6,6 +6,7 @@
 package com.xemay.view;
 
 import com.xemay.dao.NhaCungCapDAO;
+import com.xemay.helper.ShareHelper;
 import com.xemay.model.NhaCungCap;
 import java.util.Collections;
 import java.util.Comparator;
@@ -311,7 +312,8 @@ public class NhaCungCapPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_tblQuanLyNccMouseClicked
 
     private void btnXoaNccActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaNccActionPerformed
-       try {
+        if(!ShareHelper.TaiKhoan.getVaiTro().equals("NhanVien")){
+            try {
             int i = tblQuanLyNcc.getSelectedRow();
             int traloi = JOptionPane.showConfirmDialog(this, "bạn có chắc muốn xóa nhà cung cấp có mã: " + dataNhaCungCaps.get(i).getMaNcc());
             if (traloi == 0) {
@@ -326,6 +328,9 @@ public class NhaCungCapPanel extends javax.swing.JPanel {
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Cần chọn nhà cung cấp để xóa");
+        }
+        }else{
+            JOptionPane.showMessageDialog(this, "Bạn không được phép xóa!");
         }
     }//GEN-LAST:event_btnXoaNccActionPerformed
 
