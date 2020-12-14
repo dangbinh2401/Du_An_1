@@ -370,10 +370,14 @@ public class NhapHangPanel extends javax.swing.JPanel {
             int i = tblHoaDonNhap.getSelectedRow();
             if (i != -1) {
                 if (JOptionPane.showConfirmDialog(this, "bạn có chắc muốn xóa hóa đơn này?") == 0) {
-                    dao.delete(list.get(i).getMaHDN());
-                    JOptionPane.showMessageDialog(this, "Xóa thành công!");
-                    list = select();
-                    fillToTable(list);
+                    try {
+                        dao.delete(list.get(i).getMaHDN());
+                        JOptionPane.showMessageDialog(this, "Xóa thành công!");
+                        list = select();
+                        fillToTable(list);
+                    } catch (Exception e) {
+                        JOptionPane.showMessageDialog(this, "Không được xóa hóa đơn đã có chi tiết hóa đơn!");
+                    }
                 }
             } else {
                 JOptionPane.showMessageDialog(this, "Vui lòng chọn hóa đơn cần xóa!");

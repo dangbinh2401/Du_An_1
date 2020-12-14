@@ -31,6 +31,7 @@ public class ThemKhachHang extends javax.swing.JDialog {
         } catch (Exception ex) {
         }
         initComponents();
+        setIconImage(ShareHelper.APP_ICON);
         setLocationRelativeTo(null);
         TaiKhoanDAO tk = new TaiKhoanDAO();
         List<TaiKhoan> data = tk.selectAll();

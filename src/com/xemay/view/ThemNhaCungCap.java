@@ -6,8 +6,10 @@
 package com.xemay.view;
 
 import com.xemay.dao.NhaCungCapDAO;
+import com.xemay.helper.ShareHelper;
 import com.xemay.model.NhaCungCap;
 import com.xemay.utils.CheckLoi;
+import java.util.List;
 import javax.swing.JOptionPane;
 
 /**
@@ -22,10 +24,23 @@ public class ThemNhaCungCap extends javax.swing.JDialog {
     public ThemNhaCungCap(java.awt.Frame parent, boolean modal, NhaCungCap ncc) {
         super(parent, modal);
         initComponents();
+        setIconImage(ShareHelper.APP_ICON);
         if(ncc != null) {
             showDataOnView(ncc);
         }
+        NhaCungCapDAO daoNCC= new NhaCungCapDAO();
         this.setLocationRelativeTo(null);
+                List<NhaCungCap> data=daoNCC.selectAll();
+        String s;
+        if (data.size()-1<0){
+            s="0";
+        }else{
+            s=data.get(data.size()-1).getMaNcc();
+        }
+        System.out.println(s);
+        //ShareHelper.getMaXe("XE", s);
+        txtMaNcc.setText(ShareHelper.getMaXe("NCC", s));
+        txtMaNcc.disable();
     }
 
     /**
@@ -74,7 +89,7 @@ public class ThemNhaCungCap extends javax.swing.JDialog {
 
         txtTenNcc.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
-        txtMaNcc.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txtMaNcc.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
 
         btnThemNcc.setText("Thêm mới");
         btnThemNcc.addActionListener(new java.awt.event.ActionListener() {

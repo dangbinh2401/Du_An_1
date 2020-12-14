@@ -28,6 +28,7 @@ public class ThemCuaHang extends javax.swing.JDialog {
         } catch (Exception ex) {
         }
         initComponents();
+        setIconImage(ShareHelper.APP_ICON);
         setLocationRelativeTo(null);
         String s;
         if (list.size()-1<0){

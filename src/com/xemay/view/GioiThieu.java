@@ -5,6 +5,8 @@
  */
 package com.xemay.view;
 
+import com.xemay.helper.ShareHelper;
+
 /**
  *
  * @author PC
@@ -16,6 +18,7 @@ public class GioiThieu extends javax.swing.JDialog {
      */
     public GioiThieu() {
         initComponents();
+        setIconImage(ShareHelper.APP_ICON);
         this.setLocationRelativeTo(null);
     }
 

@@ -33,6 +33,7 @@ public class ChiTietHoaDonNhap extends javax.swing.JDialog {
     public ChiTietHoaDonNhap(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        setIconImage(ShareHelper.APP_ICON);
         setLocationRelativeTo(null);
         fillToTable();
     }
@@ -356,7 +357,7 @@ public class ChiTietHoaDonNhap extends javax.swing.JDialog {
              print.printHDN(txtMaHDN.getText(), ShareHelper.TaiKhoan.getTenCH(), ShareHelper.TaiKhoan.getDiaChiCH(), "0961143378", lblTenNCC.getText(), lblSoDienThoai.getText(), txtNgayNhap.getText(), list, lblTongTien.getText());
              JOptionPane.showMessageDialog(this, "In thành công hóa đơn!");
              try {
-                Desktop.getDesktop().browse(new File("src/com/xemay/help/"+txtMaHDN.getText()+".pdf").toURI());
+                Desktop.getDesktop().browse(new File("hoadon/"+txtMaHDN.getText()+".pdf").toURI());
             } catch (IOException ex) {
             }
         } catch (Exception e) {

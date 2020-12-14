@@ -42,12 +42,12 @@ public class printPDF {
                          Font catFontt = new Font();
                         catFont.getFamilyname();
                         //Vnariali.ttf
-                        Font f = new Font(BaseFont.createFont("src/com/xemay/help/times.ttf", BaseFont.IDENTITY_H, BaseFont.EMBEDDED));
+                        Font f = new Font(BaseFont.createFont("font/times.ttf", BaseFont.IDENTITY_H, BaseFont.EMBEDDED));
                            // f.setColor(Color.BLUE);
                             f.setSize(22);
                             f.setStyle(Font.NORMAL);
 			// Tạo đối tượng PdfWriter
-			PdfWriter.getInstance(document, new FileOutputStream("src/com/xemay/help/"+MaHD+".pdf"));
+			PdfWriter.getInstance(document, new FileOutputStream("hoadon/"+MaHD+".pdf"));
 
 			// Mở file để thực hiện ghi
 			document.open();
@@ -133,12 +133,12 @@ public class printPDF {
                          Font catFontt = new Font();
                         catFont.getFamilyname();
                         //Vnariali.ttf
-                        Font f = new Font(BaseFont.createFont("src/com/xemay/help/times.ttf", BaseFont.IDENTITY_H, BaseFont.EMBEDDED));
+                        Font f = new Font(BaseFont.createFont("font/times.ttf", BaseFont.IDENTITY_H, BaseFont.EMBEDDED));
                            // f.setColor(Color.BLUE);
                             f.setSize(22);
                             f.setStyle(Font.NORMAL);
 			// Tạo đối tượng PdfWriter
-			PdfWriter.getInstance(document, new FileOutputStream("src/com/xemay/help/"+MaHD+".pdf"));
+			PdfWriter.getInstance(document, new FileOutputStream("hoadon/"+MaHD+".pdf"));
 
 			// Mở file để thực hiện ghi
 			document.open();
@@ -219,14 +219,14 @@ public class printPDF {
                         Font catFont = new Font(Font.FontFamily.TIMES_ROMAN, 22,Font.BOLD);
                         Font catFontt = new Font();
                         catFont.getFamilyname();
-                        Font f = new Font(BaseFont.createFont("src/com/xemay/help/times.ttf", BaseFont.IDENTITY_H, BaseFont.EMBEDDED));
+                        Font f = new Font(BaseFont.createFont("font/times.ttf", BaseFont.IDENTITY_H, BaseFont.EMBEDDED));
                         String s;
                         if (Ten.equals("NHẬP VÀO")){
                             s="NhapVao";
                         }else{
                             s="BanRa";
                         }
-                        PdfWriter.getInstance(document, new FileOutputStream("src/com/xemay/help/ThongKe"+s+".pdf"));
+                        PdfWriter.getInstance(document, new FileOutputStream("hoadon/ThongKe"+s+".pdf"));
                             f.setSize(22);
                             f.setStyle(Font.NORMAL);
 

@@ -5,6 +5,7 @@
  */
 package com.xemay.view;
 
+import com.xemay.helper.ShareHelper;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -23,6 +24,7 @@ public class ChaoJdialog extends javax.swing.JFrame {
      */
     public ChaoJdialog() {
         initComponents();
+        setIconImage(ShareHelper.APP_ICON);
         intit();
 
     }
@@ -93,6 +95,7 @@ public class ChaoJdialog extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("QUẢN LÝ CỬA HÀNG");
         setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(115, 133, 219));

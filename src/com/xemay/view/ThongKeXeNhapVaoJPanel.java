@@ -364,7 +364,7 @@ public class ThongKeXeNhapVaoJPanel extends javax.swing.JPanel {
             print.printThongKe(list, lblTong.getText(),"NHẬP VÀO");
             JOptionPane.showMessageDialog(this, "In thành công");
             try {
-                Desktop.getDesktop().browse(new File("src/com/xemay/help/ThongKeNhapVao.pdf").toURI());
+                Desktop.getDesktop().browse(new File("hoadon/ThongKeNhapVao.pdf").toURI());
             } catch (IOException ex) {
             }
         } catch (Exception e) {

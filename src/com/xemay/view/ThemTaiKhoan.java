@@ -6,6 +6,7 @@
 package com.xemay.view;
 
 import com.xemay.dao.TaiKhoanDAO;
+import com.xemay.helper.ShareHelper;
 import com.xemay.model.TaiKhoan;
 import com.xemay.utils.CheckLoi;
 import javax.swing.JOptionPane;
@@ -22,6 +23,7 @@ public class ThemTaiKhoan extends javax.swing.JDialog {
     public ThemTaiKhoan(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        setIconImage(ShareHelper.APP_ICON);
         setLocationRelativeTo(null);
     }
 

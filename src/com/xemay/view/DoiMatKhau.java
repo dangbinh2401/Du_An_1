@@ -22,6 +22,7 @@ public class DoiMatKhau extends javax.swing.JDialog {
     public DoiMatKhau(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        setIconImage(ShareHelper.APP_ICON);
         txtHoTen.setText(ShareHelper.TaiKhoan.getHoTen());
         this.setLocationRelativeTo(null);
     }

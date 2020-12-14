@@ -6,6 +6,7 @@
 package com.xemay.view;
 
 import com.xemay.dao.TaiKhoanDAO;
+import com.xemay.helper.ShareHelper;
 import com.xemay.helper.email;
 import com.xemay.model.TaiKhoan;
 import java.util.List;
@@ -24,6 +25,7 @@ public class QuenMatKhau extends javax.swing.JDialog {
     public QuenMatKhau(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        setIconImage(ShareHelper.APP_ICON);
         setLocationRelativeTo(null);
 
     }

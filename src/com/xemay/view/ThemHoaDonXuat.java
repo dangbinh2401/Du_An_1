@@ -27,6 +27,7 @@ public class ThemHoaDonXuat extends javax.swing.JDialog {
     public ThemHoaDonXuat(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        setIconImage(ShareHelper.APP_ICON);
         setLocationRelativeTo(null);
         fillToKH();
         cboMaKH.addActionListener(new ActionListener() {

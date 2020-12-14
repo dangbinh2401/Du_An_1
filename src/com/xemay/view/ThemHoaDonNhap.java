@@ -18,6 +18,7 @@ public class ThemHoaDonNhap extends javax.swing.JDialog {
     public ThemHoaDonNhap(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        setIconImage(ShareHelper.APP_ICON);
         setLocationRelativeTo(null);
         txtTenNCC.disable();
         cboMaNCC.addActionListener(new ActionListener() {

@@ -39,6 +39,7 @@ public class BaoHanh extends javax.swing.JDialog {
         } catch (Exception ex) {
         }
         initComponents();
+        setIconImage(ShareHelper.APP_ICON);
         setLocationRelativeTo(null);
         fillComboxXe();
         timKiemTenKH();

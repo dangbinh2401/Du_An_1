@@ -168,14 +168,20 @@ public class BaoHanhJPanel extends javax.swing.JPanel {
             BaoHang baoHang = dataBaoHanh.get(index);
             try {
                 if (JOptionPane.showConfirmDialog(this, "Bạn có chắc chắn xóa không") == JOptionPane.YES_OPTION) {
-                    bhDao.delete(baoHang.getMaBh());
-                    JOptionPane.showMessageDialog(this, "Xóa thành công");
-                    fillTable(select());
+                    try {
+                        bhDao.delete(baoHang.getMaBh());
+                        JOptionPane.showMessageDialog(this, "Xóa thành công");
+                        fillTable(select());
+                    } catch (Exception e) {
+                        JOptionPane.showMessageDialog(this, "Xóa thất bại");
+                    }
                 }
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(this, "Xóa thất bại", "Thông báo",
                         JOptionPane.ERROR_MESSAGE);
             }
+        }else{
+            JOptionPane.showMessageDialog(this, "Bạn phải chọn bảo hành cần xóa");
         }
     }
 

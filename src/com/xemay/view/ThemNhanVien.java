@@ -33,6 +33,7 @@ public class ThemNhanVien extends javax.swing.JDialog {
         } catch (Exception ex) {
         }
         initComponents();
+        setIconImage(ShareHelper.APP_ICON);
         setLocationRelativeTo(null);
         fillMaCH();
         List<NhanVien> data = dao.select();

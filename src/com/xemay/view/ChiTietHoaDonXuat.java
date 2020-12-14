@@ -24,6 +24,7 @@ public class ChiTietHoaDonXuat extends javax.swing.JDialog {
     public ChiTietHoaDonXuat(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        setIconImage(ShareHelper.APP_ICON);
         setLocationRelativeTo(null);
         fillToTable();
     }
@@ -368,7 +369,7 @@ public class ChiTietHoaDonXuat extends javax.swing.JDialog {
             print.print(txtMaHDX.getText(), ShareHelper.TaiKhoan.getTenCH(), ShareHelper.TaiKhoan.getDiaChiCH(), sdt, lblHoTenKH.getText(), lblSoDienThoai.getText(), txtNgayXuat.getText(), list, lblTongTien.getText());
             JOptionPane.showMessageDialog(this, "In thành công!");
             try {
-                Desktop.getDesktop().browse(new File("src/com/xemay/help/"+txtMaHDX.getText()+".pdf").toURI());
+                Desktop.getDesktop().browse(new File("hoadon/"+txtMaHDX.getText()+".pdf").toURI());
             } catch (IOException ex) {
             }
         } catch (Exception e) {

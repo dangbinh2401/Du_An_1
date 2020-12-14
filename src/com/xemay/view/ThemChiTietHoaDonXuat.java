@@ -8,6 +8,7 @@ package com.xemay.view;
 
 import com.xemay.dao.ChiTietHoaDonXuatDAO;
 import com.xemay.dao.XeDAO;
+import com.xemay.helper.ShareHelper;
 import com.xemay.model.ChiTietHdx;
 import com.xemay.model.Xe;
 import com.xemay.utils.CheckLoi;
@@ -27,6 +28,7 @@ public class ThemChiTietHoaDonXuat extends javax.swing.JDialog {
     public ThemChiTietHoaDonXuat(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        setIconImage(ShareHelper.APP_ICON);
         timXe();
         setLocationRelativeTo(null);
         cboMaXe.addActionListener(new ActionListener() { 

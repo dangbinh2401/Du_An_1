@@ -345,7 +345,7 @@ public class ThongKeXeBanRaJpanel extends javax.swing.JPanel {
             print.printThongKe(list, lblTong.getText(),"BÁN RA");
             JOptionPane.showMessageDialog(this, "In thành công");
             try {
-                Desktop.getDesktop().browse(new File("src/com/xemay/help/ThongKeBanRa.pdf").toURI());
+                Desktop.getDesktop().browse(new File("hoadon/ThongKeBanRa.pdf").toURI());
             } catch (IOException ex) {
             }
         } catch (Exception e) {

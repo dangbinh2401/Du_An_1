@@ -9,6 +9,7 @@ import com.xemay.dao.CuaHangDAO;
 import com.xemay.dao.LoaiXeDao;
 import com.xemay.dao.NhanVienDAO;
 import com.xemay.dao.XeDAO;
+import com.xemay.helper.ShareHelper;
 import com.xemay.model.CuaHang;
 import com.xemay.model.LoaiXe;
 import com.xemay.model.Xe;
@@ -33,8 +34,20 @@ public class ThemMoiXe extends javax.swing.JDialog {
         } catch (Exception ex) {
         }
         initComponents();
+        setIconImage(ShareHelper.APP_ICON);
         setLocationRelativeTo(null);
         fillMaCH();
+        List<Xe> dataHDN=dao.selectTong();
+        String s;
+        if (dataHDN.size()-1<0){
+            s="0";
+        }else{
+            s=dataHDN.get(dataHDN.size()-1).getMaXe();
+        }
+        System.out.println(s);
+        //ShareHelper.getMaXe("XE", s);
+        txtMaXe.setText(ShareHelper.getMaXe("XE", s));
+        txtMaXe.disable();
         fill();
     }
     XeDAO dao = new XeDAO();
@@ -69,8 +82,8 @@ public class ThemMoiXe extends javax.swing.JDialog {
         jPanel1 = new javax.swing.JPanel();
         txtMaXe = new javax.swing.JTextField();
         txtTenXe = new javax.swing.JTextField();
-        cboMaLoaiXe = new javax.swing.JComboBox<String>();
-        cboMaCuaHang = new javax.swing.JComboBox<String>();
+        cboMaLoaiXe = new javax.swing.JComboBox<>();
+        cboMaCuaHang = new javax.swing.JComboBox<>();
         txtSoKhung = new javax.swing.JTextField();
         txtDungTich = new javax.swing.JTextField();
         txtGiaTien = new javax.swing.JTextField();
@@ -96,7 +109,7 @@ public class ThemMoiXe extends javax.swing.JDialog {
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
-        txtMaXe.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txtMaXe.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
 
         txtTenXe.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
