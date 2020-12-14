@@ -10,6 +10,8 @@ import com.xemay.dao.XeDAO;
 import com.xemay.helper.ShareHelper;
 import com.xemay.model.LoaiXe;
 import com.xemay.model.Xe;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.Collections;
@@ -47,6 +49,15 @@ public class QuanLyXeJPanel extends javax.swing.JPanel {
             @Override
             public void changedUpdate(DocumentEvent de) {
                 timKiem();
+            }
+        });
+        cboTimKiem2.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                int i = cboTimKiem2.getSelectedIndex();
+                if (i >=0 ) {
+                    timKiem();
+                }
+
             }
         });
     }
@@ -192,8 +203,8 @@ public class QuanLyXeJPanel extends javax.swing.JPanel {
                     .addComponent(jButton49, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cboTimKiem2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 441, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(80, 80, 80))
+                .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 510, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);

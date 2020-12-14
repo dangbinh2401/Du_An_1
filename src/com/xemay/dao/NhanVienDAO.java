@@ -26,7 +26,8 @@ public class NhanVienDAO {
         JdbcHelper.executeUpdate(sql,model.getMaCH(),model.getHoTen(), model.getSdt(), model.getEmail(),model.getGioiTinh(),model.getDiaChi(),model.getMaTK(),model.getMaNV());
     }
     public List<NhanVien> select() {
-        String sql = "SELECT * FROM NhanVien where Kt=1";
+   //     String sql = "SELECT * FROM NhanVien where Kt=1";
+        String sql = "SELECT * FROM NhanVien a inner join CuaHang b on a.MaCH = b.MaCH where a.Kt=1";
         return selectt(sql);
     }
     public List<NhanVien> select(String MaCH) {
@@ -47,7 +48,7 @@ public class NhanVienDAO {
     }
     public List<NhanVien> findName(String key){
         String sql = "select * from NhanVien where HoTen like N'%"+key+"%' and Kt=1";
-        return select(sql);
+        return selectt(sql);
     }
     public List<NhanVien> findName(String key,String MaCH){
         String sql = "SELECT * FROM NhanVien a inner join CuaHang b on a.MaCH = b.MaCH where a.HoTen like N'%"+key+"%' and a.Kt=1 and b.MaCH=?";
@@ -55,7 +56,7 @@ public class NhanVienDAO {
     }
     public List<NhanVien> findMaNV(String key){
         String sql = "select * from NhanVien where MaNV like N'%"+key+"%' and Kt=1";
-        return select(sql);
+        return selectt(sql);
     }
     public List<NhanVien> findMaNV(String key,String MaCH){
         String sql = "SELECT * FROM NhanVien a inner join CuaHang b on a.MaCH = b.MaCH where a.MaNV like N'%"+key+"%' and a.Kt=1 and b.MaCH=?";
