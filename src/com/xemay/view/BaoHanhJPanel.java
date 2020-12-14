@@ -494,7 +494,7 @@ public class BaoHanhJPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btnChinhSuaActionPerformed
 
     private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
-        if (!ShareHelper.TaiKhoan.getVaiTro().equals("KhachHang")) {
+        if (!ShareHelper.TaiKhoan.getVaiTro().equals("KhachHang")&&!ShareHelper.TaiKhoan.getVaiTro().equals("NhanVien")) {
             this.delete();
         } else {
             JOptionPane.showMessageDialog(this, "bạn không được xóa!");

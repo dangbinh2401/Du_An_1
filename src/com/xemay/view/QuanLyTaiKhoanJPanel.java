@@ -115,7 +115,6 @@ public class QuanLyTaiKhoanJPanel extends javax.swing.JPanel {
         txtTimKiem = new javax.swing.JTextField();
         jButton39 = new javax.swing.JButton();
         btnSapXep = new javax.swing.JButton();
-        jButton41 = new javax.swing.JButton();
         jButton42 = new javax.swing.JButton();
         jScrollPane8 = new javax.swing.JScrollPane();
         tblTaiKhoan = new javax.swing.JTable();
@@ -141,14 +140,6 @@ public class QuanLyTaiKhoanJPanel extends javax.swing.JPanel {
         btnSapXep.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSapXepActionPerformed(evt);
-            }
-        });
-
-        jButton41.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jButton41.setText("Tạo mới");
-        jButton41.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton41ActionPerformed(evt);
             }
         });
 
@@ -200,7 +191,12 @@ public class QuanLyTaiKhoanJPanel extends javax.swing.JPanel {
         QuanLyTaiKhoan.setLayout(QuanLyTaiKhoanLayout);
         QuanLyTaiKhoanLayout.setHorizontalGroup(
             QuanLyTaiKhoanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1835, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, QuanLyTaiKhoanLayout.createSequentialGroup()
+                .addContainerGap(1106, Short.MAX_VALUE)
+                .addComponent(btnSapXep, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(162, 162, 162)
+                .addComponent(jButton42, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(298, 298, 298))
             .addGroup(QuanLyTaiKhoanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(QuanLyTaiKhoanLayout.createSequentialGroup()
                     .addGap(49, 49, 49)
@@ -211,13 +207,7 @@ public class QuanLyTaiKhoanJPanel extends javax.swing.JPanel {
                             .addComponent(txtTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 374, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGap(62, 62, 62)
                             .addComponent(jButton39, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(86, 86, 86)
-                            .addComponent(btnSapXep, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(83, 83, 83)
-                            .addComponent(jButton41, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(79, 79, 79)
-                            .addComponent(jButton42, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(109, 109, 109)
+                            .addGap(723, 723, 723)
                             .addComponent(jButton43, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(QuanLyTaiKhoanLayout.createSequentialGroup()
                             .addComponent(jLabel21)
@@ -227,7 +217,12 @@ public class QuanLyTaiKhoanJPanel extends javax.swing.JPanel {
         );
         QuanLyTaiKhoanLayout.setVerticalGroup(
             QuanLyTaiKhoanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1013, Short.MAX_VALUE)
+            .addGroup(QuanLyTaiKhoanLayout.createSequentialGroup()
+                .addGap(54, 54, 54)
+                .addGroup(QuanLyTaiKhoanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton42, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnSapXep, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(922, Short.MAX_VALUE))
             .addGroup(QuanLyTaiKhoanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(QuanLyTaiKhoanLayout.createSequentialGroup()
                     .addGap(25, 25, 25)
@@ -235,10 +230,7 @@ public class QuanLyTaiKhoanJPanel extends javax.swing.JPanel {
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                     .addGroup(QuanLyTaiKhoanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(txtTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jButton41, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jButton42, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jButton43, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(btnSapXep, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jButton39, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(cboTimKiem4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGap(18, 18, 18)
@@ -282,13 +274,6 @@ public class QuanLyTaiKhoanJPanel extends javax.swing.JPanel {
             y = 0;
         }
     }//GEN-LAST:event_tblTaiKhoanMousePressed
-
-    private void jButton41ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton41ActionPerformed
-        ThemTaiKhoan them = new ThemTaiKhoan(null, true);
-        them.show();
-        list = select();
-        fillToTable(list);
-    }//GEN-LAST:event_jButton41ActionPerformed
 
     private void btnSapXepActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSapXepActionPerformed
         Comparator<TaiKhoan> sortName = new Comparator<TaiKhoan>() {
@@ -359,7 +344,6 @@ public class QuanLyTaiKhoanJPanel extends javax.swing.JPanel {
     private javax.swing.JButton btnSapXep;
     private javax.swing.JComboBox<String> cboTimKiem4;
     private javax.swing.JButton jButton39;
-    private javax.swing.JButton jButton41;
     private javax.swing.JButton jButton42;
     private javax.swing.JButton jButton43;
     private javax.swing.JLabel jLabel21;
