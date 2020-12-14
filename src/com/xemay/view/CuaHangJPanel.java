@@ -130,7 +130,7 @@ public class CuaHangJPanel extends javax.swing.JPanel {
         jLabel11.setText("QUẢN LÝ SHOWROOM");
 
         cboTimKiem1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        cboTimKiem1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tìm kiếm theo tên", "Tìm kiếm theo mã" }));
+        cboTimKiem1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tìm kiếm theo tên" }));
         cboTimKiem1.setMinimumSize(new java.awt.Dimension(138, 35));
 
         txtTimKiem.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N

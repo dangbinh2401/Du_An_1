@@ -8,10 +8,14 @@ package com.xemay.view;
 import com.xemay.dao.NhaCungCapDAO;
 import com.xemay.helper.ShareHelper;
 import com.xemay.model.NhaCungCap;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import javax.swing.JOptionPane;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -27,6 +31,30 @@ public class NhaCungCapPanel extends javax.swing.JPanel {
     public NhaCungCapPanel() {
         initComponents();
         fillTable();
+        txtTimKiemNcc.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent de) {
+                timKiem();
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent de) {
+                timKiem();
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent de) {
+                timKiem();
+            }
+        });
+        cboTimKiemNcc.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                int i = cboTimKiemNcc.getSelectedIndex();
+                if (i >=0 ) {
+                    timKiem();
+                }
+            }
+        });
     }
     NhaCungCapDAO dao = new NhaCungCapDAO();
     void timKiemTheoTen(){
@@ -374,13 +402,15 @@ public class NhaCungCapPanel extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, "lỗi truy vẫn dữ liệu"+e);
         }
     }//GEN-LAST:event_btnSapXepActionPerformed
-
-    private void jButton17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton17ActionPerformed
+    void timKiem(){
         if (cboTimKiemNcc.getSelectedItem().equals("Tìm kiếm theo tên")) {
             this.timKiemTheoTen();
         }else{
             this.timKiemTheoMa();
         }
+    }
+    private void jButton17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton17ActionPerformed
+        this.timKiem();
     }//GEN-LAST:event_jButton17ActionPerformed
 
     private void tblQuanLyNccMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblQuanLyNccMousePressed

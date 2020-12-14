@@ -126,7 +126,7 @@ public class QuanLyTaiKhoanJPanel extends javax.swing.JPanel {
         jLabel21.setText("QUẢN LÝ TÀI KHOẢN");
 
         cboTimKiem4.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        cboTimKiem4.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tìm kiếm theo tên", "Tìm kiếm theo mã" }));
+        cboTimKiem4.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tìm kiếm theo tên" }));
         cboTimKiem4.setMinimumSize(new java.awt.Dimension(138, 35));
 
         txtTimKiem.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N

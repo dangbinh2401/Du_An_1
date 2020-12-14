@@ -46,24 +46,24 @@ public class BaoHanhJPanel extends javax.swing.JPanel {
         txtTimKiem.getDocument().addDocumentListener(new DocumentListener() {
             @Override
             public void insertUpdate(DocumentEvent de) {
-                timKiem();
+                tk();
             }
 
             @Override
             public void removeUpdate(DocumentEvent de) {
-                timKiem();
+                tk();
             }
 
             @Override
             public void changedUpdate(DocumentEvent de) {
-                timKiem();
+                tk();
             }
         });
         cboTimKiemBaoHanh.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 int i = cboTimKiemBaoHanh.getSelectedIndex();
                 if (i >= 0) {
-                    timKiem();
+                    tk();
                 }
 
             }
@@ -504,8 +504,7 @@ public class BaoHanhJPanel extends javax.swing.JPanel {
     private void btnSapXepActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSapXepActionPerformed
 
     }//GEN-LAST:event_btnSapXepActionPerformed
-
-    private void btnTimKiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTimKiemActionPerformed
+    void tk(){
         if (!ShareHelper.TaiKhoan.getVaiTro().equals("KhachHang")) {
             if (cboTimKiemBaoHanh.getSelectedItem().equals("Tìm kiếm theo tên khách hàng")) {
                 this.timKiemTheoTenKH();
@@ -515,6 +514,9 @@ public class BaoHanhJPanel extends javax.swing.JPanel {
                 this.timKiemTheoTenXe();
             }
         }
+    }
+    private void btnTimKiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTimKiemActionPerformed
+        this.tk();
     }//GEN-LAST:event_btnTimKiemActionPerformed
 
     private void tblBaoHanhMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblBaoHanhMousePressed

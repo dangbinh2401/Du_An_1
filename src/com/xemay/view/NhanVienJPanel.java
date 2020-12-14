@@ -8,6 +8,8 @@ package com.xemay.view;
 import com.xemay.dao.NhanVienDAO;
 import com.xemay.helper.ShareHelper;
 import com.xemay.model.NhanVien;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -30,6 +32,15 @@ public class NhanVienJPanel extends javax.swing.JPanel {
         initComponents();
         list = select();
         fillToTable(list);
+        cboTimKiem2.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                int i = cboTimKiem2.getSelectedIndex();
+                if (i >=0 ) {
+                    timKiem();
+                }
+
+            }
+        });
         txtTimKiem.getDocument().addDocumentListener(new DocumentListener() {
             @Override
             public void insertUpdate(DocumentEvent de) {
@@ -157,7 +168,7 @@ public class NhanVienJPanel extends javax.swing.JPanel {
 
         QuanLyNhanVien = new javax.swing.JPanel();
         jLabel16 = new javax.swing.JLabel();
-        cboTimKiem2 = new javax.swing.JComboBox<String>();
+        cboTimKiem2 = new javax.swing.JComboBox<>();
         txtTimKiem = new javax.swing.JTextField();
         jButton29 = new javax.swing.JButton();
         btnSapXep = new javax.swing.JButton();
@@ -173,7 +184,7 @@ public class NhanVienJPanel extends javax.swing.JPanel {
         jLabel16.setText("QUẢN LÝ NHÂN VIÊN");
 
         cboTimKiem2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        cboTimKiem2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Tìm kiếm theo tên", "Tìm kiếm theo mã" }));
+        cboTimKiem2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tìm kiếm theo tên", "Tìm kiếm theo mã" }));
         cboTimKiem2.setMinimumSize(new java.awt.Dimension(138, 35));
 
         txtTimKiem.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
